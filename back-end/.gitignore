@@ -2,6 +2,12 @@
 ### MS-DISCOVERY ###
 ms-discovery/HELP.md
 
+### MS-CONFIG ###
+ms-config/HELP.md
+
+### MS-TEMPLATE ###
+ms-template/HELP.md
+
 
 target/
 !.mvn/wrapper/maven-wrapper.jar
