@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: ms-config
+
+  cloud:
+    config:
+      profile: local,dev,prod
+      enabled: on
+      server:
+        git:
+          uri: https://github.com/Juancazzhr/Pets-Care-Veterinary-Clinic.git
+          refresh-rate: 60
+          timeout: 60
+          search-paths:
+            - back-end/configs/*
+          basedir: D:\_Development\SharedProjects\Pets-Care-Veterinary-Clinic
+
+server:
+  port: 8888
