@@ -2,5 +2,8 @@ spring:
   application:
     name: ms-discovery
 
+  profiles:
+    active: ${SPRING_PROFILE_ACTIVE:local}
+
   config:
     import: configserver:${SPRING_CONFIG_URL:http://localhost:8888}
