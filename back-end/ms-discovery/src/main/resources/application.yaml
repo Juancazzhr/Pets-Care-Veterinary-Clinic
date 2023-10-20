@@ -3,7 +3,7 @@ spring:
     name: ms-discovery
 
   profiles:
-    active: ${SPRING_PROFILE_ACTIVE:local}
+    active: ${SPRING_PROFILE_ACTIVE:dev}
 
   config:
     import: configserver:${SPRING_CONFIG_URL:http://localhost:8888}
