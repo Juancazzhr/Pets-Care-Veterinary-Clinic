@@ -2,9 +2,6 @@ spring:
   application:
     name: ms-discovery
 
-  profiles:
-    active: ${SPRING_PROFILE_ACTIVE:local}
-
 eureka:
   instance:
     hostname: localhost
