@@ -11,7 +11,7 @@ eureka:
     fetchRegistry: false
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
-  environment: ${SPRING_PROFILE_ACTIVE:local}
+  environment: ${SPRING_PROFILE_ACTIVE:dev}
 
 server:
   port: ${PORT:8761}
