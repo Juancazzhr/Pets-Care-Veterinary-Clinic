@@ -2,26 +2,5 @@ spring:
   application:
     name: ms-discovery
 
-  profiles:
-    active: local
-
   config:
-    import: configserver:http://localhost:8888
-
-  cloud:
-    config:
-      enabled: on
-
-eureka:
-  instance:
-    hostname: localhost
-    prefer-ip-address: true
-  client:
-    registerWithEureka: false
-    fetchRegistry: false
-    serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
-  environment: dev
-
-server:
-  port: 8761
+    import: configserver:${SPRING_CONFIG_URL:http://localhost:8888}
