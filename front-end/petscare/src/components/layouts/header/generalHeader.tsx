@@ -35,9 +35,9 @@ const GeneralHeader = (props: Props) => {
 
     return (
         <>
-            <AppBar position="static">
+            <AppBar position="static" sx={{height: '120px'}}>
                 <Container maxWidth="xl" >
-                    <Toolbar disableGutters>
+                    <Toolbar disableGutters >
                         <Typography
                             variant="h6"
                             component="div"
@@ -47,7 +47,7 @@ const GeneralHeader = (props: Props) => {
                         </Typography>
                         <Box>
                             <IconButton
-                                color="inherit"
+                                color="info"
                                 aria-label="open drawer"
                                 edge="start"
                                 onClick={handleDrawerToggle}
