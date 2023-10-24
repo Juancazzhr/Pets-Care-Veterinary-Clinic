@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import PersonIcon from '@mui/icons-material/Person';
+import CancelIcon from '@mui/icons-material/Cancel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -13,13 +16,17 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
+import NextLink from 'next/link'
+import Image from 'next/image'
+import logo from '../../../assets/img/logo-petscare.svg'
+import styles from './generalHeader.module.css';
 
 
 interface Props {
     window?: () => Window;
 }
 const drawerWidth = 250;
-const navItems = ['inicio', 'servicios', 'turnos', 'profesionales', 'faqs'];
+const navItems = ['INICIO', 'SERVICIOS', 'TURNOS', 'PROFESIONALES', 'FAQS'];
 
 
 const GeneralHeader = (props: Props) => {
@@ -33,34 +40,51 @@ const GeneralHeader = (props: Props) => {
 
     const container = window !== undefined ? () => window().document.body : undefined;
 
+    const [auth, setAuth] = useState(true)
+
     return (
         <>
-            <AppBar position="static" sx={{height: '120px'}}>
+            <AppBar className={styles.appBar} >
                 <Container maxWidth="xl" >
-                    <Toolbar disableGutters >
-                        <Typography
-                            variant="h6"
-                            component="div"
-                            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-                        >
-                            MUI
-                        </Typography>
+                    <Toolbar disableGutters className={styles.toolbar}>
+                        <NextLink href="/" passHref>
+                            <Image
+                                src={logo}
+                                alt='logo'
+                                width={190.78}
+                                height={60}
+                                priority={true} />
+                        </NextLink>
                         <Box>
                             <IconButton
-                                color="info"
+                                color="secondary"
+                                size='large'
                                 aria-label="open drawer"
-                                edge="start"
+                                edge="end"
                                 onClick={handleDrawerToggle}
-                                sx={{ mr: 2, display: { sm: 'none' } }}
+                                sx={{ display: { md: 'none' } }}
                             >
-                                <MenuIcon />
+                                <MenuIcon sx={{ fontSize: '32px' }} />
                             </IconButton>
-                            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-                                {navItems.map((item) => (
-                                    <Button key={item} sx={{ color: '' }}>
-                                        {item}
-                                    </Button>
-                                ))}
+                            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                                <Box>
+                                    {navItems.map((item) => (
+                                        <Button key={item} sx={{ color: '#EAEBED' }}>
+                                            {item}
+                                        </Button>
+                                    ))}
+                                </Box>
+                                <Box className={styles.boxLogin}>
+                                    {auth ?
+                                        <Stack direction="row">
+                                            <PersonIcon color='secondary' sx={{ fontSize: '32px' }} />
+                                            <Typography className={styles.user} >Lio Messi</Typography>
+                                            <CancelIcon className={styles.cancelIcon} onClick={() => { }} />
+                                        </Stack>
+                                        :
+                                        <Button variant="contained" color='secondary' className={styles.buttonLogin}>iniciar sesión</Button>
+                                    }
+                                </Box>
                             </Box>
                         </Box>
                     </Toolbar>
@@ -77,24 +101,30 @@ const GeneralHeader = (props: Props) => {
                         keepMounted: true,
                     }}
                     sx={{
-                        display: { xs: 'block', sm: 'none' },
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                        display: { xs: 'block', md: 'none' },
+                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, padding: '10px' },
                     }}
                 >
-                    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-                        <Typography variant="h6" sx={{ my: 2 }}>
-                            MUI
-                        </Typography>
-                        <Divider />
+                    <Box onClick={handleDrawerToggle} >
+                        <Stack className={styles.drawerUser}>
+                            {auth && <>
+                                <CancelIcon color='secondary' className={styles.cancelIcon} onClick={() => { }} />
+                                <Box className={styles.drawerUserData}>
+                                    <PersonIcon color='primary' className={styles.personIcon} />
+                                    <Typography className={styles.user}>Lio Messi</Typography>
+                                </Box></>}
+                        </Stack>
+                        <Divider color='#573469' variant="middle" />
                         <List>
                             {navItems.map((item) => (
-                                <ListItem key={item} disablePadding sx={{color: '#573469', }}>
+                                <ListItem key={item} disablePadding sx={{ color: '#573469' }}>
                                     <ListItemButton>
                                         <ListItemText primary={item} />
                                     </ListItemButton>
                                 </ListItem>
                             ))}
                         </List>
+                        <Button variant="outlined" className={styles.buttonLoginDrawer}>{auth ? 'cerrar sesión' : 'iniciar sesión'}</Button>
                     </Box>
                 </Drawer>
             </nav>
