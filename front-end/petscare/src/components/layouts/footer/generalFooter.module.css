@@ -1,0 +1,33 @@
+.containerFooter {
+  background-color: #573469;
+  width: 100%;
+}
+
+.gridFooter {
+  text-align: center;
+  padding: 50px 30px;
+  color: #eaebed;
+  font-weight: bold;
+}
+
+
+.iconsFooter {
+  font-size: 30px;
+  margin: 0 5px;
+}
+
+.copyrights {
+  width: 100%;
+  background-color: #eaebed;
+  color: #573469;
+  font-weight: 700;
+  height: 50px;
+}
+
+@media screen and (min-width: 900px) {
+  .gridItemFooter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
