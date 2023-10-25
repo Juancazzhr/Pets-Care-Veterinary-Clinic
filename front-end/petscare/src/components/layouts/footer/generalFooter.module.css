@@ -1,18 +1,15 @@
 .containerFooter {
   background-color: #573469;
+  width: 100%;
 }
 
 .gridFooter {
- /*  margin: auto; */
   text-align: center;
   padding: 50px 30px;
   color: #eaebed;
   font-weight: bold;
 }
 
-/* .gridItemFooter:first-child {
-  padding-top: 30px;
-} */
 
 .iconsFooter {
   font-size: 30px;
@@ -27,14 +24,6 @@
   height: 50px;
 }
 
-/* @media screen and (min-width: 600px) {
-  .gridItemFooter:first-child {
-    padding-top: 32px;
-  }
-  .gridFooter {
-    padding-top: 18px;
-  }
-} */
 @media screen and (min-width: 900px) {
   .gridItemFooter {
     display: flex;
