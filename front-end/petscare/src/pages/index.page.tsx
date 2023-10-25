@@ -1,3 +1,4 @@
+import { Servicios } from '@/components/home/servicios/Servicios'
 import Head from 'next/head'
 /* import { Roboto } from 'next/font/google' */
 
