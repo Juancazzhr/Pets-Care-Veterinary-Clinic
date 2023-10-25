@@ -1,3 +1,4 @@
+import { Servicios } from '@/components/home/servicios/Servicios'
 import Head from 'next/head'
 //import { Inter } from 'next/font/google'
 
@@ -18,6 +19,7 @@ export default function Home() {
           <p>
             Get started Pets Care&nbsp;
           </p>
+          <Servicios />
         </div>
       </main>
     </>
