@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import styles from '../../../styles/nosotros.module.css'
+import styles from '../nosotros/nosotros.module.css'
 
 
 
@@ -7,7 +7,7 @@ const Nosotros: FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.rectangulo}></div>
-      <h2>Nosotros</h2>
+      <h2>nosotros</h2>
       <p className="texto">
         ¡En PETS CARE Clínica Veterinaria encontrarás todo lo que necesitas para cuidar y consentir a tu mascota!
       </p>
