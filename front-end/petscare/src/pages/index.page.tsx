@@ -1,4 +1,5 @@
 
+import Nosotros from '../components/home/nosotros'
 import {Servicios}  from '../components/home/servicios/Servicios'
 import Head from 'next/head'
 
@@ -13,6 +14,7 @@ export default function Home() {
       </Head>
       <main>
         <Servicios />
+        <Nosotros/>
       </main>
     </>
   )
