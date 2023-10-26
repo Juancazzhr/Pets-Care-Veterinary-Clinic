@@ -1,3 +1,4 @@
+import Nosotros from '../components/home/nosotros'
 import Head from 'next/head'
 //import { Inter } from 'next/font/google'
 
@@ -18,6 +19,7 @@ export default function Home() {
           <p>
             Get started Pets Care&nbsp;
           </p>
+          <Nosotros/>
         </div>
       </main>
     </>
