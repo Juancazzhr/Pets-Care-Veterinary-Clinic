@@ -1,4 +1,8 @@
 
+.stack{
+    margin: 90px 0;
+}
+
 .container{
     display: flex;
     flex-direction: column;
@@ -7,16 +11,23 @@
 .title{
     font-family: Roboto;
     text-align: left;
-    font-size: 40px;
+    font-size: 35px;
     color: #573469;
     margin: 5px 5px 20px 5px;    
 }
 
-.cards, .button{
+.cards{
     width: 280px;
     margin: 5px auto;
     color: #EAEBED;
+}
 
+.button{
+    width: 204px;
+    margin: 5px auto;
+    color: #EAEBED;
+    text-transform: lowercase;
+    font-weight: 900;
 }
 
 .nameCard{
@@ -26,7 +37,7 @@
 }
 
 .linea {
-    border-top: 7px solid #64C9A7;
+    border-top: 10px solid #64C9A7;
     max-width: 70px;
     padding: 0;
     margin-left: 5px;
@@ -44,10 +55,7 @@
     }
 
     .button{
-        width: 280px;
-        color: #EAEBED;
-        grid-column: 2/2;
-    
+        grid-column: 2/2;    
     }
 
     .title{
@@ -78,18 +86,13 @@
         flex-direction: row;
         align-items: center;
     }
-    
 
     .cards{
         width: 220px    
     }
 
     .button{
-        width: 280px;
-        color: #EAEBED;
-        grid-column: 2/2;
         margin-right: -10px;
-    
     }
 
     .title{

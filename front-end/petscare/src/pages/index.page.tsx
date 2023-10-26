@@ -1,8 +1,6 @@
-import { Servicios } from '@/components/home/servicios/Servicios'
-import Head from 'next/head'
-/* import { Roboto } from 'next/font/google' */
 
-/* const roboto = Roboto({ subsets: ['latin'] }) */
+import {Servicios}  from '../components/home/servicios/Servicios'
+import Head from 'next/head'
 
 export default function Home() {
   return (
@@ -13,10 +11,8 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main /* className={`${roboto.className}`} */>
-        <p>
-          Get started Pets Care&nbsp;
-        </p>
+      <main>
+        <Servicios />
       </main>
     </>
   )
