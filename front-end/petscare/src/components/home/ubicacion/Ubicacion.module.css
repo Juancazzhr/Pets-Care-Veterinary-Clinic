@@ -1,0 +1,11 @@
+.mapouter{
+    display: block;
+    margin: 0;
+    height: 250px;
+
+}
+
+.frame{
+    width: 100%;
+    height: 100%;
+}
