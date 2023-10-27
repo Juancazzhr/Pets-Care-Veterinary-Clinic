@@ -1,0 +1,26 @@
+
+.paper{
+    background-image: url('../../../assets/img/experiencia.jpg');
+    height: 350px;
+    background-size: 150%;
+    background-position: center;
+    background-repeat: 'no-repeat'
+}
+
+.container{
+    padding-top: 20px;
+}
+
+.title{
+    font-size: 50px;
+    font-weight: 800;
+    color: white;
+}
+
+
+.description{
+    font-size: 15px;
+    font-weight: 300;
+    color:#EAEBED;
+    max-width: 182px ;
+}
