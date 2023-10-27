@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Slider from '../components/home/carousel/Slider'
 import Nosotros from '../components/home/nosotros'
 import {Servicios}  from '../components/home/servicios/Servicios'
-
+import { Ubicacion } from '../components/home/ubicacion/Ubicacion'
 
 export default function Home() {
   return (
@@ -17,6 +17,7 @@ export default function Home() {
         <Slider />
         <Servicios />
         <Nosotros/>
+        <Ubicacion />
       </main>
     </>
   )
