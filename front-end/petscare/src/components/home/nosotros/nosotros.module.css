@@ -10,8 +10,8 @@
   color: #ffffff;
   background-image: url('/Vector.png');
   background-repeat: no-repeat;
-  background-size: 50%; 
-  background-position: center;
+  background-size: 100%; 
+  background-position: initial;
   padding: 5%;
 }
 
@@ -30,28 +30,16 @@
   max-width: 90%;
   margin-bottom: 1rem;
   font-size: 35px; 
-  margin-left: 4rem;
-  
+  margin-left: 4rem;  
 }
 
-.container p:first-of-type {
-  max-width: 100%; 
-  margin-bottom: 1rem; 
-  font-size: 18px;
-  line-height: 1.5;
-  text-align: center;
-  margin-left: 0;
-  font-family: Roboto, sans-serif;
-}
-
-.container p:last-of-type {
+.container p {
   max-width: 100%; 
   margin-bottom: 2rem; 
   font-size: 18px;
   line-height: 1.5;
-  text-align: center;
+  text-align: left;
   margin-left: 0;
-  font-family: Roboto,sans-serif;
 }
 
 /* Tablets */
@@ -59,7 +47,7 @@
   .container {
     height: auto;
     padding: 5%; 
-    background-size: 40%; 
+    background-size: 80%; 
     background-position: center;
   }
 
@@ -74,12 +62,7 @@
     margin-left: 5rem;
   }
 
-  .container p:first-of-type {
-    text-align: center;
-    margin-left: 0;
-  }
-
-  .container p:last-of-type {
+  .container p{
     max-width: 60%;
     margin-left: 8rem;
   }
@@ -89,7 +72,7 @@
 @media (min-width: 1020px) {
   .container {
     height: 60vh;
-    background-size: 20%; 
+    background-size: 21%; 
     background-position: 25%;
     padding-right: 10%;
     padding-top: 10%; 
