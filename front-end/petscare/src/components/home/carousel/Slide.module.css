@@ -1,26 +1,47 @@
-
-.paper{
-    background-image: url('../../../assets/img/experiencia.jpg');
-    height: 350px;
-    background-size: 150%;
-    background-position: center;
-    background-repeat: 'no-repeat'
+.paper {
+  background-image: url("../../../assets/img/experiencia.jpg");
+  height: 350px;
+  background-size: 150%;
+  background-position: center;
+  background-repeat: "no-repeat";
 }
 
-.container{
-    padding-top: 20px;
+.container {
+  padding-top: 20px;
 }
 
-.title{
-    font-size: 50px;
-    font-weight: 800;
-    color: white;
+.title {
+  font-size: 50px;
+  font-weight: 800;
+  color: white;
 }
 
+.description {
+  font-size: 15px;
+  font-weight: 300;
+  color: #eaebed;
+  max-width: 182px;
+}
 
-.description{
-    font-size: 15px;
+/* Tablet and Smaller Desktop */
+@media (min-width: 701px) {
+
+  .description {
+    font-size: 20px;
     font-weight: 300;
-    color:#EAEBED;
-    max-width: 182px ;
+    max-width: 382px;
+  }
+}
+
+
+/* Desktop */
+@media (min-width: 1020px) {
+
+.paper {
+  background-image: url("../../../assets/img/experiencia.jpg");
+  height: 350px;
+  background-size: 100%;
+  background-position: calc(margin-top: 50px);
+  background-repeat: "no-repeat";
+}
 }
