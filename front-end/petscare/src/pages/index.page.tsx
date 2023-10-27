@@ -1,7 +1,7 @@
-
+import Head from 'next/head'
+import Slider from '../components/home/carousel/Slider'
 import Nosotros from '../components/home/nosotros'
 import {Servicios}  from '../components/home/servicios/Servicios'
-import Head from 'next/head'
 import { Ubicacion } from '../components/home/ubicacion/Ubicacion'
 
 export default function Home() {
@@ -14,6 +14,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        <Slider />
         <Servicios />
         <Nosotros/>
         <Ubicacion />
