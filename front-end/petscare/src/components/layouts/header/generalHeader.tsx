@@ -69,7 +69,7 @@ const GeneralHeader = (props: Props) => {
                             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                                 <Box>
                                     {navItems.map((item) => (
-                                        <Button key={item} sx={{ color: '#EAEBED' }}>
+                                        <Button key={item} className={styles.buttonNav}>
                                             {item}
                                         </Button>
                                     ))}

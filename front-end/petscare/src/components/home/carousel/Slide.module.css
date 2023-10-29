@@ -1,8 +1,7 @@
 .paper {
-  background-image: url("../../../assets/img/experiencia.jpg");
   height: 350px;
   background-size: 150%;
-  background-position: center;
+  background-position: 40% 60%;
   background-repeat: "no-repeat";
 }
 
@@ -16,43 +15,65 @@
   color: white;
 }
 
+.line{
+  width: 72px;
+  height: 3px;
+  border: 2.5px solid white;
+  margin-top: 8px;
+  margin-bottom: 15px;
+}
+
 .description {
-  font-size: 15px;
-  font-weight: 300;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
   color: #eaebed;
   max-width: 182px;
 }
 
-/* Tablet and Smaller Desktop */
-@media (min-width: 701px) {
+.indicator {
+  font-size: 60px;
+  font-weight: 900;
+  margin: -5px;
+}
 
+
+/* Tablet and Smaller Desktop */
+@media (min-width: 600px) {
   .description {
     font-size: 20px;
-    font-weight: 300;
     max-width: 482px;
+  }
+  .indicator {
+    font-size: 80px;
   }
 }
 
-
 /* Desktop */
 @media (min-width: 1020px) {
-    .title {
-        font-size: 60px;
-      }
-      
-      .description {
-        font-size: 20px;
-    
-      }
+  .title {
+    font-size: 60px;
+  }
 
-    .container {
-        padding-top: 50px;
-      }
-.paper {
-  background-image: url("../../../assets/img/experiencia.jpg");
-  height: 400px;
-  background-size: 100%;
-  background-position: 65% 35%;
-  background-repeat: "no-repeat";
-}
+  .description {
+    font-size: 22px;
+    line-height: 26px;
+  }
+
+  .container {
+    padding-top: 50px;
+  }
+
+  .paper {
+    height: 400px;
+    background-size: 100%;
+    background-position: 65% 35%;
+    background-repeat: "no-repeat";
+  }
+
+  .indicator {
+    font-size: 100px;
+    font-weight: 700;
+    margin: -10px;
+  }
 }

@@ -69,6 +69,10 @@
     left: 22px;
 }
 
+.buttonNav{
+    color: var(--secondary-color);
+}
+
 @media screen and (min-width: 900px) {
     .appBar{
         padding: 0 20px;
