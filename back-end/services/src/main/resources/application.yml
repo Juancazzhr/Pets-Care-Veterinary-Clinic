@@ -1,9 +1,15 @@
 spring:
+#Datos de prueba:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://db.ctd.academy:3306/pi21023c02_GRUPO6?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: pi21023c02_GRUPO6
-    password: iguu3Ohg
+    url: jdbc:mysql://localhost:3306/my_db?createDatabaseIfNotExist=true&useUnicode=true&amp&characterEncoding=utf-8&autoReconnect=true
+    username: root
+    password: July750113
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://db.ctd.academy:3306/pi21023c02_GRUPO6?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+#    username: pi21023c02_GRUPO6
+#    password: iguu3Ohg
   jpa:
     show-sql: true
     hibernate:
