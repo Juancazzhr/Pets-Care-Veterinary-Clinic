@@ -36,7 +36,7 @@ public class ProfessionalServiceService implements IProfessionalService {
         if(serviceFounded.isPresent()){
             return repository.save(service);
         }else{
-            throw new Exception("ID "+ service.getId() +" does not exist. Please check the service id and try again.");
+            throw new Exception("Service with id "+ service.getId() +" does not exist. Please check the service id and try again.");
         }
     }
 
@@ -46,7 +46,7 @@ public class ProfessionalServiceService implements IProfessionalService {
         if(serviceFounded.isPresent()){
             repository.deleteById(id);
         }else{
-            throw new Exception("ID "+id+" does not exist. Please check the service id and try again.");
+            throw new Exception("Service with id "+id+" does not exist. Please check the service id and try again.");
         }
     }
 
