@@ -48,7 +48,7 @@ const AppBarComponent: FC<Props> = ({handleDrawerToggle, navItems, auth}) => {
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                             <Box>
                                 {navItems.map((item) => (
-                                    <Button key={item} className={styles.buttonNav}>
+                                    <Button key={item} className={styles.buttonNav} href={item === 'inicio' ? '/' : `/${item}`}>
                                         {item}
                                     </Button>
                                 ))}

@@ -3,7 +3,7 @@ import AppBarComponent from './AppBarComponent';
 import NavDrawer from './navDrawer';
 
 
-const navItems = ['INICIO', 'SERVICIOS', 'TURNOS', 'PROFESIONALES', 'FAQS'];
+const navItems = ['inicio', 'servicios', 'turnos', 'profesionales', 'faqs'];
 
 
 const GeneralHeader = () => {

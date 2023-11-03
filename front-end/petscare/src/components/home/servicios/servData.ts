@@ -2,32 +2,32 @@ export const servData = [
     
     {
         "id":1,
-        "nombre": "Cirugía",
+        "nombre": "cirugía",
         "url":"/cirugia.png"
     },
     {
         "id":2,
-        "nombre": "Laboratorio",
+        "nombre": "laboratorio",
         "url":"/laboratorio.jpg"
     },
     {
         "id":3,
-        "nombre": "Vacunación",
+        "nombre": "vacunación",
         "url":"/vacunacion.png"
     },
     {
         "id":4,
-        "nombre": "Consulta",
+        "nombre": "consulta",
         "url":"/consulta.png"
     },
     {
         "id":5,
-        "nombre": "Radiografía",
+        "nombre": "radiografía",
         "url":"/radiografia.png"
     },
     {
         "id":6,
-        "nombre": "Peluquería",
+        "nombre": "peluquería",
         "url":"/peluqueria.png"
     }
 ]
