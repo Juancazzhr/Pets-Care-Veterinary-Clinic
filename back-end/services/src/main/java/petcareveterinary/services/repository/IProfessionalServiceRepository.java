@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import petcareveterinary.services.model.ProfessionalService;
 
 @Repository
-public interface IRepositoryProfessionalService extends JpaRepository<ProfessionalService, Long> {
+public interface IProfessionalServiceRepository extends JpaRepository<ProfessionalService, Long> {
 
 }
