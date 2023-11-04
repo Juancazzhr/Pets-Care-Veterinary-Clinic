@@ -1,8 +1,13 @@
 package petcareveterinary.services.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity
 @Table(name = "Services")
 public class ProfessionalService {
@@ -17,12 +22,6 @@ public class ProfessionalService {
     @Column
     private String thumbnail;
 
-    public ProfessionalService(Long id, String name, String description, String thumbnail) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.thumbnail = thumbnail;
-    }
 
     public Long getId() {
         return id;
