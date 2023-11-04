@@ -12,17 +12,17 @@ const Slider: FC = () => {
         {
             title: "experiencia",
             description: "Desde 2000, dedicados a la atención integral de tu mascota ",
-            image: `${process.env.BASE_URL+"/experiencia.jpg"}`
+            image: `${process.env.BASE_URL_SLIDER+"experiencia.jpg"}`
         },
         {
             title: "confianza",
             description: "Profesionales con altos niveles de capacitación, innovación, exigencia y seriedad.",
-            image:`${process.env.BASE_URL+"/confianza.jpg"}`
+            image:`${process.env.BASE_URL_SLIDER+"confianza.jpg"}`
         },
         {
             title: "empatía",
             description: "Compartimos tu amor por ellos y los cuidamos como si fueran nuestros.",
-            image: `${process.env.BASE_URL+"/empatia.jpg"}`
+            image: `${process.env.BASE_URL_SLIDER+"empatia.jpg"}`
         }
     ]
 
