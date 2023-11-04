@@ -30,7 +30,7 @@ public class ProfessionalServiceController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProfessionalService> searchById(@PathVariable Long id){
+    public ResponseEntity<ProfessionalService> searchById(@PathVariable Long id) throws Exception {
         if(professionalServiceService.searchProfessionalServiceById(id).isPresent()){
             return ResponseEntity.ok(professionalServiceService.searchProfessionalServiceById(id).get());
         }else{

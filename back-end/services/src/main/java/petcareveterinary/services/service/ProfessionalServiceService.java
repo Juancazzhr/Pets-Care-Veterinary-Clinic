@@ -21,13 +21,14 @@ public class ProfessionalServiceService implements IProfessionalService {
     }
 
     @Override
-    public Optional<ProfessionalService> searchProfessionalServiceById(Long id) {
+    public Optional<ProfessionalService> searchProfessionalServiceById(Long id) throws Exception {
+        ProfessionalService serviceFounded = repository.findById(id).orElseThrow(() -> new Exception("Service with id: " + id + " does not exist. Please check the service id and try again."));
         return repository.findById(id);
     }
 
     @Override
-    public ProfessionalService createProfessionalService(ProfessionalService service) {
-        return repository.save(service);
+    public void createProfessionalService(ProfessionalService service) {
+        repository.save(service);
     }
 
     @Override

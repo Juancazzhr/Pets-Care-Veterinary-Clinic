@@ -8,9 +8,9 @@ import java.util.Optional;
 public interface IProfessionalService {
     List<ProfessionalService> listProfessionalServices();
 
-    Optional<ProfessionalService> searchProfessionalServiceById(Long id);
+    Optional<ProfessionalService> searchProfessionalServiceById(Long id) throws Exception;
 
-    ProfessionalService createProfessionalService(ProfessionalService professional);
+    void createProfessionalService(ProfessionalService professional);
 
     void deleteProfessionalService(Long id) throws Exception;
 
