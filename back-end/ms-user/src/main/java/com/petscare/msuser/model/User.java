@@ -1,7 +1,11 @@
 package com.petscare.msuser.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -22,4 +26,7 @@ public class User {
     private String email;
     @Column
     private String phone;
+
+    @OneToMany(mappedBy = "user")
+    private List<Pet> pets;
 }
