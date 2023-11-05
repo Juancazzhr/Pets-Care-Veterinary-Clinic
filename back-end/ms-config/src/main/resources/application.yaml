@@ -7,7 +7,7 @@ spring:
       server:
         git:
           clone-on-start: on
-          default-label: dev
+          default-label: main
           uri: https://github.com/Juancazzhr/Pets-Care-Veterinary-Clinic.git
           refresh-rate: 60
           search-paths:
