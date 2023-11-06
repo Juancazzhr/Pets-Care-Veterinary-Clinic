@@ -1,4 +1,4 @@
-import LayoutAuth from '../components/layouts/LayoutAuth';
+import LayoutAuth from '../../components/layouts/LayoutAuth';
 import React from 'react'
 
 const RegistroPage = () => {
