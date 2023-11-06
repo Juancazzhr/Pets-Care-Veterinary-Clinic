@@ -1,8 +1,21 @@
-.appBar{
+.appBar, .appBarAuth{
     height: 120px; 
     flex-direction: row;
     align-items: center; 
     position: static;  
+}
+
+.appBarAuth{
+    background-color: none;
+}
+
+.bgAuth{
+    background-color: #EAEBED;
+    background-image: url('/vector.png');
+    background-repeat: no-repeat;
+    background-size: 40%; 
+    background-position: 50%;
+    height: 100vh;
 }
 
 .toolbar{
