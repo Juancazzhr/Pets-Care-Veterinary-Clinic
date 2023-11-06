@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: ms-config
+
+  cloud:
+    config:
+      server:
+        git:
+          clone-on-start: on
+          default-label: dev
+          uri: https://github.com/Juancazzhr/Pets-Care-Veterinary-Clinic.git
+          refresh-rate: 60
+          search-paths:
+            - back-end/configs/*
+          basedir: ${user.home}/config-repo
+
+server:
+  port: 8888

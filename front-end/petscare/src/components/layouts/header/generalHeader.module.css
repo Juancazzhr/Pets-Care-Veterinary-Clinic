@@ -1,0 +1,82 @@
+.appBar{
+    height: 120px; 
+    flex-direction: row;
+    align-items: center; 
+    position: static;  
+}
+
+.toolbar{
+    justify-content: space-between
+}
+
+.buttonLogin{
+    width: 206px;
+    text-transform: lowercase;
+    font-weight: 900;
+}
+
+.boxLogin{
+    display: flex;
+}
+
+.boxLogin .user{
+    margin-top:7px;
+    margin-left: 5px;
+    color: '#EAEBED';
+    font-Weight: '900'
+}
+
+.boxLogin .cancelIcon{
+    position: absolute;
+    top: -10px;
+    right: 0px;
+}
+
+.drawerUser{
+    height: 180px;
+    flex-direction: column;
+    padding: 20px;
+  /*   justify-content: end; */
+}
+
+.drawerUser .cancelIcon{
+    position: absolute;
+    right: 35px;   
+}
+
+.drawerUserData{
+    position: absolute;
+    top: 80px;  
+}
+ .drawerUserData .user{
+    color: #573469;
+    font-size: larger;
+    font-weight: bold;
+    margin-left: -3px;
+}
+
+.drawerUserData .personIcon{
+    font-size: 50px;
+    margin-left: -10px;
+}
+
+.buttonLoginDrawer{
+    position: absolute;
+    width: 206px;
+    text-transform: lowercase;
+    font-weight: 900;
+    bottom: 40px;
+    left: 22px;
+}
+
+@media screen and (min-width: 900px) {
+    .appBar{
+        padding: 0 20px;
+    }  
+}
+
+@media screen and (min-width: 965px) {
+    .boxLogin{
+        margin-left: 70px;
+    }
+}

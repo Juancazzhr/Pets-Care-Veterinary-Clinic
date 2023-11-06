@@ -1,0 +1,108 @@
+
+.stack{
+    margin: 90px 0;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.title{
+    font-family: Roboto;
+    text-align: left;
+    font-size: 35px;
+    color: #573469;
+    margin: 5px 5px 20px 5px;    
+}
+
+.cards{
+    width: 280px;
+    margin: 5px auto;
+    color: #EAEBED;
+}
+
+.button{
+    width: 204px;
+    margin: 5px auto;
+    color: #EAEBED;
+    text-transform: lowercase;
+    font-weight: 900;
+}
+
+.nameCard{
+    text-align :center;
+    font-size : 30px;
+    color: #573469;
+}
+
+.linea {
+    border-top: 10px solid #64C9A7;
+    max-width: 70px;
+    padding: 0;
+    margin-left: 5px;
+  }
+
+/* Tablet and Smaller Desktop */
+@media (min-width: 701px){
+
+    .container{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        width: 98%;
+    }
+
+    .button{
+        grid-column: 2/2;    
+    }
+
+    .title{
+        width: 80%;
+        margin-left: 20px;
+    }
+
+    .linea{
+        margin-left: 30px;
+        width: 80px;
+    }
+
+    .nameCard{
+        font-size : 24px;
+    }
+
+}
+
+/* Desktop */
+@media (min-width: 1020px) {
+    
+    .nameCard{
+        font-size : 20px;
+    }
+
+    .container{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .cards{
+        width: 220px    
+    }
+
+    .button{
+        margin-right: -10px;
+    }
+
+    .title{
+        width: 80%;
+        margin-left: 20px;
+    }
+
+    .linea{
+        margin-left: 33px;
+        width: 80px;
+    }
+    
+}
