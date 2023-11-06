@@ -4,7 +4,7 @@ spring:
 
 eureka:
   instance:
-    hostname: localhost
+    hostname: ${DISCOVERY_INSTANCE_HOSTNAME:localhost}
     prefer-ip-address: true
   client:
     registerWithEureka: false
@@ -14,4 +14,4 @@ eureka:
   environment: ${SPRING_PROFILE_ACTIVE:dev}
 
 server:
-  port: ${PORT:8761}
+  port: ${DISCOVERY_PORT:8761}

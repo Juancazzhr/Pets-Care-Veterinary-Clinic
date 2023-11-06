@@ -8,7 +8,7 @@ COPY . /project
 WORKDIR /project
 RUN mvn clean package -DskipTests
 
-ENV PORT=8761
+ENV PORT=8888
 ENV PROFILE=prod
 ENV CLOUD_CONFIG_URI=http://localhost:8888
 
@@ -16,12 +16,12 @@ EXPOSE ${PORT}
 
 FROM amazoncorretto:21-alpine3.18
 RUN mkdir /app
-COPY --from=build /project/target/ms-discovery-0.0.1-SNAPSHOT.jar /app/ms-discovery-0.0.1-SNAPSHOT.jar
+COPY --from=build /project/target/ms-gateway-0.0.1-SNAPSHOT.jar /app/ms-gateway-0.0.1-SNAPSHOT.jar
 WORKDIR /app
 
 RUN apk update && apk add --no-cache \
     bash \
     curl \
-    git \
+    git
 
-CMD ["sh", "-c", "java -jar ms-discovery-0.0.1-SNAPSHOT.jar"]
+CMD ["sh", "-c", "java -jar ms-gateway-0.0.1-SNAPSHOT.jar"]

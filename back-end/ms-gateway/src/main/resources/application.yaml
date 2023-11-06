@@ -1,6 +1,6 @@
 spring:
   application:
-    name: ms-discovery
+    name: ms-gateway
 
   profiles:
     active: ${SPRING_PROFILE_ACTIVE:dev}

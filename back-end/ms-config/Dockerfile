@@ -1,21 +1,27 @@
-FROM amazoncorretto:21-alpine3.18
+FROM maven:3.9.5-amazoncorretto-21 AS build
 
-ENV APP_NAME=ms-config
+LABEL maintainer="Juancazzhr"
+LABEL authors="C2 Team 6 PI Specialization"
+
+RUN mkdir /project
+COPY . /project
+WORKDIR /project
+RUN mvn clean package -DskipTests
+
 ENV PORT=8888
-ENV PROFILE=local
+ENV PROFILE=prod
 ENV CLOUD_CONFIG_URI=http://localhost:8888
 
-EXPOSE $PORT
+EXPOSE ${PORT}
+
+FROM amazoncorretto:21-alpine3.18
+RUN mkdir /app
+COPY --from=build /project/target/ms-config-0.0.1-SNAPSHOT.jar /app/ms-config-0.0.1-SNAPSHOT.jar
+WORKDIR /app
 
 RUN apk update && apk add --no-cache \
     bash \
     curl \
     git \
 
-WORKDIR /app
-COPY ./target/ms-config-0.0.1-SNAPSHOT.jar /app/${APP_NAME}.jar
-
-LABEL maintainer="Juancazzhr"
-LABEL authors="C2 Team 6 PI Specialization"
-
-CMD ["sh", "-c", "java -jar ${APP_NAME}.jar"]
+CMD ["sh", "-c", "java -jar ms-config-0.0.1-SNAPSHOT.jar"]
