@@ -1,13 +1,13 @@
-name: Pets Care Micro-Services
+name: Pets Care MS
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [ main, dev ]
     paths: 
       - "back-end/**"
       - ".github/workflows/app-workflow.yaml"
   push:
-    branches: [ main ]
+    branches: [ main, dev ]
     paths:
       - "back-end/**"
       - ".github/workflows/app-workflow.yaml"
@@ -40,6 +40,24 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{secrets.DOCKERHUB_USERNAME}}/ms-config:latest
+      
+      -
+        name: Build and push ms-discovery
+        uses: docker/build-push-action@v5
+        with:
+          context: back-end/ms-discovery
+          file: ./Dockerfile
+          push: true
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/ms-discovery:latest
+
+      -
+        name: Build and push ms-gateway
+        uses: docker/build-push-action@v5
+        with:
+          context: back-end/ms-gateway
+          file: ./Dockerfile
+          push: true
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/ms-gateway:latest
             
             
     
