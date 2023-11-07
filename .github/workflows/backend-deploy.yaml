@@ -2,12 +2,12 @@ name: Pets Care MS
 
 on:
   pull_request:
-    branches: [ main, dev ]
+    branches: [ main ]
     paths: 
       - "back-end/**"
       - ".github/workflows/app-workflow.yaml"
   push:
-    branches: [ main, dev ]
+    branches: [ main ]
     paths:
       - "back-end/**"
       - ".github/workflows/app-workflow.yaml"
