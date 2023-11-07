@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Ubicacion } from '../components/home/ubicacion/Ubicacion'
+import Paper from '@mui/material/Paper'
 
 export default function Home() {
   return (
@@ -11,8 +11,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-   <h1>hollla</h1>
-        <Ubicacion />
+
+        <Paper>
+          <h1>hollla</h1>
+        </Paper>
       </main>
     </>
   )
