@@ -6,7 +6,6 @@
 - Spring Boot 3.1.5
 - Spring Cloud 2022.0.4
 - Docker 24.0.6
-- MySQL 8.0.33
 
 #### POM.xml base de un microservicio
 ```xml

@@ -3,31 +3,31 @@ export const servData = [
     {
         "id":1,
         "nombre": "Cirugía",
-        "url":"/cirugia.png"
+        "url":`${process.env.BASE_URL_SERVICES+"cirugia.png"}`
     },
     {
         "id":2,
         "nombre": "Laboratorio",
-        "url":"/laboratorio.jpg"
+        "url":`${process.env.BASE_URL_SERVICES+"laboratorio.jpg"}`
     },
     {
         "id":3,
         "nombre": "Vacunación",
-        "url":"/vacunacion.png"
+        "url":`${process.env.BASE_URL_SERVICES+"vacunacion.png"}`
     },
     {
         "id":4,
         "nombre": "Consulta",
-        "url":"/consulta.png"
+        "url":`${process.env.BASE_URL_SERVICES+"consulta.png"}`
     },
     {
         "id":5,
         "nombre": "Radiografía",
-        "url":"/radiografia.png"
+        "url":`${process.env.BASE_URL_SERVICES+"radiografia.png"}`
     },
     {
         "id":6,
         "nombre": "Peluquería",
-        "url":"/peluqueria.png"
+        "url":`${process.env.BASE_URL_SERVICES+"peluqueria.png"}`
     }
 ]
