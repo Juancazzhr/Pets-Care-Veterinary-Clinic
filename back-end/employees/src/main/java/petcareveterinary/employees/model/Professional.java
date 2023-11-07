@@ -14,8 +14,7 @@ import java.util.Set;
 @Table(name="Professionals")
 public class Professional {
     @Id
-    @SequenceGenerator(name="professional_sequence", sequenceName = "professional_sequence")
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "professional_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     @Column
     private String name;
@@ -27,8 +26,4 @@ public class Professional {
     private Set<ProfessionalService> services = new HashSet<ProfessionalService>();
     //@ManyToMany
     //private List<Turn> turns;
-    @OneToMany
-    private List<ProfessionalPhoto> photos = new ArrayList<ProfessionalPhoto>();
-
-
 }
