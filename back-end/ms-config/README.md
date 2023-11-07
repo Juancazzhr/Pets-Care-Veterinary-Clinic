@@ -1,15 +1,26 @@
-#### ENV
+# Config Service
 
-`SERVER_GIT_URI`
-Esta es la URI del repositorio git.
+This service is responsible for providing configuration to the other services.
 
-SERVER_GIT_BRANCH
+### Environment Variables
 
-SERVER_GIT_SEARCH_PATH
+| Name                               | Description                | Default Value |
+|------------------------------------|----------------------------|---------------|
+| MS_CONFIG_SERVER_GIT_URI           | URL to Git repository      |               |
+| MS_CONFIG_SERVER_GIT_DEFAULT_LABEL | Default branch name        | dev           |
+| MS_CONFIG_PORT                     | Port to run the service on | 8888          |
 
-SERVER_GIT_BASE_DIR
+### Build Image
 
-This is the base directory for the git repository. It is used to determine the
-path to the git repository. If the git repository is located at
-`/home/user/repo` then the `SERVER_GIT_BASE_DIR` should be set to `/home/user`.
-SERVER_PORT
+`docker build -t {username}/petscare-ms-config .`
+
+### Push Image
+
+`docker push {username}/petscare-ms-config`
+
+### Run Container
+
+`docker run --name ms-config -dp 8888:8888 -e MS_CONFIG_SERVER_GIT_URI=... \
+-e MS_CONFIG_SERVER_GIT_DEFAULT_LABEL=... \
+-e MS_CONFIG_PORT=...
+`

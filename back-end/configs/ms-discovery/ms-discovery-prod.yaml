@@ -4,14 +4,14 @@ spring:
 
 eureka:
   instance:
-    hostname: ${DISCOVERY_INSTANCE_HOSTNAME:localhost}
+    hostname: localhost
     prefer-ip-address: true
   client:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
-  environment: ${SPRING_PROFILE_ACTIVE:prod}
+  environment: ${MS_DISCOVERY_PROFILE_ACTIVE:prod}
 
 server:
-  port: ${DISCOVERY_PORT:8761}
+  port: ${MS_DISCOVERY_PORT:8761}

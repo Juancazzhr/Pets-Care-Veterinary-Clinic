@@ -7,12 +7,12 @@ spring:
       server:
         git:
           clone-on-start: on
-          default-label: main
-          uri: https://github.com/Juancazzhr/Pets-Care-Veterinary-Clinic.git
+          uri: ${MS_CONFIG_SERVER_GIT_URI:https://github.com/Juancazzhr/Pets-Care.git}
+          default-label: ${MS_CONFIG_SERVER_GIT_DEFAULT_LABEL:dev}
           refresh-rate: 60
           search-paths:
             - back-end/configs/*
           basedir: ${user.home}/config-repo
 
 server:
-  port: 8888
+  port: ${MS_CONFIG_PORT:8888}

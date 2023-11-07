@@ -1,9 +1,11 @@
 # Back-End: Pets Care
 
-#### Stack de tecnologias y versiones
+#### Stack de tecnologías y versiones Back-End
 - Java 21.0.1
-- Spring Boot 3.1.4
+- Maven 3.9.5
+- Spring Boot 3.1.5
 - Spring Cloud 2022.0.4
+- Docker 24.0.6
 - MySQL 8.0.33
 
 #### POM.xml base de un microservicio
@@ -15,7 +17,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.4</version>
+        <version>3.1.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.petscare</groupId>
