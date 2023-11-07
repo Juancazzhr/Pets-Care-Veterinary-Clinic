@@ -3,7 +3,7 @@ spring:
     name: ms-gateway
 
   profiles:
-    active: ${SPRING_PROFILE_ACTIVE:dev}
+    active: ${MS_GATEWAY_PROFILE_ACTIVE:dev}
 
   config:
-    import: configserver:${SPRING_CONFIG_SERVER_URL:http://localhost:8888}
+    import: configserver:${MS_GATEWAY_CONFIG_SERVER_URL:http://localhost:8888}

@@ -11,7 +11,7 @@ eureka:
     fetchRegistry: false
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
-  environment: ${SPRING_PROFILE_ACTIVE:dev}
+  environment: ${MS_DISCOVERY_PROFILE_ACTIVE:dev}
 
 server:
-  port: ${DISCOVERY_PORT:8761}
+  port: ${MS_DISCOVERY_PORT:8761}
