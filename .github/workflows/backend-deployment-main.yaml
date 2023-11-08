@@ -32,7 +32,7 @@ jobs:
       - name: Build and push ms-config
         uses: docker/build-push-action@v5
         with:
-          context: back-end/ms-config
+          context: ms-config
           file: ./Dockerfile
           push: true
           tags: ${{secrets.DOCKERHUB_USERNAME}}/petscare-ms-config:latest
@@ -40,7 +40,7 @@ jobs:
       - name: Build and push ms-discovery
         uses: docker/build-push-action@v5
         with:
-          context: back-end/ms-discovery
+          context: ms-discovery
           file: ./Dockerfile
           push: true
           tags: ${{secrets.DOCKERHUB_USERNAME}}/petscare-ms-discovery:latest
@@ -48,7 +48,7 @@ jobs:
       - name: Build and push ms-gateway
         uses: docker/build-push-action@v5
         with:
-          context: back-end/ms-gateway
+          context: ms-gateway
           file: ./Dockerfile
           push: true
           tags: ${{secrets.DOCKERHUB_USERNAME}}/petscare-ms-gateway:latest
