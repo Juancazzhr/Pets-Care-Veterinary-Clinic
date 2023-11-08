@@ -58,3 +58,26 @@ jobs:
           context: ./back-end/ms-gateway
           push: true
           tags: ${{secrets.DOCKERHUB_USERNAME}}/petscare-ms-gateway:latest
+
+  compose-deploy:
+    needs:
+      - docker-buildx
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: "dev"
+          
+      - name: Add server Key to connect with EC2
+        run: touch key_petscare.pem; cat ${{secrets.EC2_SERVER_KEY}} >> key_petscare.pem;
+
+      - name: Copy docker-compose to EC2
+        run: scp -i "key_petscare.pem" ./back-end/docker-compose.yaml ${{env.EC2_SERVER_USER}}@${{env.EC2_SERVER_IP}}:/home/ubuntu/server -o StrictHostKeyChecking=no
+
+      - name: Deploy docker-compose
+        run: ssh -i "key_petscare.pem" ${{env.EC2_SERVER_USER}}@${{env.EC2_SERVER_IP}} "cd server; docker compose up -d" -o StrictHostKeyChecking=no
+        
+      
+    
