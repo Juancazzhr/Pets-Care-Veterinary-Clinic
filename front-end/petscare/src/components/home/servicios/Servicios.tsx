@@ -10,16 +10,14 @@ import TitleSection from '../../utils/TitleSection';
 
 export const Servicios: FC = () => {
   return (
-    <Container maxWidth="xl" className={styles.wrapper}> 
+    <Container maxWidth={'xl'} className={styles.wrapper}> 
       <Stack className={styles.stack}>
         <Container className={styles.container}> 
-          <div className={styles.linea}></div>
-          <h2 className={styles.title}>servicios</h2>
+        <TitleSection title='servicios' colorLine='64C9A7' colorText='573469'/>
           <Button className={styles.button} variant="contained">Solicita tu turno</Button>      
         </Container>
         <Cards servicio={servData}/>
       </Stack>
     </Container>
-
   )
 }

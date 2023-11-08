@@ -22,7 +22,6 @@ const TurnosPage: NextPage = () => {
           <Appointments />
         </Box>
       </Container>
-
     </>
   )
 }
