@@ -61,7 +61,7 @@ jobs:
 
   compose-deploy:
     needs:
-      - docker-buildx
+      - docker-buildx-push
     runs-on: ubuntu-latest
 
     steps:
