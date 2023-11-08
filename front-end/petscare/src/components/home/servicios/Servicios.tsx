@@ -5,6 +5,7 @@ import styles from "./Servicios.module.css";
 import {servData} from './servData'
 import { Button, Container } from '@mui/material';
 import Stack from '@mui/material/Stack'
+import TitleSection from '../../utils/TitleSection';
 
 
 export const Servicios: FC = () => {
