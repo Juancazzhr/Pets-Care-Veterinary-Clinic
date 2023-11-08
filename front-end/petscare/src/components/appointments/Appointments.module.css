@@ -1,0 +1,76 @@
+.paper {
+  width: 95%;
+  max-width: 850px;
+  padding: 40px 20px 80px;
+  margin: 20px auto 80px;
+}
+
+.addPets {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+}
+
+.radioGroup {
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+
+.radioItem {
+  margin: auto;
+  width: 48%;
+}
+
+.petSelect {
+  color: #eaebed;
+}
+
+.btnStepper {
+  width: 118px;
+  text-transform: lowercase;
+  font-weight: 900;
+}
+
+.formProfessional, .formDatetime {
+  width: 100%;
+}
+
+.selectProfessional, .selectDatetime {
+  width: 90%;
+  margin: 20px auto;
+}
+
+.selectProfessional label {
+  left: 10%;
+  top: 20px;
+}
+
+.dataConfirmation{
+  width: 70%;
+  margin: 30px auto 0;
+}
+
+.dataConfirmation p{
+ line-height: 2;
+}
+
+/* Tablet and Smaller Desktop */
+@media (min-width: 600px) {
+  .paper {
+    padding: 40px 80px 80px;
+    margin: 20px auto 80px;
+  }
+  .radioItem {
+    width: 32%;
+  }
+  .selectProfessional {
+    width: 80%;
+  }
+  .btnStepper {
+    width: 204px;
+  }
+  .dataConfirmation{
+    width: 50%
+  }
+}

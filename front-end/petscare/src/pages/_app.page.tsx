@@ -7,6 +7,7 @@ import { theme } from "../styles/material-theme";
 export default function App({ Component, pageProps }: AppProps) {
 
   const LayoutComponent = (Component as any).Layout;
+  
   return   <ThemeProvider theme={theme}>
     <CssBaseline />
     {LayoutComponent ?
