@@ -2,14 +2,16 @@ name: Pets Care BackEnd Prod
 
 on:
   pull_request:
-    branches: [ "main" ]
+    branches: 
+      - "main"
     paths: 
-      - "back-end/*"
+      - "back-end/**"
       - ".github/workflows/backend-deployment-main.yaml"
   push:
-    branches: [ "main" ]
+    branches: 
+      - "main"
     paths:
-      - "back-end/*"
+      - "back-end/**"
       - ".github/workflows/backend-deployment-main.yaml"
       
 jobs:
@@ -17,6 +19,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
         
@@ -32,23 +37,23 @@ jobs:
       - name: Build and push ms-config
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: back-end/ms-config/Dockerfile
+          context: ./back-end/ms-config
+          file: Dockerfile
           push: true
           tags: ${{secrets.DOCKERHUB_USERNAME}}/petscare-ms-config:latest
       
       - name: Build and push ms-discovery
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: back-end/ms-discovery/Dockerfile
+          context: ./back-end/ms-discovery
+          file: Dockerfile
           push: true
           tags: ${{secrets.DOCKERHUB_USERNAME}}/petscare-ms-discovery:latest
 
       - name: Build and push ms-gateway
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: back-end/ms-gateway/Dockerfile
+          context: ./back-end/ms-gateway
+          file: Dockerfile
           push: true
           tags: ${{secrets.DOCKERHUB_USERNAME}}/petscare-ms-gateway:latest
