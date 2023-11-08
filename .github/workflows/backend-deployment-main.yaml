@@ -71,7 +71,7 @@ jobs:
           ref: "dev"
           
       - name: Add server Key to connect with EC2
-        run: touch key_petscare.pem; cat ${{secrets.EC2_SERVER_KEY}} >> key_petscare.pem;
+        run: touch key_petscare.pem; echo ${{secrets.EC2_SERVER_KEY}} >> key_petscare.pem;
 
       - name: Copy docker-compose to EC2
         run: scp -i "key_petscare.pem" ./back-end/docker-compose.yaml ${{env.EC2_SERVER_USER}}@${{env.EC2_SERVER_IP}}:/home/ubuntu/server -o StrictHostKeyChecking=no
