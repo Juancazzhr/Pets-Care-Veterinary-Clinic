@@ -4,9 +4,24 @@
     margin-bottom: 70px;
 }
 
-.container{
+.wrapper{
     display: flex;
+}
+
+.container{
+    display: grid;
     flex-direction: column;
+}
+
+
+.box{
+    display: flex;
+    flex-wrap: wrap;
+   
+}
+
+.grid{
+    display: contents;
 }
 
 .title{
@@ -18,14 +33,15 @@
 }
 
 .cards{
-    width: 280px;
-    margin: 5px auto;
+    width: 340px;
+    margin: 20px auto;
     color: #EAEBED;
+    padding: 0;
 }
 
 .button{
     width: 204px;
-    margin: 5px auto;
+    margin: 5px auto !important;
     color: #EAEBED;
     text-transform: lowercase;
     font-weight: 900;
@@ -37,6 +53,12 @@
     color: #573469;
 }
 
+.descripCard{
+    font-size: 16px;
+    text-align: justify;
+    color: #573469;
+}
+
 .linea {
     border-top: 10px solid #64C9A7;
     max-width: 70px;
@@ -44,56 +66,70 @@
     margin-left: 5px;
   }
 
-/* Tablet and Smaller Desktop */
-@media (min-width: 701px){
+
+
+@media screen and (min-width: 900px) {
+
+    .wrapper{
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+    }
 
     .container{
         display: flex;
         flex-direction: row;
-        justify-content: flex-start;
         align-items: center;
-        width: 98%;
+        padding: 0;
     }
 
-    .button{
-        grid-column: 2/2;    
+    .box{
+        display: flex;
+        justify-content: space-between;    
+        margin: 0;
     }
 
+    
+    .nameCard{
+        font-size : 24px;
+    }
+
+    .cards{
+        width: 250px;  
+        margin-top: 20px;
+    }
+
+    
     .title{
         width: 80%;
         margin-left: 20px;
     }
 
     .linea{
-        margin-left: 30px;
         width: 80px;
-    }
-
-    .nameCard{
-        font-size : 24px;
     }
 
 }
 
-/* Desktop */
-@media (min-width: 1020px) {
+
+@media screen and (min-width: 965px) {
     
     .nameCard{
         font-size : 20px;
     }
 
-    .container{
-        display: flex;
+    .wrapper{
         flex-direction: row;
         align-items: center;
     }
 
-    .cards{
-        width: 220px    
+    .box{
+        margin: 20px;
     }
 
-    .button{
-        margin-right: -10px;
+    .cards{
+        width: 280px;
+        margin-top: 20px;    
     }
 
     .title{
@@ -102,8 +138,33 @@
     }
 
     .linea{
-        margin-left: 33px;
         width: 80px;
     }
     
+}
+
+@media screen and (min-width: 1200px) {
+    .cards{
+        width: 360px;
+        margin-top: 20px; 
+    }
+    .container{
+        margin: 0;
+    }
+    
+}
+
+@media screen and (min-width: 1540px) {
+    .cards{
+        width: 220px;
+        margin: 10px;    
+    }
+
+    .container{
+        margin: 0;
+    }
+
+    .box{
+        margin: 0;
+    }
 }

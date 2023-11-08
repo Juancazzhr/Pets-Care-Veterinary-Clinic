@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["img.freepik.com"],
+    domains: ["img.freepik.com", "petscare.s3.amazonaws.com"],
 },
   reactStrictMode: true,
   //
