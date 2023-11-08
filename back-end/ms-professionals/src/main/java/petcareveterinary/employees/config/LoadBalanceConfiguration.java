@@ -1,4 +1,3 @@
-/*
 package petcareveterinary.employees.config;
 
 import org.springframework.cloud.client.ServiceInstance;
@@ -21,4 +20,4 @@ public class LoadBalanceConfiguration {
     }
 
 }
-*/
+
