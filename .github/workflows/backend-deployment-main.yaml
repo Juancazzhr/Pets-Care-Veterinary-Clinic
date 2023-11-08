@@ -17,7 +17,7 @@ on:
       - ".github/workflows/backend-deployment-main.yaml"
       
 jobs:
-  docker-buildx:
+  docker-buildx-push:
     runs-on: ubuntu-latest
 
     steps:
