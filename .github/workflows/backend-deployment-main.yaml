@@ -1,4 +1,4 @@
-name: Pets Care MS
+name: Pets Care MS Prod
 
 on:
   pull_request:
