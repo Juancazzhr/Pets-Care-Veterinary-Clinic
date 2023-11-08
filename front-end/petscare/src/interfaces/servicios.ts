@@ -1,5 +1,6 @@
-export interface ServData {
+export interface Serv {
     id:number,
     nombre: string,
-    url:string
+    url:string,
+    descripcion: string
   }

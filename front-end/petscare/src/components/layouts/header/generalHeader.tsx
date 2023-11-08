@@ -1,13 +1,17 @@
 import { useState } from 'react'
-import AppBarComponent from './AppBarComponent';
+import AppBarComponent from './AppBarGeneral';
 import NavDrawer from './navDrawer';
+import AppBarAuth from './AppBarAuth';
 
 
-const navItems = ['INICIO', 'SERVICIOS', 'TURNOS', 'PROFESIONALES', 'FAQS'];
+const navItems = ['inicio', 'servicios', 'turnos', 'profesionales', 'faqs'];
 
+interface Props {
+    variant?: "auth" | "general"
+}
 
-const GeneralHeader = () => {
-    
+const GeneralHeader = ({ variant }: Props) => {
+
     const [mobileOpen, setMobileOpen] = useState(false);
 
     const handleDrawerToggle = () => {
@@ -18,10 +22,17 @@ const GeneralHeader = () => {
 
     return (
         <>
-            <AppBarComponent navItems={navItems} handleDrawerToggle={handleDrawerToggle} auth={auth}/>           
+            {variant === 'general' ?
+                <AppBarComponent navItems={navItems} handleDrawerToggle={handleDrawerToggle} auth={auth} />
+                :
+                <AppBarAuth handleDrawerToggle={handleDrawerToggle} />}
+
             <NavDrawer navItems={navItems} handleDrawerToggle={handleDrawerToggle} auth={auth} mobileOpen={mobileOpen} />
         </>
     )
+}
+GeneralHeader.defaultProps = {
+    variant: 'general'
 }
 
 export default GeneralHeader
