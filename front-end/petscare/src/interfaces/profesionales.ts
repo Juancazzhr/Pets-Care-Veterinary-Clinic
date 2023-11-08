@@ -1,4 +1,4 @@
-export interface Serv {
+export interface Prof {
     id:number,
     nombre: string,
     url:string,
