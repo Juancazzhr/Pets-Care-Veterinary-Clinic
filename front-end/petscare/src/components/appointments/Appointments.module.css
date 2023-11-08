@@ -27,16 +27,16 @@
 }
 
 .btnStepper {
-  width: 204px;
+  width: 118px;
   text-transform: lowercase;
   font-weight: 900;
 }
 
-.formProfessional {
+.formProfessional, .formDatetime {
   width: 100%;
 }
 
-.selectProfessional {
+.selectProfessional, .selectDatetime {
   width: 90%;
   margin: 20px auto;
 }
@@ -58,4 +58,8 @@
   .selectProfessional {
     width: 80%;
   }
+  .btnStepper {
+    width: 204px;
+  }
+  
 }

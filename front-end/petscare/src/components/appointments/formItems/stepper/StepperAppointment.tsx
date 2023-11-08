@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import ServiceStep from './ServiceStep';
 import styles from '../../Appointments.module.css'
 import ProfessionalStep from './ProfessionalStep';
+import DatetimeStep from './DatetimeStep';
 
 const steps = ['servicio', 'profesional', 'fecha y hora', 'confirmación'];
 
@@ -26,24 +27,39 @@ const defaultValues = {
 
 const StepperAppointment = () => {
 
-    const [activeStep, setActiveStep] = useState(1);
+    const [activeStep, setActiveStep] = useState(2);
     
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
+    const handlerServiceStep = (data: any) => {
+       /*  setDataForm({ ...dataForm, service: data }) */
+        setActiveStep((prevActiveStep) => prevActiveStep + 1)
+    }
+    
+    const handlerProfessionalStep = (data: any) => {
+        /*  setDataForm({ ...dataForm, professional: data }) */
+         setActiveStep((prevActiveStep) => prevActiveStep + 1)
+     }
+
+     const handlerDatetimeStep = (data: any) => {
+        /*  setDataForm({ ...dataForm, datetime: data }) */
+         setActiveStep((prevActiveStep) => prevActiveStep + 1)
+     }
+
   return (
     <Box sx={{ width: '100%', mt:'50px' }}>
 
-            <Stepper activeStep={activeStep} alternativeLabel>
+            <Stepper activeStep={activeStep} alternativeLabel >
                 {steps.map((label, index) => { 
                     const stepProps: { completed?: boolean } = {};
                     const labelProps: {
                         optional?: React.ReactNode;
                     } = {};
                     return (
-                        <Step key={label} {...stepProps}>
-                            <StepLabel {...labelProps}>{label}</StepLabel>
+                        <Step key={label} {...stepProps} /* sx={{'.MuiSvgIcon-root-MuiStepIcon-root.Mui-completed':{color:'secondary'}}} */ >
+                            <StepLabel {...labelProps} >{label}</StepLabel>
                         </Step>
                     );
                 })}
@@ -63,16 +79,16 @@ const StepperAppointment = () => {
                     }}>
                     <Box> {activeStep === 0 && <>
                         <Typography sx={{  mt: 2, mb: 1, ml: 1.7}}>SELECCIONÁ EL SERVICIO A AGENDAR</Typography>
-                        <ServiceStep />
+                        <ServiceStep handlerServiceStep={handlerServiceStep}/>
                         
                     </>}
                         {activeStep === 1 && <>
                             <Typography sx={{ mt: 2, mb: 1, ml: 1.7 }}>SELECCIONÁ AL PROFESIONAL DE TU PREFERENCIA</Typography>
-                            <ProfessionalStep />
+                            <ProfessionalStep  handlerProfessionalStep={handlerProfessionalStep}/>
                         </>}
                         {activeStep === 2 && <>
                             <Typography sx={{ mt: 2, mb: 1, ml: 1.7  }}>SELECCIONÁ FECHA Y HORA</Typography>
-                            
+                            <DatetimeStep handlerDatetimeStep={handlerDatetimeStep}/>
                         </>}
                         {activeStep === 3 && <>
                             <Typography sx={{ mt: 2, mb: 1, ml: 1.7 }}>RESUMEN DE TU TURNO</Typography>

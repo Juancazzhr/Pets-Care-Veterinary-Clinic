@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import { useForm, SubmitHandler } from 'react-hook-form'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -9,17 +10,30 @@ import Box from '@mui/material/Box'
 
 const services = ['cirugía', 'laboratorio', 'vacunación', 'consulta', 'radiografía', 'peluquería']
 
-const ServiceStep = () => {
+interface Props {
+    handlerServiceStep: (data: any) => void,
+    /* defaultValues: CheckoutInput */
+}
+
+
+
+const ServiceStep = ({handlerServiceStep}:Props) => {
 
     const [value, setValue] = useState('');
+
+    const { control, formState: { errors }, handleSubmit } = useForm(/* {
+        resolver: yupResolver(schemaService)
+    } */);
 
     const handleChangeRadio = (event: React.ChangeEvent<HTMLInputElement>) => {
         setValue((event.target as HTMLInputElement).value);
     };
-
+    const onSubmit: SubmitHandler<any> = (data) => {
+        handlerServiceStep(data)
+    }
 
     return (
-        <FormControl>
+        <FormControl onSubmit={handleSubmit(onSubmit)}>
             <RadioGroup
                 value={value}
                 onChange={handleChangeRadio}
