@@ -33,7 +33,7 @@ const ServiceStep = ({handlerServiceStep}:Props) => {
     }
 
     return (
-        <FormControl onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
             <RadioGroup
                 value={value}
                 onChange={handleChangeRadio}
@@ -46,7 +46,7 @@ const ServiceStep = ({handlerServiceStep}:Props) => {
             <Box display={'flex'} justifyContent={'end'} position={'relative'} bottom={'-125px'}>
                 <Button type='submit' variant='outlined' color='secondary' className={styles.btnStepper}>Siguiente</Button>
             </Box>
-        </FormControl>
+        </form>
     )
 }
 

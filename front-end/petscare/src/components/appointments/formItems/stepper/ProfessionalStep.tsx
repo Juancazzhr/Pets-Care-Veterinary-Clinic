@@ -34,7 +34,7 @@ const ProfessionalStep = ({handlerProfessionalStep}:Props) => {
 
 
     return (
-        <FormControl className={styles.formProfessional} onSubmit={handleSubmit(onSubmit)}>
+        <form className={styles.formProfessional} onSubmit={handleSubmit(onSubmit)}>
             <Stack className={styles.selectProfessional}>
                 <InputLabel>Listado de profesionales</InputLabel>
                 <Select
@@ -53,7 +53,7 @@ const ProfessionalStep = ({handlerProfessionalStep}:Props) => {
             <Box display={'flex'} justifyContent={'end'} position={'relative'} bottom={'-125px'}>
                 <Button type='submit' variant='outlined' color='secondary' className={styles.btnStepper}>Siguiente</Button>
             </Box>
-        </FormControl>
+        </form>
     )
 }
 

@@ -31,7 +31,7 @@ const DatetimeStep = ({ handlerDatetimeStep }: Props) => {
     }
 
     return (
-        <FormControl onSubmit={handleSubmit(onSubmit)} className={styles.formDatetime}>
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.formDatetime}>
             <Stack className={styles.selectDatetime}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DemoContainer
@@ -51,7 +51,7 @@ const DatetimeStep = ({ handlerDatetimeStep }: Props) => {
             <Box display={'flex'} justifyContent={'end'} position={'relative'} bottom={'-125px'}>
                 <Button type='submit' variant='outlined' color='secondary' className={styles.btnStepper}>Siguiente</Button>
             </Box>
-        </FormControl>
+        </form>
     )
 }
 

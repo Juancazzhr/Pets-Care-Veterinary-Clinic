@@ -10,6 +10,8 @@ import ServiceStep from './ServiceStep';
 import styles from '../../Appointments.module.css'
 import ProfessionalStep from './ProfessionalStep';
 import DatetimeStep from './DatetimeStep';
+import ConfirmationStep from './ConfirmationStep';
+import { useRouter } from 'next/router';
 
 const steps = ['servicio', 'profesional', 'fecha y hora', 'confirmación'];
 
@@ -27,25 +29,31 @@ const defaultValues = {
 
 const StepperAppointment = () => {
 
-    const [activeStep, setActiveStep] = useState(2);
+    const [activeStep, setActiveStep] = useState(0);
+    const router = useRouter()  
     
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
-    const handlerServiceStep = (data: any) => {
+    const handlerServiceStep = (/* data: any */) => {
        /*  setDataForm({ ...dataForm, service: data }) */
         setActiveStep((prevActiveStep) => prevActiveStep + 1)
     }
     
-    const handlerProfessionalStep = (data: any) => {
+    const handlerProfessionalStep = (/* data: any */) => {
         /*  setDataForm({ ...dataForm, professional: data }) */
          setActiveStep((prevActiveStep) => prevActiveStep + 1)
      }
 
-     const handlerDatetimeStep = (data: any) => {
+     const handlerDatetimeStep = (/* data: any */) => {
         /*  setDataForm({ ...dataForm, datetime: data }) */
          setActiveStep((prevActiveStep) => prevActiveStep + 1)
+     }
+
+     const handlerConfirmationStep = (/* data: any */) => {
+        /*  setDataForm({ ...dataForm, datetime: data }) */
+        router.push("/")
      }
 
   return (
@@ -92,7 +100,7 @@ const StepperAppointment = () => {
                         </>}
                         {activeStep === 3 && <>
                             <Typography sx={{ mt: 2, mb: 1, ml: 1.7 }}>RESUMEN DE TU TURNO</Typography>
-                            
+                            <ConfirmationStep handlerConfirmationStep={handlerConfirmationStep}/>
                         </>}
                         <Button
                             variant='outlined'

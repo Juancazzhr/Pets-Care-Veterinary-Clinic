@@ -46,6 +46,15 @@
   top: 20px;
 }
 
+.dataConfirmation{
+  width: 70%;
+  margin: 30px auto 0;
+}
+
+.dataConfirmation p{
+ line-height: 2;
+}
+
 /* Tablet and Smaller Desktop */
 @media (min-width: 600px) {
   .paper {
@@ -61,5 +70,7 @@
   .btnStepper {
     width: 204px;
   }
-  
+  .dataConfirmation{
+    width: 50%
+  }
 }
