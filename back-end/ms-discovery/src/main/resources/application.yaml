@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: ms-discovery
+
+  profiles:
+    active: ${MS_DISCOVERY_PROFILE_ACTIVE:dev}
+
+  config:
+    import: configserver:${MS_DISCOVERY_CONFIG_SERVER_URL:http://localhost:8888}

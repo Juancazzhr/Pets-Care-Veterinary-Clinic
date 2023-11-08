@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: ms-gateway
+
+eureka:
+  instance:
+    hostname: localhost
+    instance-id: ${random.uuid}-${spring.application.name}-${eureka.instance.hostname}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: ${MS_GATEWAY_SERVICE_URL:http://localhost:8761}
+
+server:
+  port: ${MS_GATEWAY_PORT:8080}

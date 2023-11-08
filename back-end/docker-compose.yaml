@@ -1,0 +1,34 @@
+name: pets-care
+
+services:
+  ms-config:
+    image: juancazz/petscare-ms-config:latest
+    container_name: ms-config
+    restart: always
+    networks:
+      - pets-care-network
+    ports:
+      - 8888:8888
+    environment:
+      - MS_CONFIG_SERVER_GIT_URI=https://github.com/Juancazzhr/Pets-Care.git
+      - MS_CONFIG_SERVER_GIT_DEFAULT_LABEL=dev
+      - MS_CONFIG_PORT=8888
+
+  ms-discovery:
+    image: juancazz/petscare-ms-discovery:latest
+    container_name: ms-discovery
+    restart: always
+    depends_on:
+      - ms-config
+    networks:
+      - pets-care-network
+    ports:
+        - 8761:8761
+    environment:
+        - MS_DISCOVERY_PORT=8761
+        - MS_DISCOVERY_CONFIG_SERVER_URL=http://ms-config:8888
+        - MS_DISCOVERY_PROFILE_ACTIVE=dev
+
+networks:
+  pets-care-network:
+    name: pets-care-network

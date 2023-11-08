@@ -1,0 +1,117 @@
+.container {
+  position: relative;
+  background-color: #399FB8;
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-family: Roboto;
+  color: #ffffff;
+  background-image: url('/vector.png');
+  background-repeat: no-repeat;
+  background-size: 100%; 
+  background-position: initial;
+  padding: 5%;
+}
+
+.container::before {
+  content: "";
+  position: absolute; 
+  bottom: 84%;
+  left: 5%; 
+  width: 12%; 
+  height: 8px;
+  background-color: #573469;
+  z-index: 1;
+}
+
+.container h2 {
+  max-width: 90%;
+  margin-bottom: 1rem;
+  font-size: 35px; 
+  margin-left: 4rem;  
+}
+
+.container p {
+  max-width: 100%; 
+  margin-bottom: 2rem; 
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: left;
+  margin-left: 0;
+}
+
+/* Tablets */
+@media (min-width: 481px) {
+  .container {
+    height: auto;
+    padding: 5%; 
+    background-size: 80%; 
+    background-position: center;
+  }
+
+  .container::before {
+    bottom: 81%;
+    left: 5%;
+    width: 8%;
+  }
+
+  .container h2 {
+    font-size: 28px;
+    margin-left: 5rem;
+  }
+
+  .container p{
+    max-width: 60%;
+    margin-left: 8rem;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1020px) {
+  .container {
+    height: 60vh;
+    background-size: 21%; 
+    background-position: 25%;
+    padding-right: 10%;
+    padding-top: 10%; 
+  }
+
+  .container::before {
+    position: absolute;
+    top: 93px; 
+    left: 33px; 
+    width: 4.2%;
+    height: 2%; 
+  }
+
+  .container h2 {
+    font-size: 35px; 
+    position: absolute;
+    top: 35px; 
+    left: 45px; 
+  }
+
+  .container p:first-of-type {
+    max-width: 36.8%; 
+    text-align: left;
+    margin-bottom: 1rem; 
+    margin-left: auto;
+  }
+
+  .container p:last-of-type {
+    max-width: 36.8%; 
+    margin-left: auto;
+    margin-bottom: 4rem; 
+    text-align: left;
+  }
+}
+
+
+
+
+
+
+
+  
