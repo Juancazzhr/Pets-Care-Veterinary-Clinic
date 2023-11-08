@@ -38,7 +38,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./back-end/ms-config
-          file: Dockerfile
           push: true
           tags: ${{secrets.DOCKERHUB_USERNAME}}/petscare-ms-config:latest
       
@@ -46,7 +45,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./back-end/ms-discovery
-          file: Dockerfile
           push: true
           tags: ${{secrets.DOCKERHUB_USERNAME}}/petscare-ms-discovery:latest
 
@@ -54,6 +52,5 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./back-end/ms-gateway
-          file: Dockerfile
           push: true
           tags: ${{secrets.DOCKERHUB_USERNAME}}/petscare-ms-gateway:latest
