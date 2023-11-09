@@ -70,18 +70,27 @@ jobs:
         with:
           ref: "dev"
 
-      - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.8.0
-        with:
-          ssh-private-key: ${{secrets.EC2_SERVER_KEY}}
+      - name: Get EC2 SSH key
+        id: ssh_key_petscare
+        run: |
+          echo "::set-output name=key::${{ secrets.EC2_SERVER_KEY }}"
+
+      - name: Write SSH key to file
+        run: |
+          echo "${{ steps.ssh_key_petscare.outputs.key }}" > key.pem
+
+      - name: Set permissions to key file
+        run: |
+          chmod 400 key.pem
+        
 
       - name: Copy compose to server folder on EC2
         run: |
-          scp -i ${{ secrets.EC2_SERVER_KEY }} -o StrictHostKeyChecking=no docker-compose.yaml ${{env.EC2_SERVER_USER}}@${{env.EC2_SERVER_IP}}:/home/ubuntu/server
+          scp -i key.pem -o StrictHostKeyChecking=no docker-compose.yaml ${{env.EC2_SERVER_USER}}@${{env.EC2_SERVER_IP}}:/home/ubuntu/server
 
       - name: Connect to the server EC2
         run: |
-          ssh -i ${{ secrets.EC2_SERVER_KEY }} -o StrictHostKeyChecking=no ${{env.EC2_SERVER_USER}}@${{env.EC2_SERVER_IP}}
+          ssh -i key.pem -o StrictHostKeyChecking=no ${{env.EC2_SERVER_USER}}@${{env.EC2_SERVER_IP}}
 
       - name: Navigate to server folder on EC2
         run: |
