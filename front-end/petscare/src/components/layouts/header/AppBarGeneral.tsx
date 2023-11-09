@@ -10,7 +10,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import NextLink from 'next/link'
+import Link from 'next/link'
 import Image from 'next/image'
 import logo from '../../../assets/img/logo-petscare.svg'
 import styles from './generalHeader.module.css';
@@ -26,14 +26,15 @@ const AppBarComponent: FC<Props> = ({handleDrawerToggle, navItems, auth}) => {
         <AppBar className={styles.appBar} >
             <Container maxWidth="xl" >
                 <Toolbar disableGutters className={styles.toolbar}>
-                    <NextLink href="/" passHref>
+                    <Link href="/" passHref >
                         <Image
                             src={logo}
                             alt='logo'
                             width={190.78}
                             height={60}
-                            priority={true} />
-                    </NextLink>
+                            priority={true} 
+                            className={styles.logo}/>
+                    </Link>
                     <Box>
                         <IconButton
                             color="secondary"
