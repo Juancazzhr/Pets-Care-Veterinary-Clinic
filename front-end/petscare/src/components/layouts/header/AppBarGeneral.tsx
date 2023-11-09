@@ -61,7 +61,7 @@ const AppBarComponent: FC<Props> = ({handleDrawerToggle, navItems, auth}) => {
                                         <CancelIcon className={styles.cancelIcon} onClick={() => { }} />
                                     </Stack>
                                     :
-                                    <Button variant="contained" color='secondary' className={styles.buttonLogin}>iniciar sesión</Button>
+                                    <Button variant="contained" color='secondary' className={styles.buttonLogin} href='/login'>iniciar sesión</Button>
                                 }
                             </Box>
                         </Box>
