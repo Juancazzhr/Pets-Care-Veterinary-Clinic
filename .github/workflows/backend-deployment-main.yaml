@@ -69,19 +69,26 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: "dev"
-          
-      - name: Add server Key to connect with EC2
-        run: | 
-          touch key_petscare.pem
-          echo ${{secrets.EC2_SERVER_KEY}} > key_petscare.pem
 
-      - name: Copy docker-compose to EC2
-        run: |
-          scp -i "key_petscare.pem" ./back-end/docker-compose.yaml ${{env.EC2_SERVER_USER}}@${{env.EC2_SERVER_IP}}:/home/ubuntu/server -o StrictHostKeyChecking=no
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{secrets.EC2_SERVER_KEY}}
 
-      - name: Deploy docker-compose
+      - name: Copy compose to server folder on EC2
         run: |
-          ssh -i "key_petscare.pem" ${{env.EC2_SERVER_USER}}@${{env.EC2_SERVER_IP}} "cd server; docker compose up -d" -o StrictHostKeyChecking=no
-        
-      
+          scp -i ${{ secrets.EC2_SERVER_KEY }} -o StrictHostKeyChecking=no docker-compose.yaml ${{env.EC2_SERVER_USER}}@${{env.EC2_SERVER_IP}}:/home/ubuntu/server
+
+      - name: Connect to the server EC2
+        run: |
+          ssh -i ${{ secrets.EC2_SERVER_KEY }} -o StrictHostKeyChecking=no ${{env.EC2_SERVER_USER}}@${{env.EC2_SERVER_IP}}
+
+      - name: Navigate to server folder on EC2
+        run: |
+          cd /home/ubuntu/server
+
+      - name: Deploy compose with pull and up
+        run: |
+          docker compose pull
+          docker compose up -d
     
