@@ -4,7 +4,7 @@ import PasswordField from "../../components/login_register/PasswordField";
 import { validationSchema } from "../../components/login_register/schema.form";
 import LayoutAuth from "../../components/layouts/LayoutAuth";
 import { useRouter } from "next/router";
-import styles from "./login.module.css";
+import styles from "../../components/login_register/login.module.css";
 import { Button, TextField, Typography, Box, Link, Paper } from "@mui/material";
 
 
