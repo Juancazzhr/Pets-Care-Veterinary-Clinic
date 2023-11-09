@@ -1,9 +1,5 @@
 name: Pets Care BackEnd Prod
 
-env:
-  SERVER_USER: ${{ env.EC2_SERVER_USER }}
-  SERVER_IP: ${{ env.EC2_SERVER_IP }}
-
 on:
   pull_request:
     branches: 
@@ -19,6 +15,10 @@ on:
     paths:
       - "back-end/**"
       - ".github/workflows/backend-deployment-main.yaml"
+
+env:
+  SERVER_USER: ${{ env.EC2_SERVER_USER }}
+  SERVER_IP: ${{ env.EC2_SERVER_IP }}
       
 jobs:
   docker-buildx-push:
