@@ -85,7 +85,4 @@ jobs:
 
       - name: Connect to the server EC2 and deploy docker-compose
         run: |
-          ssh -i key.txt -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP
-          cd server
-          docker compose pull
-          docker compose up -d
+          ssh -i key.txt -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "cd server && docker compose pull && docker compose up -d"
