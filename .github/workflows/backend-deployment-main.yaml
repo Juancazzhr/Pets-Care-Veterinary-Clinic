@@ -17,8 +17,8 @@ on:
       - ".github/workflows/backend-deployment-main.yaml"
 
 env:
-  SERVER_USER: ${{ env.EC2_SERVER_USER }}
-  SERVER_IP: ${{ env.EC2_SERVER_IP }}
+  SERVER_USER: ${{ vars.EC2_SERVER_USER }}
+  SERVER_IP: ${{ vars.EC2_SERVER_IP }}
       
 jobs:
   docker-buildx-push:
