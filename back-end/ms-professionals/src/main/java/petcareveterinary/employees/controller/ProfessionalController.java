@@ -59,4 +59,6 @@ public class ProfessionalController {
             throw new Exception();
         }
     }
+
+    //primero creo el usuario y de ahi tomo el id, todo esto va en el endpoit
 }

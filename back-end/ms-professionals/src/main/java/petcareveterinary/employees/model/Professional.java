@@ -12,5 +12,4 @@ public class Professional {
     private Long Id;
     @Column
     private String licenseNumber;
-
 }
