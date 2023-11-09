@@ -1,5 +1,9 @@
 name: Pets Care BackEnd Prod
 
+env:
+  SERVER_USER: ${{ env.EC2_SERVER_USER }}
+  SERVER_IP: ${{ env.EC2_SERVER_IP }}
+
 on:
   pull_request:
     branches: 
@@ -86,11 +90,11 @@ jobs:
 
       - name: Copy compose to server folder on EC2
         run: |
-          scp -i key.pem -o StrictHostKeyChecking=no docker-compose.yaml ${{ env.EC2_SERVER_USER }}@${{ env.EC2_SERVER_IP }}:/home/ubuntu/server
+          scp -i key.pem -o StrictHostKeyChecking=no docker-compose.yaml $SERVER_USER@$SERVER_IP:/home/ubuntu/server
 
       - name: Connect to the server EC2
         run: |
-          ssh -i key.pem -o StrictHostKeyChecking=no ${{ env.EC2_SERVER_USER }}@${{ env.EC2_SERVER_IP }}
+          ssh -i key.pem -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP
 
       - name: Navigate to server folder on EC2
         run: |
