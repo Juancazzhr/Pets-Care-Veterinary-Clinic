@@ -81,7 +81,7 @@ jobs:
 
       - name: Copy compose to server folder on EC2
         run: |
-          scp -i key.pem -o StrictHostKeyChecking=no docker-compose.yaml $SERVER_USER@$SERVER_IP:/home/ubuntu/server
+          scp -i key.txt -o StrictHostKeyChecking=no docker-compose.yaml $SERVER_USER@$SERVER_IP:/home/ubuntu/server
 
       - name: Connect to the server EC2
         run: |
