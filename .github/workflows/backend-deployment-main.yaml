@@ -43,21 +43,21 @@ jobs:
         with:
           context: ./back-end/ms-config
           push: true
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/petscare-ms-config:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/petscare-ms-config:latest
       
       - name: Build and push ms-discovery
         uses: docker/build-push-action@v5
         with:
           context: ./back-end/ms-discovery
           push: true
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/petscare-ms-discovery:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/petscare-ms-discovery:latest
 
       - name: Build and push ms-gateway
         uses: docker/build-push-action@v5
         with:
           context: ./back-end/ms-gateway
           push: true
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/petscare-ms-gateway:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/petscare-ms-gateway:latest
 
   compose-deploy:
     needs:
@@ -86,11 +86,11 @@ jobs:
 
       - name: Copy compose to server folder on EC2
         run: |
-          scp -i key.pem -o StrictHostKeyChecking=no docker-compose.yaml ${{env.EC2_SERVER_USER}}@${{env.EC2_SERVER_IP}}:/home/ubuntu/server
+          scp -i key.pem -o StrictHostKeyChecking=no docker-compose.yaml ${{ env.EC2_SERVER_USER }}@${{ env.EC2_SERVER_IP }}:/home/ubuntu/server
 
       - name: Connect to the server EC2
         run: |
-          ssh -i key.pem -o StrictHostKeyChecking=no ${{env.EC2_SERVER_USER}}@${{env.EC2_SERVER_IP}}
+          ssh -i key.pem -o StrictHostKeyChecking=no ${{ env.EC2_SERVER_USER }}@${{ env.EC2_SERVER_IP }}
 
       - name: Navigate to server folder on EC2
         run: |
@@ -100,4 +100,3 @@ jobs:
         run: |
           docker compose pull
           docker compose up -d
-    
