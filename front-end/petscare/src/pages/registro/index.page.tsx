@@ -1,8 +1,8 @@
 import React from "react";
 import { NextPage } from "next";
 import { useFormik } from "formik";
-import { validationSchema } from "./schema.form";
-import PasswordField from "./PasswordField";
+import { validationSchema } from "../../components/login_register/schema.form";
+import PasswordField from "../../components/login_register/PasswordField";
 import LayoutAuth from "../../components/layouts/LayoutAuth";
 import { useRouter } from "next/router";
 import styles from "./registro.module.css";

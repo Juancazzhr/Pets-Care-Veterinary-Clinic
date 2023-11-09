@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import AppBarComponent from './AppBarGeneral';
 import NavDrawer from './navDrawer';
 import AppBarAuth from './AppBarAuth';
+
 
 
 const navItems = ['inicio', 'servicios', 'turnos', 'profesionales', 'faqs'];
@@ -18,16 +19,17 @@ const GeneralHeader = ({ variant }: Props) => {
         setMobileOpen((prevState) => !prevState);
     };
 
-    const [auth, setAuth] = useState(false)
+    /* const [auth, setAuth] = useState(false) */
+    
 
     return (
         <>
             {variant === 'general' ?
-                <AppBarComponent navItems={navItems} handleDrawerToggle={handleDrawerToggle} auth={auth} />
+                <AppBarComponent navItems={navItems} handleDrawerToggle={handleDrawerToggle}  />
                 :
                 <AppBarAuth handleDrawerToggle={handleDrawerToggle} />}
 
-            <NavDrawer navItems={navItems} handleDrawerToggle={handleDrawerToggle} auth={auth} mobileOpen={mobileOpen} />
+            <NavDrawer navItems={navItems} handleDrawerToggle={handleDrawerToggle} mobileOpen={mobileOpen} />
         </>
     )
 }

@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import { useFormik } from "formik";
-import PasswordField from "../registro/PasswordField";
-import { validationSchema } from "../registro/schema.form";
+import PasswordField from "../../components/login_register/PasswordField";
+import { validationSchema } from "../../components/login_register/schema.form";
 import LayoutAuth from "../../components/layouts/LayoutAuth";
 import { useRouter } from "next/router";
 import styles from "./login.module.css";
