@@ -5,15 +5,15 @@ on:
     branches: 
       - "main"
       - "dev"
-    paths: 
-      - "back-end/**"
+    paths:
+      - "back-end/**/{Dockerfile,pom.xml,src/**}"
       - ".github/workflows/backend-deployment-main.yaml"
   push:
     branches: 
       - "main"
       - "dev"
     paths:
-      - "back-end/**"
+      - "back-end/**/{Dockerfile,pom.xml,src/**}"
       - ".github/workflows/backend-deployment-main.yaml"
 
 env:
