@@ -15,12 +15,13 @@ RUN apk add --no-cache bash curl jq
 ENV MS_USERS_CONFIG_SERVER_URL=http://localhost:8888
 ENV MS_USERS_PROFILE_ACTIVE=dev
 ENV MS_USERS_SERVICE_URL=http://localhost:8761/eureka
-ENV MS_USERS_PORT=8005
+ENV MS_USERS_HOSTNAME=localhost
+ENV MS_USERS_PORT=8001
 ENV MS_USERS_DB=db.ctd.academy:3306/pi21023c02_GRUPO6
 ENV MS_USERS_DB_USERNAME=pi21023c02_GRUPO6
 ENV MS_USERS_DB_PASSWORD=iguu3Ohg
 
-EXPOSE ${MS_PROFESSIONALS_PORT}
+EXPOSE ${MS_USERS_PORT}
 
 LABEL maintainer="AlejoG"
 LABEL authors="C2 Team 6 PI Specialization"
@@ -28,3 +29,6 @@ LABEL description="MS Users Service"
 
 SHELL ["/bin/bash", "-c"]
 CMD ["java", "-jar", "ms-users-0.0.1-SNAPSHOT.jar"]
+
+# docker build -t juancazz/ms-users .
+# docker push ms-users
