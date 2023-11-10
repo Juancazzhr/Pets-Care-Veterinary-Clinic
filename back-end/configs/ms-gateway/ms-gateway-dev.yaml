@@ -2,6 +2,29 @@ spring:
   application:
     name: ms-gateway
 
+  cloud:
+    gateway:
+      routes:
+        - id: ms-professionals
+          uri: lb://ms-professionals
+          predicates:
+            - Path=/v1/professionals/**
+
+        - id: ms-users
+          uri: lb://ms-users
+          predicates:
+            - Path=/v1/users/**
+
+        - id: ms-users-roles
+          uri: lb://ms-users
+          predicates:
+            - Path=/v1/roles/**
+
+        - id: ms-services
+          uri: lb://ms-services
+          predicates:
+            - Path=/v1/services/**
+
 eureka:
   instance:
     hostname: localhost
