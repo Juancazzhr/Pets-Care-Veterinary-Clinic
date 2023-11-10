@@ -20,4 +20,8 @@ spring:
           uri: lb://ms-users
           predicates:
             - Path=/v1/users/**
+
+        - id: ms-users-roles
+          uri: lb://ms-users
+          predicates:
             - Path=/v1/roles/**
