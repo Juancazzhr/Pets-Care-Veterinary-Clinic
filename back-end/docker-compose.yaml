@@ -13,12 +13,6 @@ services:
       - MS_CONFIG_SERVER_GIT_URI=https://github.com/Juancazzhr/Pets-Care.git
       - MS_CONFIG_SERVER_GIT_DEFAULT_LABEL=dev
       - MS_CONFIG_PORT=8888
-    healthcheck:
-      test: [ "CMD", "curl -s -o /dev/null -w '%{http_code}' http://localhost:8888/actuator/health | grep -q 200" ]
-      start_period: 6s
-      timeout: 10s
-      retries: 2
-      interval: 10s
 
   ms-discovery:
     image: juancazz/petscare-ms-discovery:latest
@@ -26,7 +20,7 @@ services:
     restart: always
     depends_on:
       ms-config:
-        condition: service_healthy
+        condition: service_completed_successfully
     networks:
       - pets-care-network
     ports:
@@ -35,12 +29,6 @@ services:
       - MS_DISCOVERY_PORT=8761
       - MS_DISCOVERY_CONFIG_SERVER_URL=http://ms-config:8888
       - MS_DISCOVERY_PROFILE_ACTIVE=dev
-    healthcheck:
-      test: [ "CMD", "curl -s -o /dev/null -w '%{http_code}' http://localhost:8761/actuator/health | grep -q 200" ]
-      start_period: 6s
-      timeout: 10s
-      retries: 2
-      interval: 10s
 
   ms-gateway:
     image: juancazz/petscare-ms-gateway:latest
@@ -48,9 +36,9 @@ services:
     restart: always
     depends_on:
       ms-config:
-        condition: service_healthy
+        condition: service_completed_successfully
       ms-discovery:
-        condition: service_healthy
+        condition: service_completed_successfully
     networks:
       - pets-care-network
     ports:
@@ -60,12 +48,6 @@ services:
       - MS_GATEWAY_PROFILE_ACTIVE=dev
       - MS_GATEWAY_SERVICE_URL=http://ms-discovery:8761/eureka
       - MS_GATEWAY_PORT=8080
-    healthcheck:
-      test: [ "CMD", "curl -s -o /dev/null -w '%{http_code}' http://localhost:8080/actuator/health | grep -q 200" ]
-      start_period: 6s
-      timeout: 10s
-      retries: 2
-      interval: 10s
 
 networks:
   pets-care-network:
