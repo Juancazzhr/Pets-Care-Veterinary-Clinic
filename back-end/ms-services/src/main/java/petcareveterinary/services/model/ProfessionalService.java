@@ -12,8 +12,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "Services")
 public class ProfessionalService {
     @Id
-    @SequenceGenerator(name = "service_sequence", sequenceName = "service_sequence")
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "service_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
     private String name;
