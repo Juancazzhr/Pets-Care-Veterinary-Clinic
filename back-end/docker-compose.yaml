@@ -13,13 +13,20 @@ services:
       - MS_CONFIG_SERVER_GIT_URI=https://github.com/Juancazzhr/Pets-Care.git
       - MS_CONFIG_SERVER_GIT_DEFAULT_LABEL=dev
       - MS_CONFIG_PORT=8888
+    healthcheck:
+      test: wget -qO- http://localhost:8888/actuator/health/readiness || exit 1
+      interval: 20s
+      timeout: 10s
+      retries: 4
+      start_period: 20s
 
   ms-discovery:
     image: juancazz/petscare-ms-discovery:latest
     container_name: ms-discovery
     restart: always
     depends_on:
-      - ms-config
+      ms-config:
+        condition: service_healthy
     networks:
       - pets-care-network
     ports:
@@ -28,14 +35,22 @@ services:
       - MS_DISCOVERY_PORT=8761
       - MS_DISCOVERY_CONFIG_SERVER_URL=http://ms-config:8888
       - MS_DISCOVERY_PROFILE_ACTIVE=dev
+    healthcheck:
+      test: wget -qO- http://localhost:8761/actuator/health/readiness || exit 1
+      interval: 20s
+      timeout: 10s
+      retries: 4
+      start_period: 20s
 
   ms-gateway:
     image: juancazz/petscare-ms-gateway:latest
     container_name: ms-gateway
     restart: always
     depends_on:
-      - ms-config
-      - ms-discovery
+      ms-config:
+        condition: service_healthy
+      ms-discovery:
+        condition: service_healthy
     networks:
       - pets-care-network
     ports:
@@ -47,24 +62,39 @@ services:
       - MS_GATEWAY_PROFILE_ACTIVE=dev
       - MS_GATEWAY_SERVICE_URL=http://ms-discovery:8761/eureka
       - MS_GATEWAY_PORT=8080
+    healthcheck:
+      test: wget -qO- http://localhost:8080/actuator/health/readiness || exit 1
+      interval: 20s
+      timeout: 10s
+      retries: 4
+      start_period: 20s
 
-  ms-professionals:
-    image: juancazz/petscare-ms-professionals:latest
-    container_name: ms-professionals
+  ms-users:
+    image: juancazz/petscare-ms-users:latest
+    container_name: ms-users
     restart: always
+    env_file:
+      - docker-compose.env
     depends_on:
-      - ms-config
-      - ms-discovery
-      - ms-gateway
+      ms-config:
+        condition: service_healthy
+      ms-discovery:
+        condition: service_healthy
+      ms-gateway:
+        condition: service_healthy
     networks:
       - pets-care-network
     ports:
       - 8001:8001
     environment:
-      - MS_PROFESSIONALS_CONFIG_SERVER_URL=http://ms-config:8888
-      - MS_PROFESSIONALS_PROFILE_ACTIVE=dev
-      - MS_PROFESSIONALS_SERVICE_URL=http://ms-discovery:8761/eureka
-      - MS_PROFESSIONALS_PORT=8001
+      - MS_USERS_CONFIG_SERVER_URL=http://ms-config:8888
+      - MS_USERS_PROFILE_ACTIVE=dev
+      - MS_USERS_SERVICE_URL=http://ms-discovery:8761/eureka
+      - MS_USERS_HOSTNAME=ms-users
+      - MS_USERS_PORT=8001
+      - MS_USERS_DB=${PETSCARE_DB}
+      - MS_USERS_DB_USERNAME=${PETSCARE_DB_USERNAME}
+      - MS_USERS_DB_PASSWORD=${PETSCARE_DB_PASSWORD}
 
 networks:
   pets-care-network:

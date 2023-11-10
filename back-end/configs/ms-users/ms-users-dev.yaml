@@ -21,7 +21,7 @@ eureka:
     serviceUrl:
       defaultZone: ${MS_USERS_SERVICE_URL:http://localhost:8761/eureka/}
   instance:
-    hostname: localhost
+    hostname: ${MS_USERS_HOSTNAME:localhost}
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
 
