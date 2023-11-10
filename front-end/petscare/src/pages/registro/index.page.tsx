@@ -103,7 +103,7 @@ const Register: NextPage = () => {
             <Grid item xs={12} sm={12}>
               <TextField
                 fullWidth
-                required
+                /* required */
                 id="address"
                 name="address"
                 label="Dirección"
@@ -118,7 +118,7 @@ const Register: NextPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                required
+              /*   required */
                 id="phone"
                 name="phone"
                 label="Teléfono"
@@ -133,7 +133,7 @@ const Register: NextPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                required
+               /*  required */
                 id="email"
                 name="email"
                 label="Email"
@@ -145,7 +145,7 @@ const Register: NextPage = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <PasswordField
-                required
+                /* required */
                 name="password"
                 label="Contraseña"
                 value={formik.values.user.password}
@@ -162,7 +162,7 @@ const Register: NextPage = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <PasswordField
-                required
+                /* required */
                 label="Confirmar contraseña"
                 name="confirmPassword"
                 value={formik.values.user.confirmPassword}
@@ -187,7 +187,7 @@ const Register: NextPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                required
+               /*  required */
                 id="name"
                 name="mascotaNombre"
                 label="Nombre"
@@ -204,7 +204,7 @@ const Register: NextPage = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <FormControl
-                required
+               /*  required */
                 fullWidth
                 error={
                   formik.touched.pet?.type &&
