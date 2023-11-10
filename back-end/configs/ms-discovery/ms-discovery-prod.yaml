@@ -13,5 +13,29 @@ eureka:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
   environment: ${MS_DISCOVERY_PROFILE_ACTIVE:prod}
 
+info:
+  name: ${spring.application.name}
+  description: ${spring.application.name} is a Spring Boot application
+  version: 1.0.0
+  project: Pets Care - Microservices
+
+management:
+  health:
+    readinessstate:
+      enabled: true
+    livenessstate:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  info:
+    env:
+      enabled: on
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
 server:
   port: ${MS_DISCOVERY_PORT:8761}

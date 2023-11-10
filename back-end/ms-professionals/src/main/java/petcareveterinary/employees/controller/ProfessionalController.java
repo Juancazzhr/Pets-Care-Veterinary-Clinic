@@ -1,5 +1,6 @@
 package petcareveterinary.employees.controller;
 
+import feign.Client;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -59,4 +60,5 @@ public class ProfessionalController {
         }
     }
 
+    //primero creo el usuario y de ahi tomo el id, todo esto va en el endpoit
 }

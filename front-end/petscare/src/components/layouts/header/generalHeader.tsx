@@ -18,7 +18,7 @@ const GeneralHeader = ({ variant }: Props) => {
         setMobileOpen((prevState) => !prevState);
     };
 
-    const [auth, setAuth] = useState(true)
+    const [auth, setAuth] = useState(false)
 
     return (
         <>

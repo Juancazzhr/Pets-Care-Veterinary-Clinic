@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: ms-consult
+  profiles:
+    active: ${MS_CONSULTS_PROFILE_ACTIVE:dev}
+  config:
+    import: configserver:${MS_CONSULTS_CONFIG_SERVER_URL:http://localhost:8888}

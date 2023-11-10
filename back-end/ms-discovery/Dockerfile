@@ -10,6 +10,8 @@ RUN mkdir app
 COPY --from=build /project/target/ms-discovery-0.0.1-SNAPSHOT.jar /app/ms-discovery-0.0.1-SNAPSHOT.jar
 WORKDIR app
 
+RUN apk add --no-cache bash curl jq
+
 ENV MS_DISCOVERY_CONFIG_SERVER_URL=http://localhost:8888
 ENV MS_DISCOVERY_PROFILE_ACTIVE=dev
 ENV MS_DISCOVERY_PORT=8761
@@ -20,4 +22,5 @@ LABEL maintainer="Juancazzhr"
 LABEL authors="C2 Team 6 PI Specialization"
 LABEL description="MS Discovery Service"
 
+SHELL ["/bin/bash", "-c"]
 CMD ["java", "-jar", "ms-discovery-0.0.1-SNAPSHOT.jar"]

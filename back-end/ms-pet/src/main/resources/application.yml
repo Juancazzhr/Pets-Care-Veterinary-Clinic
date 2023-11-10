@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: ms-pet
+  profiles:
+    active: ${MS_PETS_PROFILE_ACTIVE:dev}
+  config:
+    import: configserver:${MS_PETS_CONFIG_SERVER_URL:http://localhost:8888}
