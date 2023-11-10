@@ -136,7 +136,6 @@ const Register: NextPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                /*   required */
                 id="phone"
                 name="phone"
                 label="Teléfono"
@@ -156,7 +155,6 @@ const Register: NextPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                /*  required */
                 id="email"
                 name="email"
                 label="Email"
@@ -175,7 +173,6 @@ const Register: NextPage = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <PasswordField
-                /* required */
                 name="password"
                 label="Contraseña"
                 value={formik.values.user.password}
@@ -195,7 +192,6 @@ const Register: NextPage = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <PasswordField
-                /* required */
                 label="Confirmar contraseña"
                 name="confirmPassword"
                 value={formik.values.user.confirmPassword}
@@ -222,7 +218,6 @@ const Register: NextPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                /*  required */
                 id="petName"
                 name="petName"
                 label="Nombre"
@@ -241,7 +236,6 @@ const Register: NextPage = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <FormControl
-                /*  required */
                 fullWidth
                 error={
                   formik.touched.pet?.type && Boolean(formik.errors.pet?.type)

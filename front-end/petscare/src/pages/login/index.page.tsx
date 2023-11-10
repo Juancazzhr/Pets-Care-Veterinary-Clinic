@@ -40,7 +40,6 @@ const LoginPage: NextPage = () => {
         <Box component="form" onSubmit={formik.handleSubmit} sx={{ mt: 1 }}>
           <TextField
             margin="normal"
-            required
             fullWidth
             id="email"
             label="Email"
@@ -57,7 +56,6 @@ const LoginPage: NextPage = () => {
           <PasswordField
             label="Contraseña"
             name="password"
-            required
             value={formik.values.user.password}
             onChange={(event) =>
               formik.setFieldValue("user.password", event.target.value)
