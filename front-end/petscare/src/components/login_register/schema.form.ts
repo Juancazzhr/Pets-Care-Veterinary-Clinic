@@ -13,7 +13,7 @@ export const validationSchema = yup.object({
     password: yup.string().required("La contraseña es obligatoria"),
     confirmPassword: yup
       .string()
-      .oneOf([yup.ref("contrasena")], "Las contraseñas deben coincidir")
+      .oneOf([yup.ref("password")], "Las contraseñas deben coincidir")
       .required("La confirmación de contraseña es obligatoria"),
   }),
   pet: yup.object({

@@ -8,7 +8,7 @@ interface PasswordFieldProps {
   name: string;
   value: string;
   required?: boolean;
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   error?: boolean;
   helperText?: string;
 }
@@ -18,7 +18,7 @@ const PasswordField: React.FC<PasswordFieldProps> = ({
   name,
   value,
   required,
-  handleChange,
+  onChange,
   error,
   helperText
 }) => {
@@ -36,7 +36,7 @@ const PasswordField: React.FC<PasswordFieldProps> = ({
       type={showPassword ? 'text' : 'password'}
       value={value}
       required={required}
-      onChange={handleChange}
+      onChange={onChange}
       error={error}
       helperText={helperText}
       InputProps={{

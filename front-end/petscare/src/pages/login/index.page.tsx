@@ -13,8 +13,10 @@ import { Button, TextField, Typography, Box, Link, Paper } from "@mui/material";
 const LoginPage: NextPage = () => {
   const formik = useFormik({
     initialValues: {
-      email: "",
-      contrasena: "",
+      user: {
+        email: "",
+        password: "",
+    },
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -45,23 +47,27 @@ const LoginPage: NextPage = () => {
             name="email"
             autoComplete="email"
             autoFocus
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            error={formik.touched.email && Boolean(formik.errors.email)}
-            helperText={formik.touched.email && formik.errors.email}
+            value={formik.values.user.email}
+            onChange={(event) =>
+              formik.setFieldValue("user.email", event.target.value)
+            }
+            error={formik.touched.user?.email && Boolean(formik.errors.user?.email)}
+            helperText={formik.touched.user?.email && formik.errors.user?.email}
           />
           <PasswordField
             label="Contraseña"
-            name="contrasena"
+            name="password"
             required
-            value={formik.values.contrasena}
-            handleChange={formik.handleChange}
+            value={formik.values.user.password}
+            onChange={(event) =>
+              formik.setFieldValue("user.password", event.target.value)
+            }
             error={
-              formik.touched.contrasena && Boolean(formik.errors.contrasena)
+              formik.touched.user?.password && Boolean(formik.errors.user?.password)
             }
             helperText={
-              formik.touched.contrasena && formik.errors.contrasena
-                ? formik.errors.contrasena
+              formik.touched.user?.password && formik.errors.user?.password
+                ? formik.errors.user?.password
                 : ""
             }
           />
