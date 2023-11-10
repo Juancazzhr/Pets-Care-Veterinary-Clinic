@@ -1,10 +1,8 @@
 spring:
   application:
     name: ms-gateway
-
   profiles:
     active: ${MS_GATEWAY_PROFILE_ACTIVE:dev}
-
   config:
     import: configserver:${MS_GATEWAY_CONFIG_SERVER_URL:http://localhost:8888}
 
