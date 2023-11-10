@@ -10,10 +10,12 @@ RUN mkdir app
 COPY --from=build /project/target/employees-0.0.1-SNAPSHOT.jar /app/employees-0.0.1-SNAPSHOT.jar
 WORKDIR app
 
+RUN apk add --no-cache bash curl jq
+
 ENV MS_PROFESSIONALS_CONFIG_SERVER_URL=http://localhost:8888
 ENV MS_PROFESSIONALS_PROFILE_ACTIVE=dev
-ENV MS_PROFESSIONALS_SERVICE_URL=http://localhost:8761
-ENV MS_PROFESSIONALS_PORT=8181
+ENV MS_PROFESSIONALS_SERVICE_URL=http://localhost:8761/eureka
+ENV MS_PROFESSIONALS_PORT=8001
 
 EXPOSE ${MS_PROFESSIONALS_PORT}
 
@@ -21,6 +23,7 @@ LABEL maintainer="AlejoG"
 LABEL authors="C2 Team 6 PI Specialization"
 LABEL description="MS Professionals Service"
 
+SHELL ["/bin/bash", "-c"]
 CMD ["java", "-jar", "employees-0.0.1-SNAPSHOT.jar"]
 
 
