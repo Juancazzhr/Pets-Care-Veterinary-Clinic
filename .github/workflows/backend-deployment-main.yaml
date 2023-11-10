@@ -1,17 +1,18 @@
 name: Pets Care BackEnd Prod
 
 on:
+  pull_request_target:
+    branches: 
+      - "dev"
   pull_request:
     branches: 
       - "main"
-      - "dev"
     paths:
       - "back-end/**/{Dockerfile,pom.xml,src/**}"
       - ".github/workflows/backend-deployment-main.yaml"
   push:
     branches: 
       - "main"
-      - "dev"
     paths:
       - "back-end/**/{Dockerfile,pom.xml,src/**}"
       - ".github/workflows/backend-deployment-main.yaml"
