@@ -8,6 +8,20 @@ spring:
   config:
     import: configserver:${MS_GATEWAY_CONFIG_SERVER_URL:http://localhost:8888}
 
+  cloud:
+    gateway:
+      routes:
+        - id: ms-professionals
+          uri: lb://ms-professional
+          predicates:
+            - Path=/v1/professionals/**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
 info:
   app:
     name: ${spring.application.name}
