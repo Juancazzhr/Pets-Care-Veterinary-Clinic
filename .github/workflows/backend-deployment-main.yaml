@@ -64,6 +64,13 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/petscare-ms-gateway:latest
 
+      - name: Build and push ms-professionals
+        uses: docker/build-push-action@v5
+        with:
+          context: ./back-end/ms-professionals
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/petscare-ms-profesionals:latest
+
   compose-deploy:
     needs:
       - docker-buildx-push
