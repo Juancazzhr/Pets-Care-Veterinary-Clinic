@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>pet-care-veterinary</groupId>
-	<artifactId>services</artifactId>
+	<artifactId>ms-services</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>services</name>
 	<description>Microservice for veterinary services</description>
