@@ -7,3 +7,4 @@ spring:
 
   config:
     import: configserver:${MS_GATEWAY_CONFIG_SERVER_URL:http://localhost:8888}
+
