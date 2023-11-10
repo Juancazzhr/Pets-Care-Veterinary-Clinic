@@ -25,6 +25,16 @@ spring:
           predicates:
             - Path=/v1/services/**
 
+        - id: ms-professionals
+          uri: lb://ms-professionals
+          predicates:
+            - Path=/v1/professionals/**
+
+        - id: ms-pets
+          uri: lb://ms-pets
+          predicates:
+            - Path=/v1/pets/**
+
 eureka:
   instance:
     hostname: localhost
