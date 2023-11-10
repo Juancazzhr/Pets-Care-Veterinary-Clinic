@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/consult")
+@RequestMapping("/v1/consults")
 public class ConsultController {
     ConsultService consultService;
     public ConsultController(ConsultService consultService) {this.consultService = consultService;}
