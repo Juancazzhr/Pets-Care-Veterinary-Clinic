@@ -77,6 +77,13 @@ jobs:
           context: ./back-end/ms-services
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/petscare-ms-services:latest
+      
+      - name: Build and push ms-pets
+        uses: docker/build-push-action@v5
+        with:
+          context: ./back-end/ms-pets
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/petscare-ms-pets:latest
 
   compose-deploy:
     needs:
