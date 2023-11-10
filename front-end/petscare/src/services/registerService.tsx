@@ -11,14 +11,15 @@ import { useState } from "react";
 }
 
   const [successRegister, setSuccessRegister] = useState(false);
+  const [errors, setErrors] = useState({});
+
   const urlAPI = `${process.env.BASE_URL}/users`;
   
-  function realizarRegistro(settings: Settings) {
-    fetch(`${URL_BASE}/usuario`, settings)
+  function realizarRegistroUsuario(settings: Settings) {
+    fetch(`http://ec2-34-203-105-0.compute-1.amazonaws.com/v1/users`, settings)
       .then((response) => {
-     //   console.log({response});
         if (!response.ok) {
-          setFailure(true);
+          console.log('Error');
         } else {
           return response.json();
         }
@@ -37,7 +38,7 @@ import { useState } from "react";
 
 
 
-  const handleSubmitRegister = (e) => {
+/*   export const handleSubmitRegister = (e) => {
     e.preventDefault();
     setErrors(validateForm(form));
 
@@ -72,4 +73,4 @@ import { useState } from "react";
     } else {
       console.log("No se pudo completar el registro");
     }
-  };
+  }; */
