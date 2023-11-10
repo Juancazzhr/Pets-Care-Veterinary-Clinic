@@ -73,8 +73,7 @@ services:
     image: juancazz/petscare-ms-users:latest
     container_name: ms-users
     restart: always
-    env_file:
-      - docker-compose.env
+    env_file: .env
     depends_on:
       ms-config:
         condition: service_healthy

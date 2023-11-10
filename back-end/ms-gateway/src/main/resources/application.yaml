@@ -15,3 +15,8 @@ spring:
           uri: lb://ms-professionals
           predicates:
             - Path=/v1/professionals/**
+
+        - id: ms-users
+          uri: lb://ms-users
+          predicates:
+            - Path=/v1/users/**
