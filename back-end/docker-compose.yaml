@@ -19,8 +19,7 @@ services:
     container_name: ms-discovery
     restart: always
     depends_on:
-      ms-config:
-        condition: service_completed_successfully
+      - ms-config
     networks:
       - pets-care-network
     ports:
@@ -35,10 +34,8 @@ services:
     container_name: ms-gateway
     restart: always
     depends_on:
-      ms-config:
-        condition: service_completed_successfully
-      ms-discovery:
-        condition: service_completed_successfully
+      - ms-config
+      - ms-discovery
     networks:
       - pets-care-network
     ports:
@@ -48,6 +45,24 @@ services:
       - MS_GATEWAY_PROFILE_ACTIVE=dev
       - MS_GATEWAY_SERVICE_URL=http://ms-discovery:8761/eureka
       - MS_GATEWAY_PORT=8080
+
+  ms-professionals:
+    image: juancazz/petscare-ms-professionals:latest
+    container_name: ms-professionals
+    restart: always
+    depends_on:
+      - ms-config
+      - ms-discovery
+      - ms-gateway
+    networks:
+      - pets-care-network
+    ports:
+      - 8001:8001
+    environment:
+        - MS_PROFESSIONALS_CONFIG_SERVER_URL=http://ms-config:8888
+        - MS_PROFESSIONALS_PROFILE_ACTIVE=dev
+        - MS_PROFESSIONALS_SERVICE_URL=http://ms-discovery:8761/eureka
+        - MS_PROFESSIONALS_PORT=8001
 
 networks:
   pets-care-network:
