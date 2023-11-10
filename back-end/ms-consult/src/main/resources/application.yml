@@ -1,43 +1,7 @@
 spring:
   application:
-    name: consult-service
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://db.ctd.academy:3306/pi21023c02_GRUPO6?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: pi21023c02_GRUPO6
-    password: iguu3Ohg
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
-  cloud:
-    config:
-      import-check:
-        enabled: false
-server:
-  port: 8082
-  error:
-    include-message: always
-  application:
-    name: consult-service
+    name: ms-consult
+  profiles:
+    active: ${MS_CONSULTS_PROFILE_ACTIVE:dev}
   config:
-    import: ms-config:http://localhost:8888
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-  instance:
-    hostname: localhost
-    instance-id: ${spring.application.name}
-
-#eureka:
-#  client:
-#    serviceUrl:
-#      defaultZone: http://localhost:8761/eureka/
-#  instance:
-#    hostname: localhost
-#    instanceId: ${spring.application.name}:${server.port}
-
+    import: configserver:${MS_CONSULTS_CONFIG_SERVER_URL:http://localhost:8888}
