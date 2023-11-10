@@ -10,8 +10,7 @@ import lombok.*;
 public class Pet {
 
     @Id
-    @SequenceGenerator(name="pet_sequence", sequenceName = "pet_sequence")
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "pet_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
     private String name;

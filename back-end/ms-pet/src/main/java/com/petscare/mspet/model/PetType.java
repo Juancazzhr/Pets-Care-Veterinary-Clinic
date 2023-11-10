@@ -8,8 +8,7 @@ import lombok.Data;
 @Table(name = "PetTypes")
 public class PetType {
     @Id
-    @SequenceGenerator(name="petType_sequence", sequenceName = "petType_sequence")
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "petType_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "type_name")
