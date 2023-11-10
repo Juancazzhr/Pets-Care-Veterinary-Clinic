@@ -1,4 +1,4 @@
-name: Pets Care BackEnd Dev CI
+name: Pets Care BackEnd Dev CI/CD
 
 run-name: Build, Push and Deploy Ms
 
@@ -11,13 +11,12 @@ on:
     - back-end/**/{Dockerfile,pom.xml,src/**}
     - .github/workflows/**
 
-env:
-  SERVER_USER: ${{ vars.EC2_SERVER_USER }}
-  SERVER_IP: ${{ vars.EC2_SERVER_IP }}
-
 jobs:
   docker-buildx-push:
     runs-on: ubuntu-latest
+    name: Docker buildx and push Images
+    environment: Dev
+    if: contains(github.event.pull_request.title, matrix.service) || contains(github.event.pull_request.body, matrix.service) || contains(join(github.event.pull_request.modified_files), matrix.path)
     strategy:
       matrix:
         services: [ms-config, ms-discovery, ms-gateway, ms-users, ms-services, ms-pets]
