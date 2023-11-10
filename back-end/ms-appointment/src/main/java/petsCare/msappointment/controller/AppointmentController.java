@@ -21,7 +21,7 @@ public class AppointmentController {
     @PostMapping
     public ResponseEntity<String> create(@RequestBody Appointment appointment){
         service.createAppointment(appointment);
-        return ResponseEntity.status(HttpStatus.CREATED).body("The appointment was successfully created.")
+        return ResponseEntity.status(HttpStatus.CREATED).body("The appointment was successfully created.");
     }
 
     @GetMapping
