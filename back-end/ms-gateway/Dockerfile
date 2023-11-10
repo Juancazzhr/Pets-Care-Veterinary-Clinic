@@ -23,4 +23,5 @@ LABEL maintainer="Juancazzhr"
 LABEL authors="C2 Team 6 PI Specialization"
 LABEL description="MS Gateway Service"
 
+SHELL ["/bin/bash", "-c"]
 CMD ["java", "-jar", "ms-gateway-0.0.1-SNAPSHOT.jar"]
