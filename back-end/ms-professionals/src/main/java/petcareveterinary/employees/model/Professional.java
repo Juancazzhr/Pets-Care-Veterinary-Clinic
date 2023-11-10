@@ -12,4 +12,6 @@ public class Professional {
     private Long Id;
     @Column
     private String licenseNumber;
+    @Column(name = "user_id")
+    private int userId;
 }
