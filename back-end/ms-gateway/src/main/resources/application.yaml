@@ -7,3 +7,10 @@ spring:
 
   config:
     import: configserver:${MS_GATEWAY_CONFIG_SERVER_URL:http://localhost:8888}
+
+info:
+  app:
+    name: ${spring.application.name}
+    description: ${spring.application.name} is a Spring Boot application
+    version: 1.0.0
+    project: Pets Care - Microservices
