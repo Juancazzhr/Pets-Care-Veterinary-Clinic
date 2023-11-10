@@ -15,6 +15,39 @@ spring:
           predicates:
             - Path=/v1/professionals/**
 
+  cloud:
+    gateway:
+      routes:
+        - id: ms-professionals
+          uri: lb://ms-professionals
+          predicates:
+            - Path=/v1/professionals/**
+
+        - id: ms-users
+          uri: lb://ms-users
+          predicates:
+            - Path=/v1/users/**
+
+        - id: ms-users-roles
+          uri: lb://ms-users
+          predicates:
+            - Path=/v1/roles/**
+
+        - id: ms-services
+          uri: lb://ms-services
+          predicates:
+            - Path=/v1/services/**
+
+        - id: ms-professionals
+          uri: lb://ms-professionals
+          predicates:
+            - Path=/v1/professionals/**
+
+        - id: ms-pets
+          uri: lb://ms-pets
+          predicates:
+            - Path=/v1/pets/**
+
 eureka:
   client:
     registerWithEureka: false

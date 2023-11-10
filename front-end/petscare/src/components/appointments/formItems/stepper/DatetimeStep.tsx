@@ -34,7 +34,7 @@ const DatetimeStep = ({ handlerDatetimeStep }: Props) => {
         <form onSubmit={handleSubmit(onSubmit)} className={styles.formDatetime}>
             <Stack className={styles.selectDatetime}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DemoContainer
+                    {/* <DemoContainer
                         components={[
                             'DateTimePicker'
                         ]}
@@ -45,7 +45,7 @@ const DatetimeStep = ({ handlerDatetimeStep }: Props) => {
                                 value={value}
                                 onChange={(newValue) => setValue(newValue)} />
                         </DemoItem>
-                    </DemoContainer>
+                    </DemoContainer> */}
                 </LocalizationProvider>
             </Stack>
             <Box display={'flex'} justifyContent={'end'} position={'relative'} bottom={'-125px'}>

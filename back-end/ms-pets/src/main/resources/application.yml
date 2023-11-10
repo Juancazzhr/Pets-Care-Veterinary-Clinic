@@ -1,6 +1,6 @@
 spring:
   application:
-    name: ms-pet
+    name: ms-pets
   profiles:
     active: ${MS_PETS_PROFILE_ACTIVE:dev}
   config:
