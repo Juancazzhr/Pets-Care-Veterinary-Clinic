@@ -12,19 +12,6 @@ spring:
     gateway:
       routes:
         - id: ms-professionals
-          uri: lb://ms-professional
+          uri: lb://ms-professionals
           predicates:
             - Path=/v1/professionals/**
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-
-info:
-  app:
-    name: ${spring.application.name}
-    description: ${spring.application.name} is a Spring Boot application
-    version: 1.0.0
-    project: Pets Care - Microservices
