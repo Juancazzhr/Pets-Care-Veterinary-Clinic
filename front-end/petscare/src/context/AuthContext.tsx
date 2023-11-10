@@ -7,11 +7,9 @@ interface ContextProps {
   userLog: User | undefined
 }
 
-
 interface ChildrenProps {
   children: ReactNode
 }
-
 
 const AuthContext = createContext<ContextProps>({} as ContextProps);
 
@@ -19,14 +17,14 @@ const AuthProvider = ({ children }: ChildrenProps) => {
   const [auth, setAuth] = useState(false);
   const [userLog, setUserLog] = useState<User>();
 
-  const urlAPI = `${process.env.BASE_URL}/usuario`;
+  const urlAPI = `${process.env.BASE_URL}/users`;
 
   const getUser = (url:string, token:string) => {
 
     const settings = {
       method: "GET",
       headers: {
-        authorization: "Bearer " + token,
+        /* authorization: "Bearer " + token, */
       },
     };
     fetch(url, settings)

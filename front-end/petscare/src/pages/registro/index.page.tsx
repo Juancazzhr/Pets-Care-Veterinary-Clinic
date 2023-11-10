@@ -24,17 +24,27 @@ import {
 const Register: NextPage = () => {
   const formik = useFormik({
     initialValues: {
-      nombre: "",
-      apellido: "",
-      direccion: "",
-      telefono: "",
-      email: "",
-      contrasena: "",
-      confirmarContrasena: "",
-      mascotaNombre: "",
-      mascotaTipo: "",
-      mascotaRaza: "",
-      mascotaTamano: "",
+      user: {
+        firstName: "",
+        lastName: "",
+        address: "",
+        phone: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        rol:{
+          id: 3,
+          name: "client",
+          description: null
+        }
+      },
+      pet: {
+        petName: "",
+        type: "",
+        size: "",
+        race: "",
+      }
+
     },
     validationSchema,
     onSubmit: (values) => {
@@ -65,59 +75,59 @@ const Register: NextPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                required
-                id="nombre"
-                name="nombre"
+               /*  required */
+                id="firstName"
+                name="firstName"
                 label="Nombre"
-                value={formik.values.nombre}
+                value={formik.values.user.firstName}
                 onChange={formik.handleChange}
-                error={formik.touched.nombre && Boolean(formik.errors.nombre)}
-                helperText={formik.touched.nombre && formik.errors.nombre}
+                error={formik.touched.user?.firstName && Boolean(formik.errors.user?.firstName)}
+                helperText={formik.touched.user?.firstName && formik.errors.user?.firstName}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                required
-                id="apellido"
-                name="apellido"
+               /*  required */
+                id="lastName"
+                name="lastName"
                 label="Apellido"
-                value={formik.values.apellido}
+                value={formik.values.user.lastName}
                 onChange={formik.handleChange}
                 error={
-                  formik.touched.apellido && Boolean(formik.errors.apellido)
+                  formik.touched.user?.lastName && Boolean(formik.errors.user?.lastName)
                 }
-                helperText={formik.touched.apellido && formik.errors.apellido}
+                helperText={formik.touched.user?.lastName && formik.errors.user?.lastName}
               />
             </Grid>
             <Grid item xs={12} sm={12}>
               <TextField
                 fullWidth
                 required
-                id="Direccion"
-                name="direccion"
+                id="address"
+                name="address"
                 label="Dirección"
-                value={formik.values.direccion}
+                value={formik.values.user.address}
                 onChange={formik.handleChange}
                 error={
-                  formik.touched.direccion && Boolean(formik.errors.direccion)
+                  formik.touched.user?.address && Boolean(formik.errors.user?.address)
                 }
-                helperText={formik.touched.direccion && formik.errors.direccion}
+                helperText={formik.touched.user?.address && formik.errors.user?.address}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
                 required
-                id="telefono"
-                name="telefono"
+                id="phone"
+                name="phone"
                 label="Teléfono"
-                value={formik.values.telefono}
+                value={formik.values.user.phone}
                 onChange={formik.handleChange}
                 error={
-                  formik.touched.telefono && Boolean(formik.errors.telefono)
+                  formik.touched.user?.phone && Boolean(formik.errors.user?.phone)
                 }
-                helperText={formik.touched.telefono && formik.errors.telefono}
+                helperText={formik.touched.user?.phone && formik.errors.user?.phone}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -127,25 +137,25 @@ const Register: NextPage = () => {
                 id="email"
                 name="email"
                 label="Email"
-                value={formik.values.email}
+                value={formik.values.user.email}
                 onChange={formik.handleChange}
-                error={formik.touched.email && Boolean(formik.errors.email)}
-                helperText={formik.touched.email && formik.errors.email}
+                error={formik.touched.user?.email && Boolean(formik.errors.user?.email)}
+                helperText={formik.touched.user?.email && formik.errors.user?.email}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <PasswordField
                 required
+                name="password"
                 label="Contraseña"
-                name="contrasena"
-                value={formik.values.contrasena}
+                value={formik.values.user.password}
                 handleChange={formik.handleChange}
                 error={
-                  formik.touched.contrasena && Boolean(formik.errors.contrasena)
+                  formik.touched.user?.password && Boolean(formik.errors.user?.password)
                 }
                 helperText={
-                  formik.touched.contrasena && formik.errors.contrasena
-                    ? formik.errors.contrasena
+                  formik.touched.user?.password&& formik.errors.user?.password
+                    ? formik.errors.user?.password
                     : ""
                 }
               />
@@ -154,17 +164,17 @@ const Register: NextPage = () => {
               <PasswordField
                 required
                 label="Confirmar contraseña"
-                name="confirmarContrasena"
-                value={formik.values.confirmarContrasena}
+                name="confirmPassword"
+                value={formik.values.user.confirmPassword}
                 handleChange={formik.handleChange}
                 error={
-                  formik.touched.confirmarContrasena &&
-                  Boolean(formik.errors.confirmarContrasena)
+                  formik.touched.user?.confirmPassword &&
+                  Boolean(formik.errors.user?.confirmPassword)
                 }
                 helperText={
-                  formik.touched.confirmarContrasena &&
-                  formik.errors.confirmarContrasena
-                    ? formik.errors.confirmarContrasena
+                  formik.touched.user?.confirmPassword &&
+                    formik.errors.user?.confirmPassword
+                    ? formik.errors.user?.confirmPassword
                     : ""
                 }
               />
@@ -178,17 +188,17 @@ const Register: NextPage = () => {
               <TextField
                 fullWidth
                 required
-                id="mascotaNombre"
+                id="name"
                 name="mascotaNombre"
                 label="Nombre"
-                value={formik.values.mascotaNombre}
+                value={formik.values.pet.petName}
                 onChange={formik.handleChange}
                 error={
-                  formik.touched.mascotaNombre &&
-                  Boolean(formik.errors.mascotaNombre)
+                  formik.touched.pet?.petName &&
+                  Boolean(formik.errors.pet?.petName)
                 }
                 helperText={
-                  formik.touched.mascotaNombre && formik.errors.mascotaNombre
+                  formik.touched.pet?.petName && formik.errors.pet?.petName
                 }
               />
             </Grid>
@@ -197,8 +207,8 @@ const Register: NextPage = () => {
                 required
                 fullWidth
                 error={
-                  formik.touched.mascotaTipo &&
-                  Boolean(formik.errors.mascotaTipo)
+                  formik.touched.pet?.type &&
+                  Boolean(formik.errors.pet?.type)
                 }
               >
                 <InputLabel id="mascota-tipo-label">Seleccioná Tipo</InputLabel>
@@ -206,16 +216,19 @@ const Register: NextPage = () => {
                   labelId="mascota-tipo-label"
                   id="mascotaTipo"
                   name="mascotaTipo"
-                  value={formik.values.mascotaTipo}
+                  value={formik.values.pet.type}
                   onChange={formik.handleChange}
                 >
-                  <MenuItem value="tipo1">Perro</MenuItem>
-                  <MenuItem value="tipo2">Gato</MenuItem>
-                  <MenuItem value="tipo3">Conejo</MenuItem>
-                  <MenuItem value="tipo4">Otro</MenuItem>
+                  <MenuItem value="tipo1">perro</MenuItem>
+                  <MenuItem value="tipo2">gato</MenuItem>
+                  <MenuItem value="tipo3">conejo</MenuItem>
+                  <MenuItem value="tipo3">tortuga</MenuItem>
+                  <MenuItem value="tipo3">loro</MenuItem>
+                  <MenuItem value="tipo3">hámster</MenuItem>
+                  <MenuItem value="tipo4">otro</MenuItem>
                 </Select>
                 <FormHelperText>
-                  {formik.touched.mascotaTipo && formik.errors.mascotaTipo}
+                  {formik.touched.pet?.type && formik.errors.pet?.type}
                 </FormHelperText>
               </FormControl>
             </Grid>
@@ -225,14 +238,14 @@ const Register: NextPage = () => {
                 id="mascotaRaza"
                 name="mascotaRaza"
                 label="Raza"
-                value={formik.values.mascotaRaza}
+                value={formik.values.pet.race}
                 onChange={formik.handleChange}
                 error={
-                  formik.touched.mascotaRaza &&
-                  Boolean(formik.errors.mascotaRaza)
+                  formik.touched.pet?.race&&
+                  Boolean(formik.errors.pet?.race)
                 }
                 helperText={
-                  formik.touched.mascotaRaza && formik.errors.mascotaRaza
+                  formik.touched.pet?.race && formik.errors.pet?.race
                 }
               />
             </Grid>
@@ -240,8 +253,8 @@ const Register: NextPage = () => {
               <FormControl
                 fullWidth
                 error={
-                  formik.touched.mascotaTamano &&
-                  Boolean(formik.errors.mascotaTamano)
+                  formik.touched.pet?.size &&
+                  Boolean(formik.errors.pet?.size)
                 }
               >
                 <InputLabel id="mascota-tamano-label">
@@ -251,15 +264,15 @@ const Register: NextPage = () => {
                   labelId="mascota-tamano-label"
                   id="mascota-tamano-label"
                   name="mascotaTamano"
-                  value={formik.values.mascotaTamano}
+                  value={formik.values.pet.size}
                   onChange={formik.handleChange}
                 >
-                  <MenuItem value="tipo1">Pequeño</MenuItem>
-                  <MenuItem value="tipo2">Mediano</MenuItem>
-                  <MenuItem value="tipo3">Grande</MenuItem>
+                  <MenuItem value="tipo1">pequeño</MenuItem>
+                  <MenuItem value="tipo2">mediano</MenuItem>
+                  <MenuItem value="tipo3">grande</MenuItem>
                 </Select>
                 <FormHelperText>
-                  {formik.touched.mascotaTamano && formik.errors.mascotaTamano}
+                  {formik.touched.pet?.size && formik.errors.pet?.size}
                 </FormHelperText>
               </FormControl>
             </Grid>
