@@ -58,6 +58,9 @@ const Register: NextPage = () => {
     router.push("/login");
   };
 
+  console.log(formik.errors);
+  
+
   return (
     <Box className={styles.root}>
       <Typography
