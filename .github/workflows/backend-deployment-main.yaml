@@ -70,6 +70,13 @@ jobs:
           context: ./back-end/ms-users
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/petscare-ms-users:latest
+          
+      - name: Build and push ms-services
+        uses: docker/build-push-action@v5
+        with:
+          context: ./back-end/ms-services
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/petscare-ms-services:latest
 
   compose-deploy:
     needs:
