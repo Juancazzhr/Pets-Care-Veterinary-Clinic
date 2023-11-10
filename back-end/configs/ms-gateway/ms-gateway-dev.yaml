@@ -26,14 +26,22 @@ spring:
           uri: lb://ms-services
           predicates:
             - Path=/v1/services/**
-        - id: ms-professionals
-          uri: lb://ms-professionals
-          predicates:
-            - Path=/v1/professionals/**
         - id: ms-pets
           uri: lb://ms-pets
           predicates:
             - Path=/v1/pets/**
+        - id: ms-consult
+          uri: lb://ms-consult
+          predicates:
+            - Path=/v1/consults/**
+        - id: ms-client
+          uri: lb://ms-client
+          predicates:
+            - Path=/v1/clients/**
+        - id: ms-appointment
+          uri: lb://ms-appointment
+          predicates:
+            - Path=/v1/appointments/**
 
 eureka:
   client:
