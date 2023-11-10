@@ -1,0 +1,25 @@
+server:
+  port: ${MS_PETS_PORT:0}
+spring:
+  application:
+    name: ms-pets
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MS_PETS_DB:db.ctd.academy:3306/pi21023c02_GRUPO6}?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: ${MS_PETS_DB_USERNAME:pi21023c02_GRUPO6}
+    password: ${MS_PETS_DB_PASSWORD:iguu3Ohg}
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${MS_PETS_SERVICE_URL:http://localhost:8761/eureka/}
+  instance:
+    hostname: ${MS_PETS_HOSTNAME:localhost}
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}

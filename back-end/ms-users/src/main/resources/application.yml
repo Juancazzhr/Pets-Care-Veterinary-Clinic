@@ -1,27 +1,7 @@
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://db.ctd.academy:3306/pi21023c02_GRUPO6?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: pi21023c02_GRUPO6
-    password: iguu3Ohg
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
-server:
-  error:
-    include-message: always
   application:
-    name: user-service
+    name: ms-users
+  profiles:
+    active: ${MS_USERS_PROFILE_ACTIVE:dev}
   config:
-    import: ms-config:http://localhost:8888
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-  instance:
-    hostname: localhost
-    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    import: configserver:${MS_USERS_CONFIG_SERVER_URL:http://localhost:8888}

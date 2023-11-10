@@ -7,15 +7,12 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name="Client")
+@Table(name="Clients")
 public class Client {
 
     @Id
-    @SequenceGenerator(name="client_sequence", sequenceName = "client_sequence")
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "client_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-
-
-
+    @Column(name = "user_id")
+    private int userId;
 }

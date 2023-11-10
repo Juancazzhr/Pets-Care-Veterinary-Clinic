@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: ms-services
+  profiles:
+    active: ${MS_SERVICES_PROFILE_ACTIVE:dev}
+  config:
+    import: configserver:${MS_SERVICES_CONFIG_SERVER_URL:http://localhost:8888}
