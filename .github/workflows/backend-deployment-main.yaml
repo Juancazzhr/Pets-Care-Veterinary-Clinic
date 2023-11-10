@@ -69,7 +69,7 @@ jobs:
         with:
           context: ./back-end/ms-professionals
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/petscare-ms-profesionals:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/petscare-ms-professionals:latest
 
   compose-deploy:
     needs:
