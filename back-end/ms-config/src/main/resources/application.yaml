@@ -7,12 +7,36 @@ spring:
       server:
         git:
           clone-on-start: on
-          default-label: dev
-          uri: https://github.com/Juancazzhr/Pets-Care-Veterinary-Clinic.git
+          uri: ${MS_CONFIG_SERVER_GIT_URI:https://github.com/Juancazzhr/Pets-Care.git}
+          default-label: ${MS_CONFIG_SERVER_GIT_DEFAULT_LABEL:dev}
           refresh-rate: 60
           search-paths:
             - back-end/configs/*
           basedir: ${user.home}/config-repo
 
+info:
+  name: ${spring.application.name}
+  description: ${spring.application.name} is a Spring Boot application
+  version: 1.0.0
+  project: Pets Care - Microservices
+
+management:
+  health:
+    readinessstate:
+      enabled: true
+    livenessstate:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  info:
+    env:
+      enabled: on
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
 server:
-  port: 8888
+  port: ${MS_CONFIG_PORT:8888}

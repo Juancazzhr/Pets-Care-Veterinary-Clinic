@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: ms-users
+  profiles:
+    active: ${MS_USERS_PROFILE_ACTIVE:dev}
+  config:
+    import: configserver:${MS_USERS_CONFIG_SERVER_URL:http://localhost:8888}

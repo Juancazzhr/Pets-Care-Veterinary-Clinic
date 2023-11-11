@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: ms-professionals
+  profiles:
+    active: ${MS_PROFESSIONALS_PROFILE_ACTIVE:dev}
+  config:
+    import: configserver:${MS_PROFESSIONALS_CONFIG_SERVER_URL:http://localhost:8888}

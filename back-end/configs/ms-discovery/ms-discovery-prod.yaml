@@ -4,14 +4,38 @@ spring:
 
 eureka:
   instance:
-    hostname: localhost
+    hostname: ${DISCOVERY_INSTANCE_HOSTNAME:localhost}
     prefer-ip-address: true
   client:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
-  environment: ${SPRING_PROFILE_ACTIVE:prod}
+  environment: ${MS_DISCOVERY_PROFILE_ACTIVE:prod}
+
+info:
+  name: ${spring.application.name}
+  description: ${spring.application.name} is a Spring Boot application
+  version: 1.0.0
+  project: Pets Care - Microservices
+
+management:
+  health:
+    readinessstate:
+      enabled: true
+    livenessstate:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  info:
+    env:
+      enabled: on
+  endpoints:
+    web:
+      exposure:
+        include: '*'
 
 server:
-  port: ${PORT:8761}
+  port: ${MS_DISCOVERY_PORT:8761}
