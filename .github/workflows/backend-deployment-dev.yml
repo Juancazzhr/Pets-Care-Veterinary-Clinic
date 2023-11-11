@@ -16,7 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     name: Docker buildx and push Images
     environment: Dev
-    if: contains(github.event.pull_request.title, matrix.service) || contains(github.event.pull_request.body, matrix.service) || contains(join(github.event.pull_request.modified_files), matrix.path)
     strategy:
       matrix:
         services: [ms-config, ms-discovery, ms-gateway, ms-users, ms-services, ms-pets]
