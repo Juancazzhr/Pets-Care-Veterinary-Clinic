@@ -19,4 +19,6 @@ public interface IProfessionalService {
     Professional updateProfessional(Professional professional) throws Exception;
 
     List<UserServiceClient.UserDTO> listUsers();
+
+    Optional<UserServiceClient.UserDTO> searchUserById(Long id);
 }

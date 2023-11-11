@@ -59,4 +59,9 @@ public class ProfessionalService implements IProfessionalService {
     public List<UserServiceClient.UserDTO> listUsers() {
         return userServiceClient.getAllUsers();
     }
+
+    @Override
+    public Optional<UserServiceClient.UserDTO> searchUserById(Long id) {
+        return userServiceClient.getUserById(id);
+    }
 }
