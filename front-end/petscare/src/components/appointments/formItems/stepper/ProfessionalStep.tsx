@@ -41,7 +41,7 @@ const ProfessionalStep = ({handlerProfessionalStep}:Props) => {
                     labelId="professionalSelect"
                     id="professionalSelect"
                     value={professional}
-                    label="pet"
+                    label="professionalSelect"
                     onChange={handleChange}
                 >
                     {professionals.map((professional) =>
