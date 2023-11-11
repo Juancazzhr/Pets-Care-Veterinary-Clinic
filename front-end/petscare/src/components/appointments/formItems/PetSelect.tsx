@@ -10,7 +10,7 @@ const PetSelect = () => {
 
     const [pet, setPet] = useState('');
 
-    const handleChange = (event: SelectChangeEvent) => {
+    const handleChangePet = (event: SelectChangeEvent) => {
         setPet(event.target.value as string);
       };
     
@@ -22,7 +22,7 @@ const PetSelect = () => {
                 id="petSelect"
                 value={pet}
                 label="pet"
-                onChange={handleChange}
+                onChange={handleChangePet}
             >
                 { petsUser.map((pet)=>
                 <MenuItem value={pet}>{pet}</MenuItem>

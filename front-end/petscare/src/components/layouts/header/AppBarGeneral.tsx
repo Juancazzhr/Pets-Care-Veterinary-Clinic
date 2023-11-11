@@ -1,4 +1,4 @@
-import {FC} from 'react'
+import {FC, useContext} from 'react'
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
@@ -10,30 +10,33 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import NextLink from 'next/link'
+import Link from 'next/link'
 import Image from 'next/image'
 import logo from '../../../assets/img/logo-petscare.svg'
 import styles from './generalHeader.module.css';
+import AuthContext from '../../../context/AuthContext';
 
 interface Props{
     handleDrawerToggle: ()=> void
     navItems: string []
-    auth: boolean
 }
 
-const AppBarComponent: FC<Props> = ({handleDrawerToggle, navItems, auth}) => {
+const AppBarComponent: FC<Props> = ({handleDrawerToggle, navItems}) => {
+
+    const { auth } = useContext(AuthContext);
     return (
         <AppBar className={styles.appBar} >
             <Container maxWidth="xl" >
                 <Toolbar disableGutters className={styles.toolbar}>
-                    <NextLink href="/" passHref>
+                    <Link href="/" passHref >
                         <Image
                             src={logo}
                             alt='logo'
                             width={190.78}
                             height={60}
-                            priority={true} />
-                    </NextLink>
+                            priority={true} 
+                            className={styles.logo}/>
+                    </Link>
                     <Box>
                         <IconButton
                             color="secondary"

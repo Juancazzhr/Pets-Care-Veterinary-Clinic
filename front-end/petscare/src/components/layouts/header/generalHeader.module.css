@@ -22,6 +22,10 @@
     justify-content: space-between
 }
 
+.logo:hover{
+    cursor: pointer;
+}
+
 .buttonLogin{
     width: 206px;
     text-transform: lowercase;

@@ -30,7 +30,8 @@ const AppBarAuth: FC<Props> = ({ handleDrawerToggle }) => {
                             alt='logo'
                             width={190.78}
                             height={60}
-                            priority={true} />
+                            priority={true} 
+                            className={styles.logo}/>
                     </NextLink>
                     <Box>
                         <IconButton

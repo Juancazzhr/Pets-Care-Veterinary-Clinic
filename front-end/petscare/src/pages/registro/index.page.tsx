@@ -1,11 +1,11 @@
 import React from "react";
 import { NextPage } from "next";
 import { useFormik } from "formik";
-import { validationSchema } from "./schema.form";
-import PasswordField from "./PasswordField";
+import { validationSchema } from "../../components/login_register/schema.form";
+import PasswordField from "../../components/login_register/PasswordField";
 import LayoutAuth from "../../components/layouts/LayoutAuth";
 import { useRouter } from "next/router";
-import styles from "./registro.module.css";
+import styles from "../../components/login_register/registro.module.css";
 import {
   Button,
   FormControl,
@@ -24,17 +24,26 @@ import {
 const Register: NextPage = () => {
   const formik = useFormik({
     initialValues: {
-      nombre: "",
-      apellido: "",
-      direccion: "",
-      telefono: "",
-      email: "",
-      contrasena: "",
-      confirmarContrasena: "",
-      mascotaNombre: "",
-      mascotaTipo: "",
-      mascotaRaza: "",
-      mascotaTamano: "",
+      user: {
+        firstName: "",
+        lastName: "",
+        address: "",
+        phone: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        rol: {
+          id: 3,
+          name: "client",
+          description: null,
+        },
+      },
+      pet: {
+        petName: "",
+        type: "",
+        size: "",
+        race: "",
+      },
     },
     validationSchema,
     onSubmit: (values) => {
@@ -48,6 +57,9 @@ const Register: NextPage = () => {
     event.preventDefault();
     router.push("/login");
   };
+
+  console.log(formik.errors);
+  
 
   return (
     <Box className={styles.root}>
@@ -65,106 +77,135 @@ const Register: NextPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                required
-                id="nombre"
-                name="nombre"
+                name="firstName"
                 label="Nombre"
-                value={formik.values.nombre}
-                onChange={formik.handleChange}
-                error={formik.touched.nombre && Boolean(formik.errors.nombre)}
-                helperText={formik.touched.nombre && formik.errors.nombre}
+                value={formik.values.user.firstName}
+                onChange={(event) =>
+                  formik.setFieldValue("user.firstName", event.target.value)
+                }
+                error={
+                  formik.touched.user?.firstName &&
+                  Boolean(formik.errors.user?.firstName)
+                }
+                helperText={
+                  formik.touched.user?.firstName &&
+                  formik.errors.user?.firstName
+                }
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                required
-                id="apellido"
-                name="apellido"
+                /*  required */
+                id="lastName"
+                name="lastName"
                 label="Apellido"
-                value={formik.values.apellido}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.apellido && Boolean(formik.errors.apellido)
+                value={formik.values.user.lastName}
+                onChange={(event) =>
+                  formik.setFieldValue("user.lastName", event.target.value)
                 }
-                helperText={formik.touched.apellido && formik.errors.apellido}
+                error={
+                  formik.touched.user?.lastName &&
+                  Boolean(formik.errors.user?.lastName)
+                }
+                helperText={
+                  formik.touched.user?.lastName && formik.errors.user?.lastName
+                }
               />
             </Grid>
             <Grid item xs={12} sm={12}>
               <TextField
                 fullWidth
-                required
-                id="Direccion"
-                name="direccion"
+                /* required */
+                id="address"
+                name="address"
                 label="Dirección"
-                value={formik.values.direccion}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.direccion && Boolean(formik.errors.direccion)
+                value={formik.values.user.address}
+                onChange={(event) =>
+                  formik.setFieldValue("user.address", event.target.value)
                 }
-                helperText={formik.touched.direccion && formik.errors.direccion}
+                error={
+                  formik.touched.user?.address &&
+                  Boolean(formik.errors.user?.address)
+                }
+                helperText={
+                  formik.touched.user?.address && formik.errors.user?.address
+                }
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                required
-                id="telefono"
-                name="telefono"
+                id="phone"
+                name="phone"
                 label="Teléfono"
-                value={formik.values.telefono}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.telefono && Boolean(formik.errors.telefono)
+                value={formik.values.user.phone}
+                onChange={(event) =>
+                  formik.setFieldValue("user.phone", event.target.value)
                 }
-                helperText={formik.touched.telefono && formik.errors.telefono}
+                error={
+                  formik.touched.user?.phone &&
+                  Boolean(formik.errors.user?.phone)
+                }
+                helperText={
+                  formik.touched.user?.phone && formik.errors.user?.phone
+                }
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                required
                 id="email"
                 name="email"
                 label="Email"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                error={formik.touched.email && Boolean(formik.errors.email)}
-                helperText={formik.touched.email && formik.errors.email}
+                value={formik.values.user.email}
+                onChange={(event) =>
+                  formik.setFieldValue("user.email", event.target.value)
+                }
+                error={
+                  formik.touched.user?.email &&
+                  Boolean(formik.errors.user?.email)
+                }
+                helperText={
+                  formik.touched.user?.email && formik.errors.user?.email
+                }
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <PasswordField
-                required
+                name="password"
                 label="Contraseña"
-                name="contrasena"
-                value={formik.values.contrasena}
-                handleChange={formik.handleChange}
+                value={formik.values.user.password}
+                onChange={(event) =>
+                  formik.setFieldValue("user.password", event.target.value)
+                }
                 error={
-                  formik.touched.contrasena && Boolean(formik.errors.contrasena)
+                  formik.touched.user?.password &&
+                  Boolean(formik.errors.user?.password)
                 }
                 helperText={
-                  formik.touched.contrasena && formik.errors.contrasena
-                    ? formik.errors.contrasena
+                  formik.touched.user?.password && formik.errors.user?.password
+                    ? formik.errors.user?.password
                     : ""
                 }
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <PasswordField
-                required
                 label="Confirmar contraseña"
-                name="confirmarContrasena"
-                value={formik.values.confirmarContrasena}
-                handleChange={formik.handleChange}
+                name="confirmPassword"
+                value={formik.values.user.confirmPassword}
+                onChange={(event) =>
+                  formik.setFieldValue("user.confirmPassword", event.target.value)
+                }
                 error={
-                  formik.touched.confirmarContrasena &&
-                  Boolean(formik.errors.confirmarContrasena)
+                  formik.touched.user?.confirmPassword &&
+                  Boolean(formik.errors.user?.confirmPassword)
                 }
                 helperText={
-                  formik.touched.confirmarContrasena &&
-                  formik.errors.confirmarContrasena
-                    ? formik.errors.confirmarContrasena
+                  formik.touched.user?.confirmPassword &&
+                  formik.errors.user?.confirmPassword
+                    ? formik.errors.user?.confirmPassword
                     : ""
                 }
               />
@@ -177,71 +218,73 @@ const Register: NextPage = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                required
-                id="mascotaNombre"
-                name="mascotaNombre"
+                id="petName"
+                name="petName"
                 label="Nombre"
-                value={formik.values.mascotaNombre}
-                onChange={formik.handleChange}
+                value={formik.values.pet.petName}
+                onChange={(event) =>
+                  formik.setFieldValue("pet.petName", event.target.value)
+                }
                 error={
-                  formik.touched.mascotaNombre &&
-                  Boolean(formik.errors.mascotaNombre)
+                  formik.touched.pet?.petName &&
+                  Boolean(formik.errors.pet?.petName)
                 }
                 helperText={
-                  formik.touched.mascotaNombre && formik.errors.mascotaNombre
+                  formik.touched.pet?.petName && formik.errors.pet?.petName
                 }
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <FormControl
-                required
                 fullWidth
                 error={
-                  formik.touched.mascotaTipo &&
-                  Boolean(formik.errors.mascotaTipo)
+                  formik.touched.pet?.type && Boolean(formik.errors.pet?.type)
                 }
               >
                 <InputLabel id="mascota-tipo-label">Seleccioná Tipo</InputLabel>
                 <Select
                   labelId="mascota-tipo-label"
-                  id="mascotaTipo"
-                  name="mascotaTipo"
-                  value={formik.values.mascotaTipo}
-                  onChange={formik.handleChange}
+                  id="type"
+                  name="type"
+                  value={formik.values.pet.type}
+                  onChange={(event) =>
+                    formik.setFieldValue("pet.type", event.target.value)
+                  }
                 >
-                  <MenuItem value="tipo1">Perro</MenuItem>
-                  <MenuItem value="tipo2">Gato</MenuItem>
-                  <MenuItem value="tipo3">Conejo</MenuItem>
-                  <MenuItem value="tipo4">Otro</MenuItem>
+                  <MenuItem value="tipo1">perro</MenuItem>
+                  <MenuItem value="tipo2">gato</MenuItem>
+                  <MenuItem value="tipo3">conejo</MenuItem>
+                  <MenuItem value="tipo4">tortuga</MenuItem>
+                  <MenuItem value="tipo5">loro</MenuItem>
+                  <MenuItem value="tipo6">hámster</MenuItem>
+                  <MenuItem value="tipo7">otro</MenuItem>
                 </Select>
                 <FormHelperText>
-                  {formik.touched.mascotaTipo && formik.errors.mascotaTipo}
+                  {formik.touched.pet?.type && formik.errors.pet?.type}
                 </FormHelperText>
               </FormControl>
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                id="mascotaRaza"
-                name="mascotaRaza"
+                id="race"
+                name="race"
                 label="Raza"
-                value={formik.values.mascotaRaza}
-                onChange={formik.handleChange}
+                value={formik.values.pet.race}
+                onChange={(event) =>
+                  formik.setFieldValue("pet.race", event.target.value)
+                }
                 error={
-                  formik.touched.mascotaRaza &&
-                  Boolean(formik.errors.mascotaRaza)
+                  formik.touched.pet?.race && Boolean(formik.errors.pet?.race)
                 }
-                helperText={
-                  formik.touched.mascotaRaza && formik.errors.mascotaRaza
-                }
+                helperText={formik.touched.pet?.race && formik.errors.pet?.race}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <FormControl
                 fullWidth
                 error={
-                  formik.touched.mascotaTamano &&
-                  Boolean(formik.errors.mascotaTamano)
+                  formik.touched.pet?.size && Boolean(formik.errors.pet?.size)
                 }
               >
                 <InputLabel id="mascota-tamano-label">
@@ -249,17 +292,19 @@ const Register: NextPage = () => {
                 </InputLabel>
                 <Select
                   labelId="mascota-tamano-label"
-                  id="mascota-tamano-label"
-                  name="mascotaTamano"
-                  value={formik.values.mascotaTamano}
-                  onChange={formik.handleChange}
+                  id="size"
+                  name="size"
+                  value={formik.values.pet.size}
+                  onChange={(event) =>
+                    formik.setFieldValue("pet.size", event.target.value)
+                  }
                 >
-                  <MenuItem value="tipo1">Pequeño</MenuItem>
-                  <MenuItem value="tipo2">Mediano</MenuItem>
-                  <MenuItem value="tipo3">Grande</MenuItem>
+                  <MenuItem value="tipo1">pequeño</MenuItem>
+                  <MenuItem value="tipo2">mediano</MenuItem>
+                  <MenuItem value="tipo3">grande</MenuItem>
                 </Select>
                 <FormHelperText>
-                  {formik.touched.mascotaTamano && formik.errors.mascotaTamano}
+                  {formik.touched.pet?.size && formik.errors.pet?.size}
                 </FormHelperText>
               </FormControl>
             </Grid>

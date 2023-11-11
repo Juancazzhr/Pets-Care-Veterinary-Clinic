@@ -1,10 +1,10 @@
 import { NextPage } from "next";
 import { useFormik } from "formik";
-import PasswordField from "../registro/PasswordField";
-import { validationSchema } from "../registro/schema.form";
+import PasswordField from "../../components/login_register/PasswordField";
+import { validationSchema } from "../../components/login_register/schema.form";
 import LayoutAuth from "../../components/layouts/LayoutAuth";
 import { useRouter } from "next/router";
-import styles from "./login.module.css";
+import styles from "../../components/login_register/login.module.css";
 import { Button, TextField, Typography, Box, Link, Paper } from "@mui/material";
 
 
@@ -13,8 +13,10 @@ import { Button, TextField, Typography, Box, Link, Paper } from "@mui/material";
 const LoginPage: NextPage = () => {
   const formik = useFormik({
     initialValues: {
-      email: "",
-      contrasena: "",
+      user: {
+        email: "",
+        password: "",
+    },
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -38,30 +40,32 @@ const LoginPage: NextPage = () => {
         <Box component="form" onSubmit={formik.handleSubmit} sx={{ mt: 1 }}>
           <TextField
             margin="normal"
-            required
             fullWidth
             id="email"
             label="Email"
             name="email"
             autoComplete="email"
             autoFocus
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            error={formik.touched.email && Boolean(formik.errors.email)}
-            helperText={formik.touched.email && formik.errors.email}
+            value={formik.values.user.email}
+            onChange={(event) =>
+              formik.setFieldValue("user.email", event.target.value)
+            }
+            error={formik.touched.user?.email && Boolean(formik.errors.user?.email)}
+            helperText={formik.touched.user?.email && formik.errors.user?.email}
           />
           <PasswordField
             label="Contraseña"
-            name="contrasena"
-            required
-            value={formik.values.contrasena}
-            handleChange={formik.handleChange}
+            name="password"
+            value={formik.values.user.password}
+            onChange={(event) =>
+              formik.setFieldValue("user.password", event.target.value)
+            }
             error={
-              formik.touched.contrasena && Boolean(formik.errors.contrasena)
+              formik.touched.user?.password && Boolean(formik.errors.user?.password)
             }
             helperText={
-              formik.touched.contrasena && formik.errors.contrasena
-                ? formik.errors.contrasena
+              formik.touched.user?.password && formik.errors.user?.password
+                ? formik.errors.user?.password
                 : ""
             }
           />
