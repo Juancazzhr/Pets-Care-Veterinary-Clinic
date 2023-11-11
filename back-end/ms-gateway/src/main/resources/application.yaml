@@ -1,23 +1,8 @@
 spring:
   application:
     name: ms-gateway
-
   profiles:
     active: ${MS_GATEWAY_PROFILE_ACTIVE:dev}
-
   config:
     import: configserver:${MS_GATEWAY_CONFIG_SERVER_URL:http://localhost:8888}
 
-  cloud:
-    gateway:
-      routes:
-        - id: ms-professionals
-          uri: lb://ms-professionals
-          predicates:
-            - Path=/v1/professionals/**
-
-        - id: ms-users
-          uri: lb://ms-users
-          predicates:
-            - Path=/v1/users/**
-            - Path=/v1/roles/**

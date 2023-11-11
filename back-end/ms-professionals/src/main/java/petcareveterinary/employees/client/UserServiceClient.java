@@ -8,12 +8,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import petcareveterinary.employees.config.LoadBalanceConfiguration;
 
-@FeignClient(name="user-service")
-@LoadBalancerClient(value="user-service", configuration = LoadBalanceConfiguration.class)
+import java.util.List;
+
+@FeignClient(name="ms-users")
+@LoadBalancerClient(value="ms-users", configuration = LoadBalanceConfiguration.class)
 public interface UserServiceClient {
 
     @GetMapping("/v1/users/{id}")
     ResponseEntity<UserDTO> getUserById(@PathVariable (value = "id") Long id);
+
+    @GetMapping("/v1/users")
+    List<UserDTO> getAllUsers();
 
     @Data
     class UserDTO{

@@ -1,12 +1,52 @@
+server:
+  port: ${MS_GATEWAY_PORT:8080}
+
 spring:
   application:
     name: ms-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: ms-professionals
+          uri: lb://ms-professionals
+          predicates:
+            - Path=/v1/professionals/**
+        - id: ms-users
+          uri: lb://ms-users
+          predicates:
+            - Path=/v1/users/**
+        - id: ms-users-roles
+          uri: lb://ms-users
+          predicates:
+            - Path=/v1/roles/**
+        - id: ms-services
+          uri: lb://ms-services
+          predicates:
+            - Path=/v1/services/**
+        - id: ms-pets
+          uri: lb://ms-pets
+          predicates:
+            - Path=/v1/pets/**
+        - id: ms-consult
+          uri: lb://ms-consult
+          predicates:
+            - Path=/v1/consults/**
+        - id: ms-client
+          uri: lb://ms-client
+          predicates:
+            - Path=/v1/clients/**
+        - id: ms-appointment
+          uri: lb://ms-appointment
+          predicates:
+            - Path=/v1/appointments/**
 
 eureka:
-  instance:
-    hostname: localhost
-    instance-id: ${random.uuid}-${spring.application.name}-${eureka.instance.hostname}:${server.port}
   client:
+    registerWithEureka: false
+    fetchRegistry: true
     serviceUrl:
       defaultZone: ${MS_GATEWAY_SERVICE_URL:http://localhost:8761/eureka}
 
@@ -28,11 +68,9 @@ management:
         enabled: true
   info:
     env:
-      enabled: on
+      enabled: true
   endpoints:
     web:
       exposure:
         include: '*'
 
-server:
-  port: ${MS_GATEWAY_PORT:8080}

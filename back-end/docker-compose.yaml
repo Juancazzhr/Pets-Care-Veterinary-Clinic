@@ -95,6 +95,58 @@ services:
       - MS_USERS_DB_USERNAME=${PETSCARE_DB_USERNAME}
       - MS_USERS_DB_PASSWORD=${PETSCARE_DB_PASSWORD}
 
+  ms-services:
+    image: juancazz/petscare-ms-services:latest
+    container_name: ms-services
+    restart: always
+    env_file: .env
+    depends_on:
+      ms-config:
+        condition: service_healthy
+      ms-discovery:
+        condition: service_healthy
+      ms-gateway:
+        condition: service_healthy
+    networks:
+      - pets-care-network
+    ports:
+      - 8002:8002
+    environment:
+      - MS_SERVICES_CONFIG_SERVER_URL=http://ms-config:8888
+      - MS_SERVICES_PROFILE_ACTIVE=dev
+      - MS_SERVICES_SERVICE_URL=http://ms-discovery:8761/eureka
+      - MS_SERVICES_HOSTNAME=ms-services
+      - MS_SERVICES_PORT=8002
+      - MS_SERVICES_DB=${PETSCARE_DB}
+      - MS_SERVICES_DB_USERNAME=${PETSCARE_DB_USERNAME}
+      - MS_SERVICES_DB_PASSWORD=${PETSCARE_DB_PASSWORD}
+
+  ms-pets:
+    image: juancazz/petscare-ms-pets:latest
+    container_name: ms-pets
+    restart: always
+    env_file: .env
+    depends_on:
+      ms-config:
+        condition: service_healthy
+      ms-discovery:
+        condition: service_healthy
+      ms-gateway:
+        condition: service_healthy
+    networks:
+      - pets-care-network
+    ports:
+      - 8003:8003
+    environment:
+      - MS_PETS_CONFIG_SERVER_URL=http://ms-config:8888
+      - MS_PETS_PROFILE_ACTIVE=dev
+      - MS_PETS_SERVICE_URL=http://ms-discovery:8761/eureka
+      - MS_PETS_HOSTNAME=ms-pets
+      - MS_PETS_PORT=8003
+      - MS_PETS_DB=${PETSCARE_DB}
+      - MS_PETS_DB_USERNAME=${PETSCARE_DB_USERNAME}
+      - MS_PETS_DB_PASSWORD=${PETSCARE_DB_PASSWORD}
+
 networks:
   pets-care-network:
     name: pets-care-network

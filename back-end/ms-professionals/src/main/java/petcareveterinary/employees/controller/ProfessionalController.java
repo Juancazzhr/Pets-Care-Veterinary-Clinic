@@ -1,9 +1,13 @@
 package petcareveterinary.employees.controller;
 
 import feign.Client;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import petcareveterinary.employees.client.UserServiceClient;
 import petcareveterinary.employees.model.Professional;
 import petcareveterinary.employees.service.ProfessionalService;
 
@@ -20,18 +24,18 @@ public class ProfessionalController {
     }
 
     @PostMapping
-    public ResponseEntity<String> crear(@RequestBody Professional professional){
+    ResponseEntity<String> crear(@RequestBody Professional professional){
         service.createProfessional(professional);
         return ResponseEntity.status(HttpStatus.CREATED).body("Empleado creado correctamente");
     }
 
     @GetMapping
-    public List<Professional> listarTodos(){
+    List<Professional> listarTodos(){
         return service.listProfessionals();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Professional> buscarPorId(@PathVariable Long id){
+    ResponseEntity<Professional> buscarPorId(@PathVariable Long id){
         if(service.searchProfessionalById(id).isPresent()){
             return ResponseEntity.ok(service.searchProfessionalById(id).get());
         }else{
@@ -40,7 +44,7 @@ public class ProfessionalController {
     }
 
     @PutMapping
-    public  ResponseEntity<Professional> actualizar(@RequestBody Professional professional) throws Exception {
+    ResponseEntity<Professional> actualizar(@RequestBody Professional professional) throws Exception {
         if(service.searchProfessionalById(professional.getId()).isPresent()){
             return ResponseEntity.ok(service.updateProfessional(professional));
         }else{
@@ -50,7 +54,7 @@ public class ProfessionalController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminar(@PathVariable Long id) throws Exception {
+    ResponseEntity<String> eliminar(@PathVariable Long id) throws Exception {
         if (service.searchProfessionalById(id).isPresent()){
             service.deleteProfessional(id);
             return ResponseEntity.ok("El empleado fue eliminado correctamente");
@@ -58,6 +62,22 @@ public class ProfessionalController {
             ResponseEntity.status(HttpStatus.NOT_FOUND).body("El empleado con el id "+id+" no existe");
             throw new Exception();
         }
+    }
+
+    @GetMapping("/prueba")
+    ProfessionalUser listAllPU(){
+        List<UserServiceClient.UserDTO> users = service.listUsers();
+        List<Professional> professionals = service.listProfessionals();
+        ProfessionalUser professionalUser = new ProfessionalUser(professionals,users);
+        return professionalUser;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    class ProfessionalUser{
+        private List<Professional> professionals;
+        private List<UserServiceClient.UserDTO> users;
     }
 
     //primero creo el usuario y de ahi tomo el id, todo esto va en el endpoit
