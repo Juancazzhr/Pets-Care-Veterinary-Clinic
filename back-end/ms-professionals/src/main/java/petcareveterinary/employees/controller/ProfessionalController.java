@@ -72,6 +72,11 @@ public class ProfessionalController {
         return professionalUser;
     }
 
+    @GetMapping("/test/{id}")
+    ResponseEntity<UserServiceClient.UserDTO> searchUserById(@PathVariable Long id){
+        return ResponseEntity.ok(service.searchUserById(id).get());
+    }
+
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
@@ -79,6 +84,8 @@ public class ProfessionalController {
         private List<Professional> professionals;
         private List<UserServiceClient.UserDTO> users;
     }
+
+
 
     //primero creo el usuario y de ahi tomo el id, todo esto va en el endpoit
 }
