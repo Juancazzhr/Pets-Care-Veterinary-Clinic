@@ -15,7 +15,8 @@
     background-repeat: no-repeat;
     background-size: 110%; 
     background-position: 50%;
-    height: 100vh;
+    min-height: 100vh;
+    padding-bottom: 80px;
 }
 
 .toolbar{
@@ -53,7 +54,6 @@
     height: 180px;
     flex-direction: column;
     padding: 20px;
-  /*   justify-content: end; */
 }
 
 .drawerUser .cancelIcon{
