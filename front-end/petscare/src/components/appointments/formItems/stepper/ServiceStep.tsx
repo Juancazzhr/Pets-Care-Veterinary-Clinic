@@ -26,6 +26,7 @@ const ServiceStep = ({handlerServiceStep}:Props) => {
     } */);
 
     const handleChangeRadio = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.stopPropagation();
         setValue((event.target as HTMLInputElement).value);
     };
     const onSubmit: SubmitHandler<any> = (data) => {
@@ -39,8 +40,8 @@ const ServiceStep = ({handlerServiceStep}:Props) => {
                 onChange={handleChangeRadio}
                 className={styles.radioGroup}
             >
-                {services.map((service) =>
-                    <FormControlLabel value={service} control={<Radio color='secondary'/>} label={service} className={styles.radioItem}/>
+                {services.map((service, index) =>
+                    <FormControlLabel key={index} value={service} control={<Radio color='secondary'/>} label={service} className={styles.radioItem}/>
                 )}
             </RadioGroup>
             <Box display={'flex'} justifyContent={'end'} position={'relative'} bottom={'-125px'}>

@@ -22,6 +22,10 @@
   width: 48%;
 }
 
+.boxPet{
+  margin-bottom: 4%;
+}
+
 .petSelect {
   color: #eaebed;
 }
@@ -41,7 +45,7 @@
   margin: 20px auto;
 }
 
-.selectProfessional label {
+.selectProfessional #professionalSelect {
   left: 10%;
   top: 20px;
 }
