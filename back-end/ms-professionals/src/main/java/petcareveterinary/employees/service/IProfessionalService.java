@@ -1,6 +1,5 @@
 package petcareveterinary.employees.service;
 
-import petcareveterinary.employees.client.UserServiceClient;
 import petcareveterinary.employees.model.Professional;
 
 import java.util.List;
@@ -17,6 +16,4 @@ public interface IProfessionalService {
     void deleteProfessional(Long id) throws Exception;
 
     Professional updateProfessional(Professional professional) throws Exception;
-
-    List<UserServiceClient.UserDTO> listUsers();
 }

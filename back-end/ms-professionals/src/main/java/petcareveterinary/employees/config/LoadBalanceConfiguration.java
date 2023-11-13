@@ -13,9 +13,9 @@ import org.springframework.core.env.Environment;
 public class LoadBalanceConfiguration {
     @Bean
     ReactorLoadBalancer<ServiceInstance> configure(Environment environment, LoadBalancerClientFactory loadBalancerClientFactory){
-        String name = environment.getProperty(loadBalancerClientFactory.PROPERTY_NAME);
-        return new RoundRobinLoadBalancer(loadBalancerClientFactory.getLazyProvider(
-                name, ServiceInstanceListSupplier.class),name
+        String name = environment.getProperty(LoadBalancerClientFactory.PROPERTY_NAME);
+        return new RoundRobinLoadBalancer(loadBalancerClientFactory.getLazyProvider
+                (name, ServiceInstanceListSupplier.class),name
         );
     }
 
