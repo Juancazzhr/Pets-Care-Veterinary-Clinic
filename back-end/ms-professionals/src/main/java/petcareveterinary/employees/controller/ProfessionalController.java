@@ -1,20 +1,18 @@
 package petcareveterinary.employees.controller;
 
-import feign.Client;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import petcareveterinary.employees.client.UserServiceClient;
 import petcareveterinary.employees.model.Professional;
 import petcareveterinary.employees.service.ProfessionalService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("v1/professionals")
+@RequestMapping("/v1/professionals")
 public class ProfessionalController {
 
     ProfessionalService service;
@@ -63,29 +61,4 @@ public class ProfessionalController {
             throw new Exception();
         }
     }
-
-    @GetMapping("/prueba")
-    ProfessionalUser listAllPU(){
-        List<UserServiceClient.UserDTO> users = service.listUsers();
-        List<Professional> professionals = service.listProfessionals();
-        ProfessionalUser professionalUser = new ProfessionalUser(professionals,users);
-        return professionalUser;
-    }
-
-    @GetMapping("/test/{id}")
-    ResponseEntity<UserServiceClient.UserDTO> searchUserById(@PathVariable Long id){
-        return ResponseEntity.ok(service.searchUserById(id).get());
-    }
-
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    class ProfessionalUser{
-        private List<Professional> professionals;
-        private List<UserServiceClient.UserDTO> users;
-    }
-
-
-
-    //primero creo el usuario y de ahi tomo el id, todo esto va en el endpoit
 }
