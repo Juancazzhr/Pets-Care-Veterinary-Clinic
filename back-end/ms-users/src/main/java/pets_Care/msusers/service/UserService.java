@@ -1,6 +1,8 @@
 package pets_Care.msusers.service;
 
 import org.springframework.stereotype.Service;
+import pets_Care.msusers.client.IClientServiceClient;
+import pets_Care.msusers.client.IProfessionalServiceClient;
 import pets_Care.msusers.model.User;
 import pets_Care.msusers.repository.IUserRepository;
 
@@ -12,9 +14,14 @@ import java.util.Optional;
 public class UserService implements IUserService {
 
     IUserRepository repository;
+    IClientServiceClient clientRepository;
 
-    public UserService(IUserRepository repository) {
+    IProfessionalServiceClient professionalRepository;
+
+    public UserService(IUserRepository repository, IClientServiceClient clientRepository, IProfessionalServiceClient professionalRepository) {
         this.repository = repository;
+        this.clientRepository = clientRepository;
+        this.professionalRepository = professionalRepository;
     }
 
     @Override
@@ -50,5 +57,53 @@ public class UserService implements IUserService {
         }else{
             throw new Exception("The user with id "+user.getId()+" doesn't exist.");
         }
+    }
+
+    //CLIENTS
+
+    @Override
+    public IClientServiceClient.ClientDTO createClient(IClientServiceClient.ClientDTO clientDTO) {
+        return clientRepository.createClient(clientDTO);
+    }
+
+    @Override
+    public List<IClientServiceClient.ClientDTO> listClients() {
+        return clientRepository.listClients();
+    }
+
+    @Override
+    public Optional<IClientServiceClient.ClientDTO> searchClientById(Long id) {
+        return clientRepository.listClientById(id);
+    }
+
+    @Override
+    public void deleteClient(Long id) {
+        clientRepository.deleteClient(id);
+    }
+
+    @Override
+    public void updateCLient(IClientServiceClient.ClientDTO clientDTO) {
+        clientRepository.updateClient(clientDTO);
+    }
+
+    //PROFESSIONALS
+    @Override
+    public IProfessionalServiceClient.ProfessionalDTO createProfessional(IProfessionalServiceClient.ProfessionalDTO professionalDTO) {
+        return professionalRepository.createProfessional(professionalDTO);
+    }
+
+    @Override
+    public List<IProfessionalServiceClient.ProfessionalDTO> listProfessionals() {
+        return professionalRepository.listProfessionals();
+    }
+
+    @Override
+    public void deleteProfessional(Long id) {
+        professionalRepository.deleteProfessional(id);
+    }
+
+    @Override
+    public void updateProfessional(IProfessionalServiceClient.ProfessionalDTO professionalDTO) {
+        professionalRepository.updateProfessional(professionalDTO);
     }
 }
