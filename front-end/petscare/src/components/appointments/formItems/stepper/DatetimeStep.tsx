@@ -35,6 +35,7 @@ const DatetimeStep = ({ handlerDatetimeStep }: Props) => {
                     <DateTimePicker
                         label="fecha y hora"
                         value={value}
+                        format="DD-MM-YYYY HH:mm:ss"
                         onChange={(newValue) => setValue(newValue)} />
                 </LocalizationProvider>
             </Stack>
