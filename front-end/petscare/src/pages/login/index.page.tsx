@@ -1,10 +1,10 @@
 import { NextPage } from "next";
 import { useFormik } from "formik";
-import PasswordField from "../../components/login_register/PasswordField";
-import { validationSchema } from "../../components/login_register/schema.form";
+import PasswordField from "../../components/register/PasswordField";
+import { validationSchema } from "../../components/register/schema.form";
 import LayoutAuth from "../../components/layouts/LayoutAuth";
 import { useRouter } from "next/router";
-import styles from "../../components/login_register/login.module.css";
+import styles from "../../components/login/login.module.css";
 import { Button, TextField, Typography, Box, Link, Paper } from "@mui/material";
 
 
@@ -16,7 +16,7 @@ const LoginPage: NextPage = () => {
       user: {
         email: "",
         password: "",
-      },
+    },
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -33,8 +33,8 @@ const LoginPage: NextPage = () => {
 
   return (
     <Box className={styles.root}>
-      <Typography variant="h3" color="primary" fontWeight={700} sx={{ mb: "5px" }}>
-        iniciá sesión
+      <Typography variant="h3" color="primary">
+        Inicia sesión
       </Typography>
       <Paper elevation={8} className={styles.paper}>
         <Box component="form" onSubmit={formik.handleSubmit} sx={{ mt: 1 }}>
@@ -69,13 +69,13 @@ const LoginPage: NextPage = () => {
                 : ""
             }
           />
-          <Box className={styles.boxTextLink} sx={{textAlign: "left"}}>
-          ¿Olvidaste tu contraseña?{" "}
+          <Box sx={{ width: "100%", textAlign: "left" }}>
             <Link
               href="#"
               underline="hover"
-              sx={{ }}
-            >              
+              sx={{ display: "block", marginTop: 2 }}
+            >
+              ¿Olvidaste tu contraseña?{" "}
               <span style={{ color: "#007FFF" }}> Recuperala</span>
             </Link>
           </Box>
@@ -86,13 +86,14 @@ const LoginPage: NextPage = () => {
           >
             iniciar sesión
           </Button>
-          <Box className={styles.boxTextLink} sx={{textAlign: "right"}}>
-            ¿Aún no tenés cuenta?{" "}
+          <Box sx={{ width: "100%", textAlign: "right" }}>
             <Link
               href="#"
               underline="hover"
+              sx={{ display: "block", marginTop: 2 }}
               onClick={handleRegisterLinkClick}
             >
+              ¿Aún no tenés cuenta?{" "}
               <span style={{ color: "#007FFF" }}> Registrate</span>
             </Link>
           </Box>
