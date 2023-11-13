@@ -22,12 +22,13 @@ const Register: NextPage = () => {
   return (
     <Box className={styles.root}>
       <Typography
-        color="primary"
-        variant="h3"
-        textAlign={"center"}
-        sx={{ padding: "5px" }}
+         color="primary"
+         variant="h3"
+         textAlign={"center"}
+         fontWeight={700}
+         sx={{ mb: "15px" }}
       >
-        Regístrate
+        registrate
       </Typography>
       <Paper elevation={8} className={styles.paper}>
         <form onSubmit={formik.handleSubmit}>
@@ -43,15 +44,14 @@ const Register: NextPage = () => {
           >
             Crear cuenta
           </Button>
-          <Box sx={{ width: "100%", textAlign: "right" }}>
+          <Box className={styles.boxTextLink}>
+            ¿Ya tenes cuenta?{" "}
             <Link
               href="#"
               underline="hover"
-              sx={{ display: "block", marginTop: 2 }}
               onClick={handleRegisterLinkClick}
             >
-              ¿Ya tenes cuenta?{" "}
-              <span style={{ color: "#007FFF" }}> Inicia sesión</span>
+              <span style={{ color: "#007FFF" }}>Inicia sesión</span>
             </Link>
           </Box>
         </form>

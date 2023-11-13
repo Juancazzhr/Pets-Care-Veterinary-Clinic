@@ -33,8 +33,8 @@ const LoginPage: NextPage = () => {
 
   return (
     <Box className={styles.root}>
-      <Typography variant="h3" color="primary">
-        Inicia sesión
+      <Typography variant="h3" color="primary" fontWeight={700} sx={{ mb: "5px" }}>
+        inicia sesión
       </Typography>
       <Paper elevation={8} className={styles.paper}>
         <Box component="form" onSubmit={formik.handleSubmit} sx={{ mt: 1 }}>
@@ -69,13 +69,13 @@ const LoginPage: NextPage = () => {
                 : ""
             }
           />
-          <Box sx={{ width: "100%", textAlign: "left" }}>
+          <Box className={styles.boxTextLink} sx={{textAlign: "left"}}>
+          ¿Olvidaste tu contraseña?{" "}
             <Link
               href="#"
               underline="hover"
-              sx={{ display: "block", marginTop: 2 }}
-            >
-              ¿Olvidaste tu contraseña?{" "}
+              sx={{ }}
+            >              
               <span style={{ color: "#007FFF" }}> Recuperala</span>
             </Link>
           </Box>
@@ -86,14 +86,13 @@ const LoginPage: NextPage = () => {
           >
             iniciar sesión
           </Button>
-          <Box sx={{ width: "100%", textAlign: "right" }}>
+          <Box className={styles.boxTextLink} sx={{textAlign: "right"}}>
+            ¿Aún no tenés cuenta?{" "}
             <Link
               href="#"
               underline="hover"
-              sx={{ display: "block", marginTop: 2 }}
               onClick={handleRegisterLinkClick}
             >
-              ¿Aún no tenés cuenta?{" "}
               <span style={{ color: "#007FFF" }}> Registrate</span>
             </Link>
           </Box>
