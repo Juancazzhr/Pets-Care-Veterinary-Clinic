@@ -1,12 +1,10 @@
 import { useState } from 'react'
-import FormControl from '@mui/material/FormControl'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import styles from '../../Appointments.module.css'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
 import dayjs, { Dayjs } from 'dayjs';
-import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
@@ -34,18 +32,10 @@ const DatetimeStep = ({ handlerDatetimeStep }: Props) => {
         <form onSubmit={handleSubmit(onSubmit)} className={styles.formDatetime}>
             <Stack className={styles.selectDatetime}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    {/* <DemoContainer
-                        components={[
-                            'DateTimePicker'
-                        ]}
-                    >
-                        <DemoItem>
-                            <DateTimePicker
-                                label="fecha y hora"
-                                value={value}
-                                onChange={(newValue) => setValue(newValue)} />
-                        </DemoItem>
-                    </DemoContainer> */}
+                    <DateTimePicker
+                        label="fecha y hora"
+                        value={value}
+                        onChange={(newValue) => setValue(newValue)} />
                 </LocalizationProvider>
             </Stack>
             <Box display={'flex'} justifyContent={'end'} position={'relative'} bottom={'-125px'}>
