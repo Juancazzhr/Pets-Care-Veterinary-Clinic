@@ -3,7 +3,6 @@ package petcareveterinary.employees.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-
 @Data
 @Entity
 @Table(name="Professionals")
@@ -14,5 +13,5 @@ public class Professional {
     @Column
     private String licenseNumber;
     @Column(name = "user_id")
-    private Long userId;
+    private int userId;
 }
