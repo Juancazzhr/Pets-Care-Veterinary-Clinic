@@ -10,7 +10,7 @@ import petcareveterinary.services.service.ProfessionalServiceService;
 import java.util.List;
 
 @RestController
-@RequestMapping("v1/services")
+@RequestMapping("/v1/services")
 public class ProfessionalServiceController {
     ProfessionalServiceService professionalServiceService;
 

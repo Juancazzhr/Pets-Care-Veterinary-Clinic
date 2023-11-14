@@ -1,5 +1,6 @@
 package pets_Care.msusers.service;
 
+import org.springframework.http.ResponseEntity;
 import pets_Care.msusers.client.IClientServiceClient;
 import pets_Care.msusers.client.IProfessionalServiceClient;
 import pets_Care.msusers.model.User;
@@ -16,7 +17,7 @@ public interface IUserService {
     User updateUser(User user) throws Exception;
 
     //CLIENTS
-    IClientServiceClient.ClientDTO createClient(IClientServiceClient.ClientDTO clientDTO);
+    ResponseEntity<String> createClient(IClientServiceClient.ClientDTO clientDTO);
     List<IClientServiceClient.ClientDTO> listClients();
 
     Optional<IClientServiceClient.ClientDTO> searchClientById(Long id);
@@ -25,7 +26,7 @@ public interface IUserService {
     void updateCLient(IClientServiceClient.ClientDTO clientDTO);
 
     //PROFESSIONALS
-    IProfessionalServiceClient.ProfessionalDTO createProfessional(IProfessionalServiceClient.ProfessionalDTO professionalDTO);
+    ResponseEntity<String> createProfessional(IProfessionalServiceClient.ProfessionalDTO professionalDTO);
     List<IProfessionalServiceClient.ProfessionalDTO> listProfessionals();
     void deleteProfessional(Long id);
     void updateProfessional(IProfessionalServiceClient.ProfessionalDTO professionalDTO);

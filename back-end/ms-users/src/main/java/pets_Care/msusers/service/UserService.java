@@ -1,5 +1,6 @@
 package pets_Care.msusers.service;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pets_Care.msusers.client.IClientServiceClient;
 import pets_Care.msusers.client.IProfessionalServiceClient;
@@ -62,7 +63,7 @@ public class UserService implements IUserService {
     //CLIENTS
 
     @Override
-    public IClientServiceClient.ClientDTO createClient(IClientServiceClient.ClientDTO clientDTO) {
+    public ResponseEntity<String> createClient(IClientServiceClient.ClientDTO clientDTO) {
         return clientRepository.createClient(clientDTO);
     }
 
@@ -88,7 +89,7 @@ public class UserService implements IUserService {
 
     //PROFESSIONALS
     @Override
-    public IProfessionalServiceClient.ProfessionalDTO createProfessional(IProfessionalServiceClient.ProfessionalDTO professionalDTO) {
+    public ResponseEntity<String> createProfessional(IProfessionalServiceClient.ProfessionalDTO professionalDTO) {
         return professionalRepository.createProfessional(professionalDTO);
     }
 

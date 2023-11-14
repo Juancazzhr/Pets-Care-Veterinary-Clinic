@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface IProfessionalServiceClient {
     Optional<ProfessionalDTO> listProfessionalById(@PathVariable (value = "id") Long id);
 
     @PostMapping("/v1/professionals")
-    ProfessionalDTO createProfessional(@RequestBody ProfessionalDTO professionalDTO);
+    ResponseEntity<String> createProfessional(@RequestBody ProfessionalDTO professionalDTO);
 
     @DeleteMapping("/v1/professionals/{id}")
     void deleteProfessional(@PathVariable (value = "id") Long id);

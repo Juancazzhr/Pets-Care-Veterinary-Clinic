@@ -36,8 +36,6 @@ public class UserController {
         User userCreated = service.createUser(userRequested);
         IProfessionalServiceClient.ProfessionalDTO professionalDTOCreado = new IProfessionalServiceClient.ProfessionalDTO(user.getLicenseNumber(),userCreated.getId());
         service.createProfessional(professionalDTOCreado);
-        System.out.println(userCreated);
-        System.out.println(professionalDTOCreado);
         return ResponseEntity.status(HttpStatus.CREATED).body("User successfully created.");
     }
 
@@ -46,8 +44,6 @@ public class UserController {
         User userCreated = service.createUser(user);
         IClientServiceClient.ClientDTO clientDTO = new IClientServiceClient.ClientDTO(userCreated.getId());
         service.createClient(clientDTO);
-        System.out.println(userCreated);
-        System.out.println(clientDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body("User successfully created.");
     }
 
@@ -211,7 +207,7 @@ public class UserController {
         String firstName;
         String lastName;
         String address;
-        int phone;
+        Long phone;
         String email;
         String password;
         Rol rol;
