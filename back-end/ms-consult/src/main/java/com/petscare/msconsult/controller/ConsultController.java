@@ -18,17 +18,17 @@ public class ConsultController {
 
     //Consult
 
-    @PostMapping("/consult")
+    @PostMapping
     public ResponseEntity<String> createConsult(@RequestBody Consult consult){
         consultService.createConsult(consult);
         return ResponseEntity.status(HttpStatus.CREATED).body("Consulta creada correctamente");
     }
 
-    @GetMapping("/consult")
+    @GetMapping
     public List<Consult> getAllConsult() {
         return consultService.getAllConsult();
     }
-    @GetMapping("/consult/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Object> searchConsultById(@PathVariable Long id){
         if(consultService.getConsultById(id).isPresent()){
             return ResponseEntity.ok(consultService.getConsultById(id).get());
@@ -36,7 +36,7 @@ public class ConsultController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La consulta con el id "+id+" no existe");
         }
     }
-    @PutMapping("/consult/{id}")
+    @PutMapping("/{id}")
     public  ResponseEntity<Consult> updateConsult(@RequestBody Consult consult) throws Exception {
         if(consultService.getConsultById(consult.getId()).isPresent()){
             return ResponseEntity.ok(consultService.updateConsult(consult));
@@ -45,7 +45,7 @@ public class ConsultController {
             throw new Exception();
         }
     }
-    @DeleteMapping("/consult/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteConsult(@PathVariable Long id) throws Exception {
         if (consultService.getConsultById(id).isPresent()){
             consultService.deleteConsult(id);

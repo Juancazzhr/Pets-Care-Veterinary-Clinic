@@ -17,11 +17,35 @@ public class User {
     @Column
     private String address;
     @Column
-    private int phone;
+    private Long phone;
     @Column
     private String email;
     @Column
     private String password;
     @ManyToOne(fetch = FetchType.EAGER)
     private Rol rol;
+
+    public User() {
+    }
+
+    public User(Long id, String firstName, String lastName, String address, Long phone, String email, String password, Rol rol) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+        this.password = password;
+        this.rol = rol;
+    }
+
+    public User(String firstName, String lastName, String address, Long phone, String email, String password, Rol rol) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+        this.password = password;
+        this.rol = rol;
+    }
 }

@@ -1,6 +1,7 @@
 package petcareveterinary.employees.service;
 
-import petcareveterinary.employees.client.UserServiceClient;
+import petcareveterinary.employees.client.IAppointmentServiceClient;
+import petcareveterinary.employees.client.IServicesProfessionalServiceClient;
 import petcareveterinary.employees.model.Professional;
 
 import java.util.List;
@@ -18,5 +19,6 @@ public interface IProfessionalService {
 
     Professional updateProfessional(Professional professional) throws Exception;
 
-    List<UserServiceClient.UserDTO> listUsers();
+    List<IServicesProfessionalServiceClient.ServiceDTO> listServices();
+    List<IAppointmentServiceClient.AppointmentDTO> listAppointments();
 }

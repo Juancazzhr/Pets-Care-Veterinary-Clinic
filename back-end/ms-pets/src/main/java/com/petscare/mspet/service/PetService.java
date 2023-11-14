@@ -1,5 +1,8 @@
 package com.petscare.mspet.service;
 
+import com.petscare.mspet.client.IAppointmentServiceClient;
+import com.petscare.mspet.client.IConsultServiceClient;
+import com.petscare.mspet.client.IServicesProfessionalServiceClient;
 import com.petscare.mspet.model.PetClinicalHistory;
 import com.petscare.mspet.model.PetType;
 import com.petscare.mspet.repository.IPetClinicalHistory;
@@ -18,12 +21,20 @@ public class PetService implements IPetService{
     IPetTypeRepository repositoryPetType;
     IPetClinicalHistory repositoryPetClinicalHistory;
 
+    IAppointmentServiceClient appointmentRepository;
 
-    public PetService(IPetRepository repositoryPet,IPetTypeRepository repositoryPetType, IPetClinicalHistory repositoryPetClinicalHistory) {
+    IServicesProfessionalServiceClient serviceRepository;
+
+    IConsultServiceClient consultRepository;
+
+
+    public PetService(IPetRepository repositoryPet, IPetTypeRepository repositoryPetType, IPetClinicalHistory repositoryPetClinicalHistory, IAppointmentServiceClient appointmentRepository, IServicesProfessionalServiceClient serviceRepository, IConsultServiceClient consultRepository) {
         this.repositoryPet = repositoryPet;
         this.repositoryPetType = repositoryPetType;
         this.repositoryPetClinicalHistory = repositoryPetClinicalHistory;
-
+        this.appointmentRepository = appointmentRepository;
+        this.serviceRepository = serviceRepository;
+        this.consultRepository = consultRepository;
     }
 
     //Pets
@@ -106,7 +117,18 @@ public class PetService implements IPetService{
     }
 
 
+    @Override
+    public List<IAppointmentServiceClient.AppointmentDTO> listAllAppointments() {
+        return appointmentRepository.listAllApointments();
+    }
 
+    @Override
+    public List<IServicesProfessionalServiceClient.ServiceDTO> listAllServices() {
+        return serviceRepository.listAllServices();
+    }
 
-
+    @Override
+    public List<IConsultServiceClient.ConsultDTO> listAllConsults() {
+        return consultRepository.listAllConsults();
+    }
 }

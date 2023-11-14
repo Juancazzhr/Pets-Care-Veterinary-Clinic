@@ -1,15 +1,22 @@
 package com.petscare.mspet.controller;
 
+import com.petscare.mspet.client.IAppointmentServiceClient;
+import com.petscare.mspet.client.IConsultServiceClient;
+import com.petscare.mspet.client.IServicesProfessionalServiceClient;
 import com.petscare.mspet.model.Pet;
 import com.petscare.mspet.model.PetClinicalHistory;
 import com.petscare.mspet.model.PetType;
 import com.petscare.mspet.service.PetService;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -125,10 +132,15 @@ public class PetController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Historial clinico de mascota creado correctamente");
     }
 
-    @GetMapping("/clinical-history")
+    /*@GetMapping("/clinical-history")
     public List<PetClinicalHistory> getAllClinicalHistory() {
         return petService.getAllClinicalHistory();
-    }
+    }*/
+
+
+
+
+
     @GetMapping("/clinical-history/{id}")
     public ResponseEntity<Object> searchClinicalHistoryById(@PathVariable Long id){
         if(petService.getPetClinicalHistoryById(id).isPresent()){
@@ -157,5 +169,74 @@ public class PetController {
         }
     }
 
+    @GetMapping("/clinical-history")
+    public List<PetHistoryConsults> getAllClinicalHistory() {
+        List<PetHistoryConsults> petHistoryConsultsList = new ArrayList<>();
+        List<Pet> pets = petService.getAll();
+        List<IConsultServiceClient.ConsultDTO> consultDTOList = petService.listAllConsults();
+        for(Pet pet : pets){
+            List<IConsultServiceClient.ConsultDTO> consultDTOS = new ArrayList<>();
+            for(IConsultServiceClient.ConsultDTO consultDTO : consultDTOList){
+                if(pet.getPetClinicalHistory().getId() == consultDTO.getPetClinicalHistoryId()){
+                    consultDTOS.add(consultDTO);
+                }
+            }
+            if(!consultDTOS.isEmpty()){
+                PetHistoryConsults petHistoryConsults = new PetHistoryConsults(pet,consultDTOS);
+                petHistoryConsultsList.add(petHistoryConsults);
+            }
+        }
+        return petHistoryConsultsList;
+    }
+
+    @GetMapping("/appointments")
+    List<PetsAppointments> listAll(){
+        List<PetsAppointments> petsAppointmentsList = new ArrayList<>();
+        List<Pet> pets = petService.getAll();
+        List<IAppointmentServiceClient.AppointmentDTO> appointmentsDTO = petService.listAllAppointments();
+        List<IServicesProfessionalServiceClient.ServiceDTO> servicesDTOS = petService.listAllServices();
+        for(Pet pet : pets){
+            List<AppointmentsServices> petAppointmentsServices = new ArrayList<>();
+            for(IAppointmentServiceClient.AppointmentDTO appointmentDTO : appointmentsDTO){
+                for(IServicesProfessionalServiceClient.ServiceDTO serviceDTO : servicesDTOS){
+                    if(appointmentDTO.getServiceID() == serviceDTO.getId()){
+                        if(pet.getId() == (appointmentDTO.getPetID())){
+                            AppointmentsServices appointmentsServicesSearched = new AppointmentsServices(appointmentDTO,serviceDTO);
+                            petAppointmentsServices.add(appointmentsServicesSearched);
+                        }
+                    }
+                }
+            }
+            if(!petAppointmentsServices.isEmpty()){
+                PetsAppointments petsAppointments = new PetsAppointments(pet,petAppointmentsServices);
+                petsAppointmentsList.add(petsAppointments);
+            }
+        }
+        return petsAppointmentsList;
+    }
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    static class PetsAppointments{
+        Pet pet;
+        List<AppointmentsServices> appointments = new ArrayList<>();
+    }
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    static class AppointmentsServices{
+        IAppointmentServiceClient.AppointmentDTO appointmentDTO;
+        IServicesProfessionalServiceClient.ServiceDTO serviceDTO;
+    }
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    static class PetHistoryConsults{
+        Pet pet;
+        List<IConsultServiceClient.ConsultDTO> consults = new ArrayList<>();
+    }
 
 }
