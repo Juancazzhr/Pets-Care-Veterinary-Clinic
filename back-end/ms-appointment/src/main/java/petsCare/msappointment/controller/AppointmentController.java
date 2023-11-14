@@ -9,7 +9,7 @@ import petsCare.msappointment.service.AppointmentService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/appointments")
+@RequestMapping("v1/appointments")
 public class AppointmentController {
 
     AppointmentService service;
