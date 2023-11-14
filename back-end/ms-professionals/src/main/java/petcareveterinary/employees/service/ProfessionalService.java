@@ -2,6 +2,8 @@ package petcareveterinary.employees.service;
 
 
 import org.springframework.stereotype.Service;
+import petcareveterinary.employees.client.IAppointmentServiceClient;
+import petcareveterinary.employees.client.IServicesProfessionalServiceClient;
 import petcareveterinary.employees.model.Professional;
 import petcareveterinary.employees.repository.IProfessionalRepository;
 
@@ -12,9 +14,14 @@ import java.util.Optional;
 public class ProfessionalService implements IProfessionalService {
 
     IProfessionalRepository repository;
+    IServicesProfessionalServiceClient serviceRepository;
 
-    public ProfessionalService(IProfessionalRepository repository) {
+    IAppointmentServiceClient appointmentRepository;
+
+    public ProfessionalService(IProfessionalRepository repository, IServicesProfessionalServiceClient serviceRepository, IAppointmentServiceClient appointmentRepository) {
         this.repository = repository;
+        this.serviceRepository = serviceRepository;
+        this.appointmentRepository = appointmentRepository;
     }
 
     @Override
@@ -50,5 +57,15 @@ public class ProfessionalService implements IProfessionalService {
         }else{
             throw new Exception("El empleado con el id = "+ professional.getId()+" no existe. Ingrese un id correcto");
         }
+    }
+
+    @Override
+    public List<IServicesProfessionalServiceClient.ServiceDTO> listServices() {
+        return serviceRepository.listAllServices();
+    }
+
+    @Override
+    public List<IAppointmentServiceClient.AppointmentDTO> listAppointments() {
+        return appointmentRepository.listAll();
     }
 }

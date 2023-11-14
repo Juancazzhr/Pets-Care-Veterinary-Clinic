@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import petcareveterinary.employees.client.IAppointmentServiceClient;
+import petcareveterinary.employees.client.IServicesProfessionalServiceClient;
 import petcareveterinary.employees.model.Professional;
 import petcareveterinary.employees.service.ProfessionalService;
 
@@ -60,5 +62,15 @@ public class ProfessionalController {
             ResponseEntity.status(HttpStatus.NOT_FOUND).body("El empleado con el id "+id+" no existe");
             throw new Exception();
         }
+    }
+
+    @GetMapping("/services")
+    List<IServicesProfessionalServiceClient.ServiceDTO> listAllServices(){
+        return service.listServices();
+    }
+
+    @GetMapping("/appointments")
+    List<IAppointmentServiceClient.AppointmentDTO> listAllApointments(){
+        return service.listAppointments();
     }
 }

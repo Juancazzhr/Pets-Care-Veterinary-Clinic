@@ -20,7 +20,7 @@ public interface IClientServiceClient {
     Optional<ClientDTO> listClientById(@PathVariable (value = "id") Long id);
 
     @PostMapping("/v1/clients")
-    ClientDTO createClient(@RequestBody ClientDTO clientDTO);
+    ResponseEntity<String> createClient(@RequestBody ClientDTO clientDTO);
 
     @DeleteMapping("/v1/clients/{id}")
     void deleteClient(@PathVariable (value = "id") Long id);

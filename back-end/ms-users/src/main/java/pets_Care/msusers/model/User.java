@@ -17,7 +17,7 @@ public class User {
     @Column
     private String address;
     @Column
-    private int phone;
+    private Long phone;
     @Column
     private String email;
     @Column
@@ -28,7 +28,7 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String firstName, String lastName, String address, int phone, String email, String password, Rol rol) {
+    public User(Long id, String firstName, String lastName, String address, Long phone, String email, String password, Rol rol) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -39,7 +39,7 @@ public class User {
         this.rol = rol;
     }
 
-    public User(String firstName, String lastName, String address, int phone, String email, String password, Rol rol) {
+    public User(String firstName, String lastName, String address, Long phone, String email, String password, Rol rol) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;

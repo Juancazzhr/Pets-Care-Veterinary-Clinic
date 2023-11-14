@@ -3,6 +3,7 @@ package petcareveterinary.employees.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+
 @Data
 @Entity
 @Table(name="Professionals")
