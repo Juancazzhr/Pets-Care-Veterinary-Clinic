@@ -1,9 +1,7 @@
 name: Pets Care BackEnd Prod
 
 on:
-  pull_request_target:
-    branches: 
-      - "dev"
+  workflow_dispatch:
   pull_request:
     branches: 
       - "main"
@@ -84,6 +82,13 @@ jobs:
           context: ./back-end/ms-pets
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/petscare-ms-pets:latest
+
+      - name: Build and push ms-professionals
+        uses: docker/build-push-action@v5
+        with:
+          context: ./back-end/ms-pets
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/petscare-ms-professionals:latest
 
   compose-deploy:
     needs:
