@@ -135,8 +135,8 @@ services:
         condition: service_healthy
     networks:
       - pets-care-network
-    ports:
-      - 8003:8003
+    expose:
+      - 8003
     environment:
       - MS_PETS_CONFIG_SERVER_URL=http://ms-config:8888
       - MS_PETS_PROFILE_ACTIVE=dev
@@ -146,6 +146,33 @@ services:
       - MS_PETS_DB=${PETSCARE_DB}
       - MS_PETS_DB_USERNAME=${PETSCARE_DB_USERNAME}
       - MS_PETS_DB_PASSWORD=${PETSCARE_DB_PASSWORD}
+
+  ms-professionals:
+    image: juancazz/petscare-ms-professionals:latest
+    container_name: ms-professionals
+    restart: always
+    env_file: .env
+    depends_on:
+      ms-config:
+        condition: service_healthy
+      ms-discovery:
+        condition: service_healthy
+      ms-gateway:
+        condition: service_healthy
+    networks:
+      - pets-care-network
+    expose:
+      - 8004
+    environment:
+      - MS_PROFESSIONALS_CONFIG_SERVER_URL=http://ms-config:8888
+      - MS_PROFESSIONALS_PROFILE_ACTIVE=dev
+      - MS_PROFESSIONALS_SERVICE_URL=http://ms-discovery:8761/eureka
+      - MS_PROFESSIONALS_HOSTNAME=ms-professionals
+      - MS_PROFESSIONALS_PORT=8004
+      - MS_PROFESSIONALS_DB=${PETSCARE_DB}
+      - MS_PROFESSIONALS_DB_USERNAME=${PETSCARE_DB_USERNAME}
+      - MS_PROFESSIONALS_DB_PASSWORD=${PETSCARE_DB_PASSWORD}
+
 
 networks:
   pets-care-network:

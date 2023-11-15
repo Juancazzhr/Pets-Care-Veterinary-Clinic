@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>pet-care-veterinary</groupId>
-	<artifactId>employees</artifactId>
+	<artifactId>ms-professionals</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>employees</name>
-	<description>microservice to management employees</description>
+	<name>ms-professionals</name>
+	<description>microservice to management professionals</description>
 	<properties>
 		<java.version>21</java.version>
 	</properties>
