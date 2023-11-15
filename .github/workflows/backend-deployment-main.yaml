@@ -1,4 +1,6 @@
-name: Pets Care BackEnd Prod
+name: Pets Care BackEnd Prod CI/CD
+
+run-name: Build, Push and Deploy Prod Ms
 
 on:
   workflow_dispatch:
@@ -89,6 +91,13 @@ jobs:
           context: ./back-end/ms-professionals
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/petscare-ms-professionals:latest
+
+      - name: Build and push ms-appointments
+        uses: docker/build-push-action@v5
+        with:
+          context: ./back-end/ms-appointments
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/petscare-ms-appointments:latest
 
   compose-deploy:
     needs:
