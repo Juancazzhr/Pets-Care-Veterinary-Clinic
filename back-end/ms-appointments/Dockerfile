@@ -28,7 +28,7 @@ LABEL authors="C2 Team 6 PI Specialization"
 LABEL description="MS Appointments Service"
 
 SHELL ["/bin/bash", "-c"]
-CMD ["java", "-jar", "ms-appointment-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "ms-appointments-0.0.1-SNAPSHOT.jar"]
 
 
 
