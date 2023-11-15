@@ -1,6 +1,6 @@
 spring:
   application:
-    name: ms-appointment
+    name: ms-appointments
   profiles:
     active: ${MS_APPOINTMENTS_PROFILE_ACTIVE:dev}
   config:

@@ -14,32 +14,39 @@ spring:
           uri: lb://ms-professionals
           predicates:
             - Path=/v1/professionals/**
+
         - id: ms-users
           uri: lb://ms-users
           predicates:
             - Path=/v1/users/**
+
         - id: ms-users-roles
           uri: lb://ms-users
           predicates:
             - Path=/v1/roles/**
+
         - id: ms-services
           uri: lb://ms-services
           predicates:
             - Path=/v1/services/**
+
         - id: ms-pets
           uri: lb://ms-pets
           predicates:
             - Path=/v1/pets/**
+
         - id: ms-consult
           uri: lb://ms-consult
           predicates:
             - Path=/v1/consults/**
+
         - id: ms-client
           uri: lb://ms-client
           predicates:
             - Path=/v1/clients/**
-        - id: ms-appointment
-          uri: lb://ms-appointment
+
+        - id: ms-appointments
+          uri: lb://ms-appointments
           predicates:
             - Path=/v1/appointments/**
 
