@@ -30,10 +30,10 @@ const defaultValues = {
         time: ''
     }
 }
+
 interface Props {  
     services: Service[]
 }
-
 
 const StepperAppointment = ({services}:Props) => {
 
@@ -140,20 +140,5 @@ const StepperAppointment = ({services}:Props) => {
 }
 
 
-export const getServerSideProps: GetServerSideProps = async ({ query, res }) => {
-
-       
-    const services = await getServices()
-
-    res.setHeader(
-        'Cache-Control',
-        'public, s-maxage=10, stale-while-revalidate=59'
-    )
-    return {
-        props: {
-            services
-        }
-    }
-}
 
 export default StepperAppointment
