@@ -1,6 +1,6 @@
 name: Pets Care BackEnd Dev CI/CD
 
-run-name: Build, Push and Deploy Ms
+run-name: Build, Push and Deploy Dev Ms
 
 on:
   workflow_dispatch:
