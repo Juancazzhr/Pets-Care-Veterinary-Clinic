@@ -7,7 +7,7 @@ RUN mvn clean package -DskipTests
 
 FROM amazoncorretto:21-alpine3.18-jdk
 RUN mkdir app
-COPY --from=build /project/target/ms-pet-0.0.1-SNAPSHOT.jar /app/ms-pet-0.0.1-SNAPSHOT.jar
+COPY --from=build /project/target/ms-pets-0.0.1-SNAPSHOT.jar /app/ms-pets-0.0.1-SNAPSHOT.jar
 WORKDIR app
 
 RUN apk add --no-cache bash curl jq
@@ -28,4 +28,4 @@ LABEL authors="C2 Team 6 PI Specialization"
 LABEL description="MS Pets Service"
 
 SHELL ["/bin/bash", "-c"]
-CMD ["java", "-jar", "ms-pet-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "ms-pets-0.0.1-SNAPSHOT.jar"]
