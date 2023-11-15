@@ -3,21 +3,24 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
-import FormControl from '@mui/material/FormControl'
 import styles from '../../Appointments.module.css'
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
+import { getServices } from '../../../../services/stepperService';
+import { GetServerSideProps, GetStaticProps } from 'next'
+import { Service } from '../../../../interfaces/servicios'
 
-const services = ['cirugía', 'laboratorio', 'vacunación', 'consulta', 'radiografía', 'peluquería']
+/* const services = ['cirugía', 'laboratorio', 'vacunación', 'consulta', 'radiografía', 'peluquería'] */
 
 interface Props {
     handlerServiceStep: (data: any) => void,
+    services: Service[]
     /* defaultValues: CheckoutInput */
 }
 
 
 
-const ServiceStep = ({handlerServiceStep}:Props) => {
+const ServiceStep = ({handlerServiceStep, services}:Props) => {
 
     const [value, setValue] = useState('');
 
@@ -33,6 +36,9 @@ const ServiceStep = ({handlerServiceStep}:Props) => {
         handlerServiceStep(data)
     }
 
+    console.log(services);
+    
+
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <RadioGroup
@@ -40,8 +46,8 @@ const ServiceStep = ({handlerServiceStep}:Props) => {
                 onChange={handleChangeRadio}
                 className={styles.radioGroup}
             >
-                {services.map((service, index) =>
-                    <FormControlLabel key={index} value={service} control={<Radio color='secondary'/>} label={service} className={styles.radioItem}/>
+                {services?.map((service, index) =>
+                    <FormControlLabel key={index} value={service} control={<Radio color='secondary'/>} label={service.name} className={styles.radioItem}/>
                 )}
             </RadioGroup>
             <Box display={'flex'} justifyContent={'end'} position={'relative'} bottom={'-125px'}>
@@ -51,4 +57,6 @@ const ServiceStep = ({handlerServiceStep}:Props) => {
     )
 }
 
+
 export default ServiceStep
+

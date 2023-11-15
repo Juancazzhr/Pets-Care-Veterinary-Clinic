@@ -15,6 +15,9 @@ import { useRouter } from 'next/router';
 import PetSelect from '../PetSelect';
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 import { Stack } from '@mui/material';
+import { getServices } from '../../../../services/stepperService';
+import { GetServerSideProps } from 'next';
+import { Service } from '../../../../interfaces/servicios'
 
 const steps = ['servicio', 'profesional', 'fecha y hora', 'confirmación'];
 
@@ -27,9 +30,15 @@ const defaultValues = {
         time: ''
     }
 }
+interface Props {  
+    services: Service[]
+}
 
-const StepperAppointment = () => {
 
+const StepperAppointment = ({services}:Props) => {
+
+    console.log(services);
+    
     const [activeStep, setActiveStep] = useState(0);
     const router = useRouter()
 
@@ -99,7 +108,7 @@ const StepperAppointment = () => {
                     }}>
                     <Box> {activeStep === 0 && <>
                         <Typography sx={{ mt: 2, mb: 1, ml: 1.7 }}>SELECCIONÁ EL SERVICIO A AGENDAR</Typography>
-                        <ServiceStep handlerServiceStep={handlerServiceStep} />
+                        <ServiceStep handlerServiceStep={handlerServiceStep} services={services} />
 
                     </>}
                         {activeStep === 1 && <>
@@ -128,6 +137,23 @@ const StepperAppointment = () => {
             </Box>
         </Box>
     )
+}
+
+
+export const getServerSideProps: GetServerSideProps = async ({ query, res }) => {
+
+       
+    const services = await getServices()
+
+    res.setHeader(
+        'Cache-Control',
+        'public, s-maxage=10, stale-while-revalidate=59'
+    )
+    return {
+        props: {
+            services
+        }
+    }
 }
 
 export default StepperAppointment

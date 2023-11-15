@@ -4,6 +4,17 @@
   padding: 40px 20px 80px;
   margin: 20px auto 80px;
 }
+.boxAlert{
+  display: flex;
+  justify-content: center
+}
+
+.buttonLogin {
+  width: 206px;
+  text-transform: lowercase;
+  font-weight: 900;
+  margin: 40px auto 0px; 
+}
 
 .addPets {
   display: flex;
@@ -22,7 +33,7 @@
   width: 48%;
 }
 
-.boxPet{
+.boxPet {
   margin-bottom: 4%;
 }
 
@@ -36,11 +47,13 @@
   font-weight: 900;
 }
 
-.formProfessional, .formDatetime {
+.formProfessional,
+.formDatetime {
   width: 100%;
 }
 
-.selectProfessional, .selectDatetime {
+.selectProfessional,
+.selectDatetime {
   width: 90%;
   margin: 20px auto;
 }
@@ -50,13 +63,13 @@
   top: 20px;
 }
 
-.dataConfirmation{
+.dataConfirmation {
   width: 70%;
   margin: 30px auto 0;
 }
 
-.dataConfirmation p{
- line-height: 2;
+.dataConfirmation p {
+  line-height: 2;
 }
 
 /* Tablet and Smaller Desktop */
@@ -74,7 +87,7 @@
   .btnStepper {
     width: 204px;
   }
-  .dataConfirmation{
-    width: 50%
+  .dataConfirmation {
+    width: 50%;
   }
 }
