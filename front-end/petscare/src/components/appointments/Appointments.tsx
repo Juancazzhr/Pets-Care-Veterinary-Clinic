@@ -7,7 +7,7 @@ import AuthContext from '../../context/AuthContext'
 import Button from '@mui/material/Button'
 import { Stack } from '@mui/material'
 import { GetServerSideProps, NextPage } from 'next'
-import { getServices } from '../../services/stepperService';
+import { getProfessionals, getServices } from '../../services/stepperService';
 import { Service } from '../../interfaces/servicios'
 
 interface Props {  
@@ -38,14 +38,16 @@ export const getServerSideProps: GetServerSideProps = async ({ query, res }) => 
 
        
     const services = await getServices()
+    const professionals = await getProfessionals()
 
     res.setHeader(
         'Cache-Control',
-        'public, s-maxage=10, stale-while-revalidate=59'
+        'public, s-maxage=10, stale-while-revalidate'
     )
     return {
         props: {
-            services
+            services,
+            professionals
         }
     }
 }
