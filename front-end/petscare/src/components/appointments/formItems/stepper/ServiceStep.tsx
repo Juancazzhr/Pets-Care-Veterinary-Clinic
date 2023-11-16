@@ -57,6 +57,22 @@ const ServiceStep = ({handlerServiceStep, services}:Props) => {
     )
 }
 
+/* export const getServerSideProps: GetServerSideProps = async ({ query, res }) => {
+
+       
+    const services = await getServices()
+
+    res.setHeader(
+        'Cache-Control',
+        'public, s-maxage=10, stale-while-revalidate=59'
+    )
+    return {
+        props: {
+            services
+        }
+    }
+}
+ */
 
 export default ServiceStep
 
