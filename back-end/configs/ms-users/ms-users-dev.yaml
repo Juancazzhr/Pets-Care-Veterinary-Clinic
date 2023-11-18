@@ -5,9 +5,9 @@ spring:
     name: ms-users
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${MS_USERS_DB:db.ctd.academy:3306/pi21023c02_GRUPO6}?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: ${MS_USERS_DB_USERNAME:pi21023c02_GRUPO6}
-    password: ${MS_USERS_DB_PASSWORD:iguu3Ohg}
+    url: jdbc:mysql://${MS_USERS_DB}?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: ${MS_USERS_DB_USERNAME}
+    password: ${MS_USERS_DB_PASSWORD}
   jpa:
     show-sql: true
     hibernate:
