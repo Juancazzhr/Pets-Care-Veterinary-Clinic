@@ -47,13 +47,13 @@ spring:
           predicates:
             - Path=/v1/pets/**
 
-        - id: ms-consult
-          uri: lb://ms-consult
+        - id: ms-consults
+          uri: lb://ms-consults
           predicates:
             - Path=/v1/consults/**
 
-        - id: ms-client
-          uri: lb://ms-client
+        - id: ms-clients
+          uri: lb://ms-clients
           predicates:
             - Path=/v1/clients/**
 
