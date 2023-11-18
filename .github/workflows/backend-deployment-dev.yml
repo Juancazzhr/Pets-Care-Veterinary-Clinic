@@ -71,4 +71,4 @@ jobs:
   
         - name: Connect to the server EC2 and deploy docker-compose
           run: |
-            ssh -i key.txt -o StrictHostKeyChecking=no ${{ vars.USER_SERVER_EC2 }}@${{ vars.IP_SERVER_EC2 }} "cd server && docker compose -f docker-compose-dev.yaml pull && docker compose -f docker-compose-dev.yaml up -d"
+            ssh -i key.txt -o StrictHostKeyChecking=no ${{ vars.USER_SERVER_EC2 }}@${{ vars.IP_SERVER_EC2 }} "cd server && docker compose -f docker-compose-dev.yaml pull && docker image prune -f && docker compose -f docker-compose-dev.yaml up -d"
