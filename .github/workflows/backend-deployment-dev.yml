@@ -61,5 +61,30 @@ jobs:
           context: ./back-end/${{ matrix.service }}
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/petscare-${{ matrix.service }}:dev
-      
+
+          
+  compose-deploy:
+      needs:
+        - docker-buildx-push
+      runs-on: ubuntu-latest
+      name: Docker clean and Compose Up
+      environment: Dev
   
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+          with:
+            ref: 'dev'
+  
+        - name: Configure server key EC2
+          run: |
+            touch key.txt && echo "${{ secrets.EC2_SERVER_KEY }}" > key.txt
+            chmod 600 key.txt
+  
+        - name: Copy compose to server folder on EC2
+          run: |
+            scp -i key.txt -o StrictHostKeyChecking=no ./back-end/docker-compose-dev.yaml ${{ vars.USER_SERVER_EC2 }}@${{ vars.IP_SERVER_EC2 }}:/home/ubuntu/server
+  
+        - name: Connect to the server EC2 and deploy docker-compose
+          run: |
+            ssh -i key.txt -o StrictHostKeyChecking=no ${{ vars.USER_SERVER_EC2 }}@${{ vars.IP_SERVER_EC2 }} "cd server && docker compose -f docker-compose-dev.yaml pull && docker compose -f docker-compose-dev.yaml up -d"
