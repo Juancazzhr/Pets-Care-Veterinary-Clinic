@@ -19,24 +19,6 @@ jobs:
     strategy:
       matrix:
         services: [ms-config, ms-discovery, ms-gateway, ms-users, ms-services, ms-pets]
-        include:
-          - service: ms-config
-            path: back-end/ms-config/**
-          
-          - service: ms-discovery
-            path: back-end/ms-discovery/**
-            
-          - service: ms-gateway
-            path: back-end/ms-gateway/**
-            
-          - service: ms-users
-            path: back-end/ms-users/**
-
-          - service: ms-services
-            path: back-end/ms-services/**
-            
-          - service: ms-pets
-            path: back-end/ms-pets/**
     
     steps:
       - name: Checkout
