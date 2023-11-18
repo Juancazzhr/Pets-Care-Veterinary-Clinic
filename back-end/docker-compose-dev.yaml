@@ -3,10 +3,10 @@ name: pets-care-dev
 services:
   ms-config:
     image: juancazz/petscare-ms-config:dev
-    container_name: ms-config
+    container_name: ms-config-dev
     restart: always
     networks:
-      - pets-care-network
+      - pets-care-dev-network
     expose:
       - 8888
     environment:
@@ -22,13 +22,13 @@ services:
 
   ms-discovery:
     image: juancazz/petscare-ms-discovery:dev
-    container_name: ms-discovery
+    container_name: ms-discovery-dev
     restart: always
     depends_on:
       ms-config:
         condition: service_healthy
     networks:
-      - pets-care-network
+      - pets-care-dev-network
     expose:
       - 8761
     environment:
@@ -44,7 +44,7 @@ services:
 
   ms-gateway:
     image: juancazz/petscare-ms-gateway:dev
-    container_name: ms-gateway
+    container_name: ms-gateway-dev
     restart: always
     depends_on:
       ms-config:
@@ -52,7 +52,7 @@ services:
       ms-discovery:
         condition: service_healthy
     networks:
-      - pets-care-network
+      - pets-care-dev-network
     ports:
       - 8081:8080
     expose:
@@ -71,7 +71,7 @@ services:
 
   ms-users:
     image: juancazz/petscare-ms-users:dev
-    container_name: ms-users
+    container_name: ms-users-dev
     restart: always
     env_file: .env
     depends_on:
@@ -82,7 +82,7 @@ services:
       ms-gateway:
         condition: service_healthy
     networks:
-      - pets-care-network
+      - pets-care-dev-network
     expose:
       - 8001
     environment:
@@ -97,7 +97,7 @@ services:
 
   ms-clients:
     image: juancazz/petscare-ms-clients:dev
-    container_name: ms-clients
+    container_name: ms-clients-dev
     restart: always
     env_file: .env
     depends_on:
@@ -108,7 +108,7 @@ services:
       ms-gateway:
         condition: service_healthy
     networks:
-      - pets-care-network
+      - pets-care-dev-network
     expose:
       - 8001
     environment:
@@ -123,7 +123,7 @@ services:
 
   ms-professionals:
     image: juancazz/petscare-ms-professionals:dev
-    container_name: ms-professionals
+    container_name: ms-professionals-dev
     restart: always
     env_file: .env
     depends_on:
@@ -134,7 +134,7 @@ services:
       ms-gateway:
         condition: service_healthy
     networks:
-      - pets-care-network
+      - pets-care-dev-network
     expose:
       - 8001
     environment:
@@ -149,7 +149,7 @@ services:
 
   ms-services:
     image: juancazz/petscare-ms-services:dev
-    container_name: ms-services
+    container_name: ms-services-dev
     restart: always
     env_file: .env
     depends_on:
@@ -160,7 +160,7 @@ services:
       ms-gateway:
         condition: service_healthy
     networks:
-      - pets-care-network
+      - pets-care-dev-network
     expose:
       - 8001
     environment:
@@ -175,7 +175,7 @@ services:
 
   ms-pets:
     image: juancazz/petscare-ms-pets:dev
-    container_name: ms-pets
+    container_name: ms-pets-dev
     restart: always
     env_file: .env
     depends_on:
@@ -186,7 +186,7 @@ services:
       ms-gateway:
         condition: service_healthy
     networks:
-      - pets-care-network
+      - pets-care-dev-network
     expose:
       - 8001
     environment:
@@ -201,7 +201,7 @@ services:
 
   ms-appointments:
     image: juancazz/petscare-ms-appointments:dev
-    container_name: ms-appointments
+    container_name: ms-appointments-dev
     restart: always
     env_file: .env
     depends_on:
@@ -212,7 +212,7 @@ services:
       ms-gateway:
         condition: service_healthy
     networks:
-      - pets-care-network
+      - pets-care-dev-network
     expose:
       - 8001
     environment:
@@ -227,5 +227,5 @@ services:
 
 
 networks:
-  pets-care-network:
+  pets-care-dev-network:
     name: pets-care-dev-network
