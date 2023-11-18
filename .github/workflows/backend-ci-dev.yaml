@@ -9,7 +9,7 @@ on:
       - 'dev'
     paths: 
     - 'back-end/**/{Dockerfile,pom.xml,src/**}'
-    - '.github/workflows/**'
+    - '.github/workflows/backend-ci-dev.yaml'
 
 jobs:
   docker-buildx-push:
