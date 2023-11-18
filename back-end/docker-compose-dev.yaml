@@ -1,0 +1,231 @@
+name: pets-care-dev
+
+services:
+  ms-config:
+    image: juancazz/petscare-ms-config:dev
+    container_name: ms-config
+    restart: always
+    networks:
+      - pets-care-network
+    expose:
+      - 8888
+    environment:
+      - MS_CONFIG_SERVER_GIT_URI=https://github.com/Juancazzhr/Pets-Care.git
+      - MS_CONFIG_SERVER_GIT_DEFAULT_LABEL=dev
+      - MS_CONFIG_PORT=8888
+    healthcheck:
+      test: wget -qO- http://localhost:8888/actuator/health/readiness || exit 1
+      interval: 20s
+      timeout: 10s
+      retries: 4
+      start_period: 20s
+
+  ms-discovery:
+    image: juancazz/petscare-ms-discovery:dev
+    container_name: ms-discovery
+    restart: always
+    depends_on:
+      ms-config:
+        condition: service_healthy
+    networks:
+      - pets-care-network
+    expose:
+      - 8761
+    environment:
+      - MS_DISCOVERY_PORT=8761
+      - MS_DISCOVERY_CONFIG_SERVER_URL=http://ms-config:8888
+      - MS_DISCOVERY_PROFILE_ACTIVE=dev
+    healthcheck:
+      test: wget -qO- http://localhost:8761/actuator/health/readiness || exit 1
+      interval: 20s
+      timeout: 10s
+      retries: 4
+      start_period: 20s
+
+  ms-gateway:
+    image: juancazz/petscare-ms-gateway:dev
+    container_name: ms-gateway
+    restart: always
+    depends_on:
+      ms-config:
+        condition: service_healthy
+      ms-discovery:
+        condition: service_healthy
+    networks:
+      - pets-care-network
+    ports:
+      - 8081:8080
+    expose:
+      - 8080
+    environment:
+      - MS_GATEWAY_CONFIG_SERVER_URL=http://ms-config:8888
+      - MS_GATEWAY_PROFILE_ACTIVE=dev
+      - MS_GATEWAY_SERVICE_URL=http://ms-discovery:8761/eureka
+      - MS_GATEWAY_PORT=8080
+    healthcheck:
+      test: wget -qO- http://localhost:8080/actuator/health/readiness || exit 1
+      interval: 20s
+      timeout: 10s
+      retries: 4
+      start_period: 20s
+
+  ms-users:
+    image: juancazz/petscare-ms-users:dev
+    container_name: ms-users
+    restart: always
+    env_file: .env
+    depends_on:
+      ms-config:
+        condition: service_healthy
+      ms-discovery:
+        condition: service_healthy
+      ms-gateway:
+        condition: service_healthy
+    networks:
+      - pets-care-network
+    expose:
+      - 8001
+    environment:
+      - MS_USERS_CONFIG_SERVER_URL=http://ms-config:8888
+      - MS_USERS_PROFILE_ACTIVE=dev
+      - MS_USERS_SERVICE_URL=http://ms-discovery:8761/eureka
+      - MS_USERS_HOSTNAME=ms-users
+      - MS_USERS_PORT=8001
+      - MS_USERS_DB=${PETSCARE_DB}
+      - MS_USERS_DB_USERNAME=${PETSCARE_DB_USERNAME}
+      - MS_USERS_DB_PASSWORD=${PETSCARE_DB_PASSWORD}
+
+  ms-clients:
+    image: juancazz/petscare-ms-clients:dev
+    container_name: ms-clients
+    restart: always
+    env_file: .env
+    depends_on:
+      ms-config:
+        condition: service_healthy
+      ms-discovery:
+        condition: service_healthy
+      ms-gateway:
+        condition: service_healthy
+    networks:
+      - pets-care-network
+    expose:
+      - 8001
+    environment:
+      - MS_CLIENTS_CONFIG_SERVER_URL=http://ms-config:8888
+      - MS_CLIENTS_PROFILE_ACTIVE=dev
+      - MS_CLIENTS_SERVICE_URL=http://ms-discovery:8761/eureka
+      - MS_CLIENTS_HOSTNAME=ms-clients
+      - MS_CLIENTS_PORT=8001
+      - MS_CLIENTS_DB=${PETSCARE_DB}
+      - MS_CLIENTS_DB_USERNAME=${PETSCARE_DB_USERNAME}
+      - MS_CLIENTS_DB_PASSWORD=${PETSCARE_DB_PASSWORD}
+
+  ms-professionals:
+    image: juancazz/petscare-ms-professionals:dev
+    container_name: ms-professionals
+    restart: always
+    env_file: .env
+    depends_on:
+      ms-config:
+        condition: service_healthy
+      ms-discovery:
+        condition: service_healthy
+      ms-gateway:
+        condition: service_healthy
+    networks:
+      - pets-care-network
+    expose:
+      - 8001
+    environment:
+      - MS_PROFESSIONALS_CONFIG_SERVER_URL=http://ms-config:8888
+      - MS_PROFESSIONALS_PROFILE_ACTIVE=dev
+      - MS_PROFESSIONALS_SERVICE_URL=http://ms-discovery:8761/eureka
+      - MS_PROFESSIONALS_HOSTNAME=ms-professionals
+      - MS_PROFESSIONALS_PORT=8001
+      - MS_PROFESSIONALS_DB=${PETSCARE_DB}
+      - MS_PROFESSIONALS_DB_USERNAME=${PETSCARE_DB_USERNAME}
+      - MS_PROFESSIONALS_DB_PASSWORD=${PETSCARE_DB_PASSWORD}
+
+  ms-services:
+    image: juancazz/petscare-ms-services:dev
+    container_name: ms-services
+    restart: always
+    env_file: .env
+    depends_on:
+      ms-config:
+        condition: service_healthy
+      ms-discovery:
+        condition: service_healthy
+      ms-gateway:
+        condition: service_healthy
+    networks:
+      - pets-care-network
+    expose:
+      - 8001
+    environment:
+      - MS_SERVICES_CONFIG_SERVER_URL=http://ms-config:8888
+      - MS_SERVICES_PROFILE_ACTIVE=dev
+      - MS_SERVICES_SERVICE_URL=http://ms-discovery:8761/eureka
+      - MS_SERVICES_HOSTNAME=ms-services
+      - MS_SERVICES_PORT=8001
+      - MS_SERVICES_DB=${PETSCARE_DB}
+      - MS_SERVICES_DB_USERNAME=${PETSCARE_DB_USERNAME}
+      - MS_SERVICES_DB_PASSWORD=${PETSCARE_DB_PASSWORD}
+
+  ms-pets:
+    image: juancazz/petscare-ms-pets:dev
+    container_name: ms-pets
+    restart: always
+    env_file: .env
+    depends_on:
+      ms-config:
+        condition: service_healthy
+      ms-discovery:
+        condition: service_healthy
+      ms-gateway:
+        condition: service_healthy
+    networks:
+      - pets-care-network
+    expose:
+      - 8001
+    environment:
+      - MS_PETS_CONFIG_SERVER_URL=http://ms-config:8888
+      - MS_PETS_PROFILE_ACTIVE=dev
+      - MS_PETS_SERVICE_URL=http://ms-discovery:8761/eureka
+      - MS_PETS_HOSTNAME=ms-pets
+      - MS_PETS_PORT=8001
+      - MS_PETS_DB=${PETSCARE_DB}
+      - MS_PETS_DB_USERNAME=${PETSCARE_DB_USERNAME}
+      - MS_PETS_DB_PASSWORD=${PETSCARE_DB_PASSWORD}
+
+  ms-appointments:
+    image: juancazz/petscare-ms-appointments:dev
+    container_name: ms-appointments
+    restart: always
+    env_file: .env
+    depends_on:
+      ms-config:
+        condition: service_healthy
+      ms-discovery:
+        condition: service_healthy
+      ms-gateway:
+        condition: service_healthy
+    networks:
+      - pets-care-network
+    expose:
+      - 8001
+    environment:
+      - MS_APPOINTMENTS_CONFIG_SERVER_URL=http://ms-config:8888
+      - MS_APPOINTMENTS_PROFILE_ACTIVE=dev
+      - MS_APPOINTMENTS_SERVICE_URL=http://ms-discovery:8761/eureka
+      - MS_APPOINTMENTS_HOSTNAME=ms-appointments
+      - MS_APPOINTMENTS_PORT=8001
+      - MS_APPOINTMENTS_DB=${PETSCARE_DB}
+      - MS_APPOINTMENTS_DB_USERNAME=${PETSCARE_DB_USERNAME}
+      - MS_APPOINTMENTS_DB_PASSWORD=${PETSCARE_DB_PASSWORD}
+
+
+networks:
+  pets-care-network:
+    name: pets-care-dev-network
