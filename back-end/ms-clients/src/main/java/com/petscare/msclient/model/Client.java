@@ -1,9 +1,7 @@
 package com.petscare.msclient.model;
 
 import jakarta.persistence.*;
-import lombok.*;
-
-import java.util.List;
+import lombok.Data;
 
 @Data
 @Entity

@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: ms-clients
+  profiles:
+    active: ${MS_CLIENTS_PROFILE_ACTIVE:dev}
+  config:
+    import: configserver:${MS_CLIENTS_CONFIG_SERVER_URL:http://localhost:8888}

@@ -9,9 +9,9 @@
         <relativePath/>
     </parent>
     <groupId>com.petscare</groupId>
-    <artifactId>ms-client</artifactId>
+    <artifactId>ms-clients</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ms-client</name>
+    <name>ms-clients</name>
     <description>ms-client</description>
     <properties>
         <java.version>21</java.version>
