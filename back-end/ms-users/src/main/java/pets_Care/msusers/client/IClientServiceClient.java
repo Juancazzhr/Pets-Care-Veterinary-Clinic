@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@FeignClient(name = "ms-client")
+@FeignClient(name = "ms-clients")
 public interface IClientServiceClient {
 
     @GetMapping("/v1/clients")
