@@ -9,7 +9,7 @@ on:
       - 'dev'
     paths: 
     - 'back-end/**/{Dockerfile,pom.xml,src/**}'
-    - 'back-end/**/docker-compose-dev.yaml'
+    - 'back-end/docker-compose-dev.yaml'
     - '.github/workflows/**'
 
 jobs:
