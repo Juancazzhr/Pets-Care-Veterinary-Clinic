@@ -56,9 +56,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
         
-      - name: Build and Push Images
+      - name: Build and Push Images for
         uses: docker/build-push-action@v5
         with:
-          context: ./back-end/${{ matrix.service }}
+          context: ./back-end/${{ matrix.services }}
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/petscare-${{ matrix.service }}:dev
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/petscare-${{ matrix.services }}:dev
