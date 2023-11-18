@@ -10,7 +10,7 @@ on:
     paths: 
     - 'back-end/**/{Dockerfile,pom.xml,src/**}'
     - 'back-end/docker-compose-dev.yaml'
-    - '.github/workflows/**'
+    - '.github/workflows/backend-deployment-dev.yaml'
 
 jobs:
   docker-buildx-push:
