@@ -6,10 +6,10 @@ on:
   workflow_dispatch:
   pull_request:
     branches: 
-      - dev
+      - 'dev'
     paths: 
-    - back-end/**/{Dockerfile,pom.xml,src/**}
-    - .github/workflows/**
+    - 'back-end/**/{Dockerfile,pom.xml,src/**}'
+    - '.github/workflows/**'
 
 jobs:
   docker-buildx-push:
@@ -24,7 +24,7 @@ jobs:
             path: back-end/ms-config/**
           
           - service: ms-discovery
-            path: back-end/ms-config/**
+            path: back-end/ms-discovery/**
             
           - service: ms-gateway
             path: back-end/ms-gateway/**
@@ -41,8 +41,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: "dev"
           
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -57,7 +55,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
         
       - name: Build and Push Images
-        if: contains(github.event.pull_request.title, matrix.service) || contains(github.event.pull_request.body, matrix.service) || contains(join(github.event.pull_request.modified_files), matrix.path)
+        if: contains(github.event.pull_request.modified_files, matrix.path)
         uses: docker/build-push-action@v5
         with:
           context: ./back-end/${{ matrix.service }}
