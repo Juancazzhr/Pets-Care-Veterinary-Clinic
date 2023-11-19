@@ -6,31 +6,66 @@ import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import styles from '../Appointments.module.css'
 import { SubmitHandler } from 'react-hook-form'
+import { AppointmentInput } from '@/interfaces/appointment'
 
-const petsUser = ['canela', 'lupita', 'cachilo']
+const petsUser = [
+    {
+      "id": 1,
+      "name": "Kora",
+      "size": "Pequeno",
+      "race": "Criolla",
+      "clientId": 2,
+      "petType": {
+        "id": 2,
+        "typeName": "Canino"
+      },
+      "petClinicalHistory": {
+        "id": 1,
+        "cratedAt": "2023-10-13",
+        "lastUpdate": "2023-10-13",
+        "weigth": 3.5
+      }
+    },
+    {
+      "id": 2,
+      "name": "Mittens",
+      "size": "Pequeno",
+      "race": "Criolla",
+      "clientId": 5,
+      "petType": {
+        "id": 1,
+        "typeName": "Felino"
+      },
+      "petClinicalHistory": {
+        "id": 2,
+        "cratedAt": "2023-08-13",
+        "lastUpdate": "2023-08-20",
+        "weigth": 4.2
+      }
+    }
+  ]
 
 interface Props {
-    handlerPet: (data: any) => void,
-    /* defaultValues: AppointmentInput */
+    handlerPet: (data: any) => void
 }
 
 
-const PetSelect = ({handlerPet}:Props) => {
+const PetSelect = ({ handlerPet }: Props) => {
 
     const [pet, setPet] = useState('');
 
     const handleChangePet = (event: SelectChangeEvent) => {
         event.stopPropagation();
         setPet(event.target.value as string);
+        handlerPet(event.target.value)
     };
 
-    const onSubmit: SubmitHandler<any> = (data) => {
-        handlerPet(data)
-    }
+   
+    
     return (
         <>
             <Stack className={styles.petSelect}>
-                <FormControl fullWidth onSubmit={onSubmit}>
+                <FormControl fullWidth >
                     <InputLabel id="petSelectLabel">Seleccioná la mascota</InputLabel>
                     <Select
                         labelId="petSelectLabel"
@@ -39,8 +74,8 @@ const PetSelect = ({handlerPet}:Props) => {
                         label="pet"
                         onChange={handleChangePet}
                     >
-                        {petsUser.map((pet, index) =>
-                            <MenuItem key={index} value={pet}>{pet}</MenuItem>
+                        {petsUser.map((pet) =>
+                            <MenuItem key={pet.id} value={pet.id}>{pet.name}</MenuItem>
                         )}
 
                     </Select>

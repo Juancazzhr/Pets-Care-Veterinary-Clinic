@@ -6,21 +6,23 @@ import Alert from '@mui/material/Alert'
 import AuthContext from '../../context/AuthContext'
 import Button from '@mui/material/Button'
 import { Stack } from '@mui/material'
-import { GetServerSideProps, NextPage } from 'next'
-import { getProfessionals, getServices } from '../../services/stepperService';
+import { GetServerSideProps, GetStaticProps, NextPage } from 'next'
+import { getProfessionals, getServices } from '../../services/stepperService'
 import { Service } from '../../interfaces/servicios'
+import { Professional } from '../../interfaces/profesionales'
 
 interface Props {  
     services: Service[]
+    professionals: Professional[]
 }
 
-const Appointments: NextPage<Props> = ({services}) => {
+const Appointments: NextPage<Props> = ({services, professionals}) => {
 
     const { auth } = useContext(AuthContext);
     return (
         <Paper className={styles.paper}>
             {auth ?
-                <StepperAppointment services={services} />
+                <StepperAppointment services={services} professionals={professionals}  />
                 :
                 <Stack className={styles.boxAlert}>
                     <Alert variant="outlined" severity="warning">
@@ -34,11 +36,34 @@ const Appointments: NextPage<Props> = ({services}) => {
 }
 
 
+export const getStaticProps: GetStaticProps = async () => {
+
+       
+    const services = await getServices()
+    const professionals = await getProfessionals()
+
+    console.log({services});
+    
+    return {
+        props: {
+            services,
+            professionals
+        }
+    }
+}
+
+export default Appointments;
+
+
+/* 
 export const getServerSideProps: GetServerSideProps = async ({ query, res }) => {
 
        
     const services = await getServices()
     const professionals = await getProfessionals()
+
+    console.log({services});
+    
 
     res.setHeader(
         'Cache-Control',
@@ -50,6 +75,4 @@ export const getServerSideProps: GetServerSideProps = async ({ query, res }) => 
             professionals
         }
     }
-}
-
-export default Appointments;
+} */

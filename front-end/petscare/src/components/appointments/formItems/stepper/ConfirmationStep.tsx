@@ -5,23 +5,25 @@ import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
 import { Divider, Typography } from '@mui/material'
+import { AppointmentInput } from '@/interfaces/appointment'
+import { useEffect, useState } from 'react'
+import { getPetById } from '../../../../services/stepperService'
+import { Pet } from '@/interfaces/pet'
 
-const data = {
-    petData: {
-        name: 'canela'
-    },
-    service:'laboratorio',
-    professional: 'Dr. Pepe Hongo',
-    datetime: '11/23/2023 06:30PM'
-}
 
 
 interface Props {
     handlerConfirmationStep: (data: any) => void,
-    /* defaultValues: CheckoutInput */
+    dataForm: AppointmentInput
 }
 
-const ConfirmationStep = ({handlerConfirmationStep}:Props) => {
+const ConfirmationStep = ({handlerConfirmationStep, dataForm  }:Props) => {
+
+    const [pet, setPet] = useState<Pet>()
+    const [service, setService] = useState('')
+    const [professional, setProfessional] = useState('')
+    const [date, setDate] = useState('')
+    
 
 
     const { control, formState: { errors }, handleSubmit } = useForm(/* {
@@ -32,17 +34,24 @@ const ConfirmationStep = ({handlerConfirmationStep}:Props) => {
         handlerConfirmationStep(data)
     }
 
+    useEffect(()=>{
+       getPetById(dataForm.petID, setPet)
+             
+    },[])
+
+    console.log({pet});
+    
 
     return (
         <form className={styles.formProfessional} onSubmit={handleSubmit(onSubmit)}>
             <Stack className={styles.dataConfirmation}>
-                <Typography>Nombre mascota: <strong>{data.petData.name}</strong></Typography>
+                <Typography>Nombre mascota: <strong>{pet?.name}</strong></Typography>
                 <Divider/>
-                <Typography>Servicio: <strong>{data.service}</strong></Typography>
+                <Typography>Servicio: <strong>{service}</strong></Typography>
                 <Divider/>
-                <Typography>Profesional: <strong>{data.professional}</strong></Typography>
+                <Typography>Profesional: <strong>{professional}</strong></Typography>
                 <Divider/>
-                <Typography>Fecha: <strong>{data.datetime}</strong></Typography>
+                <Typography>Fecha: <strong>{date}</strong></Typography>
                 <Divider/>
 
             </Stack>
