@@ -58,8 +58,8 @@ const navDrawer: FC<Props> = ({handleDrawerToggle, navItems, window, mobileOpen}
                         <List>
                             {navItems.map((item) => (
                                 <ListItem key={item} disablePadding sx={{ color: '#573469' }}>
-                                    <ListItemButton>
-                                        <ListItemText primary={item} />
+                                    <ListItemButton href={item === 'inicio' ? '/' : `/${item}`}>
+                                        <ListItemText primary={item}  />
                                     </ListItemButton>
                                 </ListItem>
                             ))}
