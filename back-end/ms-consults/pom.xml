@@ -9,7 +9,7 @@
         <relativePath/>
     </parent>
     <groupId>com.petscare</groupId>
-    <artifactId>ms-consult</artifactId>
+    <artifactId>ms-consults</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>ms-consult</name>
     <description>ms-consult</description>
