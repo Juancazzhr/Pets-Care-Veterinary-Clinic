@@ -196,19 +196,19 @@ public class PetController {
         List<IAppointmentServiceClient.AppointmentDTO> appointmentsDTO = petService.listAllAppointments();
         List<IServicesProfessionalServiceClient.ServiceDTO> servicesDTOS = petService.listAllServices();
         for(Pet pet : pets){
-            List<AppointmentsServices> petAppointmentsServices = new ArrayList<>();
+            List<AppointmentsServices> appointmentsServices = new ArrayList<>();
             for(IAppointmentServiceClient.AppointmentDTO appointmentDTO : appointmentsDTO){
                 for(IServicesProfessionalServiceClient.ServiceDTO serviceDTO : servicesDTOS){
                     if(appointmentDTO.getServiceID() == serviceDTO.getId()){
                         if(pet.getId() == (appointmentDTO.getPetID())){
                             AppointmentsServices appointmentsServicesSearched = new AppointmentsServices(appointmentDTO,serviceDTO);
-                            petAppointmentsServices.add(appointmentsServicesSearched);
+                            appointmentsServices.add(appointmentsServicesSearched);
                         }
                     }
                 }
             }
-            if(!petAppointmentsServices.isEmpty()){
-                PetsAppointments petsAppointments = new PetsAppointments(pet,petAppointmentsServices);
+            if(!appointmentsServices.isEmpty()){
+                PetsAppointments petsAppointments = new PetsAppointments(pet,appointmentsServices);
                 petsAppointmentsList.add(petsAppointments);
             }
         }
