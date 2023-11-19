@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.Date;
 import java.util.List;
 
-@FeignClient(name = "ms-appointment")
+@FeignClient(name = "ms-appointments")
 public interface IAppointmentServiceClient {
 
     @GetMapping("v1/appointments")
