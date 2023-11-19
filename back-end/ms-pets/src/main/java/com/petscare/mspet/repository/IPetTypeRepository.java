@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IPetTypeRepository  extends JpaRepository<PetType, Long> {
+
 }
