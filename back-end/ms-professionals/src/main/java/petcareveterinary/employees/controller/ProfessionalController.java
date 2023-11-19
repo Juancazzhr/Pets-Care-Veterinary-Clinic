@@ -65,11 +65,6 @@ public class ProfessionalController {
         }
     }
 
-    @GetMapping("/services")
-    List<IServicesProfessionalServiceClient.ServiceDTO> listAllServices(){
-        return service.listServices();
-    }
-
     @GetMapping("/appointments")
     List<ProfessionalAppointments> listAll(){
         List<ProfessionalAppointments> professionalAppointments = new ArrayList<>();

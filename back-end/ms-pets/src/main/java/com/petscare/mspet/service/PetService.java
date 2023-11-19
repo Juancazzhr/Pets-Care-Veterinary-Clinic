@@ -90,6 +90,11 @@ public class PetService implements IPetService{
         }
     }
 
+    @Override
+    public PetType searchByType(PetType petType) {
+        return null;
+    }
+
     //History
     @Override
     public List<PetClinicalHistory>getAllClinicalHistory() {return repositoryPetClinicalHistory.findAll();}

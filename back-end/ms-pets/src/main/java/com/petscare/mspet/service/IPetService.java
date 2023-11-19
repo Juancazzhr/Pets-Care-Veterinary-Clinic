@@ -25,6 +25,8 @@ public interface IPetService {
     void deletePetType(Long id) throws Exception;
     PetType updatePetType(PetType petType) throws Exception;
 
+    PetType searchByType(PetType petType);
+
     //History
     List<PetClinicalHistory> getAllClinicalHistory();
     Optional<PetClinicalHistory> getPetClinicalHistoryById(Long id);

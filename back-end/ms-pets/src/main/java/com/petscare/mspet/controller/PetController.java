@@ -16,8 +16,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/pets")
@@ -29,9 +31,13 @@ public class PetController {
 
     //Pets
     @PostMapping
-    public ResponseEntity<String> createPet(@RequestBody Pet pet){
-       petService.createPet(pet);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Mascota creada correctamente");
+    public ResponseEntity<String> createPet(@RequestBody Pet pet) throws Exception {
+        Pet newPet = petService.createPet(pet);
+        PetClinicalHistory petClinicalHistory = new PetClinicalHistory(LocalDate.now(),newPet);
+        PetClinicalHistory petClinicalHistoryNewPet = petService.createPetClinicalHistory(petClinicalHistory);
+        Pet newPetCreated = new Pet(newPet.getId(),newPet.getName(),newPet.getSize(),newPet.getRace(),newPet.getClientId(),newPet.getPetType(),petClinicalHistoryNewPet);
+        petService.updatePet(newPetCreated);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Pet successfully created.");
     }
     @GetMapping
     public List<Pet> getAll() {
@@ -43,33 +49,20 @@ public class PetController {
 
             return ResponseEntity.ok(petService.getPetById(id).get());
         }else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La mascota con el id "+ id + " no existe");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pet with id "+ id + " doesn't exist.");
         }
     }
-//    @GetMapping("/{id}")
-//    public ResponseEntity<Object> searchById(@PathVariable Long id) {
-//        if (petService.getPetById(id).isPresent()) {
-//
-//            Long userId = petService.getPetById(id).get().getClientId();
-//            ClientWithPetsDTO clientWithPetsDTO = clientFeign.getUserWithPetsById(userId);
-//
-//
-//            Pet pet = petService.getPetById(id).get();
-//            pet.setClient(clientWithPetsDTO);
-//
-//            return ResponseEntity.ok(pet);
-//        } else {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La mascota con el id " + id + " no existe");
-//        }
-//    }
-
-
     @PutMapping
     public  ResponseEntity<Pet> updatePet(@RequestBody Pet pet) throws Exception {
         if(petService.getPetById(pet.getId()).isPresent()){
-            return ResponseEntity.ok(petService.updatePet(pet));
+            PetClinicalHistory petClinicalHistory = new PetClinicalHistory(pet.getPetClinicalHistory().getId(),pet.getPetClinicalHistory().getCratedAt(),pet.getPetClinicalHistory().getLastUpdate(), pet.getPetClinicalHistory().getWeigth(), pet);
+            PetClinicalHistory petClinicalHistoryUpdatedPet = petService.updatePetClinicalHistory(petClinicalHistory);
+            System.out.println(petClinicalHistoryUpdatedPet);
+            Pet updatedPet = new Pet(pet.getId(),pet.getName(),pet.getSize(),pet.getRace(),pet.getClientId(),pet.getPetType(),petClinicalHistoryUpdatedPet);
+            System.out.println(updatedPet);
+            return ResponseEntity.ok(petService.updatePet(updatedPet));
         }else{
-            ResponseEntity.status(HttpStatus.NOT_FOUND).body("La mascota con el id "+ pet.getId()+ " no existe");
+            ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pet with id "+ pet.getId()+ " doesn't exist.");
             throw new Exception();
         }
     }
@@ -77,10 +70,13 @@ public class PetController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePet(@PathVariable Long id) throws Exception {
         if (petService.getPetById(id).isPresent()){
+            Optional<Pet> petToDelete = petService.getPetById(id);
+            Optional<PetClinicalHistory> petClinicalHistoryToDelete = petService.getPetClinicalHistoryById(petToDelete.get().getPetClinicalHistory().getId());
+            petService.deletePetClinicalHistory(petClinicalHistoryToDelete.get().getId());
             petService.deletePet(id);
-            return ResponseEntity.ok("La mascota fue eliminada correctamente");
+            return ResponseEntity.ok("Pet successfully deleted.");
         }else{
-            ResponseEntity.status(HttpStatus.NOT_FOUND).body("La mascota con el id "+ id +" no existe");
+            ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pet with id "+ id + " doesn't exist.");
             throw new Exception();
         }
     }
@@ -89,7 +85,7 @@ public class PetController {
     @PostMapping("/type")
     public ResponseEntity<String> createPetType(@RequestBody PetType petType){
         petService.createPetType(petType);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Tipo de mascota creado correctamente");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Pet type successfully created.");
     }
 
     @GetMapping("/type")
@@ -101,15 +97,15 @@ public class PetController {
         if(petService.getPetTypeById(id).isPresent()){
             return ResponseEntity.ok(petService.getPetTypeById(id).get());
         }else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El tipo de mascota con el id "+ id +" no existe");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pet type with id "+ id +" doesn't exist.");
         }
     }
-    @PutMapping("/type/{id}")
+    @PutMapping("/type")
     public  ResponseEntity<PetType> updatePetType(@RequestBody PetType petType) throws Exception {
         if(petService.getPetTypeById(petType.getId()).isPresent()){
             return ResponseEntity.ok(petService.updatePetType(petType));
         }else{
-            ResponseEntity.status(HttpStatus.NOT_FOUND).body("El tipo de mascota con el id "+ petType.getId()+ " no existe");
+            ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pet type with id "+ petType.getId()+ " doesn't exist.");
             throw new Exception();
         }
     }
@@ -117,9 +113,9 @@ public class PetController {
     public ResponseEntity<String> deletePetType(@PathVariable Long id) throws Exception {
         if (petService.getPetTypeById(id).isPresent()){
             petService.deletePetType(id);
-            return ResponseEntity.ok("El tipo de mascota fue eliminado correctamente");
+            return ResponseEntity.ok("Pet type successfully deleted.");
         }else{
-            ResponseEntity.status(HttpStatus.NOT_FOUND).body("El tipo de mascota con el id "+id+" no existe");
+            ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pet type with id "+id+" doesn't exist.");
             throw new Exception();
         }
     }
@@ -129,32 +125,28 @@ public class PetController {
     @PostMapping("/clinical-history")
     public ResponseEntity<String> createPetClinicalHistory(@RequestBody PetClinicalHistory petClinicalHistory){
         petService.createPetClinicalHistory(petClinicalHistory);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Historial clinico de mascota creado correctamente");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Clinical history successfully created.");
     }
 
-    /*@GetMapping("/clinical-history")
-    public List<PetClinicalHistory> getAllClinicalHistory() {
+    @GetMapping("/clinical-history")
+    List<PetClinicalHistory> getAllClinicalHistories(){
         return petService.getAllClinicalHistory();
-    }*/
-
-
-
-
+    }
 
     @GetMapping("/clinical-history/{id}")
     public ResponseEntity<Object> searchClinicalHistoryById(@PathVariable Long id){
         if(petService.getPetClinicalHistoryById(id).isPresent()){
             return ResponseEntity.ok(petService.getPetClinicalHistoryById(id).get());
         }else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El tipo de mascota con el id "+id+" no existe");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Clinical history with id "+id+" doesn't exist.");
         }
     }
-    @PutMapping("/clinical-history/{id}")
+    @PutMapping("/clinical-history")
     public  ResponseEntity<PetClinicalHistory> updatePetClinicalHistory(@RequestBody PetClinicalHistory petClinicalHistory) throws Exception {
         if(petService.getPetClinicalHistoryById(petClinicalHistory.getId()).isPresent()){
             return ResponseEntity.ok(petService.updatePetClinicalHistory(petClinicalHistory));
         }else{
-            ResponseEntity.status(HttpStatus.NOT_FOUND).body("El tipo de mascota con el id "+ petClinicalHistory.getId()+ " no existe");
+            ResponseEntity.status(HttpStatus.NOT_FOUND).body("Clinical history with id "+ petClinicalHistory.getId()+ " doesn't exist.");
             throw new Exception();
         }
     }
@@ -162,14 +154,14 @@ public class PetController {
     public ResponseEntity<String> deletePetClinicalHistory(@PathVariable Long id) throws Exception {
         if (petService.getPetClinicalHistoryById(id).isPresent()){
             petService.deletePetClinicalHistory(id);
-            return ResponseEntity.ok("El tipo de mascota fue eliminado correctamente");
+            return ResponseEntity.ok("Clinical history successfully deleted.");
         }else{
-            ResponseEntity.status(HttpStatus.NOT_FOUND).body("El tipo de mascota con el id "+id+" no existe");
+            ResponseEntity.status(HttpStatus.NOT_FOUND).body("Clinical history with id "+id+" doesn't exist.");
             throw new Exception();
         }
     }
 
-    @GetMapping("/clinical-history")
+    @GetMapping("/consults")
     public List<PetHistoryConsults> getAllClinicalHistory() {
         List<PetHistoryConsults> petHistoryConsultsList = new ArrayList<>();
         List<Pet> pets = petService.getAll();
