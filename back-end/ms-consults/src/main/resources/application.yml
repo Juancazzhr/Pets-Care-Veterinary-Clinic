@@ -1,6 +1,6 @@
 spring:
   application:
-    name: ms-consult
+    name: ms-consults
   profiles:
     active: ${MS_CONSULTS_PROFILE_ACTIVE:dev}
   config:

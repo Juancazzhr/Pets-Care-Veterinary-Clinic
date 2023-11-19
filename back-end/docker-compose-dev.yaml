@@ -225,6 +225,32 @@ services:
       - MS_APPOINTMENTS_DB_USERNAME=${PETSCARE_DB_USERNAME}
       - MS_APPOINTMENTS_DB_PASSWORD=${PETSCARE_DB_PASSWORD}
 
+  ms-consults:
+    image: juancazz/petscare-ms-consults:dev
+    container_name: ms-consults-dev
+    restart: always
+    env_file: .env
+    depends_on:
+      ms-config:
+        condition: service_healthy
+      ms-discovery:
+        condition: service_healthy
+      ms-gateway:
+        condition: service_healthy
+    networks:
+      - pets-care-dev-network
+    expose:
+      - 8001
+    environment:
+      - MS_CONSULTS_CONFIG_SERVER_URL=http://ms-config:8888
+      - MS_CONSULTS_PROFILE_ACTIVE=dev
+      - MS_CONSULTS_SERVICE_URL=http://ms-discovery:8761/eureka
+      - MS_CONSULTS_HOSTNAME=ms-consults
+      - MS_CONSULTS_PORT=8001
+      - MS_CONSULTS_DB=${PETSCARE_DB}
+      - MS_CONSULTS_DB_USERNAME=${PETSCARE_DB_USERNAME}
+      - MS_CONSULTS_DB_PASSWORD=${PETSCARE_DB_PASSWORD}
+
 
 networks:
   pets-care-dev-network:
