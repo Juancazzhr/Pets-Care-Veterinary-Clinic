@@ -19,7 +19,7 @@ jobs:
     environment: Dev
     strategy:
       matrix:
-         services: [ms-config, ms-discovery, ms-gateway, ms-users, ms-clients, ms-professionals, ms-services, ms-pets, ms-appointments]
+         services: [ms-config, ms-discovery, ms-gateway, ms-users, ms-clients, ms-professionals, ms-services, ms-pets, ms-appointments, ms-consults]
     
     steps:
       - name: Checkout
