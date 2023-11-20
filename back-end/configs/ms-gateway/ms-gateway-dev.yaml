@@ -62,6 +62,11 @@ spring:
           predicates:
             - Path=/v1/appointments/**
 
+        - id: ms-storage
+          uri: lb://ms-storage
+          predicates:
+            - Path=/v1/storage/**
+
 eureka:
   client:
     registerWithEureka: false

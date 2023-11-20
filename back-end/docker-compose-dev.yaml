@@ -251,6 +251,31 @@ services:
       - MS_CONSULTS_DB_USERNAME=${PETSCARE_DB_USERNAME}
       - MS_CONSULTS_DB_PASSWORD=${PETSCARE_DB_PASSWORD}
 
+  ms-storage:
+    image: juancazz/petscare-ms-storage:dev
+    container_name: ms-storage-dev
+    restart: always
+    env_file: .env
+    depends_on:
+      ms-config:
+        condition: service_healthy
+      ms-discovery:
+        condition: service_healthy
+      ms-gateway:
+        condition: service_healthy
+    networks:
+      - pets-care-dev-network
+    expose:
+      - 8001
+    environment:
+      - MS_STORAGE_CONFIG_SERVER_URL=http://ms-config:8888
+      - MS_STORAGE_PROFILE_ACTIVE=dev
+      - MS_STORAGE_SERVICE_URL=http://ms-discovery:8761/eureka
+      - MS_STORAGE_HOSTNAME=ms-storage
+      - MS_STORAGE_PORT=8001
+      - MS_STORAGE_AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - MS_STORAGE_AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+
 
 networks:
   pets-care-dev-network:
