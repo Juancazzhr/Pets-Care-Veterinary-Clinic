@@ -23,7 +23,7 @@ const steps = ['servicio', 'profesional', 'fecha y hora', 'confirmación'];
 
 const defaultValues = {
     petID: 0,
-    serviceID: 155,
+    serviceID: 3,
     professionalID: 1,
     date: "2023-10-08T00:00:00.000+00:00"
 }
@@ -48,20 +48,20 @@ const StepperAppointment = ({ services, professionals }: Props) => {
         setDataForm({ ...dataForm, petID: data })
     }
 
-    const handlerServiceStep = (dataService: any) => {
-        console.log({dataService});
+    const handlerServiceStep = (data: any) => {
+        console.log(data.serviceID);
         
-         setDataForm({ ...dataForm, serviceID: dataService })
+         setDataForm({ ...dataForm, serviceID: data.serviceID })
         setActiveStep((prevActiveStep) => prevActiveStep + 1)
     }
 
-    const handlerProfessionalStep = (/* data: any */) => {
-        /*  setDataForm({ ...dataForm, professional: data }) */
+    const handlerProfessionalStep = (data: any) => {
+         setDataForm({ ...dataForm, professionalID: data.professionalID })
         setActiveStep((prevActiveStep) => prevActiveStep + 1)
     }
 
-    const handlerDatetimeStep = (/* data: any */) => {
-        /*  setDataForm({ ...dataForm, datetime: data }) */
+    const handlerDatetimeStep = (data: any) => {
+         setDataForm({ ...dataForm, date: data })
         setActiveStep((prevActiveStep) => prevActiveStep + 1)
     }
 

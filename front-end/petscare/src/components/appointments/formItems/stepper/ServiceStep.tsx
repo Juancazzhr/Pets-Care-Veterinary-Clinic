@@ -9,6 +9,7 @@ import Box from '@mui/material/Box'
 import { AppointmentInput, Service } from '../../../../interfaces'
 import { schemaStepperData } from '../../../../rules'
 import { ObjectSchema, AnyObject } from 'yup'
+import { FormControl } from '@mui/material'
 
 
 
@@ -22,7 +23,7 @@ interface Props {
 
 const ServiceStep = ({ handlerServiceStep, services, defaultValues }: Props) => {
 
-   
+
     const [selectedValue, setSelectedValue] = useState<string | number>(defaultValues.serviceID);
 
     const { control, formState: { errors }, handleSubmit } = useForm(/* {
@@ -31,7 +32,7 @@ const ServiceStep = ({ handlerServiceStep, services, defaultValues }: Props) => 
 
     const handleChangeRadio = (event: React.ChangeEvent<HTMLInputElement>) => {
         console.log((event.target as HTMLInputElement).value);
-        
+
         setSelectedValue((event.target as HTMLInputElement).value);
     };
     const onSubmit: SubmitHandler<any> = (data) => {
@@ -47,19 +48,19 @@ const ServiceStep = ({ handlerServiceStep, services, defaultValues }: Props) => 
             <Controller
                 control={control}
                 name="serviceID"
-              /*   defaultValue={selectedValue} */
-                render={({ field }) => (
-                    <RadioGroup
-                        {...field}
-                        value={selectedValue}
-                        onChange={handleChangeRadio}
-                        className={styles.radioGroup}
-                        defaultValue={selectedValue}
-                    >
-                        {services?.map((service, index) =>
-                            <FormControlLabel key={index} value={service.id} control={<Radio color='secondary' />} label={service.name} className={styles.radioItem} />
-                        )}
-                    </RadioGroup>
+                defaultValue={selectedValue}
+                render={({ field: {onChange, value}}) => (
+                    <FormControl>
+                        <RadioGroup
+                            value={selectedValue}
+                            onChange={onChange}
+                            className={styles.radioGroup}
+                        >
+                            {services?.map((service, index) =>
+                                <FormControlLabel key={index} value={service.id} control={<Radio color='secondary' />} label={service.name} className={styles.radioItem} />
+                            )}
+                        </RadioGroup>
+                    </FormControl>
                 )}
             />
 
