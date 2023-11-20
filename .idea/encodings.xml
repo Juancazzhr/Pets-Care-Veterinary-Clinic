@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/back-end/ms-appointment/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/back-end/ms-appointment/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/back-end/ms-appointments/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/back-end/ms-appointments/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/back-end/ms-client/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/back-end/ms-client/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/back-end/ms-clients/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/back-end/ms-clients/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/back-end/ms-config/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/back-end/ms-config/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/back-end/ms-consult/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/back-end/ms-consult/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/back-end/ms-consults/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/back-end/ms-consults/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/back-end/ms-discovery/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/back-end/ms-discovery/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/back-end/ms-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/back-end/ms-gateway/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/back-end/ms-pets/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/back-end/ms-pets/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/back-end/ms-professionals/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/back-end/ms-professionals/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/back-end/ms-services/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/back-end/ms-services/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/back-end/ms-users/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/back-end/ms-users/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

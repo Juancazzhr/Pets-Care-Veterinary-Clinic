@@ -1,5 +1,11 @@
 package pets_Care.msusers.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import feign.Client;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +36,7 @@ public class UserController {
         this.rolService = rolService;
     }
 
+    @Operation(summary = "Create a professional user")
     @PostMapping("/professional")
     public ResponseEntity<String> create(@RequestBody UserProfessional user){
         User userRequested = new User (user.getFirstName(), user.getLastName(), user.getAddress(), user.getPhone(), user.getEmail(), user.getPassword(), user.getRol());
@@ -39,6 +46,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body("User successfully created.");
     }
 
+    @Operation(summary = "Create a client user")
     @PostMapping("/client")
     public ResponseEntity<String> create(@RequestBody User user){
         User userCreated = service.createUser(user);
@@ -47,6 +55,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body("User successfully created.");
     }
 
+    @Operation(summary = "Get a list of all client users")
     @GetMapping("/clients")
     List<UsersClients> listUsersClients(){
         List<UsersClients> usersClientsList = new ArrayList<>();
@@ -64,6 +73,7 @@ public class UserController {
         return usersClientsList;
     }
 
+    @Operation(summary = "Get a list of all professional users")
     @GetMapping("/professionals")
     List<UsersProfessionals> listUsersProfessionals(){
         List<UsersProfessionals> usersProfessionalsList = new ArrayList<>();
@@ -82,6 +92,7 @@ public class UserController {
     }
 
 
+    @Operation(summary = "Get a user by ID")
     @GetMapping("/{id}")
     public ResponseEntity<Object> searchUserById(@PathVariable Long id){
         Optional<User> userSearched = service.searchUserById(id);
@@ -118,6 +129,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
+    @Operation(summary = "Update a professional user")
     @PutMapping("/professional")
     public ResponseEntity<UsersProfessionals> update(@RequestBody UsersProfessionals userProfessional)throws Exception{
         try{
@@ -135,6 +147,7 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "Update a client user")
     @PutMapping("/client")
     public ResponseEntity<UsersClients> update(@RequestBody UsersClients userClient)throws Exception{
         try{
@@ -151,8 +164,15 @@ public class UserController {
         }
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User deleted"),
+            @ApiResponse(responseCode = "404", description = "User not found",
+                    content = @Content)
+    })
+    @Operation(summary = "Delete a user by ID")
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id) throws Exception{
+    public ResponseEntity<String> delete(@Parameter(description = "ID of the user to be deleted")
+                                         @PathVariable Long id) throws Exception{
         try {
             Optional<User> userSearched = service.searchUserById(id);
 
