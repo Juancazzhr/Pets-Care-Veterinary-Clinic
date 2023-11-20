@@ -30,20 +30,12 @@ const ServiceStep = ({ handlerServiceStep, services, defaultValues }: Props) => 
         resolver: yupResolver(schemaStepperData)
     } */);
 
-    const handleChangeRadio = (event: React.ChangeEvent<HTMLInputElement>) => {
-        console.log((event.target as HTMLInputElement).value);
-
-        setSelectedValue((event.target as HTMLInputElement).value);
-    };
-    const onSubmit: SubmitHandler<any> = (data) => {
-        console.log({ data });
-
+ 
+    const onSubmit: SubmitHandler<any> = (data) => {       
         handlerServiceStep(data)
     }
 
-    console.log({ selectedValue });
-
-    return (
+   return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <Controller
                 control={control}
@@ -52,7 +44,7 @@ const ServiceStep = ({ handlerServiceStep, services, defaultValues }: Props) => 
                 render={({ field: {onChange, value}}) => (
                     <FormControl>
                         <RadioGroup
-                            value={selectedValue}
+                            value={value}
                             onChange={onChange}
                             className={styles.radioGroup}
                         >

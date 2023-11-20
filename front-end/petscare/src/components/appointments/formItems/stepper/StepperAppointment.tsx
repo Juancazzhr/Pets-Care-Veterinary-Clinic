@@ -23,7 +23,7 @@ const steps = ['servicio', 'profesional', 'fecha y hora', 'confirmación'];
 
 const defaultValues = {
     petID: 0,
-    serviceID: 3,
+    serviceID: 1,
     professionalID: 1,
     date: "2023-10-08T00:00:00.000+00:00"
 }
