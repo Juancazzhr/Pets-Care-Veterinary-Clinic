@@ -8,31 +8,32 @@ import Box from '@mui/material/Box'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
-
-const professionals = ['Dr. Pepe Hongo', 'Dra. Blanca Nieves', 'Dr. Esteban Quito']
+import { Professional } from '@/interfaces'
+import { AppointmentInput } from '@/interfaces'
 
 interface Props {
     handlerProfessionalStep: (data: any) => void,
-    /* defaultValues: CheckoutInput */
+    professionals: Professional[]
+    defaultValues: AppointmentInput
 }
 
-const ProfessionalStep = ({ handlerProfessionalStep }: Props) => {
+const ProfessionalStep = ({ handlerProfessionalStep, professionals }: Props) => {
 
-    const [professional, setProfessional] = useState('');
+    const [professionalSelected, setProfessionalSelected] = useState('');
 
     const { control, formState: { errors }, handleSubmit } = useForm(/* {
         resolver: yupResolver(schemaProfessional)
     } */);
 
     const handleChangeProfessional = (event: SelectChangeEvent) => {
-        setProfessional(event.target.value as string);
+        setProfessionalSelected(event.target.value as string);
     };
 
     const onSubmit: SubmitHandler<any> = (data) => {
         handlerProfessionalStep(data)
     }
 
-
+   
     return (
         <form className={styles.formProfessional} onSubmit={handleSubmit(onSubmit)}>
             <Stack className={styles.selectProfessional}>
@@ -41,12 +42,13 @@ const ProfessionalStep = ({ handlerProfessionalStep }: Props) => {
                     <Select
                         labelId="professionalSelectLabel"
                         id="professionalSelect"
-                        value={professional}
+                        value={professionalSelected}
                         label="professionalSelect"
                         onChange={handleChangeProfessional}
                     >
-                        {professionals.map((professional, index) =>
-                            <MenuItem key={index} value={professional}>{professional}</MenuItem>
+                        {professionals?.map((professional) =>
+
+                            <MenuItem key={professional.professionalDTO.id} value={professional.professionalDTO.id}>Dr/a. {professional.user.firstName} {professional.user.lastName}</MenuItem>
                         )}
 
                     </Select>

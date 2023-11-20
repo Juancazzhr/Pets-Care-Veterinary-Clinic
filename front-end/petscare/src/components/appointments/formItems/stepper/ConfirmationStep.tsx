@@ -5,10 +5,10 @@ import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
 import { Divider, Typography } from '@mui/material'
-import { AppointmentInput } from '@/interfaces/appointment'
+import { AppointmentInput, Pet } from '@/interfaces'
 import { useEffect, useState } from 'react'
 import { getPetById } from '../../../../services/stepperService'
-import { Pet } from '@/interfaces/pet'
+
 
 
 

@@ -20,6 +20,12 @@
   display: flex;
   flex-direction: row;
   margin-top: 15px;
+  color: #573469;
+}
+
+.addPets:hover {
+  color: #64C9A7;
+  cursor: pointer;
 }
 
 .radioGroup {

@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react'
+import { useContext } from 'react'
 import Paper from '@mui/material/Paper'
 import styles from './Appointments.module.css'
 import StepperAppointment from './formItems/stepper/StepperAppointment'
@@ -9,15 +9,17 @@ import { Stack } from '@mui/material'
 import { GetServerSideProps, GetStaticProps, NextPage } from 'next'
 import { getProfessionals, getServices } from '../../services/stepperService'
 import { Service } from '../../interfaces/servicios'
-import { Professional } from '../../interfaces/profesionales'
+import { Professional } from '../../interfaces'
 
 interface Props {  
     services: Service[]
     professionals: Professional[]
 }
 
+
 const Appointments: NextPage<Props> = ({services, professionals}) => {
 
+    
     const { auth } = useContext(AuthContext);
     return (
         <Paper className={styles.paper}>
@@ -36,43 +38,5 @@ const Appointments: NextPage<Props> = ({services, professionals}) => {
 }
 
 
-export const getStaticProps: GetStaticProps = async () => {
-
-       
-    const services = await getServices()
-    const professionals = await getProfessionals()
-
-    console.log({services});
-    
-    return {
-        props: {
-            services,
-            professionals
-        }
-    }
-}
-
 export default Appointments;
 
-
-/* 
-export const getServerSideProps: GetServerSideProps = async ({ query, res }) => {
-
-       
-    const services = await getServices()
-    const professionals = await getProfessionals()
-
-    console.log({services});
-    
-
-    res.setHeader(
-        'Cache-Control',
-        'public, s-maxage=10, stale-while-revalidate'
-    )
-    return {
-        props: {
-            services,
-            professionals
-        }
-    }
-} */

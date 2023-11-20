@@ -5,8 +5,7 @@ import Stack from '@mui/material/Stack'
 import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import styles from '../Appointments.module.css'
-import { SubmitHandler } from 'react-hook-form'
-import { AppointmentInput } from '@/interfaces/appointment'
+
 
 const petsUser = [
     {

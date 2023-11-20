@@ -15,17 +15,16 @@ import { useRouter } from 'next/router';
 import PetSelect from '../PetSelect';
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 import { Stack } from '@mui/material';
-import { getServices } from '../../../../services/stepperService';
-import { GetServerSideProps } from 'next';
-import { Service } from '../../../../interfaces/servicios'
-import { Professional } from '../../../../interfaces/profesionales';
+import { Service, Professional } from '@/interfaces/'
+import Link from 'next/link';
+
 
 const steps = ['servicio', 'profesional', 'fecha y hora', 'confirmación'];
 
 const defaultValues = {
     petID: 0,
-    serviceID: 0,
-    professionalID: 0,
+    serviceID: 155,
+    professionalID: 1,
     date: "2023-10-08T00:00:00.000+00:00"
 }
 
@@ -36,7 +35,6 @@ interface Props {
 
 const StepperAppointment = ({ services, professionals }: Props) => {
 
-    console.log(services);
 
     const [activeStep, setActiveStep] = useState(0);
     const [dataForm, setDataForm] = useState(defaultValues)
@@ -50,8 +48,10 @@ const StepperAppointment = ({ services, professionals }: Props) => {
         setDataForm({ ...dataForm, petID: data })
     }
 
-    const handlerServiceStep = (/* data: any */) => {
-        /*  setDataForm({ ...dataForm, service: data }) */
+    const handlerServiceStep = (dataService: any) => {
+        console.log({dataService});
+        
+         setDataForm({ ...dataForm, serviceID: dataService })
         setActiveStep((prevActiveStep) => prevActiveStep + 1)
     }
 
@@ -70,16 +70,21 @@ const StepperAppointment = ({ services, professionals }: Props) => {
         router.push("/")
     }
 
+    console.log({dataForm});
+    
+
     return (
         <Box sx={{ width: '100%', mt: '50px' }}>
             <Stack className={styles.boxPet}>
                 {activeStep !== 3 &&
                     <>
                         <PetSelect handlerPet={handlerPet} />
-                        <Box className={styles.addPets}>
-                            <AddCircleIcon color='primary' />
-                            <Typography color='primary' ml='10px' variant='body1'>AGREGAR MASCOTA</Typography>
-                        </Box></>
+                        <Link href={'/'}>
+                            <Box className={styles.addPets}>
+                                <AddCircleIcon  />
+                                <Typography ml='10px' variant='body1'>AGREGAR MASCOTA</Typography>
+                            </Box>
+                        </Link></>
                 }
 
             </Stack>
@@ -111,12 +116,12 @@ const StepperAppointment = ({ services, professionals }: Props) => {
                     }}>
                     <Box> {activeStep === 0 && <>
                         <Typography sx={{ mt: 2, mb: 1, ml: 1.7 }}>SELECCIONÁ EL SERVICIO A AGENDAR</Typography>
-                        <ServiceStep handlerServiceStep={handlerServiceStep} /* services={services} */ />
+                        <ServiceStep handlerServiceStep={handlerServiceStep} services={services} defaultValues={dataForm} />
 
                     </>}
                         {activeStep === 1 && <>
                             <Typography sx={{ mt: 2, mb: 1, ml: 1.7 }}>SELECCIONÁ AL PROFESIONAL DE TU PREFERENCIA</Typography>
-                            <ProfessionalStep handlerProfessionalStep={handlerProfessionalStep} />
+                            <ProfessionalStep handlerProfessionalStep={handlerProfessionalStep} professionals={professionals} defaultValues={dataForm} />
                         </>}
                         {activeStep === 2 && <>
                             <Typography sx={{ mt: 2, mb: 1, ml: 1.7 }}>SELECCIONÁ FECHA Y HORA</Typography>
