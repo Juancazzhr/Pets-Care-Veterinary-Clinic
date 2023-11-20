@@ -6,11 +6,11 @@ on:
   workflow_dispatch:
   pull_request:
     branches:
-      - 'dev'
+      - "dev"
     paths:
-      - 'back-end/**/{Dockerfile,pom.xml,src/**}'
-      - 'back-end/docker-compose-dev.yaml'
-      - '.github/workflows/backend-deployment-dev.yaml'
+      - "back-end/**/{Dockerfile,pom.xml,src/**}"
+      - "back-end/docker-compose-dev.yaml"
+      - ".github/workflows/backend-deployment-dev.yaml"
 
 jobs:
   docker-buildx-push:
@@ -19,13 +19,25 @@ jobs:
     environment: Dev
     strategy:
       matrix:
-        services: [ms-config, ms-discovery, ms-gateway, ms-users, ms-clients, ms-professionals, ms-services, ms-pets, ms-appointments, ms-consults]
+        services:
+          [
+            ms-config,
+            ms-discovery,
+            ms-gateway,
+            ms-users,
+            ms-clients,
+            ms-professionals,
+            ms-services,
+            ms-pets,
+            ms-appointments,
+            ms-consults,
+          ]
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: 'dev'
+          ref: "dev"
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -46,7 +58,6 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/petscare-${{ matrix.services }}:dev
 
-
   compose-deploy:
     needs:
       - docker-buildx-push
@@ -58,7 +69,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: 'dev'
+          ref: "dev"
 
       - name: Configure server key EC2
         run: |
