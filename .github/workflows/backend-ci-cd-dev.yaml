@@ -10,7 +10,7 @@ on:
     paths:
       - "back-end/**/{Dockerfile,pom.xml,src/**}"
       - "back-end/docker-compose-dev.yaml"
-      - ".github/workflows/backend-deployment-dev.yaml"
+      - ".github/workflows/backend-ci-cd-dev.yaml"
 
 jobs:
   docker-buildx-push:
@@ -19,7 +19,7 @@ jobs:
     environment: Dev
     strategy:
       matrix:
-        services: [ ms-config, ms-discovery, ms-gateway, ms-users, ms-clients, ms-professionals, ms-services, ms-pets, ms-appointments, ms-consults ]
+        services: [ ms-config, ms-discovery, ms-gateway, ms-users, ms-clients, ms-professionals, ms-services, ms-pets, ms-appointments, ms-consults, ms-storage ]
 
     steps:
       - name: Checkout
