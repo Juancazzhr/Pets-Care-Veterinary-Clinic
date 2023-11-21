@@ -4,12 +4,21 @@ run-name: Build, Push and Deploy Dev Ms
 
 on:
   workflow_dispatch:
+  push:
+    branches: 
+      - "dev"
+    paths:
+      - "back-end/**/{Dockerfile,pom.xml,src/**}"
+      - "back-end/docker-compose-dev.yaml"
+      - "back-end/configs/**"
+      - ".github/workflows/backend-ci-cd-dev.yaml"
   pull_request:
     branches:
       - "dev"
     paths:
       - "back-end/**/{Dockerfile,pom.xml,src/**}"
       - "back-end/docker-compose-dev.yaml"
+      - "back-end/configs/**"
       - ".github/workflows/backend-ci-cd-dev.yaml"
 
 jobs:
