@@ -1,8 +1,6 @@
 package com.petscare.mspet.controller;
 
-import com.petscare.mspet.client.IAppointmentServiceClient;
-import com.petscare.mspet.client.IConsultServiceClient;
-import com.petscare.mspet.client.IServicesProfessionalServiceClient;
+import com.petscare.mspet.client.*;
 import com.petscare.mspet.model.Pet;
 import com.petscare.mspet.model.PetClinicalHistory;
 import com.petscare.mspet.model.PetType;
@@ -206,6 +204,41 @@ public class PetController {
         }
         return petsAppointmentsList;
     }
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    static class PetClients{
+        IUserServiceClient.UserDTO user;
+        List<Pet> pet;
+    }
+
+
+    @GetMapping("/users")
+    List<PetClients> listPetsClients(){
+        List<PetClients> listPetClients = new ArrayList<>();
+        List<Pet> pets = petService.getAll();
+        List<IUserServiceClient.UserDTO> users = petService.listAllUsers();
+        List<IClientServiceClient.ClientDTO> clients = petService.listAllClients();
+        for(IUserServiceClient.UserDTO userDTO : users){
+            List<Pet> petList = new ArrayList<>();
+            for(IClientServiceClient.ClientDTO clientDTO : clients){
+                for(Pet pet : pets) {
+                    if (clientDTO.getUserId() == pet.getClientId()) {
+                        if (userDTO.getId() == clientDTO.getUserId()) {
+                            petList.add(pet);
+                        }
+                    }
+                }
+            }
+            if(!petList.isEmpty()){
+                PetClients petClients = new PetClients(userDTO,petList);
+                listPetClients.add(petClients);
+            }
+        }
+        return listPetClients;
+    }
+
 
     @Data
     @NoArgsConstructor
