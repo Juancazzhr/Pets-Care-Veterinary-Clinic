@@ -16,3 +16,6 @@ eureka:
   instance:
     hostname: ${MS_STORAGE_HOSTNAME:localhost}
     instance-id: ${spring.application.name}-${random.uuid}_${eureka.instance.hostname}:${server.port}
+
+server:
+  port: ${MS_STORAGE_PORT:8001}
