@@ -86,8 +86,7 @@ const ConfirmationStep = ({ handlerConfirmationStep, dataForm, services, profess
             
             <Box display={'flex'} justifyContent={'end'} position={'relative'} bottom={'-125px'}>
                 <Button type='submit' variant='outlined' color='secondary' className={styles.btnStepper}>confirmar</Button>
-            </Box>
-        
+            </Box>        
         </form>
     )
 }

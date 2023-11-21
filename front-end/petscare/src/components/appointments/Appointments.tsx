@@ -6,16 +6,14 @@ import Alert from '@mui/material/Alert'
 import AuthContext from '../../context/AuthContext'
 import Button from '@mui/material/Button'
 import { Stack } from '@mui/material'
-import { GetServerSideProps, GetStaticProps, NextPage } from 'next'
-import { getProfessionals, getServices } from '../../services/stepperService'
-import { Service } from '../../interfaces/servicios'
-import { Professional } from '../../interfaces'
+import { NextPage } from 'next'
+import { Service, Professional } from '../../interfaces'
+
 
 interface Props {  
     services: Service[]
     professionals: Professional[]
 }
-
 
 const Appointments: NextPage<Props> = ({services, professionals}) => {
 
