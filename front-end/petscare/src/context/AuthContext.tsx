@@ -1,4 +1,4 @@
-import { User } from "@/interfaces/user";
+import { User } from "@/interfaces";
 import { ReactNode, createContext, useEffect, useState } from "react";
 
 interface ContextProps {

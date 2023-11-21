@@ -23,8 +23,8 @@ const steps = ['servicio', 'profesional', 'fecha y hora', 'confirmación'];
 
 const defaultValues = {
     petID: 0,
-    serviceID: 1,
-    professionalID: 1,
+    serviceID: 0,
+    professionalID: 0,
     date: "2023-10-08T00:00:00.000+00:00"
 }
 
@@ -129,7 +129,7 @@ const StepperAppointment = ({ services, professionals }: Props) => {
                         </>}
                         {activeStep === 3 && <>
                             <Typography sx={{ mt: 2, mb: 1, ml: 1.7 }}>RESUMEN DE TU TURNO</Typography>
-                            <ConfirmationStep handlerConfirmationStep={handlerConfirmationStep} dataForm={dataForm} />
+                            <ConfirmationStep handlerConfirmationStep={handlerConfirmationStep} dataForm={dataForm} services={services} professionals={professionals}/>
                         </>}
                         <Button
                             variant='outlined'

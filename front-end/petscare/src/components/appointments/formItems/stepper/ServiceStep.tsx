@@ -40,7 +40,7 @@ const ServiceStep = ({ handlerServiceStep, services, defaultValues }: Props) => 
             <Controller
                 control={control}
                 name="serviceID"
-                defaultValue={selectedValue}
+                defaultValue={selectedValue !== 0 ? selectedValue : ''}
                 render={({ field: {onChange, value}}) => (
                     <FormControl>
                         <RadioGroup
