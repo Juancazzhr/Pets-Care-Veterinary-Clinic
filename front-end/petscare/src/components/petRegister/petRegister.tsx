@@ -11,15 +11,15 @@ import {
   Stack
 } from "@mui/material";
 import { FormikProps } from "formik";
-import { FormValues } from "./useRegisterForm";
-import styles from '../register/registro.module.css'
+import { FormValues } from "./petRegisterForm";
+import styles from '../userRegister/registro.module.css'
 
 const PetFields = ({ formik }: { formik: FormikProps<FormValues> }) => {
   return (
     <>
       <Grid item xs={12} sm={12}>
         <Typography color="primary" variant="h6">
-          Tu Mascota
+          Mascota 1
         </Typography>
       </Grid>
       <Stack className={styles.bgBoxMascota}>
