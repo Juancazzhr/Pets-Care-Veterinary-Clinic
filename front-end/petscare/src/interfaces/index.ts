@@ -55,8 +55,8 @@ export interface PetType {
 }
 
 export interface AppointmentInput{
-  petID: number,
-  serviceID: number,
+  date: Date,
   professionalID: number,
-  date: string
+  petID: number,
+  serviceID: number 
 }

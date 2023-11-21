@@ -15,17 +15,18 @@ import { useRouter } from 'next/router';
 import PetSelect from '../PetSelect';
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 import { Stack } from '@mui/material';
-import { Service, Professional } from '@/interfaces/'
+import { Service, Professional, AppointmentInput } from '@/interfaces/'
 import Link from 'next/link';
+import { postAppointment } from '../../../../services/stepperService';
 
 
 const steps = ['servicio', 'profesional', 'fecha y hora', 'confirmación'];
 
 const defaultValues = {
-    petID: 0,
-    serviceID: 0,
+    date: new Date(),
     professionalID: 0,
-    date: "2023-10-08T00:00:00.000+00:00"
+    petID: 0,
+    serviceID: 0
 }
 
 interface Props {
@@ -37,7 +38,7 @@ const StepperAppointment = ({ services, professionals }: Props) => {
 
 
     const [activeStep, setActiveStep] = useState(0);
-    const [dataForm, setDataForm] = useState(defaultValues)
+    const [dataForm, setDataForm] = useState<AppointmentInput>(defaultValues)
     const router = useRouter()
 
     const handleBack = () => {
@@ -49,29 +50,37 @@ const StepperAppointment = ({ services, professionals }: Props) => {
     }
 
     const handlerServiceStep = (data: any) => {
-        console.log(data.serviceID);
-        
-         setDataForm({ ...dataForm, serviceID: data.serviceID })
+        setDataForm({ ...dataForm, serviceID: Number(data.serviceID) })
         setActiveStep((prevActiveStep) => prevActiveStep + 1)
     }
 
     const handlerProfessionalStep = (data: any) => {
-         setDataForm({ ...dataForm, professionalID: data.professionalID })
+        setDataForm({ ...dataForm, professionalID: data.professionalID })
         setActiveStep((prevActiveStep) => prevActiveStep + 1)
     }
 
     const handlerDatetimeStep = (data: any) => {
-         setDataForm({ ...dataForm, date: data })
+        setDataForm({ ...dataForm, date: data })
         setActiveStep((prevActiveStep) => prevActiveStep + 1)
     }
 
-    const handlerConfirmationStep = (/* data: any */) => {
-        /*  setDataForm({ ...dataForm, datetime: data }) */
-        router.push("/")
+    const handlerConfirmationStep = () => {
+
+        console.log({ dataForm });
+        const response = postAppointment(dataForm)
+
+        console.log({ response });
+
+        response.then((res) => {
+            console.log({ res });
+            if (res.data) {
+                router.push("/")
+            };
+        })
     }
 
-    console.log({dataForm});
-    
+
+
 
     return (
         <Box sx={{ width: '100%', mt: '50px' }}>
@@ -81,7 +90,7 @@ const StepperAppointment = ({ services, professionals }: Props) => {
                         <PetSelect handlerPet={handlerPet} />
                         <Link href={'/'}>
                             <Box className={styles.addPets}>
-                                <AddCircleIcon  />
+                                <AddCircleIcon />
                                 <Typography ml='10px' variant='body1'>AGREGAR MASCOTA</Typography>
                             </Box>
                         </Link></>
@@ -125,11 +134,11 @@ const StepperAppointment = ({ services, professionals }: Props) => {
                         </>}
                         {activeStep === 2 && <>
                             <Typography sx={{ mt: 2, mb: 1, ml: 1.7 }}>SELECCIONÁ FECHA Y HORA</Typography>
-                            <DatetimeStep handlerDatetimeStep={handlerDatetimeStep} />
+                            <DatetimeStep handlerDatetimeStep={handlerDatetimeStep} defaultValues={dataForm} />
                         </>}
                         {activeStep === 3 && <>
                             <Typography sx={{ mt: 2, mb: 1, ml: 1.7 }}>RESUMEN DE TU TURNO</Typography>
-                            <ConfirmationStep handlerConfirmationStep={handlerConfirmationStep} dataForm={dataForm} services={services} professionals={professionals}/>
+                            <ConfirmationStep handlerConfirmationStep={handlerConfirmationStep} dataForm={dataForm} services={services} professionals={professionals} />
                         </>}
                         <Button
                             variant='outlined'

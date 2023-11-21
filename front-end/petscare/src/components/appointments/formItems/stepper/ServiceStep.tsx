@@ -31,7 +31,7 @@ const ServiceStep = ({ handlerServiceStep, services, defaultValues }: Props) => 
     } */);
 
  
-    const onSubmit: SubmitHandler<any> = (data) => {       
+    const onSubmit: SubmitHandler<any> = (data) => {   
         handlerServiceStep(data)
     }
 

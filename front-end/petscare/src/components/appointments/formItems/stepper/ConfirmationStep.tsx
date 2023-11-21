@@ -23,16 +23,22 @@ const ConfirmationStep = ({ handlerConfirmationStep, dataForm, services, profess
     const [pet, setPet] = useState<Pet>()
     const [service, setService] = useState<Service>()
     const [professional, setProfessional] = useState<Professional>()
-    const [date, setDate] = useState('')
+    const [date, setDate] = useState<string>()
 
+    const [dataConfirmation, setDataConfirmation] = useState({
+        petname: '',
+        serviceName: '',
+        professionalName: '',
+        date: ''
+    })
 
 
     const { control, formState: { errors }, handleSubmit } = useForm(/* {
         resolver: yupResolver(schemaProfessional)
     } */);
 
-    const onSubmit: SubmitHandler<any> = (data) => {
-        handlerConfirmationStep(data)
+    const onSubmit: SubmitHandler<any> = () => {
+        handlerConfirmationStep(dataForm)
     }
 
 
@@ -52,11 +58,16 @@ const ConfirmationStep = ({ handlerConfirmationStep, dataForm, services, profess
         })
     }
 
+    const formatDate = (date: Date) => {
+        return new Date(date).toLocaleString('es-ES')
+    }
 
     useEffect(() => {
         getPetById(dataForm.petID, setPet)
         getServiceName(Number(dataForm.serviceID), services)
         getProfessionalName(Number(dataForm.professionalID), professionals)
+        setDate(formatDate(dataForm.date))
+
     }, [])
 
 
@@ -71,11 +82,12 @@ const ConfirmationStep = ({ handlerConfirmationStep, dataForm, services, profess
                 <Divider />
                 <Typography>Fecha: <strong>{date}</strong></Typography>
                 <Divider />
-
             </Stack>
+            
             <Box display={'flex'} justifyContent={'end'} position={'relative'} bottom={'-125px'}>
                 <Button type='submit' variant='outlined' color='secondary' className={styles.btnStepper}>confirmar</Button>
             </Box>
+        
         </form>
     )
 }
