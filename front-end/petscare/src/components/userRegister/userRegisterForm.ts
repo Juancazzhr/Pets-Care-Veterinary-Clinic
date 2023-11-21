@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import { validationSchema } from './schema.form';
+import { validationSchema } from './userSchema.form';
 
 export interface FormValues {
     user: {
@@ -16,12 +16,6 @@ export interface FormValues {
             description: null,
         },
 
-    };
-    pet: {
-        petName: string;
-        type: string;
-        size: string;
-        race: string;
     };
 }
 
@@ -41,12 +35,6 @@ export const useRegisterForm = () => {
                     name: "client",
                     description: null,
                 },
-            },
-            pet: {
-                petName: "",
-                type: "",
-                size: "",
-                race: "",
             },
         },
         validationSchema,

@@ -19,6 +19,12 @@
     align-items: center;
   }
   
+  .addPets {
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
+  }
+  
   .registerButton {
     display: block;
     margin-top: 2rem; 

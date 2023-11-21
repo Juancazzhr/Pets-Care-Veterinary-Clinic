@@ -16,10 +16,4 @@ export const validationSchema = yup.object({
       .oneOf([yup.ref("password")], "Las contraseñas deben coincidir")
       .required("La confirmación de contraseña es obligatoria"),
   }),
-  pet: yup.object({
-    petName: yup.string().required("El nombre de la mascota es requerido"),
-    type: yup.string().required("El tipo es requerido"),
-    size: yup.string().required("El tamaño es requerido"),
-    race: yup.string().required("La raza es requerida"),
-  }),
 });

@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField, Grid } from "@mui/material";
 import { FormikProps } from "formik";
-import { FormValues } from "./useRegisterForm";
+import { FormValues } from "./userRegisterForm";
 import PasswordField from "./PasswordField";
 
 const UserFields = ({ formik }: { formik: FormikProps<FormValues> }) => {
