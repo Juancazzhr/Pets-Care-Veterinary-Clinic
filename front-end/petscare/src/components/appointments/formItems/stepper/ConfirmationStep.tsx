@@ -9,8 +9,6 @@ import { useEffect, useState } from 'react'
 import { getPetById } from '../../../../services/stepperService'
 
 
-
-
 interface Props {
     handlerConfirmationStep: (data: any) => void
     services: Service[]

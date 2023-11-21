@@ -65,10 +65,4 @@ const ServiceStep = ({ handlerServiceStep, services, defaultValues }: Props) => 
 }
 
 
-
 export default ServiceStep
-
-function yupResolver(schemaServiceData: ObjectSchema<{ name: string | undefined }, AnyObject, { name: undefined }, "">): import("react-hook-form").Resolver<import("react-hook-form").FieldValues, any> | undefined {
-    throw new Error('Function not implemented.')
-}
-

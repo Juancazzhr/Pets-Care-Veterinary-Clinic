@@ -80,8 +80,6 @@ const StepperAppointment = ({ services, professionals }: Props) => {
     }
 
 
-
-
     return (
         <Box sx={{ width: '100%', mt: '50px' }}>
             <Stack className={styles.boxPet}>
@@ -155,7 +153,6 @@ const StepperAppointment = ({ services, professionals }: Props) => {
         </Box>
     )
 }
-
 
 
 export default StepperAppointment
