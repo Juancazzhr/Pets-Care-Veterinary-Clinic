@@ -7,7 +7,7 @@ RUN mvn clean package -DskipTests
 
 FROM amazoncorretto:21-alpine3.18-jdk
 RUN mkdir app
-COPY --from=build /project/target/ms-pet-0.0.1-SNAPSHOT.jar /app/ms-pet-0.0.1-SNAPSHOT.jar
+COPY --from=build /project/target/ms-pets-0.0.1-SNAPSHOT.jar /app/ms-pets-0.0.1-SNAPSHOT.jar
 WORKDIR app
 
 RUN apk add --no-cache bash curl jq
@@ -15,11 +15,11 @@ RUN apk add --no-cache bash curl jq
 ENV MS_PETS_CONFIG_SERVER_URL=http://localhost:8888
 ENV MS_PETS_PROFILE_ACTIVE=dev
 ENV MS_PETS_SERVICE_URL=http://localhost:8761/eureka
-ENV MS_PETS_HOSTNAME=localhost
-ENV MS_PETS_PORT=8009
-ENV MS_PETS_DB=db.ctd.academy:3306/pi21023c02_GRUPO6
-ENV MS_PETS_DB_USERNAME=pi21023c02_GRUPO6
-ENV MS_PETS_DB_PASSWORD=iguu3Ohg
+ENV MS_PETS_HOSTNAME=ms-pets
+ENV MS_PETS_PORT=8001
+ENV MS_PETS_DB=''
+ENV MS_PETS_DB_USERNAME=''
+ENV MS_PETS_DB_PASSWORD=''
 
 EXPOSE ${MS_PETS_PORT}
 
@@ -28,4 +28,4 @@ LABEL authors="C2 Team 6 PI Specialization"
 LABEL description="MS Pets Service"
 
 SHELL ["/bin/bash", "-c"]
-CMD ["java", "-jar", "ms-pet-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "ms-pets-0.0.1-SNAPSHOT.jar"]

@@ -1,7 +1,0 @@
-spring:
-  application:
-    name: ms-appointment
-  profiles:
-    active: ${MS_APPOINTMENTS_PROFILE_ACTIVE:dev}
-  config:
-    import: configserver:${MS_APPOINTMENTS_CONFIG_SERVER_URL:http://localhost:8888}

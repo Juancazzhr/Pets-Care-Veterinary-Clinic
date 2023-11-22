@@ -28,7 +28,31 @@ public class PetClinicalHistory {
     @JoinColumn(name = "pet_id")
     private Pet pet;
 
+    public PetClinicalHistory() {
+    }
 
+    public PetClinicalHistory(LocalDate cratedAt) {
+        this.cratedAt = cratedAt;
+    }
 
+    public PetClinicalHistory(Long id, LocalDate cratedAt, LocalDate lastUpdate, Double weigth, Pet pet) {
+        this.id = id;
+        this.cratedAt = cratedAt;
+        this.lastUpdate = lastUpdate;
+        this.weigth = weigth;
+        this.pet = pet;
+    }
+
+    public PetClinicalHistory(LocalDate cratedAt, Pet pet) {
+        this.cratedAt = cratedAt;
+        this.pet = pet;
+    }
+
+    public PetClinicalHistory(LocalDate cratedAt, LocalDate lastUpdate, Double weigth, Pet pet) {
+        this.cratedAt = cratedAt;
+        this.lastUpdate = lastUpdate;
+        this.weigth = weigth;
+        this.pet = pet;
+    }
 }
 

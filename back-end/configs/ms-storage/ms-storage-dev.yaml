@@ -1,0 +1,21 @@
+aws:
+  accessKeyId: ${MS_STORAGE_AWS_ACCESS_KEY_ID}
+  secretAccessKey: ${MS_STORAGE_AWS_SECRET_ACCESS_KEY}
+  region: ${MS_STORAGE_AWS_REGION:aws-global}
+  s3:
+    bucket: ${MS_STORAGE_AWS_S3_BUCKET:petscare}
+
+spring:
+  application:
+    name: ms-storage
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${MS_STORAGE_SERVICE_URL:http://localhost:8761/eureka}
+  instance:
+    hostname: ${MS_STORAGE_HOSTNAME:localhost}
+    instance-id: ${spring.application.name}-${random.uuid}_${eureka.instance.hostname}:${server.port}
+
+server:
+  port: ${MS_STORAGE_PORT:8001}

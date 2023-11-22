@@ -1,0 +1,82 @@
+name: Pets Care BackEnd Dev CI/CD
+
+run-name: Build, Push and Deploy Dev Ms
+
+on:
+  workflow_dispatch:
+  push:
+    branches: 
+      - "dev"
+    paths:
+      - "back-end/**/{Dockerfile,pom.xml,src/**}"
+      - "back-end/docker-compose-dev.yaml"
+      - "back-end/configs/**"
+      - ".github/workflows/backend-ci-cd-dev.yaml"
+  pull_request:
+    branches:
+      - "dev"
+    paths:
+      - "back-end/**/{Dockerfile,pom.xml,src/**}"
+      - "back-end/docker-compose-dev.yaml"
+      - "back-end/configs/**"
+      - ".github/workflows/backend-ci-cd-dev.yaml"
+
+jobs:
+  docker-buildx-push:
+    runs-on: ubuntu-latest
+    name: Docker buildx and push Images
+    environment: Dev
+    strategy:
+      matrix:
+        services: [ ms-config, ms-discovery, ms-gateway, ms-users, ms-clients, ms-professionals, ms-services, ms-pets, ms-appointments, ms-consults, ms-storage ]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: "dev"
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and Push Images
+        uses: docker/build-push-action@v5
+        with:
+          context: ./back-end/${{ matrix.services }}
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/petscare-${{ matrix.services }}:dev
+
+  compose-deploy:
+    needs:
+      - docker-buildx-push
+    runs-on: ubuntu-latest
+    name: Docker clean and Compose Up
+    environment: Dev
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: "dev"
+
+      - name: Configure server key EC2
+        run: |
+          touch key.txt && echo "${{ secrets.EC2_SERVER_KEY }}" > key.txt
+          chmod 600 key.txt
+
+      - name: Copy compose to server folder on EC2
+        run: |
+          scp -i key.txt -o StrictHostKeyChecking=no ./back-end/docker-compose-dev.yaml ${{ vars.USER_SERVER_EC2 }}@${{ vars.IP_SERVER_EC2 }}:/home/ubuntu/server
+
+      - name: Connect to the server EC2 and deploy docker-compose
+        run: |
+          ssh -i key.txt -o StrictHostKeyChecking=no ${{ vars.USER_SERVER_EC2 }}@${{ vars.IP_SERVER_EC2 }} "cd server && docker compose -f docker-compose-dev.yaml pull && docker compose -f docker-compose-dev.yaml up -d && docker image prune -f"

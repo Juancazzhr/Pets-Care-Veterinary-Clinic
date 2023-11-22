@@ -81,6 +81,10 @@ public class UserController {
         return usersProfessionalsList;
     }
 
+    @GetMapping
+    List<User> listAllUsers(){
+        return service.listUsers();
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> searchUserById(@PathVariable Long id){
@@ -214,3 +218,29 @@ public class UserController {
         String licenseNumber;
     }
 }
+
+
+/*    List<PetsAppointments> listAll(){
+        List<PetsAppointments> petsAppointmentsList = new ArrayList<>();
+        List<Pet> pets = petService.getAll();
+        List<IAppointmentServiceClient.AppointmentDTO> appointmentsDTO = petService.listAllAppointments();
+        List<IServicesProfessionalServiceClient.ServiceDTO> servicesDTOS = petService.listAllServices();
+        for(Pet pet : pets){
+            List<AppointmentsServices> appointmentsServices = new ArrayList<>();
+            for(IAppointmentServiceClient.AppointmentDTO appointmentDTO : appointmentsDTO){
+                for(IServicesProfessionalServiceClient.ServiceDTO serviceDTO : servicesDTOS){
+                    if(appointmentDTO.getServiceID() == serviceDTO.getId()){
+                        if(pet.getId() == (appointmentDTO.getPetID())){
+                            AppointmentsServices appointmentsServicesSearched = new AppointmentsServices(appointmentDTO,serviceDTO);
+                            appointmentsServices.add(appointmentsServicesSearched);
+                        }
+                    }
+                }
+            }
+            if(!appointmentsServices.isEmpty()){
+                PetsAppointments petsAppointments = new PetsAppointments(pet,appointmentsServices);
+                petsAppointmentsList.add(petsAppointments);
+            }
+        }
+        return petsAppointmentsList;
+    */

@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: ms-storage
+
+  profiles:
+    active: ${MS_STORAGE_PROFILE_ACTIVE:dev}
+
+  config:
+    import: configserver:${MS_STORAGE_CONFIG_SERVER_URL:http://localhost:8888}
