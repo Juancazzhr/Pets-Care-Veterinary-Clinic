@@ -4,13 +4,21 @@ run-name: Build, Push and Deploy Dev Ms
 
 on:
   workflow_dispatch:
+  push:
+    branches: 
+      - "dev"
+    paths:
+      - "back-end/**/{Dockerfile,pom.xml,src/**}"
+      - "back-end/docker-compose-dev.yaml"
+      - "back-end/configs/**"
+      - ".github/workflows/backend-ci-cd-dev.yaml"
   pull_request:
     branches:
       - "dev"
     paths:
       - "back-end/**/{Dockerfile,pom.xml,src/**}"
-      - "back-end/configs/**"
       - "back-end/docker-compose-dev.yaml"
+      - "back-end/configs/**"
       - ".github/workflows/backend-ci-cd-dev.yaml"
 
 jobs:
@@ -20,7 +28,7 @@ jobs:
     environment: Dev
     strategy:
       matrix:
-        services: [ ms-config, ms-discovery, ms-gateway, ms-users, ms-clients, ms-professionals, ms-services, ms-pets, ms-appointments, ms-consults ]
+        services: [ ms-config, ms-discovery, ms-gateway, ms-users, ms-clients, ms-professionals, ms-services, ms-pets, ms-appointments, ms-consults, ms-storage ]
 
     steps:
       - name: Checkout

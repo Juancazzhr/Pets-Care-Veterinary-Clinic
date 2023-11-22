@@ -1,25 +1,40 @@
-import { FC } from 'react'
+import { useContext } from 'react'
 import Paper from '@mui/material/Paper'
-import Box from '@mui/material/Box'
 import styles from './Appointments.module.css'
-import FormControl from '@mui/material/FormControl'
-import PetSelect from './formItems/PetSelect'
-import AddCircleIcon from '@mui/icons-material/AddCircle'
-import Typography from '@mui/material/Typography'
 import StepperAppointment from './formItems/stepper/StepperAppointment'
+import Alert from '@mui/material/Alert'
+import AuthContext from '../../context/AuthContext'
+import Button from '@mui/material/Button'
+import { Stack } from '@mui/material'
+import { NextPage } from 'next'
+import { Service, Professional } from '../../interfaces'
 
-const Appointments:FC = () => {
+
+interface Props {  
+    services: Service[]
+    professionals: Professional[]
+}
+
+const Appointments: NextPage<Props> = ({services, professionals}) => {
+
+    
+    const { auth } = useContext(AuthContext);
     return (
         <Paper className={styles.paper}>
-            <FormControl fullWidth>
-                <PetSelect />
-                <Box className={styles.addPets}>
-                    <AddCircleIcon color='primary' />
-                    <Typography color='primary' ml='10px' variant='body1'>AGREGAR MASCOTA</Typography>
-                </Box>
-                <StepperAppointment />
-            </FormControl>
-        </Paper>
-    )}
+            {auth ?
+                <StepperAppointment services={services} professionals={professionals}  />
+                :
+                <Stack className={styles.boxAlert}>
+                    <Alert variant="outlined" severity="warning">
+                        Para agendar un turno necesitas estar registrado y haber iniciado sesión
+                    </Alert>
+                    <Button variant="contained" color='secondary' className={styles.buttonLogin} href='/login'>iniciar sesión</Button>
+                </Stack>}
 
-    export default Appointments;
+        </Paper>
+    )
+}
+
+
+export default Appointments;
+

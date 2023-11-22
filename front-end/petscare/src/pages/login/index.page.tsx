@@ -1,14 +1,11 @@
 import { NextPage } from "next";
 import { useFormik } from "formik";
-import PasswordField from "../../components/login_register/PasswordField";
-import { validationSchema } from "../../components/login_register/schema.form";
+import PasswordField from "../../components/userRegister/PasswordField";
+import { validationSchema } from "../../components/userRegister/userSchema.form";
 import LayoutAuth from "../../components/layouts/LayoutAuth";
 import { useRouter } from "next/router";
-import styles from "../../components/login_register/login.module.css";
+import styles from "../../components/login/login.module.css";
 import { Button, TextField, Typography, Box, Link, Paper } from "@mui/material";
-
-
-
 
 const LoginPage: NextPage = () => {
   const formik = useFormik({
@@ -16,7 +13,7 @@ const LoginPage: NextPage = () => {
       user: {
         email: "",
         password: "",
-    },
+      },
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -33,8 +30,13 @@ const LoginPage: NextPage = () => {
 
   return (
     <Box className={styles.root}>
-      <Typography variant="h3" color="primary">
-        Inicia sesión
+      <Typography
+        variant="h3"
+        color="primary"
+        fontWeight={700}
+        sx={{ mb: "5px" }}
+      >
+        inicia sesión
       </Typography>
       <Paper elevation={8} className={styles.paper}>
         <Box component="form" onSubmit={formik.handleSubmit} sx={{ mt: 1 }}>
@@ -50,7 +52,9 @@ const LoginPage: NextPage = () => {
             onChange={(event) =>
               formik.setFieldValue("user.email", event.target.value)
             }
-            error={formik.touched.user?.email && Boolean(formik.errors.user?.email)}
+            error={
+              formik.touched.user?.email && Boolean(formik.errors.user?.email)
+            }
             helperText={formik.touched.user?.email && formik.errors.user?.email}
           />
           <PasswordField
@@ -61,7 +65,8 @@ const LoginPage: NextPage = () => {
               formik.setFieldValue("user.password", event.target.value)
             }
             error={
-              formik.touched.user?.password && Boolean(formik.errors.user?.password)
+              formik.touched.user?.password &&
+              Boolean(formik.errors.user?.password)
             }
             helperText={
               formik.touched.user?.password && formik.errors.user?.password
@@ -69,13 +74,9 @@ const LoginPage: NextPage = () => {
                 : ""
             }
           />
-          <Box sx={{ width: "100%", textAlign: "left" }}>
-            <Link
-              href="#"
-              underline="hover"
-              sx={{ display: "block", marginTop: 2 }}
-            >
-              ¿Olvidaste tu contraseña?{" "}
+          <Box className={styles.boxTextLink} sx={{ textAlign: "left" }}>
+            ¿Olvidaste tu contraseña?{" "}
+            <Link href="#" underline="hover" sx={{}}>
               <span style={{ color: "#007FFF" }}> Recuperala</span>
             </Link>
           </Box>
@@ -86,14 +87,9 @@ const LoginPage: NextPage = () => {
           >
             iniciar sesión
           </Button>
-          <Box sx={{ width: "100%", textAlign: "right" }}>
-            <Link
-              href="#"
-              underline="hover"
-              sx={{ display: "block", marginTop: 2 }}
-              onClick={handleRegisterLinkClick}
-            >
-              ¿Aún no tenés cuenta?{" "}
+          <Box className={styles.boxTextLink} sx={{ textAlign: "right" }}>
+            ¿Aún no tenés cuenta?{" "}
+            <Link href="#" underline="hover" onClick={handleRegisterLinkClick}>
               <span style={{ color: "#007FFF" }}> Registrate</span>
             </Link>
           </Box>

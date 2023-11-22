@@ -6,6 +6,18 @@ spring:
     name: ms-gateway
   cloud:
     gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins:
+              - '*'
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+            allowedHeaders:
+              - '*'
       discovery:
         locator:
           enabled: true
@@ -14,34 +26,46 @@ spring:
           uri: lb://ms-professionals
           predicates:
             - Path=/v1/professionals/**
+
         - id: ms-users
           uri: lb://ms-users
           predicates:
             - Path=/v1/users/**
+
         - id: ms-users-roles
           uri: lb://ms-users
           predicates:
             - Path=/v1/roles/**
+
         - id: ms-services
           uri: lb://ms-services
           predicates:
             - Path=/v1/services/**
+
         - id: ms-pets
           uri: lb://ms-pets
           predicates:
             - Path=/v1/pets/**
-        - id: ms-consult
-          uri: lb://ms-consult
+
+        - id: ms-consults
+          uri: lb://ms-consults
           predicates:
             - Path=/v1/consults/**
-        - id: ms-client
-          uri: lb://ms-client
+
+        - id: ms-clients
+          uri: lb://ms-clients
           predicates:
             - Path=/v1/clients/**
-        - id: ms-appointment
-          uri: lb://ms-appointment
+
+        - id: ms-appointments
+          uri: lb://ms-appointments
           predicates:
             - Path=/v1/appointments/**
+
+        - id: ms-storage
+          uri: lb://ms-storage
+          predicates:
+            - Path=/v1/storage/**
 
 eureka:
   client:

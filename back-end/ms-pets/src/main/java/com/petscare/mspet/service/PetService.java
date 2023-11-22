@@ -1,5 +1,6 @@
 package com.petscare.mspet.service;
 
+import com.petscare.mspet.client.*;
 import com.petscare.mspet.model.PetClinicalHistory;
 import com.petscare.mspet.model.PetType;
 import com.petscare.mspet.repository.IPetClinicalHistory;
@@ -18,12 +19,25 @@ public class PetService implements IPetService{
     IPetTypeRepository repositoryPetType;
     IPetClinicalHistory repositoryPetClinicalHistory;
 
+    IAppointmentServiceClient appointmentRepository;
 
-    public PetService(IPetRepository repositoryPet,IPetTypeRepository repositoryPetType, IPetClinicalHistory repositoryPetClinicalHistory) {
+    IServicesProfessionalServiceClient serviceRepository;
+
+    IConsultServiceClient consultRepository;
+
+    IUserServiceClient userRepository;
+
+    IClientServiceClient clientRepository;
+
+    public PetService(IPetRepository repositoryPet, IPetTypeRepository repositoryPetType, IPetClinicalHistory repositoryPetClinicalHistory, IAppointmentServiceClient appointmentRepository, IServicesProfessionalServiceClient serviceRepository, IConsultServiceClient consultRepository, IUserServiceClient userRepository, IClientServiceClient clientRepository) {
         this.repositoryPet = repositoryPet;
         this.repositoryPetType = repositoryPetType;
         this.repositoryPetClinicalHistory = repositoryPetClinicalHistory;
-
+        this.appointmentRepository = appointmentRepository;
+        this.serviceRepository = serviceRepository;
+        this.consultRepository = consultRepository;
+        this.userRepository = userRepository;
+        this.clientRepository = clientRepository;
     }
 
     //Pets
@@ -79,6 +93,11 @@ public class PetService implements IPetService{
         }
     }
 
+    @Override
+    public PetType searchByType(PetType petType) {
+        return null;
+    }
+
     //History
     @Override
     public List<PetClinicalHistory>getAllClinicalHistory() {return repositoryPetClinicalHistory.findAll();}
@@ -109,4 +128,18 @@ public class PetService implements IPetService{
 
 
 
+    @Override
+    public List<IConsultServiceClient.ConsultDTO> listAllConsults() {
+        return consultRepository.listAllConsults();
+    }
+
+    @Override
+    public List<IUserServiceClient.UserDTO> listAllUsers() {
+        return userRepository.listAllUsers();
+    }
+
+    @Override
+    public List<IClientServiceClient.ClientDTO> listAllClients() {
+        return clientRepository.listClients();
+    }
 }

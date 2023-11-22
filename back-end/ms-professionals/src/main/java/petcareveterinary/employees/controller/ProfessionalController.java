@@ -11,6 +11,7 @@ import petcareveterinary.employees.client.UserServiceClient;
 import petcareveterinary.employees.model.Professional;
 import petcareveterinary.employees.service.ProfessionalService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -64,21 +65,44 @@ public class ProfessionalController {
         }
     }
 
-    @GetMapping("/prueba")
-    ProfessionalUser listAllPU(){
-        List<UserServiceClient.UserDTO> users = service.listUsers();
+    @GetMapping("/appointments")
+    List<ProfessionalAppointments> listAll(){
+        List<ProfessionalAppointments> professionalAppointments = new ArrayList<>();
         List<Professional> professionals = service.listProfessionals();
-        ProfessionalUser professionalUser = new ProfessionalUser(professionals,users);
-        return professionalUser;
+        List<IAppointmentServiceClient.AppointmentDTO> appointmentsDTO = service.listAppointments();
+        List<IServicesProfessionalServiceClient.ServiceDTO> servicesDTOS = service.listServices();
+        for(Professional professional : professionals){
+            List<AppointmentsServices> appointmentsServices = new ArrayList<>();
+            for(IAppointmentServiceClient.AppointmentDTO appointmentDTO : appointmentsDTO){
+                for(IServicesProfessionalServiceClient.ServiceDTO serviceDTO : servicesDTOS){
+                    if(appointmentDTO.getServiceID() == serviceDTO.getId()){
+                        if(professional.getId() == (appointmentDTO.getProfessionalID())){
+                            AppointmentsServices appointmentsServicesSearched = new AppointmentsServices(appointmentDTO,serviceDTO);
+                            appointmentsServices.add(appointmentsServicesSearched);
+                        }
+                    }
+                }
+            }
+            if(!appointmentsServices.isEmpty()){
+                ProfessionalAppointments professionalsAppointments = new ProfessionalAppointments(professional,appointmentsServices);
+                professionalAppointments.add(professionalsAppointments);
+            }
+        }
+        return professionalAppointments;
     }
-
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    class ProfessionalUser{
-        private List<Professional> professionals;
-        private List<UserServiceClient.UserDTO> users;
+    static class ProfessionalAppointments{
+        Professional professional;
+        List<AppointmentsServices> appointmentServices = new ArrayList<>();
     }
 
-    //primero creo el usuario y de ahi tomo el id, todo esto va en el endpoit
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    static class AppointmentsServices{
+        IAppointmentServiceClient.AppointmentDTO appointmentDTO;
+        IServicesProfessionalServiceClient.ServiceDTO serviceDTO;
+    }
 }

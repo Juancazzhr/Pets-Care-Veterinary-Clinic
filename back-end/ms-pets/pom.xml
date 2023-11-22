@@ -9,9 +9,9 @@
         <relativePath/>
     </parent>
     <groupId>com.petscare</groupId>
-    <artifactId>ms-pet</artifactId>
+    <artifactId>ms-pets</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ms-pet</name>
+    <name>ms-pets</name>
     <description>ms-pet</description>
     <properties>
         <java.version>21</java.version>

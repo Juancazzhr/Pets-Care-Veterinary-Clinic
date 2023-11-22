@@ -1,5 +1,6 @@
 package com.petscare.mspet.service;
 
+import com.petscare.mspet.client.*;
 import com.petscare.mspet.model.Pet;
 import com.petscare.mspet.model.PetClinicalHistory;
 import com.petscare.mspet.model.PetType;
@@ -22,6 +23,8 @@ public interface IPetService {
     void deletePetType(Long id) throws Exception;
     PetType updatePetType(PetType petType) throws Exception;
 
+    PetType searchByType(PetType petType);
+
     //History
     List<PetClinicalHistory> getAllClinicalHistory();
     Optional<PetClinicalHistory> getPetClinicalHistoryById(Long id);
@@ -29,5 +32,14 @@ public interface IPetService {
     void deletePetClinicalHistory(Long id) throws Exception;
     PetClinicalHistory updatePetClinicalHistory(PetClinicalHistory petClinicalHistory) throws Exception;
 
+    List<IAppointmentServiceClient.AppointmentDTO> listAllAppointments();
+
+    List<IServicesProfessionalServiceClient.ServiceDTO> listAllServices();
+
+    List<IConsultServiceClient.ConsultDTO> listAllConsults();
+
+    List<IUserServiceClient.UserDTO> listAllUsers();
+
+    List<IClientServiceClient.ClientDTO> listAllClients();
 
 }

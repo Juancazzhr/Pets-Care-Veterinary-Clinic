@@ -28,6 +28,10 @@ public class UserController {
     public List<User> listAll(){
         return service.listUsers();
     }
+    @GetMapping
+    List<User> listAllUsers(){
+        return service.listUsers();
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<User> searchUserById(@PathVariable Long id){
@@ -49,11 +53,90 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) throws Exception{
-        if(service.searchUserById(id).isPresent()){
-            service.deleteUser(id);
-            return ResponseEntity.ok("User successfully deleted");
-        }else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User with id "+id+" doesn't exist.");
+        try {
+            Optional<User> userSearched = service.searchUserById(id);
+
+            if (userSearched.isPresent()) {
+                List<IClientServiceClient.ClientDTO> clients = service.listClients();
+                for (IClientServiceClient.ClientDTO clientDTO : clients) {
+                    if (id.equals(clientDTO.getUserId())) {
+                        service.deleteUser(id);
+                        service.deleteClient(clientDTO.getId());
+                        return ResponseEntity.ok("User and associated client successfully deleted.");
+                    }
+                }
+
+                List<IProfessionalServiceClient.ProfessionalDTO> professionals = service.listProfessionals();
+                for (IProfessionalServiceClient.ProfessionalDTO professionalDTO : professionals) {
+                    if (id.equals(professionalDTO.getUserId())) {
+                        service.deleteUser(id);
+                        service.deleteProfessional(professionalDTO.getId());
+                        return ResponseEntity.ok("User and associated professional successfully deleted.");
+                    }
+                }
+                service.deleteUser(id);
+                return ResponseEntity.ok("User successfully deleted");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found or not exist.");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting user");
         }
     }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    static class UsersClients{
+        User user;
+        IClientServiceClient.ClientDTO clientDTO;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    static class UsersProfessionals{
+        User user;
+        IProfessionalServiceClient.ProfessionalDTO professionalDTO;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    static class UserProfessional{
+        String firstName;
+        String lastName;
+        String address;
+        Long phone;
+        String email;
+        String password;
+        Rol rol;
+        String licenseNumber;
+    }
 }
+
+
+/*    List<PetsAppointments> listAll(){
+        List<PetsAppointments> petsAppointmentsList = new ArrayList<>();
+        List<Pet> pets = petService.getAll();
+        List<IAppointmentServiceClient.AppointmentDTO> appointmentsDTO = petService.listAllAppointments();
+        List<IServicesProfessionalServiceClient.ServiceDTO> servicesDTOS = petService.listAllServices();
+        for(Pet pet : pets){
+            List<AppointmentsServices> appointmentsServices = new ArrayList<>();
+            for(IAppointmentServiceClient.AppointmentDTO appointmentDTO : appointmentsDTO){
+                for(IServicesProfessionalServiceClient.ServiceDTO serviceDTO : servicesDTOS){
+                    if(appointmentDTO.getServiceID() == serviceDTO.getId()){
+                        if(pet.getId() == (appointmentDTO.getPetID())){
+                            AppointmentsServices appointmentsServicesSearched = new AppointmentsServices(appointmentDTO,serviceDTO);
+                            appointmentsServices.add(appointmentsServicesSearched);
+                        }
+                    }
+                }
+            }
+            if(!appointmentsServices.isEmpty()){
+                PetsAppointments petsAppointments = new PetsAppointments(pet,appointmentsServices);
+                petsAppointmentsList.add(petsAppointments);
+            }
+        }
+        return petsAppointmentsList;
+    */
