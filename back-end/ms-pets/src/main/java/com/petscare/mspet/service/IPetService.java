@@ -42,4 +42,6 @@ public interface IPetService {
 
     List<IClientServiceClient.ClientDTO> listAllClients();
 
+    IUserServiceClient.UserClientDTO getUserById(Long id);
+
 }

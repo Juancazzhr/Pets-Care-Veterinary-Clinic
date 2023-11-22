@@ -142,4 +142,9 @@ public class PetService implements IPetService{
     public List<IClientServiceClient.ClientDTO> listAllClients() {
         return clientRepository.listClients();
     }
+
+    @Override
+    public IUserServiceClient.UserClientDTO getUserById(Long id) {
+        return userRepository.getUserById(id);
+    }
 }

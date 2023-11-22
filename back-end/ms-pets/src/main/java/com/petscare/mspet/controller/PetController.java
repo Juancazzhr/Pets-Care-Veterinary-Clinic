@@ -202,15 +202,6 @@ public class PetController {
         return petsAppointmentsList;
     }
 
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    static class PetClients{
-        IUserServiceClient.UserDTO user;
-        List<Pet> pet;
-    }
-
-
     @GetMapping("/users")
     List<PetClients> listPetsClients(){
         List<PetClients> listPetClients = new ArrayList<>();
@@ -236,6 +227,18 @@ public class PetController {
         return listPetClients;
     }
 
+    @GetMapping("/users/{id}")
+    IUserServiceClient.UserClientDTO listPetsByClientId(@PathVariable Long id){
+      return petService.getUserById(id);
+    }
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    static class PetClients{
+        IUserServiceClient.UserDTO user;
+        List<Pet> pet;
+    }
 
     @Data
     @NoArgsConstructor
