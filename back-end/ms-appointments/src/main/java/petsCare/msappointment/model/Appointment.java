@@ -21,4 +21,5 @@ public class Appointment {
     private Long petID;
     @Column(name = "service_id")
     private Long serviceID;
+
 }
