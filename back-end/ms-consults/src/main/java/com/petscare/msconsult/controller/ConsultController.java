@@ -36,7 +36,7 @@ public class ConsultController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La consulta con el id "+id+" no existe");
         }
     }
-    @PutMapping("/{id}")
+    @PutMapping()
     public  ResponseEntity<Consult> updateConsult(@RequestBody Consult consult) throws Exception {
         if(consultService.getConsultById(consult.getId()).isPresent()){
             return ResponseEntity.ok(consultService.updateConsult(consult));
