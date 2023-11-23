@@ -1,13 +1,15 @@
+import React, { useCallback } from "react";
 import { NextPage } from "next";
 import { useFormik } from "formik";
+import { useRouter } from "next/router";
+import { Box, Paper, Typography, Link, Button, TextField } from "@mui/material";
 import PasswordField from "../../components/userRegister/PasswordField";
 import { validationSchema } from "../../components/userRegister/userSchema.form";
 import LayoutAuth from "../../components/layouts/LayoutAuth";
-import { useRouter } from "next/router";
 import styles from "../../components/login/login.module.css";
-import { Button, TextField, Typography, Box, Link, Paper } from "@mui/material";
 
 const LoginPage: NextPage = () => {
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       user: {
@@ -15,18 +17,24 @@ const LoginPage: NextPage = () => {
         password: "",
       },
     },
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit: (values) => {
       console.log(values);
     },
   });
 
-  const router = useRouter();
-
-  const handleRegisterLinkClick = (event: React.MouseEvent) => {
-    event.preventDefault();
+  const handleRegisterLinkClick = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
     router.push("/registro");
-  };
+  }, [router]);
+  
+  const handleEmailChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    formik.setFieldValue("user.email", e.target.value);
+  }, [formik]);
+  
+  const handlePasswordChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    formik.setFieldValue("user.password", e.target.value);
+  }, [formik]);
 
   return (
     <Box className={styles.root}>
@@ -49,9 +57,7 @@ const LoginPage: NextPage = () => {
             autoComplete="email"
             autoFocus
             value={formik.values.user.email}
-            onChange={(event) =>
-              formik.setFieldValue("user.email", event.target.value)
-            }
+            onChange={handleEmailChange}
             error={
               formik.touched.user?.email && Boolean(formik.errors.user?.email)
             }
@@ -61,9 +67,7 @@ const LoginPage: NextPage = () => {
             label="Contraseña"
             name="password"
             value={formik.values.user.password}
-            onChange={(event) =>
-              formik.setFieldValue("user.password", event.target.value)
-            }
+            onChange={handlePasswordChange}
             error={
               formik.touched.user?.password &&
               Boolean(formik.errors.user?.password)
@@ -74,10 +78,10 @@ const LoginPage: NextPage = () => {
                 : ""
             }
           />
-          <Box className={styles.boxTextLink} sx={{ textAlign: "left" }}>
+          <Box sx={{ textAlign: "left" }}>
             ¿Olvidaste tu contraseña?{" "}
-            <Link href="#" underline="hover" sx={{}}>
-              <span style={{ color: "#007FFF" }}> Recuperala</span>
+            <Link href="#" underline="hover">
+              Recupérala
             </Link>
           </Box>
           <Button
@@ -87,10 +91,10 @@ const LoginPage: NextPage = () => {
           >
             iniciar sesión
           </Button>
-          <Box className={styles.boxTextLink} sx={{ textAlign: "right" }}>
-            ¿Aún no tenés cuenta?{" "}
+          <Box sx={{ textAlign: "right" }}>
+            ¿Aún no tienes cuenta?{" "}
             <Link href="#" underline="hover" onClick={handleRegisterLinkClick}>
-              <span style={{ color: "#007FFF" }}> Registrate</span>
+              Regístrate
             </Link>
           </Box>
         </Box>
