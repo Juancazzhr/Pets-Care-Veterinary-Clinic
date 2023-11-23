@@ -3,9 +3,16 @@ import Slider from '../components/home/carousel/Slider'
 import Nosotros from '../components/home/nosotros'
 import {Servicios}  from '../components/home/servicios/Servicios'
 import { Ubicacion } from '../components/home/ubicacion/Ubicacion'
-import { GetStaticProps } from 'next'
+import { GetServerSideProps, GetStaticProps, NextPage } from 'next'
+import { getServices } from '../services/stepperService'
+import { Service } from '@/interfaces'
 
-export default function Home() {
+interface Props {
+  services: Service[]
+}
+
+
+export default function Home({services}) {
   return (
     <>
       <Head>
@@ -16,7 +23,7 @@ export default function Home() {
       </Head>
       <main>
         <Slider />
-        <Servicios />
+        <Servicios services={services}/>
         <Nosotros/>
         <Ubicacion />
       </main>
@@ -24,13 +31,17 @@ export default function Home() {
   )
 }
 
-
-export const getStaticProps: GetStaticProps = async () => {
-
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+  
+  const services = await getServices()
+ console.log(services);
+  res.setHeader(
+      'Cache-Control',
+      'public, s-maxage=10, stale-while-revalidate'
+  )
   return {
       props: {
-          
+          services
       }
   }
 }
-

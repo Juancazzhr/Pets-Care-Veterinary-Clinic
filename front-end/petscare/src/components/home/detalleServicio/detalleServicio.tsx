@@ -1,15 +1,16 @@
 import { Serv } from "@/interfaces/servicios";
 import styles from "./Detalle.module.css";
-import { Container, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
+import { CardMedia, Container, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
 import { FC, useState } from "react";
 import Image from 'next/image'
 import { profData } from '../../professionals/profData'
+import { Service } from "@/interfaces";
+
 
 interface Props {
-    servicio: Serv,
+    servicio: Service;
     visible: string
-}
-
+  }
 
 const DetalleServ: FC<Props> = ({ servicio, visible }) => {
 
@@ -22,20 +23,20 @@ const DetalleServ: FC<Props> = ({ servicio, visible }) => {
 
     return (
         <Container className={styles.wrapperDet} style={{ display: `${visible}` }}>
-            <Image className={styles.imgDet}
-                src={servicio?.url}
-                alt={"cirugia"}
-                width={340}
-                height={280}
-            />
+            <CardMedia
+                    className={styles.imgDet}
+                    component="img"
+                    image={servicio.thumbnail}
+                    alt={servicio.name}
+                    />
             <Typography className={styles.titleDet}>
 
-                {servicio?.nombre}
+                {servicio?.name}
             </Typography>
-            <Typography >
-                {servicio?.descripcion}
+            <Typography className={styles.desc}>
+                {servicio?.description}
             </Typography>
-            <FormControl variant="standard" sx={{ m: 2, width: 300 }}>
+            <FormControl variant="standard" sx={{ m: 2 }} className={styles.form}>
                 <InputLabel>LIstado de Profesionales</InputLabel>
                 <Select
                     value={profName}

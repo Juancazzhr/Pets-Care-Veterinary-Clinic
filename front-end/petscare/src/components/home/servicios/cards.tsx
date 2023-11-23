@@ -7,23 +7,35 @@ import { CardMedia } from '@mui/material'
 import { CardContent } from '@mui/material'
 import { Grid } from '@mui/material'
 import { Typography } from '@mui/material'
-import { Serv } from '@/interfaces/servicios';
-import { DetalleServ } from '../detalleServicio/detalleServicio';
+import { Service } from '@/interfaces';
+import DetalleServ from '../detalleServicio/detalleServicio';
 
 interface Props {
-  servicio: Serv[];
+  services: Service[];
 }
 
-export const Cards: FC<Props> = ({servicio}) => {
+export const Cards: FC<Props> = ({services}) => {
 
   const [buttonClicked, setButtonClicked] = useState(false);
-  const [cardActual, setCardActual] = useState({})
+  const [cardActual, setCardActual] = useState({
+    "id":0,
+    "firstName": "",
+    "lastName":  "",
+    "address":   "",
+    "phone":     0,
+    "email":     "",
+    "password":  "",
+    "rol":       {
+      "id":          3,
+      "name":        "client",
+      "description": null,
+    }
+  })
 
 function verDetalle(serv : Props) {
   
   setButtonClicked(true)
-  setCardActual(serv)
-  
+  setCardActual(serv) 
   
 }  
 
@@ -32,12 +44,12 @@ function verDetalle(serv : Props) {
     <Grid  container spacing={1} >
       <Grid>
       {
-        buttonClicked ? <DetalleServ servicio ={cardActual} visible = {"block"} /> : <></>
+        buttonClicked ? <DetalleServ  visible={"block"} servicio={cardActual} /> : <></>
       }
       </Grid>
       <Box className={styles.box}>
         {
-          servicio?.map((serv)=>(
+          services?.map((serv)=>(
             <Grid xs={10} sm={6} md={4} xl={2} key={serv.id} className={styles.grid}>  
               <Card 
                 elevation={6} 
@@ -52,12 +64,12 @@ function verDetalle(serv : Props) {
                   <CardMedia
                     component="img"
                     height='280px'
-                    image={serv.url}
-                    alt={serv.nombre}
+                    image={serv.thumbnail}
+                    alt={serv.name}
                     />
                   <CardContent>
                     <Typography className={styles.nameCard} >
-                      {serv.nombre}
+                      {serv.name}
                     </Typography>              
                   </CardContent>
                 </CardActionArea>
