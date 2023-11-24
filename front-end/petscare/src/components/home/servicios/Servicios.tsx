@@ -18,7 +18,7 @@ export const Servicios: FC<Props> = ({services}) => {
       <Stack className={styles.stack}>
         <Container className={styles.container}> 
         <TitleSection title='servicios' colorLine='64C9A7' colorText='573469'/>
-          <Button className={styles.button} variant="contained">Solicita tu turno</Button>      
+          <Button className={styles.button} variant="contained" href='/turnos'>Solicita tu turno</Button>      
         </Container>
         <Cards services={services}/>
       </Stack>
