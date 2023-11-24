@@ -1,8 +1,8 @@
 import { AppointmentInput, Pet } from "@/interfaces";
 import { Dispatch, SetStateAction } from "react";
 
-export const getPetsByIdUser = async () => {
-    const response = await fetch(`http://ec2-34-229-209-114.compute-1.amazonaws.com/dev/v1/pets`) // Endpoint pendiente desde BACK
+export const getPetsByUserId = async (id: number) => {
+    const response = await fetch(`http://ec2-34-229-209-114.compute-1.amazonaws.com/dev/v1/pets/users/${id}`)
     const pets = await response.json()
     return pets;
 }
@@ -52,18 +52,16 @@ export const getProfessionalById = async (id: number) => {
 
 export const postAppointment = async (data: AppointmentInput) => {
 
-    console.log({data});
     const dataAppointment = JSON.stringify(data);
-    console.log({dataAppointment});
-    
+
     const response = await fetch(`http://ec2-34-229-209-114.compute-1.amazonaws.com/dev/v1/appointments`, {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: dataAppointment
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: dataAppointment
     });
-  
-    return await response.json();
-  };
+
+    return await response;
+};

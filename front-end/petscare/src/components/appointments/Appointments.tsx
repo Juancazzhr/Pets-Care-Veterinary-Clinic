@@ -7,22 +7,23 @@ import AuthContext from '../../context/AuthContext'
 import Button from '@mui/material/Button'
 import { Stack } from '@mui/material'
 import { NextPage } from 'next'
-import { Service, Professional } from '../../interfaces'
+import { Service, Professional, PetUser } from '../../interfaces'
 
 
 interface Props {  
     services: Service[]
     professionals: Professional[]
+    pets: PetUser
 }
 
-const Appointments: NextPage<Props> = ({services, professionals}) => {
+const Appointments: NextPage<Props> = ({services, professionals, pets}) => {
 
     
     const { auth } = useContext(AuthContext);
     return (
         <Paper className={styles.paper}>
             {auth ?
-                <StepperAppointment services={services} professionals={professionals}  />
+                <StepperAppointment services={services} professionals={professionals} pets={pets}  />
                 :
                 <Stack className={styles.boxAlert}>
                     <Alert variant="outlined" severity="warning">

@@ -4,12 +4,12 @@ import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
 import { GetServerSideProps, NextPage } from 'next'
 import Appointments from '../../components/appointments/Appointments'
-import { getPetsByIdUser, getProfessionals, getServices } from '../../services/stepperService'
-import { Professional, Service, Pet } from '../../interfaces'
+import { getPetsByUserId, getProfessionals, getServices } from '../../services/stepperService'
+import { Professional, Service, PetUser } from '../../interfaces'
 
 
 interface Props {  
-  pets: Pet[]
+  pets: PetUser
   services: Service[]
   professionals: Professional[]
 }
@@ -28,7 +28,7 @@ const TurnosPage: NextPage<Props> = ({services, professionals, pets}) => {
       <Container maxWidth={'xl'} >
         <Box pt='80px'>
           <TitleSection title='turnos' colorLine='64C9A7' colorText='573469' />
-          <Appointments services={services} professionals={professionals}/>
+          <Appointments services={services} professionals={professionals} pets={pets}/>
         </Box>
       </Container>
     </>
@@ -39,7 +39,8 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 
   const services = await getServices()
   const professionals = await getProfessionals()  
-  const pets = await getPetsByIdUser()
+  const pets = await getPetsByUserId(2)
+
  
   res.setHeader(
       'Cache-Control',

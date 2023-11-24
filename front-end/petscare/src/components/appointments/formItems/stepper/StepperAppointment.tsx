@@ -15,7 +15,7 @@ import { useRouter } from 'next/router';
 import PetSelect from '../PetSelect';
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 import { Stack } from '@mui/material';
-import { Service, Professional, AppointmentInput } from '@/interfaces/'
+import { Service, Professional, AppointmentInput, PetUser} from '@/interfaces/'
 import Link from 'next/link';
 import { postAppointment } from '../../../../services/stepperService';
 
@@ -32,9 +32,10 @@ const defaultValues = {
 interface Props {
     services: Service[],
     professionals: Professional[]
+    pets: PetUser
 }
 
-const StepperAppointment = ({ services, professionals }: Props) => {
+const StepperAppointment = ({ services, professionals, pets }: Props) => {
 
 
     const [activeStep, setActiveStep] = useState(0);
@@ -66,14 +67,10 @@ const StepperAppointment = ({ services, professionals }: Props) => {
 
     const handlerConfirmationStep = () => {
 
-        console.log({ dataForm });
         const response = postAppointment(dataForm)
 
-        console.log({ response });
-
         response.then((res) => {
-            console.log({ res });
-            if (res.data) {
+            if (res.ok) {            
                 router.push("/")
             };
         })
@@ -85,7 +82,7 @@ const StepperAppointment = ({ services, professionals }: Props) => {
             <Stack className={styles.boxPet}>
                 {activeStep !== 3 &&
                     <>
-                        <PetSelect handlerPet={handlerPet} />
+                        <PetSelect handlerPet={handlerPet} pets={pets}/>
                         <Link href={'/'}>
                             <Box className={styles.addPets}>
                                 <AddCircleIcon />
