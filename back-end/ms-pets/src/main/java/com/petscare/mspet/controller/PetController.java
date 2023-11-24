@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/v1/pets")
@@ -205,15 +206,6 @@ public class PetController {
         return petsAppointmentsList;
     }
 
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    static class PetClients{
-        IUserServiceClient.UserDTO user;
-        List<Pet> pet;
-    }
-
-
     @GetMapping("/users")
     List<PetClients> listPetsClients(){
         List<PetClients> listPetClients = new ArrayList<>();
@@ -239,6 +231,46 @@ public class PetController {
         return listPetClients;
     }
 
+    @GetMapping("/users/{id}")
+    PetClients listPetsByClientId(@PathVariable Long id){
+        List<Pet> pets = petService.getAll();
+        List<IUserServiceClient.UserDTO> users = petService.listAllUsers();
+        List<IClientServiceClient.ClientDTO> clients = petService.listAllClients();
+
+        IUserServiceClient.UserDTO userDTO = users.stream()
+                .filter(user -> user.getId() == id)
+                .findFirst()
+                .orElse(null);
+
+        if (userDTO == null) {
+            // El usuario no fue encontrado
+            return null;
+        }
+
+        List<Pet> petList = clients.stream()
+                .filter(client -> client.getUserId() == id)
+                .flatMap(client -> pets.stream().filter(pet -> pet.getClientId() == client.getUserId()))
+                .collect(Collectors.toList());
+
+        if (petList.isEmpty()) {
+            // No se encontraron mascotas para el usuario
+            return null;
+        }
+
+        PetClients petClients = new PetClients();
+        petClients.setUser(userDTO);
+        petClients.setPet(petList);
+
+        return petClients;
+    }
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    static class PetClients{
+        IUserServiceClient.UserDTO user;
+        List<Pet> pet;
+    }
 
     @Data
     @NoArgsConstructor

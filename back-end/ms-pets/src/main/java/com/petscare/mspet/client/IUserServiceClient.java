@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -16,6 +17,17 @@ public interface IUserServiceClient {
 
     @GetMapping("/v1/users")
     List<UserDTO> listAllUsers();
+
+    @GetMapping("/v1/users/{id}")
+    UserClientDTO getUserById(@PathVariable (value = "id") Long id);
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    class UserClientDTO{
+        private UserDTO user;
+        private IClientServiceClient.ClientDTO client;
+    }
 
     @Data
     @AllArgsConstructor
@@ -39,5 +51,4 @@ public interface IUserServiceClient {
             private String description;
         }
     }
-
 }
