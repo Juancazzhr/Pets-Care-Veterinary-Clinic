@@ -83,7 +83,7 @@ const StepperAppointment = ({ services, professionals, pets }: Props) => {
                 {activeStep !== 3 &&
                     <>
                         <PetSelect handlerPet={handlerPet} pets={pets}/>
-                        <Link href={'/'}>
+                        <Link href={'/registroMascotas'}>
                             <Box className={styles.addPets}>
                                 <AddCircleIcon />
                                 <Typography ml='10px' variant='body1'>AGREGAR MASCOTA</Typography>
