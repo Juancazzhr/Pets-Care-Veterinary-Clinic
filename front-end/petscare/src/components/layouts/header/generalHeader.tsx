@@ -5,7 +5,7 @@ import AppBarAuth from './AppBarAuth';
 
 
 
-const navItems = ['inicio', 'servicios', 'turnos', 'profesionales', 'faqs'];
+const navItems = ['inicio', 'turnos', 'profesionales', 'faqs'];
 
 interface Props {
     variant?: "auth" | "general"

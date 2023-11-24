@@ -5,7 +5,6 @@ import Box from '@mui/material/Box'
 import styles from './Slide.module.css'
 
 
-
 interface Props {
     item: {
         title: string;
@@ -15,8 +14,7 @@ interface Props {
 }
 
 const Slide = ({ item }: Props) => {
-    console.log(item.image);
-    
+       
     return (
         <Paper className={styles.paper} sx={{backgroundImage: `url(${item.image})`}}>
             <Container className={styles.container} >

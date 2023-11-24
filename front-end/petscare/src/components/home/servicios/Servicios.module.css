@@ -1,175 +1,167 @@
-
-.stack{
-    margin-top: 30px;
-    margin-bottom: 70px;
+.stack {
+  margin-top: 30px;
+  margin-bottom: 70px;
 }
 
-.wrapper{
-    display: flex;
+.wrapper {
+  display: flex;
 }
 
-.container{
-    display: grid;
-    flex-direction: column;
+.container {
+  display: grid;
+  flex-direction: column;
 }
 
-
-.box{
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 30px;
-   
+.box {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 30px;
 }
 
-.grid{
-    display: contents;
+.grid {
+  display: contents;
 }
 
-.title{
-    font-family: Roboto;
-    text-align: left;
-    font-size: 35px;
-    color: #573469;
-    margin: 5px 5px 20px 5px;    
+.title {
+  font-family: Roboto;
+  text-align: left;
+  font-size: 35px;
+  color: #573469;
+  margin: 5px 5px 20px 5px;
 }
 
-.cards{
-    width: 340px;
-    margin: 20px auto;
-    color: #EAEBED;
-    padding: 0;
+.cards {
+  width: 340px;
+  margin: 20px auto;
+  color: #eaebed;
+  padding: 0;
 }
 
-.button{
-    width: 204px;
-    margin: 5px auto !important;
-    color: #EAEBED;
-    text-transform: lowercase;
-    font-weight: 900;
+.button {
+  width: 204px;
+  margin: 5px auto !important;
+  color: #eaebed;
+  text-transform: lowercase;
+  font-weight: 900;
 }
 
-.nameCard{
-    text-align :center;
-    font-size : 30px;
-    color: #573469;
+.nameCard {
+  text-align: center;
+  font-size: 30px;
+  color: #573469;
 }
 
-.descripCard{
-    font-size: 16px;
-    text-align: justify;
-    color: #573469;
+.descripCard {
+  font-size: 16px;
+  text-align: justify;
+  color: #573469;
 }
 
 .linea {
-    border-top: 10px solid #64C9A7;
-    max-width: 70px;
-    padding: 0;
-    margin-left: 5px;
-  }
-
-
-
-@media screen and (min-width: 900px) {
-
-    .wrapper{
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-    }
-
-    .container{
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        padding: 0;
-    }
-
-    .box{
-        display: flex;
-        justify-content: space-between;    
-        margin: 0;
-        margin-top: 30px;
-    }
-
-    
-    .nameCard{
-        font-size : 24px;
-    }
-
-    .cards{
-        width: 250px;  
-        margin-top: 20px;
-    }
-
-    
-    .title{
-        width: 80%;
-        margin-left: 20px;
-    }
-
-    .linea{
-        width: 80px;
-    }
-
+  border-top: 10px solid #64c9a7;
+  max-width: 70px;
+  padding: 0;
+  margin-left: 5px;
 }
 
+@media screen and (min-width: 900px) {
+  .wrapper {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+  }
+
+  .box {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    margin-top: 30px;
+  }
+
+  .button {
+    margin-right: 0 !important;
+    padding-right: 0;
+  }
+
+  .nameCard {
+    font-size: 24px;
+  }
+
+  .cards {
+    width: 250px;
+    margin-top: 20px;
+  }
+
+  .title {
+    width: 80%;
+    margin-left: 20px;
+  }
+
+  .linea {
+    width: 80px;
+  }
+}
 
 @media screen and (min-width: 965px) {
-    
-    .nameCard{
-        font-size : 20px;
-    }
+  .nameCard {
+    font-size: 20px;
+  }
 
-    .wrapper{
-        flex-direction: row;
-        align-items: center;
-    }
+  .wrapper {
+    flex-direction: row;
+    align-items: center;
+  }
 
-    .box{
-        margin-top: 30px;
-    }
+  .box {
+    margin-top: 30px;
+  }
 
-    .cards{
-        width: 280px;
-        margin-top: 20px;    
-    }
+  .cards {
+    width: 280px;
+    margin-top: 20px;
+  }
 
-    .title{
-        width: 80%;
-        margin-left: 20px;
-    }
+  .title {
+    width: 80%;
+    margin-left: 20px;
+  }
 
-    .linea{
-        width: 80px;
-    }
-    
+  .linea {
+    width: 80px;
+  }
 }
 
 @media screen and (min-width: 1200px) {
-    .cards{
-        width: 360px;
-        margin-top: 20px; 
-    }
-    .container{
-        margin: 0;
-    }
-    .box{
-        margin-top: 30px;
-    }
-    
+  .cards {
+    width: 360px;
+    margin-top: 20px;
+  }
+  .container {
+    margin: 0;
+  }
+  .box {
+    margin-top: 30px;
+  }
 }
 
 @media screen and (min-width: 1540px) {
-    .cards{
-        width: 220px;
-        margin: 10px;    
-    }
+  .cards {
+    width: 220px;
+    margin: 10px;
+  }
 
-    .container{
-        margin: 0;
-    }
+  .container {
+    margin: 0;
+  }
 
-    .box{
-        margin-top: 30px;
-    }
+  .box {
+    margin-top: 30px;
+  }
 }
