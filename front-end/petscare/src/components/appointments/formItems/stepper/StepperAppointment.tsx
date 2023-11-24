@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Paper from '@mui/material/Paper';
@@ -15,9 +15,10 @@ import { useRouter } from 'next/router';
 import PetSelect from '../PetSelect';
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 import { Stack } from '@mui/material';
-import { Service, Professional, AppointmentInput, PetUser} from '@/interfaces/'
+import { Service, Professional, AppointmentInput, PetUser } from '@/interfaces/'
 import Link from 'next/link';
 import { postAppointment } from '../../../../services/stepperService';
+import ReusableModal from '../../../../components/reusableModal/modal';
 
 
 const steps = ['servicio', 'profesional', 'fecha y hora', 'confirmación'];
@@ -41,6 +42,14 @@ const StepperAppointment = ({ services, professionals, pets }: Props) => {
     const [activeStep, setActiveStep] = useState(0);
     const [dataForm, setDataForm] = useState<AppointmentInput>(defaultValues)
     const router = useRouter()
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalInfo, setModalInfo] = useState({
+        title: "",
+        message: "",
+        isError: false,
+        acceptButtonText: "",
+    });
+
 
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -66,15 +75,28 @@ const StepperAppointment = ({ services, professionals, pets }: Props) => {
     }
 
     const handlerConfirmationStep = () => {
-
         const response = postAppointment(dataForm)
-
         response.then((res) => {
-            if (res.ok) {            
-                router.push("/")
+            if (res.ok) {
+                setModalInfo({
+                    title: "¡Felicitaciones!",
+                    message: "Tu turno ha sido agendado exitosamente y enviado los datos a tu correo.",
+                    isError: false,
+                    acceptButtonText: "ir a Inicio",
+                  });
+                  setIsModalOpen(true);
             };
         })
     }
+
+    const handleModalClose = useCallback(() => {
+        setIsModalOpen(false);
+    }, []);
+
+    const redirectToHome = useCallback(() => {
+        setIsModalOpen(false);
+        router.push("/");
+    }, [router]);
 
 
     return (
@@ -82,7 +104,7 @@ const StepperAppointment = ({ services, professionals, pets }: Props) => {
             <Stack className={styles.boxPet}>
                 {activeStep !== 3 &&
                     <>
-                        <PetSelect handlerPet={handlerPet} pets={pets}/>
+                        <PetSelect handlerPet={handlerPet} pets={pets} />
                         <Link href={'/registroMascotas'}>
                             <Box className={styles.addPets}>
                                 <AddCircleIcon />
@@ -145,6 +167,14 @@ const StepperAppointment = ({ services, professionals, pets }: Props) => {
                         >Volver
                         </Button>
                     </Box>
+                    <ReusableModal
+                        isOpen={isModalOpen}
+                        onClose={handleModalClose}
+                        onAccept={redirectToHome}
+                        title={modalInfo.title}
+                        message={modalInfo.message}
+                        acceptButtonText={modalInfo.acceptButtonText}
+                    />
                 </Paper>
             </Box>
         </Box>
