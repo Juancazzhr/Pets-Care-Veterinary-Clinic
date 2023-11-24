@@ -5,24 +5,30 @@ import HorizontalRuleRoundedIcon from '@mui/icons-material/HorizontalRuleRounded
 import styles from './Slide.module.css'
 
 
+interface Props {
+    img1: string
+    img2: string
+    img3: string
+  }
+  
 
-const Slider: FC = () => {
+const Slider: FC<Props> = ({img1, img2, img3}) => {
 
     const sliders = [
         {
             title: "experiencia",
             description: "Desde 2000, dedicados a la atención integral de tu mascota ",
-            image: `${process.env.BASE_URL_SLIDER+"experiencia.jpg"}`
+            image: `${img1}`
         },
         {
             title: "confianza",
             description: "Profesionales con altos niveles de capacitación, innovación, exigencia y seriedad.",
-            image:`${process.env.BASE_URL_SLIDER+"confianza.jpg"}`
+            image:`${img2}`
         },
         {
             title: "empatía",
             description: "Compartimos tu amor por ellos y los cuidamos como si fueran nuestros.",
-            image: `${process.env.BASE_URL_SLIDER+"empatia.jpg"}`
+            image: `${img3}`
         }
     ]
 

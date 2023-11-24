@@ -1,17 +1,21 @@
 import Head from 'next/head'
 import Slider from '../components/home/carousel/Slider'
 import Nosotros from '../components/home/nosotros'
-import {Servicios}  from '../components/home/servicios/Servicios'
+import { Servicios } from '../components/home/servicios/Servicios'
 import { Ubicacion } from '../components/home/ubicacion/Ubicacion'
 import { GetStaticProps, NextPage } from 'next'
 import { getServices } from '../services/stepperService'
 import { Service } from '@/interfaces'
+import { getImage } from '../services/homeService'
 
 interface Props {
-  services: Service[]
+  services: Service[],
+  img1: string
+  img2: string
+  img3: string
 }
 
-const Home:NextPage<Props> =({services}) =>{
+const Home: NextPage<Props> = ({ services, img1, img2, img3 }) => {
   return (
     <>
       <Head>
@@ -21,9 +25,9 @@ const Home:NextPage<Props> =({services}) =>{
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Slider />
-        <Servicios services={services}/>
-        <Nosotros/>
+        <Slider img1={img1} img2={img2} img3={img3} />
+        <Servicios services={services} />
+        <Nosotros />
         <Ubicacion />
       </main>
     </>
@@ -31,13 +35,20 @@ const Home:NextPage<Props> =({services}) =>{
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  
+
   const services = await getServices()
- 
-   return {
-      props: {
-          services
-      }
+
+  const img1 = await getImage('experiencia')
+  const img2 = await getImage('confianza')
+  const img3 = await getImage('empatia')
+
+  return {
+    props: {
+      services,
+      img1,
+      img2,
+      img3
+    }
   }
 }
 
