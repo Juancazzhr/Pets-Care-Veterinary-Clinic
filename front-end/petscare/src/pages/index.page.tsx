@@ -12,7 +12,7 @@ interface Props {
 }
 
 
-export default function Home({services}) {
+const Home: NextPage<Props> = ({services})=> {
   return (
     <>
       <Head>
@@ -31,17 +31,15 @@ export default function Home({services}) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+export const getStaticProps: GetStaticProps = async () => {
   
   const services = await getServices()
- console.log(services);
-  res.setHeader(
-      'Cache-Control',
-      'public, s-maxage=10, stale-while-revalidate'
-  )
+
   return {
       props: {
           services
       }
   }
 }
+
+export default Home
