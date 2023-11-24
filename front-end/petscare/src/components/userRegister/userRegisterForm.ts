@@ -1,44 +1,28 @@
 import { useFormik } from 'formik';
 import { validationSchema } from './userSchema.form';
+import { User } from '@/interfaces';
 
-export interface FormValues {
-    user: {
-        firstName: string;
-        lastName: string;
-        address: string,
-        phone: string,
-        email: string,
-        password: string,
-        confirmPassword: string,
-        rol: {
-            id: number,
-            name: string,
-            description: null,
-        },
 
-    };
-}
+interface Props {  
+    user: User[]
+  }
 
 export const useRegisterForm = () => {
-    const formik = useFormik<FormValues>({
+    const formik = useFormik({
         initialValues: {
-            user: {
                 firstName: "",
                 lastName: "",
                 address: "",
-                phone: "",
+                phone: 0,
                 email: "",
-                password: "",
-                confirmPassword: "",
                 rol: {
                     id: 3,
                     name: "client",
                     description: null,
-                },
             },
         },
         validationSchema,
-        onSubmit: (values) => {
+        onSubmit: (values: Props) => {
             console.log(values);
         },
     });

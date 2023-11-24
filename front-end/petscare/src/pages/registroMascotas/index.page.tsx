@@ -7,6 +7,7 @@ import { Button, Box, Grid, Typography, Paper } from "@mui/material";
 import PetFields from "../../components/petRegister/petRegister";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { PetRegisterForm } from "../../components/petRegister/petRegisterForm";
+import { Pet } from "@/interfaces";
 
 
 const RegisterPets: NextPage = () => {

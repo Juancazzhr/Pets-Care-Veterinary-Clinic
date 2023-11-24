@@ -1,14 +1,22 @@
 import React, { useCallback, useState } from "react";
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import LayoutAuth from "../../components/layouts/LayoutAuth";
 import { useRouter } from "next/router";
 import styles from "../../components/userRegister/registro.module.css";
 import { Button, Box, Grid, Typography, Paper, Link } from "@mui/material";
 import UserFields from "../../components/userRegister/userFields";
-import { FormValues, useRegisterForm,} from "../../components/userRegister/userRegisterForm";
+import { useRegisterForm} from "../../components/userRegister/userRegisterForm";
 import ReusableModal from "../../components/reusableModal/modal";
+import { postUser } from "../../services/stepperService";
+import { User } from "@/interfaces";
+import { Field } from "formik";
+
+interface Props {  
+  user: User
+}
 
 const Register: NextPage = () => {
+
   const formik = useRegisterForm();
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,39 +35,34 @@ const Register: NextPage = () => {
     [router]
   );
 
-  // Definición de la función simulateApiCall, esto cambiaria por la llamada a la API
-  const simulateApiCall = useCallback((values: FormValues) => {
+  const postData =  useCallback((values: Props) => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if (Object.keys(values).length > 0) {
-          resolve("Success");
+        if (Object.keys(values).length > 0) {          
+          const response = postUser(values)
+          response.then((res)=>{            
+            resolve("Success");
+          })
         } else {
           reject("Error");
         }
-      }, 500);
-    });
-  }, []);
-
+      }, 500)
+    })
+  }, [])
+ 
   const handleFormSubmit = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      formik.setTouched({
-        user: {
-          firstName: true,
-          lastName: true,
-          address: true,
-          phone: true,
-          email: true,
-          password: true,
-          confirmPassword: true,
-        },
-      });
+      formik.setTouched({     
+        [Field.name]: true
+    });
 
       // Realiza la validación del formulario
       const formErrors = await formik.validateForm(formik.values);
 
       if (formik.isValid && Object.keys(formErrors).length === 0) {
-        simulateApiCall(formik.values)
+
+        postData(formik.values)
           .then(() => {
             setModalInfo({
               title: "¡Bienvenid@!",
@@ -84,7 +87,7 @@ const Register: NextPage = () => {
         console.log("error", formErrors);
       }
     },
-    [formik, simulateApiCall]
+    [formik, postData]
   );
 
   const handleModalClose = useCallback(() => {
@@ -142,4 +145,4 @@ const Register: NextPage = () => {
 
 (Register as any).Layout = LayoutAuth;
 
-export default Register;
+export default Register

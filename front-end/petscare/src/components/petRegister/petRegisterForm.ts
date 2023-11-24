@@ -1,13 +1,10 @@
 import { useFormik } from 'formik';
 import { validationSchema } from './petSchema.form';
+import { Pet } from '@/interfaces';
 
-export interface FormValues {
-    pet: {
-        petName: string;
-        type: string;
-        size: string;
-        race: string;
-    };
+
+interface Props {  
+  pet: Pet[]
 }
 
  export const PetRegisterForm = () => {
@@ -21,7 +18,7 @@ export interface FormValues {
         },
       },
         validationSchema,
-        onSubmit: (values) => {
+        onSubmit: (values : Props) => {
             console.log(values);
         },
     });

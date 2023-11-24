@@ -13,8 +13,13 @@ import {
 import { FormikProps } from "formik";
 import { FormValues } from "./petRegisterForm";
 import styles from '../userRegister/registro.module.css'
+import { Pet } from "@/interfaces";
 
-const PetFields = ({ formik }: { formik: FormikProps<FormValues> }) => {
+interface Props {  
+  pet: Pet[]
+}
+
+const PetFields = ({ formik }: { formik: FormikProps<Props> }) => {
   return (
     <>
       <Grid item xs={12} sm={12}>
@@ -30,9 +35,9 @@ const PetFields = ({ formik }: { formik: FormikProps<FormValues> }) => {
               id="petName"
               name="petName"
               label="Nombre"
-              value={formik.values.pet.petName}
-              onChange={(event) =>
-                formik.setFieldValue("pet.petName", event.target.value)
+              value={formik.values?.petName}
+              onChange={(event: { target: { value: string; }; }) =>
+                formik.setFieldValue("petName", event.target.value)
               }
               error={
                 formik.touched.pet?.petName && Boolean(formik.errors.pet?.petName)
@@ -50,9 +55,9 @@ const PetFields = ({ formik }: { formik: FormikProps<FormValues> }) => {
                 labelId="mascota-tipo-label"
                 id="type"
                 name="type"
-                value={formik.values.pet.type}
-                onChange={(event) =>
-                  formik.setFieldValue("pet.type", event.target.value)
+                value={formik.values?.type}
+                onChange={(event: { target: { value: string; }; }) =>
+                  formik.setFieldValue("type", event.target.value)
                 }
               >
                 <MenuItem value="tipo1">perro</MenuItem>
@@ -74,9 +79,9 @@ const PetFields = ({ formik }: { formik: FormikProps<FormValues> }) => {
               id="race"
               name="race"
               label="Raza"
-              value={formik.values.pet.race}
-              onChange={(event) =>
-                formik.setFieldValue("pet.race", event.target.value)
+              value={formik.values?.race}
+              onChange={(event: { target: { value: string; }; }) =>
+                formik.setFieldValue("race", event.target?.value)
               }
               error={formik.touched.pet?.race && Boolean(formik.errors.pet?.race)}
               helperText={formik.touched.pet?.race && formik.errors.pet?.race}
@@ -92,9 +97,9 @@ const PetFields = ({ formik }: { formik: FormikProps<FormValues> }) => {
                 labelId="mascota-tamano-label"
                 id="size"
                 name="size"
-                value={formik.values.pet.size}
-                onChange={(event) =>
-                  formik.setFieldValue("pet.size", event.target.value)
+                value={formik.values?.size}
+                onChange={(event: { target: { value: string; }; }) =>
+                  formik.setFieldValue("size", event.target.value)
                 }
               >
                 <MenuItem value="tipo1">pequeño</MenuItem>
