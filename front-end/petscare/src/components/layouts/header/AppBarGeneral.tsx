@@ -60,7 +60,7 @@ const AppBarComponent: FC<Props> = ({handleDrawerToggle, navItems}) => {
                                 {auth ?
                                     <Stack direction="row">
                                         <PersonIcon color='secondary' sx={{ fontSize: '32px' }} />
-                                        <Typography className={styles.user} >Lio Messi</Typography>
+                                        <Typography className={styles.user} >Pablo Jover</Typography>
                                         <CancelIcon className={styles.cancelIcon} onClick={() => { }} />
                                     </Stack>
                                     :

@@ -51,7 +51,7 @@ const navDrawer: FC<Props> = ({handleDrawerToggle, navItems, window, mobileOpen}
                                 <CancelIcon color='secondary' className={styles.cancelIcon} onClick={() => { }} />
                                 <Box className={styles.drawerUserData}>
                                     <PersonIcon color='primary' className={styles.personIcon} />
-                                    <Typography className={styles.user}>Lio Messi</Typography>
+                                    <Typography className={styles.user}>Pablo Jover</Typography>
                                 </Box></>}
                         </Stack>
                         <Divider color='#573469' variant="middle" />
