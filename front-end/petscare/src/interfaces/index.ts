@@ -39,6 +39,7 @@ export interface Pet {
   race: string;
   clientId: number;
   petType: PetType;
+  petClinicalHistory?: PetClinicalHistory;
 }
 
 export interface PetClinicalHistory {
@@ -63,4 +64,19 @@ export interface AppointmentInput {
 export interface PetUser {
   user: User;
   pet: Pet[];
+}
+
+
+export interface PetConsults {
+  pet:      Pet;
+  consults: Consult[];
+}
+
+export interface Consult {
+  id:                   number;
+  cratedAt:             Date;
+  diagnostic:           string;
+  drugs:                string;
+  exams:                string;
+  petClinicalHistoryId: number;
 }
