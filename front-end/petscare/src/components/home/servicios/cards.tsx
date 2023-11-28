@@ -17,22 +17,14 @@ interface Props {
 export const Cards: FC<Props> = ({services}) => {
 
   const [buttonClicked, setButtonClicked] = useState(false);
-  const [cardActual, setCardActual] = useState({
-    "id":0,
-    "firstName": "",
-    "lastName":  "",
-    "address":   "",
-    "phone":     0,
-    "email":     "",
-    "password":  "",
-    "rol":       {
-      "id":          3,
-      "name":        "client",
-      "description": null,
-    }
+  const [cardActual, setCardActual] = useState({ 
+    "id":0,  
+    "name": "",
+    "description": "",
+    "thumbnail": "",
   })
 
-function verDetalle(serv : Props) {
+function verDetalle(serv : Service) {
   
   setButtonClicked(true)
   setCardActual(serv) 
@@ -44,7 +36,7 @@ function verDetalle(serv : Props) {
     <Grid  container spacing={1} >
       <Grid>
       {
-        buttonClicked ? <DetalleServ  visible={"block"} servicio={cardActual} /> : <></>
+        buttonClicked ? <DetalleServ  visible={"block"} servicio={cardActual}  /> : <></>
       }
       </Grid>
       <Box className={styles.box}>
