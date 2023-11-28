@@ -11,7 +11,6 @@ import {
   Stack
 } from "@mui/material";
 import { FormikProps } from "formik";
-import { FormValues } from "./petRegisterForm";
 import styles from '../userRegister/registro.module.css'
 import { Pet } from "@/interfaces";
 

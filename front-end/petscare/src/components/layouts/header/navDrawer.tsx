@@ -12,7 +12,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import styles from './generalHeader.module.css';
-import AuthContext from '../../../context/AuthContext';
+/* import AuthContext from '../../../context/AuthContext'; */
 
 interface Props{
     window?: () => Window;
