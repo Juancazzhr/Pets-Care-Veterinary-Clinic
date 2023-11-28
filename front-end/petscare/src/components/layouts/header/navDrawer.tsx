@@ -24,12 +24,12 @@ interface Props{
 
 const drawerWidth = 240;
 
-const navDrawer: FC<Props> = ({handleDrawerToggle, navItems, window, mobileOpen}) => {
+const NavDrawer: FC<Props> = ({handleDrawerToggle, navItems, window, mobileOpen}) => {
   
     const container = window !== undefined ? () => window().document.body : undefined;
   /*   const { auth } = useContext(AuthContext); */
 
-    const [ auth, setAuth] =useState(false)
+    const [ auth, setAuth] = useState(false)
     return (
         <nav>
                 <Drawer
