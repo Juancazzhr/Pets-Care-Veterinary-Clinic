@@ -10,21 +10,23 @@ interface Props {
 export const useRegisterForm = () => {
     const formik = useFormik({
         initialValues: {
-                firstName: "",
-                lastName: "",
-                address: "",
-                phone: 0,
-                email: "",
-                rol: {
-                    id: 3,
-                    name: "client",
-                    description: null,
+            firstName: "",
+            lastName: "",
+            address: "",
+            phone: 0,
+            email: "",
+            rol: {
+                id: 3,
+                name: "client",
+                description: null,
             },
+            id: 0,
+            password: ''
         },
         validationSchema,
-        onSubmit: (values: Props) => {
-            console.log(values);
-        },
+        onSubmit: (values: User) => {
+            localStorage.setItem("mailUser", values.email)
+        }
     });
 
     return formik;

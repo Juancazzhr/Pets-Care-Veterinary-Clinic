@@ -27,7 +27,6 @@ const drawerWidth = 240;
 const NavDrawer: FC<Props> = ({handleDrawerToggle, navItems, window, mobileOpen}) => {
   
     const container = window !== undefined ? () => window().document.body : undefined;
-  /*   const { auth } = useContext(AuthContext); */
 
     const [ auth, setAuth] = useState(false)
     return (
@@ -72,6 +71,7 @@ const NavDrawer: FC<Props> = ({handleDrawerToggle, navItems, window, mobileOpen}
     )
 }
 
+export default NavDrawer
 export default NavDrawer
 
 

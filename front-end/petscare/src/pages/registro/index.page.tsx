@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { GetServerSideProps, NextPage } from "next";
+import {  NextPage } from "next";
 import LayoutAuth from "../../components/layouts/LayoutAuth";
 import { useRouter } from "next/router";
 import styles from "../../components/userRegister/registro.module.css";
@@ -35,10 +35,11 @@ const Register: NextPage = () => {
     [router]
   );
 
-  const postData =  useCallback((values: Props) => {
+  const postData =  useCallback((values: User) => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         if (Object.keys(values).length > 0) {          
+          localStorage.setItem("user", JSON.stringify(values));          
           const response = postUser(values)
           response.then((res)=>{            
             resolve("Success");
@@ -84,7 +85,7 @@ const Register: NextPage = () => {
             setIsModalOpen(true);
           });
       } else {
-        console.log("error", formErrors);
+        formik.errors;
       }
     },
     [formik, postData]
