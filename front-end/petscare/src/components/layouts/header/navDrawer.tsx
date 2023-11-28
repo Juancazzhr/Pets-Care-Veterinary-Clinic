@@ -1,4 +1,4 @@
-import {FC, useContext} from 'react'
+import {FC, useContext, useState} from 'react'
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import PersonIcon from '@mui/icons-material/Person';
@@ -27,8 +27,9 @@ const drawerWidth = 240;
 const navDrawer: FC<Props> = ({handleDrawerToggle, navItems, window, mobileOpen}) => {
   
     const container = window !== undefined ? () => window().document.body : undefined;
-    const { auth } = useContext(AuthContext);
+  /*   const { auth } = useContext(AuthContext); */
 
+    const [ auth, setAuth] =useState(false)
     return (
         <nav>
                 <Drawer
