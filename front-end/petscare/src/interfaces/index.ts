@@ -33,13 +33,11 @@ export interface Service {
 }
 
 export interface Pet {
-  id: number;
   name: string;
   size: string;
   race: string;
   clientId: number;
   petType: PetType;
-  petClinicalHistory: PetClinicalHistory;
 }
 
 export interface PetClinicalHistory {

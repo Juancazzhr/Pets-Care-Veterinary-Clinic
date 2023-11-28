@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import {
   TextField,
   Grid,
@@ -10,16 +10,17 @@ import {
   Typography,
   Stack
 } from "@mui/material";
-import { FormikProps } from "formik";
-import { FormValues } from "./petRegisterForm";
+import { Field, FormikProps } from "formik";
 import styles from '../userRegister/registro.module.css'
 import { Pet } from "@/interfaces";
 
 interface Props {  
-  pet: Pet[]
+  pet: Pet
 }
 
-const PetFields = ({ formik }: { formik: FormikProps<Props> }) => {
+const PetFields = ({ formik }: { formik: FormikProps<Pet> }) => {
+  
+
   return (
     <>
       <Grid item xs={12} sm={12}>
@@ -32,45 +33,43 @@ const PetFields = ({ formik }: { formik: FormikProps<Props> }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              id="petName"
-              name="petName"
+              id="name"
+              name="name"
               label="Nombre"
-              value={formik.values?.petName}
+              value={formik.values?.name}
               onChange={(event: { target: { value: string; }; }) =>
-                formik.setFieldValue("petName", event.target.value)
+                formik.setFieldValue("name", event.target.value)
               }
               error={
-                formik.touched.pet?.petName && Boolean(formik.errors.pet?.petName)
+                formik.touched?.name && Boolean(formik.errors?.name)
               }
-              helperText={formik.touched.pet?.petName && formik.errors.pet?.petName}
+              helperText={formik.touched?.name && formik.errors?.name}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <FormControl
               fullWidth
-              error={formik.touched.pet?.type && Boolean(formik.errors.pet?.type)}
+              error={formik.touched?.petType && Boolean(formik.errors?.petType)}
             >
               <InputLabel id="mascota-tipo-label">Seleccioná Tipo</InputLabel>
               <Select
                 labelId="mascota-tipo-label"
-                id="type"
-                name="type"
-                value={formik.values?.type}
-                onChange={(event: { target: { value: string; }; }) =>
-                  formik.setFieldValue("type", event.target.value)
-                }
+                id="petType"
+                name="petType"
+                value={formik.values?.petType}
+                onChange={(event: { target: { value : {}; }}) =>{
+                formik.setFieldValue("petType", event.target.value)
+                  
+                }}
               >
-                <MenuItem value="tipo1">perro</MenuItem>
-                <MenuItem value="tipo2">gato</MenuItem>
-                <MenuItem value="tipo3">conejo</MenuItem>
-                <MenuItem value="tipo4">tortuga</MenuItem>
-                <MenuItem value="tipo5">loro</MenuItem>
-                <MenuItem value="tipo6">hámster</MenuItem>
-                <MenuItem value="tipo7">otro</MenuItem>
+                <MenuItem value="Felino">Felino</MenuItem>
+                <MenuItem value="Canino">Canino</MenuItem>
+                <MenuItem value="Aves">Aves</MenuItem>
+                <MenuItem value="Equino">Equino</MenuItem>
               </Select>
-              <FormHelperText>
-                {formik.touched.pet?.type && formik.errors.pet?.type}
-              </FormHelperText>
+              {/* <FormHelperText>
+                {formik.touched?.petType && formik.errors?.petType}
+              </FormHelperText> */}
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -83,14 +82,14 @@ const PetFields = ({ formik }: { formik: FormikProps<Props> }) => {
               onChange={(event: { target: { value: string; }; }) =>
                 formik.setFieldValue("race", event.target?.value)
               }
-              error={formik.touched.pet?.race && Boolean(formik.errors.pet?.race)}
-              helperText={formik.touched.pet?.race && formik.errors.pet?.race}
+              error={formik.touched?.race && Boolean(formik.errors?.race)}
+              helperText={formik.touched?.race && formik.errors?.race}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <FormControl
               fullWidth
-              error={formik.touched.pet?.size && Boolean(formik.errors.pet?.size)}
+              error={formik.touched?.size && Boolean(formik.errors?.size)}
             >
               <InputLabel id="mascota-tamano-label">Seleccioná Tamaño</InputLabel>
               <Select
@@ -102,12 +101,12 @@ const PetFields = ({ formik }: { formik: FormikProps<Props> }) => {
                   formik.setFieldValue("size", event.target.value)
                 }
               >
-                <MenuItem value="tipo1">pequeño</MenuItem>
-                <MenuItem value="tipo2">mediano</MenuItem>
-                <MenuItem value="tipo3">grande</MenuItem>
+                <MenuItem value="pequeño">pequeño</MenuItem>
+                <MenuItem value="mediano">mediano</MenuItem>
+                <MenuItem value="grande">grande</MenuItem>
               </Select>
               <FormHelperText>
-                {formik.touched.pet?.size && formik.errors.pet?.size}
+                {formik.touched?.size && formik.errors?.size}
               </FormHelperText>
             </FormControl>
           </Grid>

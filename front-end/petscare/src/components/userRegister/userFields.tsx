@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { TextField, Grid } from "@mui/material";
+import { TextField, Grid, styled } from "@mui/material";
 import { FormikProps } from "formik";
-//import { FormValues } from "./userRegisterForm";
 import PasswordField from "./PasswordField";
-import { User } from "@/interfaces";
+import { User } from "../../interfaces";
+import { ClassNames } from "@emotion/react";
 
 interface Props {  
   user: User
 }
 
-const UserFields = ({ formik }: { formik: FormikProps<Props> }) => {
+const UserFields = ({ formik }: { formik: FormikProps<User> }) => {
 
   const [confirPass, setConfirPass]= useState("");
   let msg = "";
@@ -25,12 +25,8 @@ const UserFields = ({ formik }: { formik: FormikProps<Props> }) => {
           onChange={(event: { target: { value: string; }; }) =>
             formik.setFieldValue("firstName", event.target.value)
           }
-          error={
-            formik.touched?.firstName &&
-            Boolean(formik.errors?.firstName)
-          }
           helperText={
-            formik.touched?.firstName && formik.errors?.firstName
+            formik.errors?.firstName
           }
         />
       </Grid>
@@ -43,13 +39,9 @@ const UserFields = ({ formik }: { formik: FormikProps<Props> }) => {
           value={formik.values?.lastName}
           onChange={(event : { target: { value: string; }; }) =>
             formik.setFieldValue("lastName", event.target.value)
-          }
-          error={
-            formik.touched?.lastName &&
-            Boolean(formik.errors?.lastName)
-          }
+          }        
           helperText={
-            formik.touched?.lastName && formik.errors?.lastName
+            formik.errors?.lastName
           }
         />
       </Grid>
@@ -59,15 +51,13 @@ const UserFields = ({ formik }: { formik: FormikProps<Props> }) => {
           id="address"
           name="address"
           label="Dirección"
+          color="error"
           value={formik.values?.address}
           onChange={(event : { target: { value: string; }; }) =>
             formik.setFieldValue("address", event.target.value)
           }
-          error={
-            formik.touched?.address && Boolean(formik.errors?.address)
-          }
           helperText={
-            formik.touched?.address && formik.errors?.address
+            formik.errors?.address
           }
         />
       </Grid>
@@ -81,10 +71,7 @@ const UserFields = ({ formik }: { formik: FormikProps<Props> }) => {
           onChange={(event : { target: { value: number; }; }) =>
             formik.setFieldValue("phone", event.target.value)
           }
-          error={
-            formik.touched?.phone && Boolean(formik.errors?.phone)
-          }
-          helperText={formik.touched?.phone && formik.errors?.phone}
+          helperText={formik.errors?.phone}
         />
       </Grid>
       <Grid item xs={12} sm={6}>
@@ -97,10 +84,7 @@ const UserFields = ({ formik }: { formik: FormikProps<Props> }) => {
           onChange={(event: { target: { value: string; }; }) =>
             formik.setFieldValue("email", event.target.value)
           }
-          error={
-            formik.touched?.email && Boolean(formik.errors?.email)
-          }
-          helperText={formik.touched?.email && formik.errors?.email}
+          helperText={formik.errors?.email}
         />
       </Grid>
       <Grid item xs={12} sm={6}>
@@ -111,38 +95,23 @@ const UserFields = ({ formik }: { formik: FormikProps<Props> }) => {
           onChange={(event) =>
             formik.setFieldValue("password", event.target.value)
           }
-          error={
-            formik.touched?.password &&
-            Boolean(formik.errors?.password)
-          }
-          helperText={
-            formik.touched?.password && formik.errors?.password
-              ? formik.errors?.password
-              : ""
-          }
+          helperText={formik.errors?.password}
         />
       </Grid>
       <Grid item xs={12} sm={6}>
         <PasswordField
           label="Confirmar contraseña"
           name="confirmPassword"
-          value={formik.values.passw?.confirmPassword}
+          value={confirPass}
           onChange={(event) =>
-            //setConfirPass(event.target.value)
-            formik.setFieldValue("passw.confirmPassword", event.target.value)
+            setConfirPass(event.target.value)
           }
-          error={
-            
-            formik.touched?.confirmPassword &&
-            confirPass === formik.values?.password &&
-            Boolean(formik.errors?.password)
-          }
-          helperText={
-            formik.touched?.confirmPassword &&
-            formik.errors?.confirmPassword
-              ? formik.errors?.cconfirmPassword
-              : ""
-          }
+          
+          // helperText={
+          //   confirPass != "" && formik.values?.password != confirPass
+          //     ? "Validar confirmación de la contraseña"
+          //     : ""
+          // }
         />
       </Grid>
     </>
