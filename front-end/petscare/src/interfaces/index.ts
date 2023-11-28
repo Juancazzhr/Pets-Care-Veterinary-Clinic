@@ -33,6 +33,7 @@ export interface Service {
 }
 
 export interface Pet {
+  id?: number,
   name: string;
   size: string;
   race: string;
