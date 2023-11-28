@@ -107,4 +107,9 @@ public class UserService implements IUserService {
     public void updateProfessional(IProfessionalServiceClient.ProfessionalDTO professionalDTO) {
         professionalRepository.updateProfessional(professionalDTO);
     }
+
+    @Override
+    public Optional<User> findUserByEmail(String mail) {
+        return repository.findUserByEmail(mail);
+    }
 }

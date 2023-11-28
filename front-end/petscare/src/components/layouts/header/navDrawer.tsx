@@ -1,4 +1,4 @@
-import {FC, useContext} from 'react'
+import {FC, useContext, useState} from 'react'
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import PersonIcon from '@mui/icons-material/Person';
@@ -12,7 +12,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import styles from './generalHeader.module.css';
-import AuthContext from '../../../context/AuthContext';
+/* import AuthContext from '../../../context/AuthContext'; */
 
 interface Props{
     window?: () => Window;
@@ -25,10 +25,10 @@ interface Props{
 const drawerWidth = 240;
 
 const NavDrawer: FC<Props> = ({handleDrawerToggle, navItems, window, mobileOpen}) => {
-    
-    const { auth } = useContext(AuthContext);
+  
     const container = window !== undefined ? () => window().document.body : undefined;
 
+    const [ auth, setAuth] = useState(false)
     return (
         <nav>
                 <Drawer
@@ -71,6 +71,7 @@ const NavDrawer: FC<Props> = ({handleDrawerToggle, navItems, window, mobileOpen}
     )
 }
 
+export default NavDrawer
 export default NavDrawer
 
 
