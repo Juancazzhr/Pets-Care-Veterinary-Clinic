@@ -72,6 +72,5 @@ const NavDrawer: FC<Props> = ({handleDrawerToggle, navItems, window, mobileOpen}
 }
 
 export default NavDrawer
-export default NavDrawer
 
 
