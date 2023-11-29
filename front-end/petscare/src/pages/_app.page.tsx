@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const domain = 'dev-juancazzhr.us.auth0.com'
   const clientId = 'T9KXSe487Atr7DdLzPrjatG2765qJZfc'
-  const audience = 'https://pets-care-ms/'
+  const audience = `https://${domain}/api/v2/`
 
   //pendiente validar si las toma desde el archivo .env
   // const domain = process.env.AUTH_DOMAIN
@@ -24,8 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
       domain = {domain}
       clientId={clientId}
       authorizationParams={{
-        audience : audience,
-        redirect_uri : '/',
+        redirect_uri: 'http://localhost:3000/'
       }}
     >
       <CssBaseline /> 
