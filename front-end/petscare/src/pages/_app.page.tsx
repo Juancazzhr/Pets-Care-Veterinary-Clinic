@@ -10,9 +10,9 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const LayoutComponent = (Component as any).Layout;
 
-  const domain = "dev-ud2x4j7fl4eku5h1.us.auth0.com"
-  const clientId = "yBgYMeusqcMUWI2R3I4axG7XPDgFyDy0"
-  const audience = 'https://dev-ud2x4j7fl4eku5h1.us.auth0.com/api/v2/'
+  const domain = 'dev-juancazzhr.us.auth0.com'
+  const clientId = 'T9KXSe487Atr7DdLzPrjatG2765qJZfc'
+  const audience = 'https://pets-care-ms/'
 
   //pendiente validar si las toma desde el archivo .env
   // const domain = process.env.AUTH_DOMAIN
