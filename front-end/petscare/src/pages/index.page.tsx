@@ -4,18 +4,19 @@ import Nosotros from '../components/home/nosotros'
 import { Servicios } from '../components/home/servicios/Servicios'
 import { Ubicacion } from '../components/home/ubicacion/Ubicacion'
 import { GetStaticProps, NextPage } from 'next'
-import { getServices } from '../services/stepperService'
-import { Service } from '@/interfaces'
+import { getProfessionals, getServices } from '../services/stepperService'
+import { Professional, Service } from '@/interfaces'
 import { getImage } from '../services/homeService'
 
 interface Props {
-  services: Service[],
+  services: Service[]
   img1: string
   img2: string
   img3: string
+  profesionales : Professional[]
 }
 
-const Home: NextPage<Props> = ({ services, img1, img2, img3 }) => {
+const Home: NextPage<Props> = ({ services, img1, img2, img3, profesionales }) => {
   return (
     <>
       <Head>
@@ -26,7 +27,7 @@ const Home: NextPage<Props> = ({ services, img1, img2, img3 }) => {
       </Head>
       <main>
         <Slider img1={img1} img2={img2} img3={img3} />
-        <Servicios services={services} />
+        <Servicios services={services} profesionals={profesionales} />
         <Nosotros />
         <Ubicacion />
       </main>
@@ -37,6 +38,7 @@ const Home: NextPage<Props> = ({ services, img1, img2, img3 }) => {
 export const getStaticProps: GetStaticProps = async () => {
 
   const services = await getServices()
+  const profesionales = await getProfessionals()
 
   const img1 = await getImage('experiencia')
   const img2 = await getImage('confianza')
@@ -47,7 +49,8 @@ export const getStaticProps: GetStaticProps = async () => {
       services,
       img1,
       img2,
-      img3
+      img3,
+      profesionales
     }
   }
 }

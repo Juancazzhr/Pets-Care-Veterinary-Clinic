@@ -1,33 +1,32 @@
-import { useFormik } from 'formik';
-import { validationSchema } from './userSchema.form';
-import { User } from '@/interfaces';
+// import { useFormik } from 'formik';
+// import { validationSchema } from './userSchema.form';
+// import { User } from '@/interfaces';
 
 
-interface Props {  
-    user: User[]
-  }
+// interface Props {  
+//     user: User[]
+//   }
 
-export const useRegisterForm = () => {
-    const formik = useFormik({
-        initialValues: {
-            firstName: "",
-            lastName: "",
-            address: "",
-            phone: 0,
-            email: "",
-            rol: {
-                id: 3,
-                name: "client",
-                description: null,
-            },
-            id: 0,
-            password: ''
-        },
-        validationSchema,
-        onSubmit: (values: User) => {
-            localStorage.setItem("mailUser", values.email)
-        }
-    });
+// export const useRegisterForm = () => {
+//     const formik = useFormik({
+//         initialValues: {
+//             firstName: "",
+//             lastName: "",
+//             address: "",
+//             phone: 0,
+//             email: "",
+//             rol: {
+//                 id: 3,
+//                 name: "client",
+//                 description: null,
+//             },
+//             id: 0,
+//             password: ''
+//         },
+//         validationSchema,
+//         onSubmit: (values: User) => {
+//         }
+//     });
 
-    return formik;
-};
+//     return formik;
+// };

@@ -1,7 +1,6 @@
+import { Pet } from '../../interfaces';
 import { useFormik } from 'formik';
 import { validationSchema } from './petSchema.form';
-import { Pet } from '@/interfaces';
-import { time } from 'console';
 
 
 interface Props {  
@@ -9,23 +8,20 @@ interface Props {
 }
 
 
- export const PetRegisterForm = () => {
-    const formik = useFormik({
-      initialValues: {
-        name: "",
-        petType: {
-          id: 0,
-          typeName: ""
-        },
-        size: "",
-        clientId: 53,
-        race: '',
-      },
-        validationSchema,
-        onSubmit: (values : Pet) => {
-            console.log(values);
-        },
-    });
-
-    return formik;
-};
+export const useRegisterForm = () => {
+  const formik = useFormik({
+    initialValues:{
+      name: "",
+      size: "",
+      clientId: 0,
+      petType: "",
+      race: ""
+    },
+    validationSchema,
+    onSubmit(values, formikHelpers) {  
+      console.log(values);
+          
+    },
+  })
+  return formik
+}

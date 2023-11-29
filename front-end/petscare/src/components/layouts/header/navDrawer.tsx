@@ -12,6 +12,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import styles from './generalHeader.module.css';
+import { useAuth0 } from "@auth0/auth0-react";
 /* import AuthContext from '../../../context/AuthContext'; */
 
 interface Props{
@@ -28,7 +29,9 @@ const NavDrawer: FC<Props> = ({handleDrawerToggle, navItems, window, mobileOpen}
   
     const container = window !== undefined ? () => window().document.body : undefined;
 
-    const [ auth, setAuth] = useState(false)
+    //const [ auth, setAuth] = useState(false)
+    const { isAuthenticated, user } = useAuth0();
+
     return (
         <nav>
                 <Drawer
@@ -47,11 +50,11 @@ const NavDrawer: FC<Props> = ({handleDrawerToggle, navItems, window, mobileOpen}
                 >
                     <Box onClick={handleDrawerToggle} >
                         <Stack className={styles.drawerUser}>
-                            {auth && <>
+                            {isAuthenticated && <>
                                 <CancelIcon color='secondary' className={styles.cancelIcon} onClick={() => { }} />
                                 <Box className={styles.drawerUserData}>
                                     <PersonIcon color='primary' className={styles.personIcon} />
-                                    <Typography className={styles.user}>Pablo Jover</Typography>
+                                    <Typography className={styles.user}>{user?.name}</Typography>
                                 </Box></>}
                         </Stack>
                         <Divider color='#573469' variant="middle" />
@@ -64,7 +67,7 @@ const NavDrawer: FC<Props> = ({handleDrawerToggle, navItems, window, mobileOpen}
                                 </ListItem>
                             ))}
                         </List>
-                        <Button variant="outlined" className={styles.buttonLoginDrawer}>{auth ? 'cerrar sesión' : 'iniciar sesión'}</Button>
+                        <Button variant="outlined" className={styles.buttonLoginDrawer}>{isAuthenticated ? 'cerrar sesión' : 'iniciar sesión'}</Button>
                     </Box>
                 </Drawer>
             </nav>

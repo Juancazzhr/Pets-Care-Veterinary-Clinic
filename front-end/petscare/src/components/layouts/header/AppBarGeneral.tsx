@@ -15,6 +15,8 @@ import Image from 'next/image'
 import logo from '../../../assets/img/logo-petscare.svg'
 import styles from './generalHeader.module.css';
 import AuthContext from '../../../context/AuthContext';
+import { useAuth0 } from "@auth0/auth0-react";
+import { useRouter } from 'next/router';
 
 interface Props{
     handleDrawerToggle: ()=> void
@@ -23,7 +25,9 @@ interface Props{
 
 const AppBarComponent: FC<Props> = ({handleDrawerToggle, navItems}) => {
 
-    const { auth } = useContext(AuthContext);
+    //const { auth } = useContext(AuthContext);
+    const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
+    const router = useRouter();
     return (
         <AppBar className={styles.appBar} >
             <Container maxWidth="xl" >
@@ -57,14 +61,18 @@ const AppBarComponent: FC<Props> = ({handleDrawerToggle, navItems}) => {
                                 ))}
                             </Box>
                             <Box className={styles.boxLogin}>
-                                {auth ?
+                                {isAuthenticated ?
                                     <Stack direction="row">
                                         <PersonIcon color='secondary' sx={{ fontSize: '32px' }} />
-                                        <Typography className={styles.user} >Pablo Jover</Typography>
-                                        <CancelIcon className={styles.cancelIcon} onClick={() => { }} />
+                                        <Typography className={styles.user} >{user?.name}</Typography>
+                                        <CancelIcon className={styles.cancelIcon} onClick={() => {logout({ logoutParams : {returnTo : '/'}}) }} />
                                     </Stack>
                                     :
-                                    <Button variant="contained" color='secondary' className={styles.buttonLogin} href='/login'>iniciar sesión</Button>
+                                    // <Button variant="contained" color='secondary' className={styles.buttonLogin} href='/login'>iniciar sesión</Button>
+                                    <>
+                                        <Button variant="contained" color='secondary' className={styles.buttonLogin} onClick={()=>{loginWithRedirect({appState: { returnTo : '/client'}})}}>iniciar sesión</Button>
+                                        <Button variant="contained" color='secondary' className={styles.buttonLogin} onClick={()=>{loginWithRedirect({appState: { returnTo : '//registroMascotas'}})}}>Registrarse</Button>
+                                    </>
                                 }
                             </Box>
                         </Box>

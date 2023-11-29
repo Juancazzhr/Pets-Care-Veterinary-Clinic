@@ -13,7 +13,7 @@ import MuiAccordionSummary, {
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import { FormCliente } from "../../components/cliente/formCliente";
-import { getUserByEmail, getUserById } from "../../services/stepperService";
+import { getUserByEmail } from "../../services/stepperService";
 
 interface Props {  
     pets: PetUser
@@ -61,7 +61,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 
 
-const ClientPage: NextPage<Props> = () => {
+const ClientPage: NextPage<Props> = ({user}) => {
 
   const [expanded, setExpanded] = useState<string | false>('panel1');
   
@@ -128,10 +128,15 @@ const ClientPage: NextPage<Props> = () => {
   export default ClientPage
 
   export const getStaticProps: GetStaticProps = async () => {
-    let email = JSON.parse(localStorage.getItem("mailUser"))
-    console.log(email);
+
+    if(typeof window !== "undefined"){
+
+      const userLoc = localStorage.getItem('user');
+      console.log(userLoc);
+    }
+
     
-    const user = await getUserByEmail(email)
+   const user = await getUserByEmail(userLoc?.email)
   
     return {
       props: {
