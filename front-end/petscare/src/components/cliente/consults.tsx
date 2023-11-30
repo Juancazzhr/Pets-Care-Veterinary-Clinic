@@ -6,10 +6,11 @@ import {
     gridFilteredSortedRowIdsSelector,
     selectedGridRowsSelector,
     GridRowId,
+    esES,
+    GridSearchIcon,
 } from '@mui/x-data-grid';
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { PetConsults } from '@/interfaces';
-import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { Typography } from '@mui/material';
 
@@ -54,14 +55,12 @@ interface Props {
     data: PetConsults
 }
 
-const DataGridConsults: FC<Props> = ({data}) => {
+const DataGridConsults: FC<Props> = ({ data }) => {
 
     const pageSize = 5;
     const pageSizeOptions = [5, 10, 20];
 
-
     const rows = data?.consults
-
 
     function CustomToolbar() {
         return (
@@ -88,20 +87,11 @@ const DataGridConsults: FC<Props> = ({data}) => {
         return gridFilteredSortedRowIdsSelector(apiRef);
     };
 
-    const localizedTextsMap = {
-        columnMenuUnsort: "Sin ordenar",
-        columnMenuSortAsc: "Orden ascendente",
-        columnMenuSortDesc: "Orden descendente",
-        columnMenuFilter: "Filtrar",
-        columnMenuHideColumn: "Ocultar columna",
-        columnMenuShowColumns: "Mostrar columnas",
-        columnMenuManageColumns: "Gestionar columnas"
-      };
-
     return (
         <div style={{ height: 400, width: '100%' }}>
 
             <DataGrid
+                
                 columns={columns}
                 rows={rows}
                 autoHeight
@@ -115,11 +105,13 @@ const DataGridConsults: FC<Props> = ({data}) => {
                     }
                 }}
                 pageSizeOptions={pageSizeOptions}
-                slots={{ toolbar: GridToolbar }}
+                slots={{ toolbar: CustomToolbar }} /* GridToolbar */
                 slotProps={{
-                    toolbar: { printOptions: { getRowsToExport: getSelectedRowsToExport } },
+                    toolbar: {CustomToolbar:{ printOptions: { getRowsToExport: getSelectedRowsToExport }, showQuickFilter: true }},
                 }}
-                localeText={localizedTextsMap}
+                localeText={esES.components.MuiDataGrid.defaultProps.localeText}
+                disableColumnSelector
+                disableDensitySelector
             />
         </div>
     );

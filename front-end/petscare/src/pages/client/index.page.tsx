@@ -29,7 +29,7 @@ const ClientPage: NextPage<Props> = ({ user, petsConsults }) => {
       </Head>
 
       <Container maxWidth={'xl'} >
-
+      <Box pt='80px'>
         <TitleSection title='Mi cuenta' colorLine='64C9A7' colorText='573469' />
         <Paper className={styles.paper}>
           <Box className={styles.personalData}>
@@ -43,6 +43,7 @@ const ClientPage: NextPage<Props> = ({ user, petsConsults }) => {
           )
           }
         </Paper>
+        </Box>
       </Container>
     </>
   )
