@@ -10,7 +10,9 @@ import { useRegisterForm } from "../../components/petRegister/petRegisterForm";
 import { Pet } from "@/interfaces";
 import ReusableModal from "../../components/reusableModal/modal";
 import { Field } from "formik";
-import { getUserByEmail, postPet } from "../../services/stepperService";
+import { getUserByEmail} from "../../services/userService";
+import { postPet} from "../../services/petService"
+
 
 interface Props {  
   pet: Pet

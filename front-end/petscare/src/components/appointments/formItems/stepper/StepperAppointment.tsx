@@ -17,7 +17,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle'
 import { Stack } from '@mui/material';
 import { Service, Professional, AppointmentInput, PetUser } from '@/interfaces/'
 import Link from 'next/link';
-import { postAppointment } from '../../../../services/stepperService';
+import { postAppointment } from '../../../../services/appointmentService';
 import ReusableModal from '../../../../components/reusableModal/modal';
 
 

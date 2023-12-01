@@ -4,7 +4,9 @@ import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
 import { GetServerSideProps, NextPage } from 'next'
 import Appointments from '../../components/appointments/Appointments'
-import { getPetsByUserId, getProfessionals, getServices } from '../../services/stepperService'
+import { getPetsByUserId} from '../../services/petService'
+import { getProfessionals } from '../../services/userService'
+import { getServices } from '../../services/servicesService'
 import { Professional, Service, PetUser } from '../../interfaces'
 
 
@@ -13,7 +15,6 @@ interface Props {
   services: Service[]
   professionals: Professional[]
 }
-
 
 const TurnosPage: NextPage<Props> = ({services, professionals, pets}) => {
   return (

@@ -6,7 +6,7 @@ import Box from '@mui/material/Box'
 import { Divider, Typography } from '@mui/material'
 import { AppointmentInput, Pet, Professional, Service } from '../../../../interfaces'
 import { useEffect, useState } from 'react'
-import { getPetById } from '../../../../services/stepperService'
+import { getPetById } from '../../../../services/petService'
 
 
 interface Props {

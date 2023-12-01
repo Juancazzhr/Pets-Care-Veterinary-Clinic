@@ -6,7 +6,7 @@ import { GetServerSideProps, GetStaticProps, NextPage } from "next"
 import Head from "next/head"
 import Typography from '@mui/material/Typography';
 import { FormCliente } from "../../components/cliente/formCliente";
-import { getUserByEmail, getUserById } from "../../services/stepperService";
+import { getUserByEmail, getUserById } from "../../services/userService";
 import styles from "../../components/cliente/client.module.css"
 import AccordionPet from "../../components/cliente/AccordionPet";
 import { getPetsConsults } from "../../services/clientService";
