@@ -17,6 +17,7 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ services, img1, img2, img3, profesionales }) => {
+  
   return (
     <>
       <Head>

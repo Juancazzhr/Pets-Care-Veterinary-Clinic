@@ -1,13 +1,10 @@
-
 import React, { FC } from 'react'
 import { Cards } from './cards'
 import styles from "./Servicios.module.css";
-import {servData} from './servData'
 import { Button, Container } from '@mui/material';
 import Stack from '@mui/material/Stack'
 import TitleSection from '../../utils/TitleSection';
 import { Professional, Service } from '@/interfaces';
-import { log } from 'console';
 
 interface Props {
   services: Service[]
@@ -15,7 +12,7 @@ interface Props {
 }
 
 export const Servicios: FC<Props> = ({services, profesionals}) => {
-  console.log(profesionals);
+/*   console.log(profesionals); */
   
   return (
     <Container maxWidth={'xl'} className={styles.wrapper}> 
