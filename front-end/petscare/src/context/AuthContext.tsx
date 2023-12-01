@@ -14,7 +14,7 @@ interface ChildrenProps {
 const AuthContext = createContext<ContextProps>({} as ContextProps);
 
 const AuthProvider = ({ children }: ChildrenProps) => {
-  const [auth, setAuth] = useState(true);
+  const [auth, setAuth] = useState(false);
   const [userLog, setUserLog] = useState<User>();
 
   const urlAPI = `${process.env.BASE_URL}/users`;

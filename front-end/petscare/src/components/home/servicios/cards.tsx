@@ -7,14 +7,16 @@ import { CardMedia } from '@mui/material'
 import { CardContent } from '@mui/material'
 import { Grid } from '@mui/material'
 import { Typography } from '@mui/material'
-import { Service } from '@/interfaces';
+import { Professional, Service } from '@/interfaces';
 import DetalleServ from '../detalleServicio/detalleServicio';
 
 interface Props {
-  services: Service[];
+  services: Service[]
+  profesionals: Professional[]
 }
 
-export const Cards: FC<Props> = ({services}) => {
+export const Cards: FC<Props> = ({services, profesionals}) => {
+console.log(profesionals);
 
   const [buttonClicked, setButtonClicked] = useState(false);
   const [cardActual, setCardActual] = useState({ 
@@ -36,7 +38,7 @@ function verDetalle(serv : Service) {
     <Grid  container spacing={1} >
       <Grid>
       {
-        buttonClicked ? <DetalleServ  visible={"block"} servicio={cardActual}  /> : <></>
+        buttonClicked ? <DetalleServ  visible={"block"} servicio={cardActual} profesionals={profesionals} /> : <></>
       }
       </Grid>
       <Box className={styles.box}>

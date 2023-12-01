@@ -28,7 +28,8 @@
 }
 
 .buttonLogin{
-    width: 206px;
+    width: 140px;
+    margin-left: 10px;
     text-transform: lowercase;
     font-weight: 900;
 }

@@ -6,13 +6,17 @@ import {servData} from './servData'
 import { Button, Container } from '@mui/material';
 import Stack from '@mui/material/Stack'
 import TitleSection from '../../utils/TitleSection';
-import { Service } from '@/interfaces';
+import { Professional, Service } from '@/interfaces';
+import { log } from 'console';
 
 interface Props {
-  services: Service[];
+  services: Service[]
+  profesionals: Professional[]
 }
 
-export const Servicios: FC<Props> = ({services}) => {
+export const Servicios: FC<Props> = ({services, profesionals}) => {
+  console.log(profesionals);
+  
   return (
     <Container maxWidth={'xl'} className={styles.wrapper}> 
       <Stack className={styles.stack}>
@@ -20,7 +24,7 @@ export const Servicios: FC<Props> = ({services}) => {
         <TitleSection title='servicios' colorLine='64C9A7' colorText='573469'/>
           <Button className={styles.button} variant="contained" href='/turnos'>Solicita tu turno</Button>      
         </Container>
-        <Cards services={services}/>
+        <Cards services={services} profesionals={profesionals}/>
       </Stack>
     </Container>
   )

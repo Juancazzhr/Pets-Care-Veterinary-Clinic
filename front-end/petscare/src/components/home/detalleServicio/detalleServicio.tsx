@@ -1,4 +1,4 @@
-import { Service } from "@/interfaces";
+import { Professional, Service } from "@/interfaces";
 import styles from "./Detalle.module.css";
 import { CardMedia, Container, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
 import { FC, useState } from "react";
@@ -10,12 +10,14 @@ import { profData } from '../../professionals/profData'
 interface Props {
     servicio: Service;
     visible: string
+    profesionals: Professional[]
   }
 
-const DetalleServ: FC<Props> = ({ servicio, visible }) => {
+const DetalleServ: FC<Props> = ({ servicio, visible, profesionals }) => {
+    console.log(profesionals);
+    
 
     const [profName, setprofName] = useState<string>('');
-    const profesionales = profData
 
     const handleChange = (event: SelectChangeEvent<typeof profName>) => {
         setprofName(event.target.value);
@@ -42,12 +44,12 @@ const DetalleServ: FC<Props> = ({ servicio, visible }) => {
                     value={profName}
                     onChange={handleChange}
                 >
-                    {profesionales?.map((profesional) => (
+                    {profesionals?.map((profesional) => (
                         <MenuItem
-                            key={profesional.id}
-                            value={profesional.nombre}
+                            key={profesional.user.id}
+                            value={profesional.user.firstName + " " + profesional.user.lastName}
                         >
-                            {profesional.nombre}
+                            {profesional.user.firstName + " " + profesional.user.lastName}
                         </MenuItem>
                     ))}
                 </Select>
