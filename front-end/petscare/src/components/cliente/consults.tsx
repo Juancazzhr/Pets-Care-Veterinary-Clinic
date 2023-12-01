@@ -105,7 +105,7 @@ const DataGridConsults: FC<Props> = ({ data }) => {
                     }
                 }}
                 pageSizeOptions={pageSizeOptions}
-                slots={{ toolbar: CustomToolbar }} /* GridToolbar */
+                slots={{ toolbar: GridToolbar }} /*  CustomToolbar */
                 slotProps={{
                     toolbar: {CustomToolbar:{ printOptions: { getRowsToExport: getSelectedRowsToExport }, showQuickFilter: true }},
                 }}
