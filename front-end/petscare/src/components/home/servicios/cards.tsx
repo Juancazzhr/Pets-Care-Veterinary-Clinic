@@ -42,7 +42,7 @@ function verDetalle(serv : Service) {
       <Box className={styles.box}>
         {
           services?.map((serv)=>(
-            <Grid xs={10} sm={6} md={4} xl={2} key={serv.id} className={styles.grid}>  
+            <Grid item xs={10} sm={6} md={4} xl={2} key={serv.id} className={styles.grid}>  
               <Card 
                 elevation={6} 
                 className={styles.cards}

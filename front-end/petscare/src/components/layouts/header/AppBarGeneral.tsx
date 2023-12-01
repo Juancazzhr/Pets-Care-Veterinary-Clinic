@@ -29,13 +29,13 @@ const AppBarComponent: FC<Props> = ({handleDrawerToggle, navItems}) => {
             <Container maxWidth="xl" >
                 <Toolbar disableGutters className={styles.toolbar}>
                     <Link href="/" passHref >
-                        <Image
+                        <a><Image
                             src={logo}
                             alt='logo'
                             width={190.78}
                             height={60}
                             priority={true} 
-                            className={styles.logo}/>
+                            className={styles.logo}/></a>
                     </Link>
                     <Box>
                         <IconButton
