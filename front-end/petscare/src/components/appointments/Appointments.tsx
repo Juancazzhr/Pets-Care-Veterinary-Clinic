@@ -3,7 +3,6 @@ import Paper from '@mui/material/Paper'
 import styles from './Appointments.module.css'
 import StepperAppointment from './formItems/stepper/StepperAppointment'
 import Alert from '@mui/material/Alert'
-import AuthContext from '../../context/AuthContext'
 import Button from '@mui/material/Button'
 import { Stack } from '@mui/material'
 import { NextPage } from 'next'
@@ -20,7 +19,6 @@ interface Props {
 const Appointments: NextPage<Props> = ({services, professionals, pets}) => {
 
     
-    //const { auth } = useContext(AuthContext);
     const { isAuthenticated, loginWithRedirect} = useAuth0();
 
     return (
