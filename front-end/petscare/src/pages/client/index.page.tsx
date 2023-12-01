@@ -127,23 +127,23 @@ const ClientPage: NextPage<Props> = ({user}) => {
   }
   export default ClientPage
 
-  export const getStaticProps: GetStaticProps = async () => {
+  // export const getStaticProps: GetStaticProps = async () => {
 
-    if(typeof window !== "undefined"){
+  //   if(typeof window !== "undefined"){
 
-      const userLoc = localStorage.getItem('user');
-      console.log(userLoc);
-    }
+  //     const userLoc = localStorage.getItem('user');
+  //     console.log(userLoc);
+  //   }
 
     
-   const user = await getUserByEmail(userLoc?.email)
+  //  const user = await getUserByEmail(userLoc?.email)
   
-    return {
-      props: {
-        user
-      }
-    }
-  }
+  //   return {
+  //     props: {
+  //       user
+  //     }
+  //   }
+  // }
 
 
 

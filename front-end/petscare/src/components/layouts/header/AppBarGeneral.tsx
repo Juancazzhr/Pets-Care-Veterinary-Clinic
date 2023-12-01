@@ -14,7 +14,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import logo from '../../../assets/img/logo-petscare.svg'
 import styles from './generalHeader.module.css';
-import AuthContext from '../../../context/AuthContext';
 import { useAuth0 } from "@auth0/auth0-react";
 import { useRouter } from 'next/router';
 
@@ -65,13 +64,43 @@ const AppBarComponent: FC<Props> = ({handleDrawerToggle, navItems}) => {
                                     <Stack direction="row">
                                         <PersonIcon color='secondary' sx={{ fontSize: '32px' }} />
                                         <Typography className={styles.user} >{user?.name}</Typography>
-                                        <CancelIcon className={styles.cancelIcon} onClick={() => {logout({ logoutParams : {returnTo : '/'}}) }} />
+                                        <CancelIcon className={styles.cancelIcon} onClick={() => {logout({ logoutParams : {returnTo : window.location.origin}}) }} />
                                     </Stack>
                                     :
                                     // <Button variant="contained" color='secondary' className={styles.buttonLogin} href='/login'>iniciar sesión</Button>
                                     <>
-                                        <Button variant="contained" color='secondary' className={styles.buttonLogin} onClick={()=>{loginWithRedirect({appState: { returnTo : '/client'}})}}>iniciar sesión</Button>
-                                        <Button variant="contained" color='secondary' className={styles.buttonLogin} onClick={()=>{loginWithRedirect({appState: { returnTo : '//registroMascotas'}})}}>Registrarse</Button>
+                                        <Button 
+                                            variant="contained" 
+                                            color='secondary' 
+                                            className={styles.buttonLogin} 
+                                            onClick={()=>
+                                            {
+                                                loginWithRedirect({
+                                                    appState: { 
+                                                        returnTo : "/client"
+                                                    }
+                                                })
+                                            }}
+                                        >iniciar sesión
+                                        </Button>
+
+                                        <Button 
+                                            variant="contained" 
+                                            color='secondary' 
+                                            className={styles.buttonLogin} 
+                                            onClick={()=>
+                                            {
+                                                loginWithRedirect({
+                                                    appState: { 
+                                                        returnTo : '/registroMascotas'
+                                                    },
+                                                    authorizationParams :{
+                                                        screen_hint: "signup",
+                                                    }
+                                                })
+                                            }}
+                                        >Registrarse
+                                        </Button>
                                     </>
                                 }
                             </Box>

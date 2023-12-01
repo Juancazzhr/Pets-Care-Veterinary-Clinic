@@ -30,7 +30,7 @@ const NavDrawer: FC<Props> = ({handleDrawerToggle, navItems, window, mobileOpen}
     const container = window !== undefined ? () => window().document.body : undefined;
 
     //const [ auth, setAuth] = useState(false)
-    const { isAuthenticated, user } = useAuth0();
+    const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
 
     return (
         <nav>
@@ -67,7 +67,11 @@ const NavDrawer: FC<Props> = ({handleDrawerToggle, navItems, window, mobileOpen}
                                 </ListItem>
                             ))}
                         </List>
-                        <Button variant="outlined" className={styles.buttonLoginDrawer}>{isAuthenticated ? 'cerrar sesión' : 'iniciar sesión'}</Button>
+                        {
+                            isAuthenticated ?
+                            <Button variant="outlined" className={styles.buttonLoginDrawer} onClick={()=>{logout({ logoutParams : {returnTo : 'http://localhost:3000/'}})}}>cerrar sesión</Button> :
+                            <Button variant="outlined" className={styles.buttonLoginDrawer} onClick={()=>{loginWithRedirect({appState: { returnTo : '/client'}})}}>iniciar sesión</Button>
+                        }
                     </Box>
                 </Drawer>
             </nav>
