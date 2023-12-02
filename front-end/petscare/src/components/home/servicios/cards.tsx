@@ -16,7 +16,7 @@ interface Props {
 }
 
 export const Cards: FC<Props> = ({services, profesionals}) => {
-console.log(profesionals);
+/* console.log(profesionals); */
 
   const [buttonClicked, setButtonClicked] = useState(false);
   const [cardActual, setCardActual] = useState({ 

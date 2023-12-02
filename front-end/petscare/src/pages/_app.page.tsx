@@ -3,7 +3,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 
 import LayoutGeneral from '../components/layouts/LayoutGeneral'
 import { theme } from "../styles/material-theme";
-//import { AuthProvider } from '../context/AuthContext';
+import { AuthProvider } from '../context/AuthContext';
 import { Auth0Provider } from '@auth0/auth0-react';
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -20,13 +20,15 @@ export default function App({ Component, pageProps }: AppProps) {
   // const audience = process.env.AUTH_AUDIENCE
 
   return <ThemeProvider theme={theme}>
+   
     <Auth0Provider
       domain = {domain}
       clientId={clientId}
       authorizationParams={{
-        redirect_uri: `${process.env.BASE_URL}`
+        redirect_uri: "http://localhost:3000/"
+        /* redirect_uri: `${process.env.BASE_URL}` */
       }}
-    >
+    > <AuthProvider>
       <CssBaseline /> 
       {LayoutComponent ?
         <LayoutComponent>
@@ -38,6 +40,8 @@ export default function App({ Component, pageProps }: AppProps) {
         </LayoutGeneral>
 
       }
+      </AuthProvider>
     </Auth0Provider>
+    
   </ThemeProvider>
 }

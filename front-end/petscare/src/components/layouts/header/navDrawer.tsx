@@ -13,7 +13,7 @@ import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import styles from './generalHeader.module.css';
 import { useAuth0 } from "@auth0/auth0-react";
-/* import AuthContext from '../../../context/AuthContext'; */
+import AuthContext from '../../../context/AuthContext';
 
 interface Props{
     window?: () => Window;
@@ -29,8 +29,8 @@ const NavDrawer: FC<Props> = ({handleDrawerToggle, navItems, window, mobileOpen}
   
     const container = window !== undefined ? () => window().document.body : undefined;
 
-  
-    const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
+    const {userLog} = useContext(AuthContext);
+    const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
     return (
         <nav>
@@ -54,7 +54,7 @@ const NavDrawer: FC<Props> = ({handleDrawerToggle, navItems, window, mobileOpen}
                                 <CancelIcon color='secondary' className={styles.cancelIcon} onClick={() => { }} />
                                 <Box className={styles.drawerUserData}>
                                     <PersonIcon color='primary' className={styles.personIcon} />
-                                    <Typography className={styles.user}>{user?.name}</Typography>
+                                    <Typography className={styles.user}>{userLog?.firstName} {userLog?.lastName}</Typography>
                                 </Box></>}
                         </Stack>
                         <Divider color='#573469' variant="middle" />
@@ -69,7 +69,7 @@ const NavDrawer: FC<Props> = ({handleDrawerToggle, navItems, window, mobileOpen}
                         </List>
                         {
                             isAuthenticated ?
-                            <Button variant="outlined" className={styles.buttonLoginDrawer} onClick={()=>{logout({ logoutParams : {returnTo : 'http://localhost:3000/'}})}}>cerrar sesión</Button> :
+                            <Button variant="outlined" className={styles.buttonLoginDrawer} onClick={()=>{logout({ logoutParams : {returnTo : `${process.env.BASE_URL}`}})}}>cerrar sesión</Button> :
                             <Button variant="outlined" className={styles.buttonLoginDrawer} onClick={()=>{loginWithRedirect({appState: { returnTo : '/client'}})}}>iniciar sesión</Button>
                         }
                     </Box>

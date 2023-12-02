@@ -1,6 +1,8 @@
+"use client"
+
 import { User } from "@/interfaces";
 import { useAuth0 } from "@auth0/auth0-react";
-import { ReactNode, createContext, useEffect, useState } from "react";
+import { ReactNode, createContext, useEffect, useMemo, useState, useContext } from "react";
 
 interface ContextProps {
   userLog: User | undefined
@@ -21,7 +23,9 @@ const AuthProvider = ({ children }: ChildrenProps) => {
 
   const getUser = (email:any, isAuth: boolean) => {
 
-    const urlAPI = `${process.env.BASE_URL_BACK}users/mail${email}}`;
+   /*  const urlAPI = `${process.env.BASE_URL_BACK}users/mail/${email}}`; */
+
+    const urlAPI = `http://ec2-34-229-209-114.compute-1.amazonaws.com/dev/v1/users/mail/${email}`;
 
     if(isAuth){
       fetch(urlAPI)
@@ -47,13 +51,19 @@ const AuthProvider = ({ children }: ChildrenProps) => {
   }, [isAuthenticated])
  
 
-  const data = { userLog };
+  const data = useMemo(
+    () =>({
+      userLog
+    }),
+    [userLog]
+  );
 
-  console.log({userLog});
-  
+console.log({userLog});
 
+ 
   return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>;
 };
 
 export { AuthProvider };
 export default AuthContext;
+

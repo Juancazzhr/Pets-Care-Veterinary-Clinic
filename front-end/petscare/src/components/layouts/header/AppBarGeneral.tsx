@@ -16,6 +16,7 @@ import logo from '../../../assets/img/logo-petscare.svg'
 import styles from './generalHeader.module.css';
 import { useAuth0 } from "@auth0/auth0-react";
 import { useRouter } from 'next/router';
+import AuthContext from '../../../context/AuthContext';
 
 interface Props{
     handleDrawerToggle: ()=> void
@@ -24,8 +25,8 @@ interface Props{
 
 const AppBarComponent: FC<Props> = ({handleDrawerToggle, navItems}) => {
 
-    //const { auth } = useContext(AuthContext);
-    const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
+    const {userLog } = useContext(AuthContext);
+    const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
     const router = useRouter();
     return (
         <AppBar className={styles.appBar} >
@@ -63,7 +64,7 @@ const AppBarComponent: FC<Props> = ({handleDrawerToggle, navItems}) => {
                                 {isAuthenticated ?
                                     <Stack direction="row">
                                         <PersonIcon color='secondary' sx={{ fontSize: '32px' }} />
-                                        <Typography className={styles.user} >{user?.name}</Typography>
+                                        <Typography className={styles.user} >{userLog?.firstName} {userLog?.lastName}</Typography>
                                         <CancelIcon className={styles.cancelIcon} onClick={() => {logout({ logoutParams : {returnTo : window.location.origin}}) }} />
                                     </Stack>
                                     :

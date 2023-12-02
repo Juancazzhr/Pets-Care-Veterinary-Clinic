@@ -1,4 +1,4 @@
-import { AppointmentInput, Pet } from "@/interfaces";
+import { AppointmentInput} from "@/interfaces";
 
 
 export const postAppointment = async (data: AppointmentInput) => {
