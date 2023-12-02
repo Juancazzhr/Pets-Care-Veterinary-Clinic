@@ -29,7 +29,7 @@ const NavDrawer: FC<Props> = ({handleDrawerToggle, navItems, window, mobileOpen}
   
     const container = window !== undefined ? () => window().document.body : undefined;
 
-    //const [ auth, setAuth] = useState(false)
+  
     const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
 
     return (

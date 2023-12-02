@@ -1,9 +1,8 @@
 import { User } from "@/interfaces";
+import { useAuth0 } from "@auth0/auth0-react";
 import { ReactNode, createContext, useEffect, useState } from "react";
 
 interface ContextProps {
-  auth: boolean
-  handleAuth: (jwt: string) => void
   userLog: User | undefined
 }
 
@@ -14,20 +13,18 @@ interface ChildrenProps {
 const AuthContext = createContext<ContextProps>({} as ContextProps);
 
 const AuthProvider = ({ children }: ChildrenProps) => {
-  const [auth, setAuth] = useState(false);
+
+  const { isAuthenticated, user } = useAuth0();
   const [userLog, setUserLog] = useState<User>();
 
-  const urlAPI = `${process.env.BASE_URL}/users`;
+ 
 
-  const getUser = (url:string, token:string) => {
+  const getUser = (email:any, isAuth: boolean) => {
 
-    const settings = {
-      method: "GET",
-      headers: {
-        /* authorization: "Bearer " + token, */
-      },
-    };
-    fetch(url, settings)
+    const urlAPI = `${process.env.BASE_URL_BACK}users/mail${email}}`;
+
+    if(isAuth){
+      fetch(urlAPI)
       .then((response) => {
         console.log(response);
         if (response.ok !== true) {
@@ -40,24 +37,20 @@ const AuthProvider = ({ children }: ChildrenProps) => {
           setUserLog(data)
         }
       });
+    }
 
   };
 
   useEffect(() => {
-    userLog?.id && setAuth(true);
-  }, [userLog])
+  getUser(user?.email, isAuthenticated)  
+  
+  }, [isAuthenticated])
+ 
 
-  const handleAuth = (jwt: string) => {
-    if (auth) {
-      localStorage.removeItem("jwt");
-      setAuth(false);
-    } else {
-      localStorage.setItem("jwt", JSON.stringify(jwt));
-      getUser(urlAPI, jwt);
-    }
-  };
+  const data = { userLog };
 
-  const data = { auth, handleAuth, userLog };
+  console.log({userLog});
+  
 
   return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>;
 };
