@@ -4,7 +4,7 @@ import MenuItem from '@mui/material/MenuItem'
 import Stack from '@mui/material/Stack'
 import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
-import styles from '../Appointments.module.css'
+import styles from '../StepperAppointment.module.css'
 import { PetUser, Pet } from '@/interfaces'
 
 

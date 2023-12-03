@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useState, useContext } from 'react'
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Paper from '@mui/material/Paper';
@@ -6,19 +6,20 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import ServiceStep from './ServiceStep';
-import styles from '../../Appointments.module.css'
-import ProfessionalStep from './ProfessionalStep';
-import DatetimeStep from './DatetimeStep';
-import ConfirmationStep from './ConfirmationStep';
+import ServiceStep from './formItems/stepper/ServiceStep';
+import styles from './StepperAppointment.module.css'
+import ProfessionalStep from './formItems/stepper/ProfessionalStep';
+import DatetimeStep from './formItems/stepper/DatetimeStep';
+import ConfirmationStep from './formItems/stepper/ConfirmationStep';
 import { useRouter } from 'next/router';
-import PetSelect from '../PetSelect';
+import PetSelect from './formItems/PetSelect';
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 import { Stack } from '@mui/material';
 import { Service, Professional, AppointmentInput, PetUser } from '@/interfaces/'
 import Link from 'next/link';
-import { postAppointment } from '../../../../services/appointmentService';
-import ReusableModal from '../../../../components/reusableModal/modal';
+import { postAppointment } from '../../services/appointmentService';
+import ReusableModal from '../reusableModal/modal';
+
 
 
 const steps = ['servicio', 'profesional', 'fecha y hora', 'confirmación'];
@@ -38,7 +39,7 @@ interface Props {
 
 const StepperAppointment = ({ services, professionals, pets }: Props) => {
 
-
+    
     const [activeStep, setActiveStep] = useState(0);
     const [dataForm, setDataForm] = useState<AppointmentInput>(defaultValues)
     const router = useRouter()

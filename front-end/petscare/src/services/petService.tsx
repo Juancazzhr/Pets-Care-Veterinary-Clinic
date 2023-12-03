@@ -18,7 +18,7 @@ export const postPet = async (data: Pet) => {
   };
 
 
-export const getPetsByUserId = async (id: number) => {
+export const getPetsByUserId = async (id: number | undefined) => {
     const response = await fetch(`http://ec2-34-229-209-114.compute-1.amazonaws.com/dev/v1/pets/users/${id}`)
     const pets = await response.json()
     return pets;
