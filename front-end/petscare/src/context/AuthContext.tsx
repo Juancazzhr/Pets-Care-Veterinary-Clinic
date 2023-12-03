@@ -2,6 +2,7 @@
 
 import { User } from "@/interfaces";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useRouter } from "next/router";
 import { ReactNode, createContext, useEffect, useMemo, useState, useContext } from "react";
 
 interface ContextProps {
@@ -19,6 +20,7 @@ const AuthProvider = ({ children }: ChildrenProps) => {
   const { isAuthenticated, user } = useAuth0();
   const [userLog, setUserLog] = useState<User>();
 
+  const router = useRouter()
  
 
   const getUser = (email:any, isAuth: boolean) => {
@@ -27,7 +29,7 @@ const AuthProvider = ({ children }: ChildrenProps) => {
 
     const urlAPI = `http://ec2-34-229-209-114.compute-1.amazonaws.com/dev/v1/users/mail/${email}`;
 
-    if(isAuth){
+    if(isAuth && router.asPath !== '/registro' ){
       fetch(urlAPI)
       .then((response) => {
         console.log(response);

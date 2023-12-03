@@ -93,7 +93,7 @@ const AppBarComponent: FC<Props> = ({handleDrawerToggle, navItems}) => {
                                             {
                                                 loginWithRedirect({
                                                     appState: { 
-                                                        returnTo : '/registroMascotas'
+                                                        returnTo : '/registro'
                                                     },
                                                     authorizationParams :{
                                                         screen_hint: "signup",

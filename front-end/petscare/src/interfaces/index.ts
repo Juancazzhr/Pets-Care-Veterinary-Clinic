@@ -8,6 +8,12 @@ export interface User {
   password: string;
   rol: Rol;
 }
+
+export interface UserAuth0{
+  email: string,
+  
+}
+
 export interface Professional {
   user: User;
   professionalDTO: ProfessionalDTO;

@@ -1,149 +1,53 @@
-// import React, { useCallback, useState } from "react";
-// import {  NextPage } from "next";
-// import LayoutAuth from "../../components/layouts/LayoutAuth";
-// import { useRouter } from "next/router";
-// import styles from "../../components/userRegister/registro.module.css";
-// import { Button, Box, Grid, Typography, Paper, Link } from "@mui/material";
-// import UserFields from "../../components/userRegister/userFields";
-// import { useRegisterForm} from "../../components/userRegister/userRegisterForm";
-// import ReusableModal from "../../components/reusableModal/modal";
-// import { postUser } from "../../services/stepperService";
-// import { User } from "@/interfaces";
-// import { Field } from "formik";
+import React, { useState } from "react";
+import TitleSection from "../../components/utils/TitleSection"
+import { Box, Container, Paper, TextField } from "@mui/material"
+import {  NextPage } from "next"
+import Head from "next/head"
+import Typography from '@mui/material/Typography';
+import styles from "../../components/cliente/client.module.css"
+import { useAuth0 } from "@auth0/auth0-react";
+import LayoutRegister from "../../components/layouts/LayoutRegister";
+import FormRegister from "../..//components/userRegister/formRegister";
 
-// interface Props {  
-//   user: User
-// }
 
-// const Register: NextPage = () => {
+interface Props {
+    /* user: UserAuth0 */
+  }
+  
 
-//   const formik = useRegisterForm();
-//   const router = useRouter();
-//   const [isModalOpen, setIsModalOpen] = useState(false);
-//   const [modalInfo, setModalInfo] = useState({
-//     title: "",
-//     message: "",
-//     isError: false,
-//     acceptButtonText: "",
-//   });
+const RegistroPage: NextPage<Props> = () => {
 
-//   const handleRegisterLinkClick = useCallback(
-//     (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-//       event.preventDefault();
-//       router.push("/login");
-//     },
-//     [router]
-//   );
+const {user} = useAuth0()
 
-//   const postData =  useCallback((values: User) => {
-//     return new Promise((resolve, reject) => {
-//       setTimeout(() => {
-//         if (Object.keys(values).length > 0) {          
-//           localStorage.setItem("email", JSON.stringify(values.email));          
-//           const response = postUser(values)
-//           response.then((res)=>{            
-//             resolve("Success");
-//           })
-//         } else {
-//           reject("Error");
-//         }
-//       }, 500)
-//     })
-//   }, [])
- 
-//   const handleFormSubmit = useCallback(
-//     async (event: React.FormEvent<HTMLFormElement>) => {
-//       event.preventDefault();
-//       formik.setTouched({     
-//         [Field.name]: true
-//     });
+    return (
+        <>
+          <Head>0
+            <title>Pets Care: registro</title>
+            <meta name="description" content="Registro" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="icon" href="/favicon.ico" />
+          </Head>
+    
+          <Container maxWidth={'xl'} >
+          <Box pt='80px'>
+            <TitleSection title='Mi cuenta' colorLine='64C9A7' colorText='573469' />
+            <Paper className={styles.paper}>
+              <Box className={styles.personalData}>
+                <Typography className={styles.subtitle}>Completá tus datos Personales</Typography>
+                <FormRegister user={user}  />
+              </Box>
+            </Paper>
+            </Box>
+          </Container>
+        </>
+      )
+    
+    
+    }
+    
+    (RegistroPage as any).Layout = LayoutRegister;
 
-//       // Realiza la validación del formulario
-//       const formErrors = await formik.validateForm(formik.values);
 
-//       if (formik.isValid && Object.keys(formErrors).length === 0) {
 
-//         postData(formik.values)
-//           .then(() => {
-//             setModalInfo({
-//               title: "¡Bienvenid@!",
-//               message: "Tu cuenta ha sido creada con éxito.",
-//               isError: false,
-//               acceptButtonText: "registra tu mascota",
-//             });
-//             setIsModalOpen(true);
-//           })
-//           .catch((error) => {
-//             // Manejar errores de la llamada de la API
-//             console.log(error);
-//             setModalInfo({
-//               title: "",
-//               message: "",
-//               isError: true,
-//               acceptButtonText: "",
-//             });
-//             setIsModalOpen(true);
-//           });
-//       } else {
-//         formik.errors;
-//       }
-//     },
-//     [formik, postData]
-//   );
 
-//   const handleModalClose = useCallback(() => {
-//     setIsModalOpen(false);
-//   }, []);
-
-//   const redirectToPetRegistration = useCallback(() => {
-//     setIsModalOpen(false);
-//     router.push("/registroMascotas");
-//   }, [router]);
-
-//   return (
-//     <Box className={styles.root}>
-//       <Typography
-//         color="primary"
-//         variant="h3"
-//         textAlign={"center"}
-//         fontWeight={700}
-//         sx={{ mb: "15px" }}
-//       >
-//         registrate
-//       </Typography>
-//       <Paper elevation={8} className={styles.paper}>
-//         <form onSubmit={handleFormSubmit}>
-//           <Grid container spacing={2}>
-//             <UserFields formik={formik} />
-//           </Grid>
-//           <Button
-//             color="primary"
-//             variant="contained"
-//             type="submit"
-//             className={styles.registerButton}
-//           >
-//             Crear cuenta
-//           </Button>
-//           <ReusableModal
-//             isOpen={isModalOpen}
-//             onClose={handleModalClose}
-//             onAccept={redirectToPetRegistration}
-//             title={modalInfo.title}
-//             message={modalInfo.message}
-//             acceptButtonText={modalInfo.acceptButtonText}
-//           />
-//           <Box className={styles.boxTextLink}>
-//             ¿Ya tenes cuenta?{" "}
-//             <Link href="#" underline="hover" onClick={handleRegisterLinkClick}>
-//               <span style={{ color: "#007FFF" }}>Inicia sesión</span>
-//             </Link>
-//           </Box>
-//         </form>
-//       </Paper>
-//     </Box>
-//   );
-// };
-
-// (Register as any).Layout = LayoutAuth;
-
-// export default Register
+export default RegistroPage
