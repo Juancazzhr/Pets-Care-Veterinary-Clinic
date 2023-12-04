@@ -8,7 +8,7 @@ interface Props {
     type: string,
     required?: boolean,
     control: Control<any>,
-    defaultValue?: string,
+    defaultValue?: string | number,
     error?: boolean;
     message?: string | undefined;
     textFieldProps?: Record<string, any>
@@ -42,9 +42,9 @@ const InputController= ({
             required={required}
             error={error}
             helperText={message}
-            sx={{ mb: 2 }}
+            sx={{ mb: 2}}
             {...textFieldProps}
-            className={style.form}
+            className={style.input}
           />
         )}
       />

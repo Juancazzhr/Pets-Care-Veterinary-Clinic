@@ -5,19 +5,15 @@ import {  NextPage } from "next"
 import Head from "next/head"
 import Typography from '@mui/material/Typography';
 import styles from "../../components/cliente/client.module.css"
-import { useAuth0 } from "@auth0/auth0-react";
 import LayoutRegister from "../../components/layouts/LayoutRegister";
 import FormRegister from "../..//components/userRegister/formRegister";
+import { UserAuth0 } from "@/interfaces";
 
 
-interface Props {
-    /* user: UserAuth0 */
-  }
-  
 
-const RegistroPage: NextPage<Props> = () => {
+const RegistroPage: NextPage = () => {
 
-const {user} = useAuth0()
+
 
     return (
         <>
@@ -34,7 +30,7 @@ const {user} = useAuth0()
             <Paper className={styles.paper}>
               <Box className={styles.personalData}>
                 <Typography className={styles.subtitle}>Completá tus datos Personales</Typography>
-                <FormRegister user={user}  />
+                <FormRegister />
               </Box>
             </Paper>
             </Box>

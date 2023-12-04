@@ -1,5 +1,5 @@
 export interface User {
-  id: number;
+  id?: number;
   firstName: string;
   lastName: string;
   address: string;
@@ -11,8 +11,7 @@ export interface User {
 
 export interface UserAuth0{
   email: string,
-  
-}
+  }
 
 export interface Professional {
   user: User;

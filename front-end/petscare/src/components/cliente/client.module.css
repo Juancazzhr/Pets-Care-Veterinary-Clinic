@@ -1,4 +1,4 @@
-.form{
+.input{
     width: 100%;
     color: blue;
 }
@@ -18,5 +18,20 @@
   }
 
   .personalData{
+    width: 90%;
+    margin-inline: auto;
     margin-bottom: 50px;
   }
+
+  .buttonSubmit {
+    width: 206px;
+    text-transform: lowercase;
+    font-weight: 700;
+  }
+
+  @media screen and (min-width: 600px) {
+    .input{
+      width: 47%;
+      margin-right: 3%;
+  }
+}
