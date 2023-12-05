@@ -14,6 +14,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import logo from '../../../assets/img/logo-petscare.svg'
 import styles from './generalHeader.module.css';
+import { useAuth0 } from "@auth0/auth0-react";
+import { useRouter } from 'next/router';
 import AuthContext from '../../../context/AuthContext';
 
 interface Props{
@@ -23,19 +25,21 @@ interface Props{
 
 const AppBarComponent: FC<Props> = ({handleDrawerToggle, navItems}) => {
 
-    const { auth } = useContext(AuthContext);
+    const {userLog } = useContext(AuthContext);
+    const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+    const router = useRouter();
     return (
         <AppBar className={styles.appBar} >
             <Container maxWidth="xl" >
                 <Toolbar disableGutters className={styles.toolbar}>
                     <Link href="/" passHref >
-                        <Image
+                        <a><Image
                             src={logo}
                             alt='logo'
                             width={190.78}
                             height={60}
                             priority={true} 
-                            className={styles.logo}/>
+                            className={styles.logo}/></a>
                     </Link>
                     <Box>
                         <IconButton
@@ -57,14 +61,48 @@ const AppBarComponent: FC<Props> = ({handleDrawerToggle, navItems}) => {
                                 ))}
                             </Box>
                             <Box className={styles.boxLogin}>
-                                {auth ?
+                                {isAuthenticated ?
                                     <Stack direction="row">
                                         <PersonIcon color='secondary' sx={{ fontSize: '32px' }} />
-                                        <Typography className={styles.user} >Lio Messi</Typography>
-                                        <CancelIcon className={styles.cancelIcon} onClick={() => { }} />
+                                        <Typography className={styles.user} >{userLog?.firstName} {userLog?.lastName}</Typography>
+                                        <CancelIcon className={styles.cancelIcon} onClick={() => {logout({ logoutParams : {returnTo : window.location.origin}}) }} />
                                     </Stack>
                                     :
-                                    <Button variant="contained" color='secondary' className={styles.buttonLogin} href='/login'>iniciar sesión</Button>
+                                    // <Button variant="contained" color='secondary' className={styles.buttonLogin} href='/login'>iniciar sesión</Button>
+                                    <>
+                                        <Button 
+                                            variant="contained" 
+                                            color='secondary' 
+                                            className={styles.buttonLogin} 
+                                            onClick={()=>
+                                            {
+                                                loginWithRedirect({
+                                                    appState: { 
+                                                        returnTo : "/client"
+                                                    }
+                                                })
+                                            }}
+                                        >iniciar sesión
+                                        </Button>
+
+                                        <Button 
+                                            variant="contained" 
+                                            color='secondary' 
+                                            className={styles.buttonLogin} 
+                                            onClick={()=>
+                                            {
+                                                loginWithRedirect({
+                                                    appState: { 
+                                                        returnTo : '/registro'
+                                                    },
+                                                    authorizationParams :{
+                                                        screen_hint: "signup",
+                                                    }
+                                                })
+                                            }}
+                                        >Registrarse
+                                        </Button>
+                                    </>
                                 }
                             </Box>
                         </Box>

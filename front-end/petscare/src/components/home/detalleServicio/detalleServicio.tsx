@@ -1,20 +1,23 @@
-import { Serv } from "@/interfaces/servicios";
+import { Professional, Service } from "@/interfaces";
 import styles from "./Detalle.module.css";
-import { Container, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
+import { CardMedia, Container, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
 import { FC, useState } from "react";
 import Image from 'next/image'
 import { profData } from '../../professionals/profData'
 
+
+
 interface Props {
-    servicio: Serv,
+    servicio: Service;
     visible: string
-}
+    profesionals: Professional[]
+  }
 
-
-const DetalleServ: FC<Props> = ({ servicio, visible }) => {
+const DetalleServ: FC<Props> = ({ servicio, visible, profesionals }) => {
+    console.log(profesionals);
+    
 
     const [profName, setprofName] = useState<string>('');
-    const profesionales = profData
 
     const handleChange = (event: SelectChangeEvent<typeof profName>) => {
         setprofName(event.target.value);
@@ -22,31 +25,31 @@ const DetalleServ: FC<Props> = ({ servicio, visible }) => {
 
     return (
         <Container className={styles.wrapperDet} style={{ display: `${visible}` }}>
-            <Image className={styles.imgDet}
-                src={servicio?.url}
-                alt={"cirugia"}
-                width={340}
-                height={280}
-            />
+            <CardMedia
+                    className={styles.imgDet}
+                    component="img"
+                    image={servicio.thumbnail}
+                    alt={servicio.name}
+                    />
             <Typography className={styles.titleDet}>
 
-                {servicio?.nombre}
+                {servicio?.name}
             </Typography>
-            <Typography >
-                {servicio?.descripcion}
+            <Typography className={styles.desc}>
+                {servicio?.description}
             </Typography>
-            <FormControl variant="standard" sx={{ m: 2, width: 300 }}>
+            <FormControl variant="standard" sx={{ m: 2 }} className={styles.form}>
                 <InputLabel>LIstado de Profesionales</InputLabel>
                 <Select
                     value={profName}
                     onChange={handleChange}
                 >
-                    {profesionales?.map((profesional) => (
+                    {profesionals?.map((profesional) => (
                         <MenuItem
-                            key={profesional.id}
-                            value={profesional.nombre}
+                            key={profesional.user.id}
+                            value={profesional.user.firstName + " " + profesional.user.lastName}
                         >
-                            {profesional.nombre}
+                            {profesional.user.firstName + " " + profesional.user.lastName}
                         </MenuItem>
                     ))}
                 </Select>

@@ -1,4 +1,4 @@
-import {FC, useContext} from 'react'
+import {FC, useContext, useState} from 'react'
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import PersonIcon from '@mui/icons-material/Person';
@@ -12,6 +12,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import styles from './generalHeader.module.css';
+import { useAuth0 } from "@auth0/auth0-react";
 import AuthContext from '../../../context/AuthContext';
 
 interface Props{
@@ -24,10 +25,12 @@ interface Props{
 
 const drawerWidth = 240;
 
-const navDrawer: FC<Props> = ({handleDrawerToggle, navItems, window, mobileOpen}) => {
+const NavDrawer: FC<Props> = ({handleDrawerToggle, navItems, window, mobileOpen}) => {
   
     const container = window !== undefined ? () => window().document.body : undefined;
-    const { auth } = useContext(AuthContext);
+
+    const {userLog} = useContext(AuthContext);
+    const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
     return (
         <nav>
@@ -47,11 +50,11 @@ const navDrawer: FC<Props> = ({handleDrawerToggle, navItems, window, mobileOpen}
                 >
                     <Box onClick={handleDrawerToggle} >
                         <Stack className={styles.drawerUser}>
-                            {auth && <>
+                            {isAuthenticated && <>
                                 <CancelIcon color='secondary' className={styles.cancelIcon} onClick={() => { }} />
                                 <Box className={styles.drawerUserData}>
                                     <PersonIcon color='primary' className={styles.personIcon} />
-                                    <Typography className={styles.user}>Lio Messi</Typography>
+                                    <Typography className={styles.user}>{userLog?.firstName} {userLog?.lastName}</Typography>
                                 </Box></>}
                         </Stack>
                         <Divider color='#573469' variant="middle" />
@@ -64,13 +67,18 @@ const navDrawer: FC<Props> = ({handleDrawerToggle, navItems, window, mobileOpen}
                                 </ListItem>
                             ))}
                         </List>
-                        <Button variant="outlined" className={styles.buttonLoginDrawer}>{auth ? 'cerrar sesión' : 'iniciar sesión'}</Button>
+                        {
+                            isAuthenticated ?
+                            <Button variant="outlined" className={styles.buttonLoginDrawer} onClick={()=>{logout({ logoutParams : {returnTo : `${process.env.BASE_URL}`}})}}>cerrar sesión</Button> :
+                            <Button variant="outlined" className={styles.buttonLoginDrawer} onClick={()=>{loginWithRedirect({appState: { returnTo : '/client'}})}}>iniciar sesión</Button>
+                        }
                     </Box>
                 </Drawer>
             </nav>
     )
 }
 
-export default navDrawer
+export default NavDrawer
+
 
 

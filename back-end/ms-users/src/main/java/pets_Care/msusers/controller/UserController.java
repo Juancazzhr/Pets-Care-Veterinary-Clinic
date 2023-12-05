@@ -84,6 +84,11 @@ public class UserController {
         }
     }
 
+    @GetMapping("/mail/{mail}")
+    Optional<User> findUserByEmail(@PathVariable String mail){
+        return service.findUserByEmail(mail);
+    }
+
     @Data
     @AllArgsConstructor
     @NoArgsConstructor

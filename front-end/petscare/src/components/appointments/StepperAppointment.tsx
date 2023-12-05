@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState, useContext } from 'react'
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Paper from '@mui/material/Paper';
@@ -6,18 +6,20 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import ServiceStep from './ServiceStep';
-import styles from '../../Appointments.module.css'
-import ProfessionalStep from './ProfessionalStep';
-import DatetimeStep from './DatetimeStep';
-import ConfirmationStep from './ConfirmationStep';
+import ServiceStep from './formItems/stepper/ServiceStep';
+import styles from './StepperAppointment.module.css'
+import ProfessionalStep from './formItems/stepper/ProfessionalStep';
+import DatetimeStep from './formItems/stepper/DatetimeStep';
+import ConfirmationStep from './formItems/stepper/ConfirmationStep';
 import { useRouter } from 'next/router';
-import PetSelect from '../PetSelect';
+import PetSelect from './formItems/PetSelect';
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 import { Stack } from '@mui/material';
-import { Service, Professional, AppointmentInput } from '@/interfaces/'
+import { Service, Professional, AppointmentInput, PetUser } from '@/interfaces/'
 import Link from 'next/link';
-import { postAppointment } from '../../../../services/stepperService';
+import { postAppointment } from '../../services/appointmentService';
+import ReusableModal from '../reusableModal/modal';
+
 
 
 const steps = ['servicio', 'profesional', 'fecha y hora', 'confirmación'];
@@ -32,14 +34,23 @@ const defaultValues = {
 interface Props {
     services: Service[],
     professionals: Professional[]
+    pets: PetUser
 }
 
-const StepperAppointment = ({ services, professionals }: Props) => {
+const StepperAppointment = ({ services, professionals, pets }: Props) => {
 
-
+    
     const [activeStep, setActiveStep] = useState(0);
     const [dataForm, setDataForm] = useState<AppointmentInput>(defaultValues)
     const router = useRouter()
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalInfo, setModalInfo] = useState({
+        title: "",
+        message: "",
+        isError: false,
+        acceptButtonText: "",
+    });
+
 
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -65,19 +76,28 @@ const StepperAppointment = ({ services, professionals }: Props) => {
     }
 
     const handlerConfirmationStep = () => {
-
-        console.log({ dataForm });
         const response = postAppointment(dataForm)
-
-        console.log({ response });
-
         response.then((res) => {
-            console.log({ res });
-            if (res.data) {
-                router.push("/")
+            if (res.ok) {
+                setModalInfo({
+                    title: "¡Felicitaciones!",
+                    message: "Tu turno ha sido agendado exitosamente y enviado los datos a tu correo.",
+                    isError: false,
+                    acceptButtonText: "ir a Inicio",
+                  });
+                  setIsModalOpen(true);
             };
         })
     }
+
+    const handleModalClose = useCallback(() => {
+        setIsModalOpen(false);
+    }, []);
+
+    const redirectToHome = useCallback(() => {
+        setIsModalOpen(false);
+        router.push("/");
+    }, [router]);
 
 
     return (
@@ -85,8 +105,8 @@ const StepperAppointment = ({ services, professionals }: Props) => {
             <Stack className={styles.boxPet}>
                 {activeStep !== 3 &&
                     <>
-                        <PetSelect handlerPet={handlerPet} />
-                        <Link href={'/'}>
+                        <PetSelect handlerPet={handlerPet} pets={pets} />
+                        <Link href={'/registroMascotas'}>
                             <Box className={styles.addPets}>
                                 <AddCircleIcon />
                                 <Typography ml='10px' variant='body1'>AGREGAR MASCOTA</Typography>
@@ -148,6 +168,14 @@ const StepperAppointment = ({ services, professionals }: Props) => {
                         >Volver
                         </Button>
                     </Box>
+                    <ReusableModal
+                        isOpen={isModalOpen}
+                        onClose={handleModalClose}
+                        onAccept={redirectToHome}
+                        title={modalInfo.title}
+                        message={modalInfo.message}
+                        acceptButtonText={modalInfo.acceptButtonText}
+                    />
                 </Paper>
             </Box>
         </Box>

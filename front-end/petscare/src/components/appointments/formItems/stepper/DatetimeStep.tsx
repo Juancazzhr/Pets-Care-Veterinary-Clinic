@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useForm, SubmitHandler, Controller } from 'react-hook-form'
-import styles from '../../Appointments.module.css'
+import styles from '../../StepperAppointment.module.css'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'

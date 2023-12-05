@@ -1,5 +1,0 @@
-{
-    "BASE_URL": "https://petscare.s3.amazonaws.com/",
-    "API_PATH_SERVICES": "services/",
-    "API_PATH_SLIDER": "slider/"     
-}

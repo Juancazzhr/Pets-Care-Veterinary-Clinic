@@ -12,9 +12,12 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
-    private String name;
-    @Column
-    private String description;
-    @Column
-    private String thumbnail_URL;
+    private Date date;
+    @Column(name = "professional_id")
+    private Long professionalID;
+    @Column(name = "pet_id")
+    private Long petID;
+    @Column(name = "service_id")
+    private Long serviceID;
+
 }

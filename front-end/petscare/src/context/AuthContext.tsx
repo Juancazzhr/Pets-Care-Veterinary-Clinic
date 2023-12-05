@@ -1,9 +1,11 @@
+"use client"
+
 import { User } from "@/interfaces";
-import { ReactNode, createContext, useEffect, useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useRouter } from "next/router";
+import { ReactNode, createContext, useEffect, useMemo, useState, useContext } from "react";
 
 interface ContextProps {
-  auth: boolean
-  handleAuth: (jwt: string) => void
   userLog: User | undefined
 }
 
@@ -14,20 +16,21 @@ interface ChildrenProps {
 const AuthContext = createContext<ContextProps>({} as ContextProps);
 
 const AuthProvider = ({ children }: ChildrenProps) => {
-  const [auth, setAuth] = useState(true);
+
+  const { isAuthenticated, user } = useAuth0();
   const [userLog, setUserLog] = useState<User>();
 
-  const urlAPI = `${process.env.BASE_URL}/users`;
+  const router = useRouter()
+ 
 
-  const getUser = (url:string, token:string) => {
+  const getUser = (email:any, isAuth: boolean) => {
 
-    const settings = {
-      method: "GET",
-      headers: {
-        /* authorization: "Bearer " + token, */
-      },
-    };
-    fetch(url, settings)
+   /*  const urlAPI = `${process.env.BASE_URL_BACK}users/mail/${email}}`; */
+
+    const urlAPI = `http://ec2-34-229-209-114.compute-1.amazonaws.com/dev/v1/users/mail/${email}`;
+
+    if(isAuth && router.asPath !== '/registro' ){
+      fetch(urlAPI)
       .then((response) => {
         console.log(response);
         if (response.ok !== true) {
@@ -40,27 +43,29 @@ const AuthProvider = ({ children }: ChildrenProps) => {
           setUserLog(data)
         }
       });
+    }
 
   };
 
   useEffect(() => {
-    userLog?.id && setAuth(true);
-  }, [userLog])
+  getUser(user?.email, isAuthenticated)  
+  
+  }, [isAuthenticated])
+ 
 
-  const handleAuth = (jwt: string) => {
-    if (auth) {
-      localStorage.removeItem("jwt");
-      setAuth(false);
-    } else {
-      localStorage.setItem("jwt", JSON.stringify(jwt));
-      getUser(urlAPI, jwt);
-    }
-  };
+  const data = useMemo(
+    () =>({
+      userLog
+    }),
+    [userLog]
+  );
 
-  const data = { auth, handleAuth, userLog };
+console.log({userLog});
 
+ 
   return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>;
 };
 
 export { AuthProvider };
 export default AuthContext;
+

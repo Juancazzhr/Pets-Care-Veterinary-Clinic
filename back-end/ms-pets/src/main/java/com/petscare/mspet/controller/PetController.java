@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/v1/pets")
@@ -228,8 +229,36 @@ public class PetController {
     }
 
     @GetMapping("/users/{id}")
-    IUserServiceClient.UserClientDTO listPetsByClientId(@PathVariable Long id){
-      return petService.getUserById(id);
+    PetClients listPetsByClientId(@PathVariable Long id){
+        List<Pet> pets = petService.getAll();
+        List<IUserServiceClient.UserDTO> users = petService.listAllUsers();
+        List<IClientServiceClient.ClientDTO> clients = petService.listAllClients();
+
+        IUserServiceClient.UserDTO userDTO = users.stream()
+                .filter(user -> user.getId() == id)
+                .findFirst()
+                .orElse(null);
+
+        if (userDTO == null) {
+            // El usuario no fue encontrado
+            return null;
+        }
+
+        List<Pet> petList = clients.stream()
+                .filter(client -> client.getUserId() == id)
+                .flatMap(client -> pets.stream().filter(pet -> pet.getClientId() == client.getUserId()))
+                .collect(Collectors.toList());
+
+        if (petList.isEmpty()) {
+            // No se encontraron mascotas para el usuario
+            return null;
+        }
+
+        PetClients petClients = new PetClients();
+        petClients.setUser(userDTO);
+        petClients.setPet(petList);
+
+        return petClients;
     }
 
     @Data

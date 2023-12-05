@@ -12,4 +12,21 @@ public interface IUserService {
     User createUser(User user);
     void deleteUser(Long id) throws Exception;
     User updateUser(User user) throws Exception;
+    Optional<User> findUserByEmail(String mail);
+
+    //CLIENTS
+    ResponseEntity<String> createClient(IClientServiceClient.ClientDTO clientDTO);
+    List<IClientServiceClient.ClientDTO> listClients();
+
+    Optional<IClientServiceClient.ClientDTO> searchClientById(Long id);
+
+    void deleteClient(Long id);
+    void updateCLient(IClientServiceClient.ClientDTO clientDTO);
+
+    //PROFESSIONALS
+    ResponseEntity<String> createProfessional(IProfessionalServiceClient.ProfessionalDTO professionalDTO);
+    List<IProfessionalServiceClient.ProfessionalDTO> listProfessionals();
+    void deleteProfessional(Long id);
+    void updateProfessional(IProfessionalServiceClient.ProfessionalDTO professionalDTO);
+
 }
