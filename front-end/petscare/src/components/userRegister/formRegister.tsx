@@ -26,8 +26,6 @@ const defaultValues = {
   }
 }
 
-
-
 const FormRegister: FC = () => {
 
   const { control, formState: { errors }, handleSubmit } = useForm({

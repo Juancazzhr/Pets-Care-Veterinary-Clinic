@@ -1,19 +1,15 @@
-import React, { useState } from "react";
 import TitleSection from "../../components/utils/TitleSection"
-import { Box, Container, Paper, TextField } from "@mui/material"
+import { Box, Container, Paper } from "@mui/material"
 import {  NextPage } from "next"
 import Head from "next/head"
 import Typography from '@mui/material/Typography';
 import styles from "../../components/cliente/client.module.css"
 import LayoutRegister from "../../components/layouts/LayoutRegister";
 import FormRegister from "../..//components/userRegister/formRegister";
-import { UserAuth0 } from "@/interfaces";
 
 
 
 const RegistroPage: NextPage = () => {
-
-
 
     return (
         <>
@@ -36,14 +32,11 @@ const RegistroPage: NextPage = () => {
             </Box>
           </Container>
         </>
-      )
-    
+      )   
     
     }
     
     (RegistroPage as any).Layout = LayoutRegister;
-
-
 
 
 export default RegistroPage
