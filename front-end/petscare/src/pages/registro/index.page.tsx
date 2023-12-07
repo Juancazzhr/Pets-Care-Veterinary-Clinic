@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import styles from "../../components/cliente/client.module.css"
 import LayoutRegister from "../../components/layouts/LayoutRegister";
 import FormRegister from "../..//components/userRegister/formRegister";
-import { UserAuth0 } from "@/interfaces";
 
 
 

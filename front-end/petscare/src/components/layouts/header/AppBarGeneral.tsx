@@ -16,7 +16,7 @@ import logo from '../../../assets/img/logo-petscare.svg'
 import styles from './generalHeader.module.css';
 import { useAuth0 } from "@auth0/auth0-react";
 import { useRouter } from 'next/router';
-import AuthContext from '../../../context/AuthContext';
+import { useUser } from '@auth0/nextjs-auth0/client';
 
 interface Props{
     handleDrawerToggle: ()=> void
@@ -25,9 +25,12 @@ interface Props{
 
 const AppBarComponent: FC<Props> = ({handleDrawerToggle, navItems}) => {
 
-    const {userLog } = useContext(AuthContext);
-    const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+    //const {userLog } = useContext(AuthContext);
+    //const { user, error, isLoading } = useUser();
+    const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
     const router = useRouter();
+    
+
     return (
         <AppBar className={styles.appBar} >
             <Container maxWidth="xl" >
@@ -61,14 +64,13 @@ const AppBarComponent: FC<Props> = ({handleDrawerToggle, navItems}) => {
                                 ))}
                             </Box>
                             <Box className={styles.boxLogin}>
-                                {isAuthenticated ?
+                                {isAuthenticated && user ?
                                     <Stack direction="row">
                                         <PersonIcon color='secondary' sx={{ fontSize: '32px' }} />
-                                        <Typography className={styles.user} >{userLog?.firstName} {userLog?.lastName}</Typography>
+                                        <Typography className={styles.user} >{user?.nickname} </Typography>
                                         <CancelIcon className={styles.cancelIcon} onClick={() => {logout({ logoutParams : {returnTo : window.location.origin}}) }} />
                                     </Stack>
                                     :
-                                    // <Button variant="contained" color='secondary' className={styles.buttonLogin} href='/login'>iniciar sesión</Button>
                                     <>
                                         <Button 
                                             variant="contained" 
@@ -77,8 +79,8 @@ const AppBarComponent: FC<Props> = ({handleDrawerToggle, navItems}) => {
                                             onClick={()=>
                                             {
                                                 loginWithRedirect({
-                                                    appState: { 
-                                                        returnTo : "/client"
+                                                    appState: {
+                                                        redirectUri: "http://localhost:3000/client"
                                                     }
                                                 })
                                             }}
@@ -91,16 +93,13 @@ const AppBarComponent: FC<Props> = ({handleDrawerToggle, navItems}) => {
                                             className={styles.buttonLogin} 
                                             onClick={()=>
                                             {
-                                                loginWithRedirect({
-                                                    appState: { 
-                                                        returnTo : '/registro'
-                                                    },
-                                                    authorizationParams :{
-                                                        screen_hint: "signup",
-                                                    }
-                                                })
+                                                loginWithRedirect({ 
+                                                    redirectUri: "http://localhost:3000/registro"
+                                                });
+                                                
                                             }}
-                                        >Registrarse
+                                        >                                       
+                                        Registrarse
                                         </Button>
                                     </>
                                 }
