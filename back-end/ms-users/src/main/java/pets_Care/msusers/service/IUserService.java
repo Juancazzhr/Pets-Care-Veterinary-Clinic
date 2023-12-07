@@ -1,8 +1,5 @@
 package pets_Care.msusers.service;
 
-import org.springframework.http.ResponseEntity;
-import pets_Care.msusers.client.IClientServiceClient;
-import pets_Care.msusers.client.IProfessionalServiceClient;
 import pets_Care.msusers.model.User;
 
 import java.util.List;

@@ -44,7 +44,6 @@ export interface Pet {
   race: string;
   clientId: number;
   petType: PetType;
-  petClinicalHistory?: PetClinicalHistory;
 }
 
 export interface PetClinicalHistory {

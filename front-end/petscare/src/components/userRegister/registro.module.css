@@ -42,13 +42,32 @@
   }
   
   .bgBoxMascota {
-    background-color: #eaebed;
     width: 100%;
     padding: 15px;
     margin: 10px auto;
     border-radius: 2%;
     margin-left: 16px;
   }
+
+  .inputPet{
+    width: 300px;
+    height: 40px;
+    margin: 10px 0;
+  }
+  
+  .label{
+    padding: 10px 0;
+    font-size: 14px;    
+  }
+  
+  .item{
+    padding: 0;
+  }
+
+  /* .help{
+    color: red;
+  } */
+
   
   @media (min-width: 800px) {
     .root {
@@ -56,7 +75,9 @@
       max-width: 700px; 
       padding: 0;
       margin-bottom: 10px;
+    
     }
+
   }
   
   @media (min-width: 960px) {

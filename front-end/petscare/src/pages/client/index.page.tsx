@@ -10,14 +10,18 @@ import { getUserByEmail, getUserById } from "../../services/userService";
 import styles from "../../components/cliente/client.module.css"
 import AccordionPet from "../../components/cliente/AccordionPet";
 import { getPetsConsults } from "../../services/clientService";
+import { useAuth0 } from "@auth0/auth0-react";
 
 interface Props {
-  user: User
+  userData: User
   petsConsults: PetConsults[]
 }
 
 
-const ClientPage: NextPage<Props> = ({ user, petsConsults }) => {
+const ClientPage: NextPage<Props> = ({ userData, petsConsults }) => {
+
+  const { user } = useAuth0()
+console.log(user);
 
   return (
     <>
@@ -34,7 +38,7 @@ const ClientPage: NextPage<Props> = ({ user, petsConsults }) => {
         <Paper className={styles.paper}>
           <Box className={styles.personalData}>
             <Typography className={styles.subtitle}>Datos Personales</Typography>
-            {/* <FormCliente user={user} /> */}
+            <FormCliente userData={userData} />
           </Box>
           <Typography className={styles.subtitle}>Mis mascotas</Typography>
 
@@ -53,13 +57,13 @@ const ClientPage: NextPage<Props> = ({ user, petsConsults }) => {
 
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-  /*  let email= 'marina@gmail.com'
-   if (typeof window !== "undefined") {
-     email = JSON.parse(localStorage.getItem("mailUser"))
-   }
-   console.log(email);
-   const user = await getUserByEmail(email)
-  */
+  //let email= 'marina@gmail.com'
+  //  if (typeof window !== "undefined") {
+  //    email = JSON.parse(localStorage.getItem("mailUser"))
+  //  }
+   //console.log(email);
+   //const userData = await getUserByEmail()
+  
 
   const petsConsults = await getPetsConsults()
 
@@ -71,7 +75,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 
   return {
     props: {
-      /* user */
+      //userData,
       petsConsults
     }
   }

@@ -5,6 +5,7 @@ import LayoutGeneral from '../components/layouts/LayoutGeneral'
 import { theme } from "../styles/material-theme";
 import { AuthProvider } from '../context/AuthContext';
 import { Auth0Provider } from '@auth0/auth0-react';
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 export default function App({ Component, pageProps }: AppProps) {
 
@@ -20,15 +21,16 @@ export default function App({ Component, pageProps }: AppProps) {
   // const audience = process.env.AUTH_AUDIENCE
 
   return <ThemeProvider theme={theme}>
-   
+   <UserProvider>
     <Auth0Provider
       domain = {domain}
       clientId={clientId}
       authorizationParams={{
-        redirect_uri: "http://localhost:3000/"
+        redirect_uri: "http://localhost:3000/client"
         /* redirect_uri: `${process.env.BASE_URL}` */
       }}
-    > <AuthProvider>
+    > 
+    {/* <AuthProvider> */}
       <CssBaseline /> 
       {LayoutComponent ?
         <LayoutComponent>
@@ -40,8 +42,8 @@ export default function App({ Component, pageProps }: AppProps) {
         </LayoutGeneral>
 
       }
-      </AuthProvider>
+      {/* </AuthProvider> */}
     </Auth0Provider>
-    
+    </UserProvider>
   </ThemeProvider>
 }

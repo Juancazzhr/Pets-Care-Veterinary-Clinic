@@ -1,18 +1,11 @@
 import * as React from 'react';
-import {
-    GridCellParams, GridColDef, GridToolbarContainer, GridToolbarExport, GridToolbarFilterButton, DataGrid,
-    GridToolbar,
-    GridPrintGetRowsToExportParams,
-    gridFilteredSortedRowIdsSelector,
-    selectedGridRowsSelector,
-    GridRowId,
-    esES,
-    GridSearchIcon,
-} from '@mui/x-data-grid';
 import { FC } from 'react';
 import { PetConsults } from '@/interfaces';
 import Stack from '@mui/material/Stack';
 import { Typography } from '@mui/material';
+import { GridCellParams, GridColDef, GridToolbarContainer, GridToolbarExport, GridToolbarFilterButton, DataGrid, GridToolbar, GridPrintGetRowsToExportParams, gridFilteredSortedRowIdsSelector,
+    selectedGridRowsSelector,
+    esES,GridRowId } from '@mui/x-data-grid';
 
 
 

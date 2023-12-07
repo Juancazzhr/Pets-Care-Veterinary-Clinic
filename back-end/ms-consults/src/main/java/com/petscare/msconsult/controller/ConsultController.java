@@ -18,17 +18,17 @@ public class ConsultController {
 
     //Consult
 
-    @PostMapping
+    @PostMapping("/consult")
     public ResponseEntity<String> createConsult(@RequestBody Consult consult){
         consultService.createConsult(consult);
         return ResponseEntity.status(HttpStatus.CREATED).body("Consulta creada correctamente");
     }
 
-    @GetMapping
+    @GetMapping("/consult")
     public List<Consult> getAllConsult() {
         return consultService.getAllConsult();
     }
-    @GetMapping("/{id}")
+    @GetMapping("/consult/{id}")
     public ResponseEntity<Object> searchConsultById(@PathVariable Long id){
         if(consultService.getConsultById(id).isPresent()){
             return ResponseEntity.ok(consultService.getConsultById(id).get());
@@ -45,7 +45,7 @@ public class ConsultController {
             throw new Exception();
         }
     }
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/consult/{id}")
     public ResponseEntity<String> deleteConsult(@PathVariable Long id) throws Exception {
         if (consultService.getConsultById(id).isPresent()){
             consultService.deleteConsult(id);

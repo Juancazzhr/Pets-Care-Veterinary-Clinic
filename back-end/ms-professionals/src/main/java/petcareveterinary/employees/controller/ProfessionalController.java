@@ -1,13 +1,13 @@
 package petcareveterinary.employees.controller;
 
+import feign.Client;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import petcareveterinary.employees.client.IAppointmentServiceClient;
-import petcareveterinary.employees.client.IServicesProfessionalServiceClient;
+import petcareveterinary.employees.client.UserServiceClient;
 import petcareveterinary.employees.model.Professional;
 import petcareveterinary.employees.service.ProfessionalService;
 
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/professionals")
+@RequestMapping("v1/professionals")
 public class ProfessionalController {
 
     ProfessionalService service;

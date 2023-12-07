@@ -3,13 +3,15 @@ import { TextField } from "@mui/material";
 import { FC } from "react";
 
 import style from './client.module.css'
+import { useAuth0 } from "@auth0/auth0-react";
 
 interface Props {
-    user: User
+  userData: User
   }
 
-export const FormCliente: FC<Props> = ({user}) => {
-    return(
+export const FormCliente: FC<Props> = ({userData}) => {
+
+      return(
         <form >
             <TextField
             required

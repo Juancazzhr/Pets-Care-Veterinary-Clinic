@@ -1,9 +1,6 @@
 package pets_Care.msusers.service;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import pets_Care.msusers.client.IClientServiceClient;
-import pets_Care.msusers.client.IProfessionalServiceClient;
 import pets_Care.msusers.model.User;
 import pets_Care.msusers.repository.IUserRepository;
 
@@ -15,14 +12,9 @@ import java.util.Optional;
 public class UserService implements IUserService {
 
     IUserRepository repository;
-    IClientServiceClient clientRepository;
 
-    IProfessionalServiceClient professionalRepository;
-
-    public UserService(IUserRepository repository, IClientServiceClient clientRepository, IProfessionalServiceClient professionalRepository) {
+    public UserService(IUserRepository repository) {
         this.repository = repository;
-        this.clientRepository = clientRepository;
-        this.professionalRepository = professionalRepository;
     }
 
     @Override

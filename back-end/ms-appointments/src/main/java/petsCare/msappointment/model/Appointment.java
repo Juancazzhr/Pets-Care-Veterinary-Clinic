@@ -3,8 +3,6 @@ package petsCare.msappointment.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
 @Entity
 @Table(name="Appointments")

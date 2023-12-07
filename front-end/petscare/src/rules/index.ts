@@ -47,4 +47,18 @@ export const schemaStepperData = yup
       })
   .required();
 
+  
+  export const validationSchema = yup
+  .object({
+    name: yup
+    .string()
+    .required("Nombre es un campo requerido")
+    .min(3, "El nombre debe tener un mínimo de 3 caracteres")
+    .max(20, "El nombre debe tener un máximo de 20 caracteres"),
+    race: yup
+    .string()
+    .required("La raza es un campo requerido"), 
+      })
+  .required();
+
 
