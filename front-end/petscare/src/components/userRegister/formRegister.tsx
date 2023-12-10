@@ -42,18 +42,18 @@ const FormRegister: FC = () => {
     isError: false,
     acceptButtonText: "",
   });
- 
-// MODAL 
-  const handleModalClose = useCallback(() => {
-  setIsModalOpen(false);
-   }, []);
-    
- const redirectToPetRegistration = useCallback(() => {
-   setIsModalOpen(false);
-   router.push("/registroMascotas");
-    }, [router]);
 
-// POST USER
+  // MODAL 
+  const handleModalClose = useCallback(() => {
+    setIsModalOpen(false);
+  }, []);
+
+  const redirectToPetRegistration = useCallback(() => {
+    setIsModalOpen(false);
+    router.push("/registroMascotas");
+  }, [router]);
+
+  // POST USER
   const onSubmit: SubmitHandler<any> = (data: any) => {
     setDataForm({
       ...dataForm,
@@ -75,7 +75,7 @@ const FormRegister: FC = () => {
       password: data.password
     }
 
-        
+
     const response = postUser(dataRegister)
     response.then((res) => {
       if (res.ok) {
@@ -92,7 +92,15 @@ const FormRegister: FC = () => {
 
   useEffect(() => {
     if (user) {
-      setDataForm({ ...dataForm, email: user.email })
+
+
+      if (user?.email === undefined) {
+        // Manejar el caso en que no hay email
+      } else {
+        setDataForm({ ...dataForm, email: user.email })
+      }
+
+
     }
   }, [user])
 
@@ -108,7 +116,7 @@ const FormRegister: FC = () => {
         label='Nombre'
         type='text'
         defaultValue={dataForm.firstName}
-        disabled= {false}
+        disabled={false}
         control={control}
         error={errors.firstName ? true : false}
         message={errors.firstName?.message as string} />
@@ -118,7 +126,7 @@ const FormRegister: FC = () => {
         label='Apellido'
         type='text'
         defaultValue={dataForm.lastName}
-        disabled= {false}
+        disabled={false}
         control={control}
         error={errors.lastName ? true : false}
         message={errors.lastName?.message as string} />
@@ -128,7 +136,7 @@ const FormRegister: FC = () => {
         label='Dirección'
         type='text'
         defaultValue={dataForm.address}
-        disabled= {false}
+        disabled={false}
         control={control}
         error={errors.address ? true : false}
         message={errors.address?.message as string} />
@@ -138,7 +146,7 @@ const FormRegister: FC = () => {
         label='Teléfono'
         type='text'
         defaultValue={dataForm.phone}
-        disabled= {false}
+        disabled={false}
         control={control}
         error={errors.phone ? true : false}
         message={errors.phone?.message as string} />
@@ -148,7 +156,7 @@ const FormRegister: FC = () => {
         label='Correo electrónico'
         type='text'
         defaultValue={dataForm.email}
-        disabled= {false}
+        disabled={false}
         control={control}
         error={errors.email ? true : false}
         message={errors.email?.message as string} />
@@ -158,7 +166,7 @@ const FormRegister: FC = () => {
         label='Contraseña'
         type='password'
         defaultValue={dataForm.password}
-        disabled= {false}
+        disabled={false}
         control={control}
         error={errors.password ? true : false}
         message={errors.password?.message as string} />
