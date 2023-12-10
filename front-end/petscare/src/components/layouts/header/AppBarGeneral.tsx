@@ -1,4 +1,4 @@
-import {FC, useContext} from 'react'
+import { FC, useContext } from 'react'
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
@@ -18,18 +18,18 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useRouter } from 'next/router';
 import { useUser } from '@auth0/nextjs-auth0/client';
 
-interface Props{
-    handleDrawerToggle: ()=> void
-    navItems: string []
+interface Props {
+    handleDrawerToggle: () => void
+    navItems: string[]
 }
 
-const AppBarComponent: FC<Props> = ({handleDrawerToggle, navItems}) => {
+const AppBarComponent: FC<Props> = ({ handleDrawerToggle, navItems }) => {
 
     //const {userLog } = useContext(AuthContext);
     //const { user, error, isLoading } = useUser();
     const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
     const router = useRouter();
-    
+
 
     return (
         <AppBar className={styles.appBar} >
@@ -41,8 +41,8 @@ const AppBarComponent: FC<Props> = ({handleDrawerToggle, navItems}) => {
                             alt='logo'
                             width={190.78}
                             height={60}
-                            priority={true} 
-                            className={styles.logo}/></a>
+                            priority={true}
+                            className={styles.logo} /></a>
                     </Link>
                     <Box>
                         <IconButton
@@ -68,16 +68,15 @@ const AppBarComponent: FC<Props> = ({handleDrawerToggle, navItems}) => {
                                     <Stack direction="row">
                                         <PersonIcon color='secondary' sx={{ fontSize: '32px' }} />
                                         <Typography className={styles.user} >{user?.nickname} </Typography>
-                                        <CancelIcon className={styles.cancelIcon} onClick={() => {logout({ logoutParams : {returnTo : window.location.origin}}) }} />
+                                        <CancelIcon className={styles.cancelIcon} onClick={() => { logout({ logoutParams: { returnTo: window.location.origin } }) }} />
                                     </Stack>
                                     :
                                     <>
-                                        <Button 
-                                            variant="contained" 
-                                            color='secondary' 
-                                            className={styles.buttonLogin} 
-                                            onClick={()=>
-                                            {
+                                        <Button
+                                            variant="contained"
+                                            color='secondary'
+                                            className={styles.buttonLogin}
+                                            onClick={() => {
                                                 loginWithRedirect({
                                                     appState: {
                                                         redirectUri: "http://localhost:3000/client"
@@ -87,19 +86,24 @@ const AppBarComponent: FC<Props> = ({handleDrawerToggle, navItems}) => {
                                         >iniciar sesión
                                         </Button>
 
-                                        <Button 
-                                            variant="contained" 
-                                            color='secondary' 
-                                            className={styles.buttonLogin} 
-                                            onClick={()=>
-                                            {
-                                                loginWithRedirect({ 
-                                                    redirectUri: "http://localhost:3000/registro"
-                                                });
-                                                
+                                        <Button
+                                            variant="contained"
+                                            color='secondary'
+                                            className={styles.buttonLogin}
+                                            onClick={() => {
+                                                loginWithRedirect({
+                                                    appState: {
+                                                        redirectUri: "http://localhost:3000/registro"
+                                                                                                           }, 
+                                                    authorizationParams: {
+                                                        screen_hint: "signup",
+                                                      }
+                                                }
+                                                );
+
                                             }}
-                                        >                                       
-                                        Registrarse
+                                        >
+                                            Registrarse
                                         </Button>
                                     </>
                                 }
