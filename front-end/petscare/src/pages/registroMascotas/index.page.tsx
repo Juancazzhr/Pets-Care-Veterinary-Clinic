@@ -3,7 +3,7 @@ import { NextPage } from "next";
 import LayoutAuth from "../../components/layouts/LayoutAuth";
 import styles from "../../components/userRegister/registro.module.css";
 import { Box, Grid, Typography, Paper } from "@mui/material";
-import {PetRegisterForm} from "../../components/petRegister/petRegisterForm";
+import PetRegisterForm from "../../components/petRegister/petRegisterForm";
 import { Pet } from "@/interfaces";
 
 
