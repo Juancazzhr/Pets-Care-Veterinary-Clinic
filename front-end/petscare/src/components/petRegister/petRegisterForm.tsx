@@ -57,8 +57,16 @@ const PetRegisterForm: FC = () => {
   const onSubmit: SubmitHandler<any> = (data: any) => {
     console.log(data);
 
-    const dataUser = getUserByEmail(user?.email)
-    console.log(dataUser);
+    const dataUser = ()=>{
+      if (user?.email === undefined) {
+        // Manejar el caso en que no hay email
+    } else {
+        const dataUser = getUserByEmail(user.email);
+        console.log(dataUser);
+    }
+    }
+     /*  getUserByEmail(user?.email)*/
+    console.log(dataUser); 
 
     let tipo = 0;
     switch ( petType) {
@@ -142,6 +150,7 @@ const PetRegisterForm: FC = () => {
               label='Nombre'
               type='text'
               defaultValue={dataForm.name}
+              disabled={false}
               control={control}
               error={errors.name ? true : false}
               message={errors.name?.message as string} />
@@ -152,6 +161,7 @@ const PetRegisterForm: FC = () => {
               label='Raza'
               type='text'
               defaultValue={dataForm.race}
+              disabled={false}
               control={control}
               error={errors.race ? true : false}
               message={errors.race?.message as string} />
