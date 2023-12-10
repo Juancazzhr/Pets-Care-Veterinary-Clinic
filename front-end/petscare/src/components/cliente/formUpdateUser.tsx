@@ -16,10 +16,14 @@ import AuthContext from "../../context/AuthContext";
 
 const FormUpdateUser: FC = () => {
 
-  const { userLog} = useContext(AuthContext)
+  const { user} = useAuth0()
   const { control, formState: { errors }, handleSubmit, reset } = useForm({
     resolver: yupResolver(schemaFormRegister),
-    defaultValues: userLog
+    defaultValues: async () => {
+      const response: any = await fetch(`http://ec2-34-229-209-114.compute-1.amazonaws.com/dev/v1/users/mail/${user?.email}`)
+      const dataUser = await response.json()
+      return dataUser
+    }
   });
 
   
@@ -179,16 +183,3 @@ const FormUpdateUser: FC = () => {
 }
 
 export default FormUpdateUser
-
-
-
-
-/* const { control, formState: { errors }, handleSubmit, reset } = useForm({
-  resolver: yupResolver(schemaFormRegister),
-  defaultValues: async () => {
-    const response: any = await fetch(`http://ec2-34-229-209-114.compute-1.amazonaws.com/dev/v1/users/mail/${user?.email}`)
-    const dataUser = await response.json()
-    setUserLog(dataUser)
-    return dataUser
-  }
-}); */

@@ -22,7 +22,7 @@ const PetSelect = ({ handlerPet }: Props) => {
     const [pets, setPets] = useState<PetUser | undefined>()
 
     const getPets = async () =>{
-        setPets(await getPetsByUserId(userLog.id))
+        setPets(await getPetsByUserId(userLog?.id))
     }
   
     useEffect(() => {

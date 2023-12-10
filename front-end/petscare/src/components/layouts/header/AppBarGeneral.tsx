@@ -68,6 +68,7 @@ const AppBarComponent: FC<Props> = ({ handleDrawerToggle, navItems }) => {
                                     <Stack direction="row">
                                         <PersonIcon color='secondary' sx={{ fontSize: '32px' }} />
                                         <Typography className={styles.user} >{user?.nickname} </Typography>
+                                        <Typography className={styles.user} >mi cuenta </Typography>
                                         <CancelIcon className={styles.cancelIcon} onClick={() => { logout({ logoutParams: { returnTo: window.location.origin } }) }} />
                                     </Stack>
                                     :

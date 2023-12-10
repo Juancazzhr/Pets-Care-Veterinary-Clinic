@@ -25,7 +25,7 @@ const ClientPage: NextPage<Props> = ({  petsConsults }) => {
   const { userLog} = useContext(AuthContext)
 
   const getData = async()=>{
-    const data = await getPetsConsultsByUserId(userLog.id, petsConsults)
+    const data = await getPetsConsultsByUserId(userLog?.id, petsConsults)
      return setDataFiltered(data)
   }
   
