@@ -34,10 +34,9 @@ const defaultValues = {
 interface Props {
     services: Service[],
     professionals: Professional[]
-    pets: PetUser
 }
 
-const StepperAppointment = ({ services, professionals, pets }: Props) => {
+const StepperAppointment = ({ services, professionals }: Props) => {
 
     
     const [activeStep, setActiveStep] = useState(0);
@@ -105,7 +104,7 @@ const StepperAppointment = ({ services, professionals, pets }: Props) => {
             <Stack className={styles.boxPet}>
                 {activeStep !== 3 &&
                     <>
-                        <PetSelect handlerPet={handlerPet} pets={pets} />
+                        <PetSelect handlerPet={handlerPet}/>
                         <Link href={'/registroMascotas'}>
                             <Box className={styles.addPets}>
                                 <AddCircleIcon />

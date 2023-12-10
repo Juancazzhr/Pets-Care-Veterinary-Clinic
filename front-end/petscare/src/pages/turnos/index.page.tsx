@@ -25,15 +25,7 @@ interface Props {
 const TurnosPage: NextPage<Props> = ({ services, professionals }) => {
 
   const { isAuthenticated, loginWithRedirect } = useAuth0();
-  const { userLog } = useContext(AuthContext);
-  const [pets, setPets] = useState<PetUser | undefined>()
-
-  useEffect(() => {
-
-    if (userLog !== undefined) {
-      async () => setPets(await getPetsByUserId(userLog.id))
-    }
-  }, [userLog])
+ 
 
   return (
     <>
@@ -48,8 +40,8 @@ const TurnosPage: NextPage<Props> = ({ services, professionals }) => {
         <Box pt='80px'>
           <TitleSection title='turnos' colorLine='64C9A7' colorText='573469' />
           <Paper className={styles.paper}>
-            {isAuthenticated && pets !== undefined ?
-              <StepperAppointment services={services} professionals={professionals} pets={pets} />
+            {isAuthenticated ?
+              <StepperAppointment services={services} professionals={professionals} />
               :
               <Stack className={styles.boxAlert}>
                 <Alert variant="outlined" severity="warning">

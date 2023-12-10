@@ -30,7 +30,7 @@ export default function App({ Component, pageProps }: AppProps) {
         /* redirect_uri: `${process.env.BASE_URL}` */
       }}
     > 
-    {/* <AuthProvider> */}
+    <AuthProvider>
       <CssBaseline /> 
       {LayoutComponent ?
         <LayoutComponent>
@@ -42,7 +42,7 @@ export default function App({ Component, pageProps }: AppProps) {
         </LayoutGeneral>
 
       }
-      {/* </AuthProvider> */}
+      </AuthProvider>
     </Auth0Provider>
     </UserProvider>
   </ThemeProvider>

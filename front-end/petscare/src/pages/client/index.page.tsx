@@ -7,10 +7,10 @@ import Typography from '@mui/material/Typography';
 import FormUpdateUser from "../../components/cliente/formUpdateUser";
 import styles from "../../components/cliente/client.module.css"
 import AccordionPet from "../../components/cliente/AccordionPet";
-import { getPetsConsults } from "../../services/clientService";
-import { useEffect, useState } from "react"
+import { getPetsConsults, getPetsConsultsByUserId } from "../../services/clientService";
+import { useContext, useEffect, useState } from "react"
 import { useAuth0 } from "@auth0/auth0-react"
-import { getUserByEmail } from "@/services/userService"
+import AuthContext from "../../context/AuthContext"
 
 interface Props {
   petsConsults: PetConsults[]
@@ -19,15 +19,24 @@ interface Props {
 
 const ClientPage: NextPage<Props> = ({  petsConsults }) => {
 
-  const [dataFiltered, setDataFiltered] = useState()
+  const [dataFiltered, setDataFiltered] = useState<PetConsults[]>()
   const { user } = useAuth0()
-  const [userLog, setUserLog] =useState()
+ 
+  const { userLog} = useContext(AuthContext)
+
+  const getData = async()=>{
+    const data = await getPetsConsultsByUserId(userLog.id, petsConsults)
+     return setDataFiltered(data)
+  }
+  
 
   useEffect(()=>{
+    getData()
+  }, [userLog])
 
-   /*  user !== undefined &&  async()=> getUserByEmail(user.email)
- */
-  }, [])
+  console.log({userLog});
+  console.log({dataFiltered});
+  
 
   return (
     <>
@@ -49,7 +58,7 @@ const ClientPage: NextPage<Props> = ({  petsConsults }) => {
             <Box className={styles.personalData}>
               <Typography className={styles.subtitle}>Mis mascotas</Typography>
 
-              {petsConsults.map((pet) =>
+              {dataFiltered?.map((pet) =>
                 <AccordionPet key={pet.pet.id} data={pet} />
               )
               }

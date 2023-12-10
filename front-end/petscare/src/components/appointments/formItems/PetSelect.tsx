@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import Stack from '@mui/material/Stack'
@@ -6,16 +6,32 @@ import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import styles from '../StepperAppointment.module.css'
 import { PetUser, Pet } from '@/interfaces'
+import AuthContext from '../../../context/AuthContext'
+import { getPetsByUserId } from '../../../services/petService'
 
 
 
 interface Props {
     handlerPet: (data: any) => void
-    pets: PetUser
-}
+  }
 
 
-const PetSelect = ({ handlerPet, pets }: Props) => {
+const PetSelect = ({ handlerPet }: Props) => {
+
+    const { userLog } = useContext(AuthContext);
+    const [pets, setPets] = useState<PetUser | undefined>()
+
+    const getPets = async () =>{
+        setPets(await getPetsByUserId(userLog.id))
+    }
+  
+    useEffect(() => {
+  
+        getPets()
+      /* if (userLog !== undefined) {
+        async () => setPets(await getPetsByUserId(userLog.id))
+      } */
+    }, [userLog])
 
    
     const [pet, setPet] = useState('');
@@ -26,6 +42,8 @@ const PetSelect = ({ handlerPet, pets }: Props) => {
         handlerPet(event.target.value)
     };
    
+    console.log({userLog});
+    
     
     return (
         <>
@@ -39,7 +57,7 @@ const PetSelect = ({ handlerPet, pets }: Props) => {
                         label="pet"
                         onChange={handleChangePet}
                     >
-                        {pets.pet.map((pet) =>
+                        {pets?.pet.map((pet) =>
                             <MenuItem key={pet.id} value={pet.id}>{pet.name}</MenuItem>
                         )}
 

@@ -1,6 +1,6 @@
 import { User, UserAuth0 } from "@/interfaces";
 import { Box, Button, TextField } from "@mui/material";
-import { FC, useCallback, useEffect, useMemo, useState } from "react";
+import { FC, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import InputController from "../userRegister/inputController";
 import styles from "../../components/cliente/client.module.css"
@@ -10,21 +10,16 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { updateUser } from "../../services/userService";
 import { useRouter } from "next/router";
 import ReusableModal from "../reusableModal/modal";
+import AuthContext from "../../context/AuthContext";
 
 
 
 const FormUpdateUser: FC = () => {
 
-  const { user } = useAuth0()
-  const [userLog, setUserLog] =useState()
+  const { userLog} = useContext(AuthContext)
   const { control, formState: { errors }, handleSubmit, reset } = useForm({
     resolver: yupResolver(schemaFormRegister),
-    defaultValues: async () => {
-      const response: any = await fetch(`http://ec2-34-229-209-114.compute-1.amazonaws.com/dev/v1/users/mail/${user?.email}`)
-      const dataUser = await response.json()
-      setUserLog(dataUser)
-      return dataUser
-    }
+    defaultValues: userLog
   });
 
   
@@ -107,11 +102,6 @@ const FormUpdateUser: FC = () => {
  }
 
 
-
-/*   console.log({ user });
-  console.log({ dataForm }); */
-  console.log({ userLog });
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
 
@@ -189,3 +179,16 @@ const FormUpdateUser: FC = () => {
 }
 
 export default FormUpdateUser
+
+
+
+
+/* const { control, formState: { errors }, handleSubmit, reset } = useForm({
+  resolver: yupResolver(schemaFormRegister),
+  defaultValues: async () => {
+    const response: any = await fetch(`http://ec2-34-229-209-114.compute-1.amazonaws.com/dev/v1/users/mail/${user?.email}`)
+    const dataUser = await response.json()
+    setUserLog(dataUser)
+    return dataUser
+  }
+}); */
