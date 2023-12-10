@@ -69,8 +69,12 @@ const NavDrawer: FC<Props> = ({handleDrawerToggle, navItems, window, mobileOpen}
                         </List>
                         {
                             isAuthenticated ?
-                            <Button variant="outlined" className={styles.buttonLoginDrawer} onClick={()=>{logout({ logoutParams : {returnTo : `${process.env.BASE_URL}`}})}}>cerrar sesión</Button> :
+                            <Button variant="outlined" className={styles.buttonLoginDrawer} onClick={()=>{logout({ logoutParams : {returnTo : `${process.env.BASE_URL}`}})}}>cerrar sesión</Button>
+                            :
+                            <Box>
                             <Button variant="outlined" className={styles.buttonLoginDrawer} onClick={()=>{loginWithRedirect({appState: { returnTo : '/client'}})}}>iniciar sesión</Button>
+                            <Button variant="outlined" className={styles.buttonRegDrawer} onClick={()=>{loginWithRedirect({appState: { returnTo : '/client'}})}}>registrarse</Button>
+                            </Box>
                         }
                     </Box>
                 </Drawer>
