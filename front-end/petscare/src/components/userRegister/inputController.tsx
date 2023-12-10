@@ -7,6 +7,7 @@ interface Props {
     label: string,
     type: string,
     required?: boolean,
+    disabled: boolean,
     control: Control<any>,
     defaultValue?: string | number,
     error?: boolean;
@@ -20,6 +21,7 @@ const InputController= ({
     type,
     required,
     control,
+    disabled,
     defaultValue,
     textFieldProps,
     error,
@@ -32,6 +34,7 @@ const InputController= ({
         name={name}
         control={control}
         defaultValue={defaultValue}
+        
         render={({ field }) => (
           <TextField
             {...field}
@@ -39,6 +42,7 @@ const InputController= ({
             label={label}
             variant="standard"
             fullWidth
+            disabled={disabled} 
             required={required}
             error={error}
             helperText={message}

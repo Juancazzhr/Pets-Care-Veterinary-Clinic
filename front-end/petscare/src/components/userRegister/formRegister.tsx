@@ -108,6 +108,7 @@ const FormRegister: FC = () => {
         label='Nombre'
         type='text'
         defaultValue={dataForm.firstName}
+        disabled= {false}
         control={control}
         error={errors.firstName ? true : false}
         message={errors.firstName?.message as string} />
@@ -117,6 +118,7 @@ const FormRegister: FC = () => {
         label='Apellido'
         type='text'
         defaultValue={dataForm.lastName}
+        disabled= {false}
         control={control}
         error={errors.lastName ? true : false}
         message={errors.lastName?.message as string} />
@@ -126,6 +128,7 @@ const FormRegister: FC = () => {
         label='Dirección'
         type='text'
         defaultValue={dataForm.address}
+        disabled= {false}
         control={control}
         error={errors.address ? true : false}
         message={errors.address?.message as string} />
@@ -135,6 +138,7 @@ const FormRegister: FC = () => {
         label='Teléfono'
         type='text'
         defaultValue={dataForm.phone}
+        disabled= {false}
         control={control}
         error={errors.phone ? true : false}
         message={errors.phone?.message as string} />
@@ -144,6 +148,7 @@ const FormRegister: FC = () => {
         label='Correo electrónico'
         type='text'
         defaultValue={dataForm.email}
+        disabled= {false}
         control={control}
         error={errors.email ? true : false}
         message={errors.email?.message as string} />
@@ -153,6 +158,7 @@ const FormRegister: FC = () => {
         label='Contraseña'
         type='password'
         defaultValue={dataForm.password}
+        disabled= {false}
         control={control}
         error={errors.password ? true : false}
         message={errors.password?.message as string} />

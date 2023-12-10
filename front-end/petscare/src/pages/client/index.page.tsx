@@ -1,27 +1,33 @@
-import React, { useState } from "react";
 import TitleSection from "../../components/utils/TitleSection"
-import { PetConsults, PetUser, Service, User } from "@/interfaces"
-import { Box, Container, Paper, TextField } from "@mui/material"
-import { GetServerSideProps, GetStaticProps, NextPage } from "next"
+import { PetConsults } from "@/interfaces"
+import { Box, Container, Paper} from "@mui/material"
+import { GetServerSideProps, NextPage } from "next"
 import Head from "next/head"
 import Typography from '@mui/material/Typography';
-import { FormCliente } from "../../components/cliente/formCliente";
-import { getUserByEmail, getUserById } from "../../services/userService";
+import FormUpdateUser from "../../components/cliente/formUpdateUser";
 import styles from "../../components/cliente/client.module.css"
 import AccordionPet from "../../components/cliente/AccordionPet";
 import { getPetsConsults } from "../../services/clientService";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect, useState } from "react"
+import { useAuth0 } from "@auth0/auth0-react"
+import { getUserByEmail } from "@/services/userService"
 
 interface Props {
-  userData: User
   petsConsults: PetConsults[]
 }
 
 
-const ClientPage: NextPage<Props> = ({ userData, petsConsults }) => {
+const ClientPage: NextPage<Props> = ({  petsConsults }) => {
 
+  const [dataFiltered, setDataFiltered] = useState()
   const { user } = useAuth0()
-console.log(user);
+  const [userLog, setUserLog] =useState()
+
+  useEffect(()=>{
+
+   /*  user !== undefined &&  async()=> getUserByEmail(user.email)
+ */
+  }, [])
 
   return (
     <>
@@ -33,20 +39,22 @@ console.log(user);
       </Head>
 
       <Container maxWidth={'xl'} >
-      <Box pt='80px'>
-        <TitleSection title='Mi cuenta' colorLine='64C9A7' colorText='573469' />
-        <Paper className={styles.paper}>
-          <Box className={styles.personalData}>
-            <Typography className={styles.subtitle}>Datos Personales</Typography>
-            <FormCliente userData={userData} />
-          </Box>
-          <Typography className={styles.subtitle}>Mis mascotas</Typography>
+        <Box pt='80px'>
+          <TitleSection title='Mi cuenta' colorLine='64C9A7' colorText='573469' />
+          <Paper className={styles.paper}>
+            <Box className={styles.personalData}>
+              <Typography className={styles.subtitle}>Datos Personales</Typography>
+              <FormUpdateUser />
+            </Box>
+            <Box className={styles.personalData}>
+              <Typography className={styles.subtitle}>Mis mascotas</Typography>
 
-          {petsConsults.map((pet) =>
-            <AccordionPet key={pet.pet.id} data={pet} />
-          )
-          }
-        </Paper>
+              {petsConsults.map((pet) =>
+                <AccordionPet key={pet.pet.id} data={pet} />
+              )
+              }
+            </Box>
+          </Paper>
         </Box>
       </Container>
     </>
@@ -57,13 +65,6 @@ console.log(user);
 
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-  //let email= 'marina@gmail.com'
-  //  if (typeof window !== "undefined") {
-  //    email = JSON.parse(localStorage.getItem("mailUser"))
-  //  }
-   //console.log(email);
-   //const userData = await getUserByEmail()
-  
 
   const petsConsults = await getPetsConsults()
 
@@ -75,7 +76,6 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 
   return {
     props: {
-      //userData,
       petsConsults
     }
   }

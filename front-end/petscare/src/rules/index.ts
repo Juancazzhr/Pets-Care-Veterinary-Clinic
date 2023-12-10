@@ -26,7 +26,7 @@ export const schemaStepperData = yup
     .string()
     .required("Apellido es un campo requerido")
     .min(3, "El apellido debe tener un mínimo de 3 caracteres")
-    .max(10, "El apellido debe tener un máximo de 10 caracteres"),
+    .max(20, "El apellido debe tener un máximo de 20 caracteres"),
     address: yup
     .string()
     .required("Dirección es un campo requerido")
