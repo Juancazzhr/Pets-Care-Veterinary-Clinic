@@ -94,7 +94,7 @@ const AppBarComponent: FC<Props> = ({ handleDrawerToggle, navItems }) => {
                                                 loginWithRedirect({
                                                     appState: {
                                                         redirectUri: "http://localhost:3000/registro"
-                                                                                                           }, 
+                                                      }, 
                                                     authorizationParams: {
                                                         screen_hint: "signup",
                                                       }
