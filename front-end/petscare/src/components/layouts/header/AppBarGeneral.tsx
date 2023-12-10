@@ -66,9 +66,11 @@ const AppBarComponent: FC<Props> = ({ handleDrawerToggle, navItems }) => {
                             <Box className={styles.boxLogin}>
                                 {isAuthenticated && user ?
                                     <Stack direction="row">
-                                        <PersonIcon color='secondary' sx={{ fontSize: '32px' }} />
+                                        <PersonIcon color='secondary' sx={{ fontSize: '47px', pt: '5px' }} />
+                                        <Box className={styles.account} onClick={()=> router.push('/client')}>
                                         <Typography className={styles.user} >{user?.nickname} </Typography>
-                                        <Typography className={styles.user} >mi cuenta </Typography>
+                                        <Typography className={styles.text} >mi cuenta </Typography>
+                                        </Box>
                                         <CancelIcon className={styles.cancelIcon} onClick={() => { logout({ logoutParams: { returnTo: window.location.origin } }) }} />
                                     </Stack>
                                     :

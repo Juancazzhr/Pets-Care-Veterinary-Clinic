@@ -38,11 +38,27 @@
     display: flex;
 }
 
-.boxLogin .user{
+.boxLogin .account{
     margin-top:7px;
     margin-left: 5px;
-    color: '#EAEBED';
+    color: #EAEBED;
+
+}
+
+.boxLogin .account:hover{
+    cursor: pointer;
+    color: #64C9A7
+}
+
+
+.account .user{   
     font-Weight: '900'
+}
+
+.account .text{
+    line-height: 10px;   
+    font-Weight: '700';
+    font-size: 12px
 }
 
 .boxLogin .cancelIcon{
@@ -71,6 +87,12 @@
     font-size: larger;
     font-weight: bold;
     margin-left: -3px;
+}
+
+.drawerUserData .text{
+    line-height: 10px;   
+    font-Weight: '700';
+    font-size: 16px
 }
 
 .drawerUserData .personIcon{

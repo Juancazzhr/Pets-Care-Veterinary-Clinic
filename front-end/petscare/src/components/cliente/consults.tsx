@@ -19,7 +19,7 @@ const columns: GridColDef[] = [
     },
     {
         field: 'diagnostic',
-        headerName: 'Diagnostico',
+        headerName: 'Diagnóstico',
         minWidth: 170,
         sortable: true,
         renderCell: (params: GridCellParams) => <>{params.value}</>
@@ -40,8 +40,6 @@ const columns: GridColDef[] = [
     },
 
 ]
-
-
 
 
 interface Props {
@@ -83,8 +81,7 @@ const DataGridConsults: FC<Props> = ({ data }) => {
     return (
         <div style={{ height: 400, width: '100%' }}>
 
-            <DataGrid
-                
+            <DataGrid                
                 columns={columns}
                 rows={rows}
                 autoHeight
@@ -100,7 +97,7 @@ const DataGridConsults: FC<Props> = ({ data }) => {
                 pageSizeOptions={pageSizeOptions}
                 slots={{ toolbar: GridToolbar }} /*  CustomToolbar */
                 slotProps={{
-                    toolbar: {CustomToolbar:{ printOptions: { getRowsToExport: getSelectedRowsToExport }, showQuickFilter: true }},
+                    toolbar: {GridToolbar:{ printOptions: { getRowsToExport: getSelectedRowsToExport }, showQuickFilter: true }},
                 }}
                 localeText={esES.components.MuiDataGrid.defaultProps.localeText}
                 disableColumnSelector

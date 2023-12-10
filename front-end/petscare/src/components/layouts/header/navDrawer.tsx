@@ -55,6 +55,7 @@ const NavDrawer: FC<Props> = ({handleDrawerToggle, navItems, window, mobileOpen}
                                 <Box className={styles.drawerUserData}>
                                     <PersonIcon color='primary' className={styles.personIcon} />
                                     <Typography className={styles.user}>{userLog?.firstName} {userLog?.lastName}</Typography>
+                                    <Typography className={styles.text} >mi cuenta </Typography>
                                 </Box></>}
                         </Stack>
                         <Divider color='#573469' variant="middle" />
