@@ -9,7 +9,6 @@ import styles from "../../components/cliente/client.module.css"
 import AccordionPet from "../../components/cliente/AccordionPet";
 import { getPetsConsults, getPetsConsultsByUserId } from "../../services/clientService";
 import { useContext, useEffect, useState } from "react"
-import { useAuth0 } from "@auth0/auth0-react"
 import AuthContext from "../../context/AuthContext"
 
 interface Props {
@@ -20,7 +19,6 @@ interface Props {
 const ClientPage: NextPage<Props> = ({ petsConsults }) => {
 
   const [dataFiltered, setDataFiltered] = useState<PetConsults[]>()
-  const { user } = useAuth0()
 
   const { userLog } = useContext(AuthContext)
 

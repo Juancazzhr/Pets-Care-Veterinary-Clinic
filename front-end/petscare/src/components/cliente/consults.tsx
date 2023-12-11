@@ -3,9 +3,11 @@ import { FC } from 'react';
 import { PetConsults } from '@/interfaces';
 import Stack from '@mui/material/Stack';
 import { Typography } from '@mui/material';
-import { GridCellParams, GridColDef, GridToolbarContainer, GridToolbarExport, GridToolbarFilterButton, DataGrid, GridToolbar, GridPrintGetRowsToExportParams, gridFilteredSortedRowIdsSelector,
+import {
+    GridCellParams, GridColDef, GridToolbarContainer, GridToolbarExport, GridToolbarFilterButton, DataGrid, GridToolbar, GridPrintGetRowsToExportParams, gridFilteredSortedRowIdsSelector,
     selectedGridRowsSelector,
-    esES,GridRowId } from '@mui/x-data-grid';
+    esES, GridRowId
+} from '@mui/x-data-grid';
 
 
 
@@ -81,28 +83,35 @@ const DataGridConsults: FC<Props> = ({ data }) => {
     return (
         <div style={{ height: 400, width: '100%' }}>
 
-            <DataGrid                
-                columns={columns}
-                rows={rows}
-                autoHeight
-                checkboxSelection
-                getRowId={(row) => row.id}
-                initialState={{
-                    pagination: {
-                        paginationModel: {
-                            pageSize: pageSize,
+            {data?.consults.length !== 0 ?
+
+                <DataGrid
+                    columns={columns}
+                    rows={rows}
+                    autoHeight
+                    checkboxSelection
+                    getRowId={(row) => row.id}
+                    initialState={{
+                        pagination: {
+                            paginationModel: {
+                                pageSize: pageSize,
+                            }
                         }
-                    }
-                }}
-                pageSizeOptions={pageSizeOptions}
-                slots={{ toolbar: GridToolbar }} /*  CustomToolbar */
-                slotProps={{
-                    toolbar: {GridToolbar:{ printOptions: { getRowsToExport: getSelectedRowsToExport }, showQuickFilter: true }},
-                }}
-                localeText={esES.components.MuiDataGrid.defaultProps.localeText}
-                disableColumnSelector
-                disableDensitySelector
-            />
+                    }}
+                    pageSizeOptions={pageSizeOptions}
+                    slots={{ toolbar: GridToolbar }} /*  CustomToolbar */
+                    slotProps={{
+                        toolbar: { GridToolbar: { printOptions: { getRowsToExport: getSelectedRowsToExport }, showQuickFilter: true } },
+                    }}
+                    localeText={esES.components.MuiDataGrid.defaultProps.localeText}
+                    disableColumnSelector
+                    disableDensitySelector
+                />
+                :
+                <Typography> Por el momento su mascota no registra consultas </Typography>
+
+            }
+
         </div>
     );
 }
