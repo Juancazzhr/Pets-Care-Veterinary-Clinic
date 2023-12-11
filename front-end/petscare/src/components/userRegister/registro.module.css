@@ -1,88 +1,88 @@
-
 .root {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 5%; 
-    padding: 5%;
-    
-  }
-  
-  .paper {
-    max-width: 100%;
-    padding: 5%;
-    border-radius: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .addPets {
-    display: flex;
-    flex-direction: row;
-    margin-top: 15px;
-  }
-  
-  .registerButton {
-    display: block;
-    margin-top: 2rem; 
-    margin-left: auto;
-    margin-right: left; 
-    padding: 0.5rem 3rem;
-    text-transform: lowercase;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 5%;
+  padding: 5%;
+}
 
-  .boxTextLink {
-    width: 100%;
-    text-align: right;
-    display: block;
-    margin-top: 20px;
-  }
-  
-  .bgBoxMascota {
-    width: 100%;
-    padding: 15px;
-    margin: 10px auto;
-    border-radius: 2%;
-    margin-left: 16px;
-  }
+.paper {
+  max-width: 100%;
+  padding: 5%;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  .inputPet{
-    width: 300px;
-    height: 40px;
-    margin: 10px 0;
+.addPets {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+}
+
+.registerButton {
+  display: block;
+  margin-top: 2rem;
+  margin-left: auto;
+  margin-right: left;
+  padding: 0.5rem 3rem;
+  text-transform: lowercase;
+}
+
+.boxTextLink {
+  width: 100%;
+  text-align: right;
+  display: block;
+  margin-top: 20px;
+}
+
+.bgBoxMascota {
+  width: 100%;
+  padding: 15px;
+  margin: 10px auto;
+  border-radius: 2%;
+  margin-left: 16px;
+}
+
+.formControl {
+  width: 100%;
+  margin: 15px 0;
+}
+
+.inputPet {
+  height: 50px;
+}
+
+.label {
+  padding: 10px 0;
+  font-size: 14px;
+}
+
+.item {
+  padding: 0;
+}
+
+@media (min-width: 600px) {
+  .formControl {
+    width: 47%;
+    margin-right: 3%;
   }
-  
-  .label{
-    padding: 10px 0;
-    font-size: 14px;    
-  }
-  
-  .item{
+}
+
+@media (min-width: 800px) {
+  .root {
+    margin: 0;
+    max-width: 700px;
     padding: 0;
+    margin-bottom: 10px;
   }
+}
 
-  /* .help{
-    color: red;
-  } */
-
-  
-  @media (min-width: 800px) {
-    .root {
-      margin: 0; 
-      max-width: 700px; 
-      padding: 0;
-      margin-bottom: 10px;
-    
-    }
-
+@media (min-width: 960px) {
+  .registerButton {
+    padding: 0.5rem 4rem;
   }
-  
-  @media (min-width: 960px) {
-    .registerButton {
-      padding: 0.5rem 4rem; 
-    }
-  }
-  
+}
