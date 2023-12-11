@@ -17,7 +17,7 @@ const RegisterPets: NextPage = () => {
     <Box className={styles.root}>
       <Typography
         color="primary"
-        variant="h3"
+        variant="h4"
         textAlign={"center"}
         fontWeight={700}
         sx={{ mb: "15px" }}
