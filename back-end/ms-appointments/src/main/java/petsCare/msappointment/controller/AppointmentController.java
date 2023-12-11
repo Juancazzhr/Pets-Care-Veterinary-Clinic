@@ -20,7 +20,7 @@ import java.util.Scanner;
 import java.util.TimeZone;
 
 @RestController
-@RequestMapping("/v1/appointments")
+@RequestMapping("v1/appointments")
 public class AppointmentController {
 
     AppointmentService service;
