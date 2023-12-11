@@ -44,11 +44,7 @@ const AppBarAuth: FC<Props> = ({ handleDrawerToggle }) => {
                         >
                             <MenuIcon sx={{ fontSize: '32px' }} />
                         </IconButton>
-                        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                            <Box className={styles.boxLogin}>
-                                <Button variant="contained" color='secondary' className={styles.buttonLogin} href={asPath === '/registro' ? '/login' : '/registro'}>{asPath === '/registro' ? 'iniciar sesión' : 'registrate'}</Button>
-                            </Box>
-                        </Box>
+                        
                     </Box>
                 </Toolbar>
             </Container>
