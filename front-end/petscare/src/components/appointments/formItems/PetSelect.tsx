@@ -22,15 +22,15 @@ const PetSelect = ({ handlerPet }: Props) => {
     const [pets, setPets] = useState<PetUser | undefined>()
 
     const getPets = async () =>{
-        setPets(await getPetsByUserId(userLog?.id))
+        if (userLog === undefined) {
+            // Manejar el caso en que no hay usuario logueado
+        } else {
+            setPets(await getPetsByUserId(userLog.id))
+        }        
     }
   
-    useEffect(() => {
-  
-        getPets()
-      /* if (userLog !== undefined) {
-        async () => setPets(await getPetsByUserId(userLog.id))
-      } */
+    useEffect(() => {  
+        getPets()   
     }, [userLog])
 
    
@@ -42,9 +42,7 @@ const PetSelect = ({ handlerPet }: Props) => {
         handlerPet(event.target.value)
     };
    
-    console.log({userLog});
-    
-    
+     
     return (
         <>
             <Stack className={styles.petSelect}>

@@ -14,9 +14,7 @@ interface Props {
   }
 
 const DetalleServ: FC<Props> = ({ servicio, visible, profesionals }) => {
-    console.log(profesionals);
-    
-
+      
     const [profName, setprofName] = useState<string>('');
 
     const handleChange = (event: SelectChangeEvent<typeof profName>) => {

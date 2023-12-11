@@ -8,26 +8,13 @@ export const getPetsConsults = async () => {
     return petsConsults;
 }
 
-export const getPetsConsultsByUserId = async (userId: number | undefined, data: PetConsults[])=>{
+export const getPetsConsultsByUserId = async (userId: number, data: PetConsults[])=>{
 
     const petsConsultsFiltered : PetConsults[] = []
     data.map((pet : PetConsults)=>{
         if (pet?.pet.clientId === userId){
-            petsConsultsFiltered.push(...petsConsultsFiltered, pet)
+            petsConsultsFiltered.push(pet)
         }
     })
     return petsConsultsFiltered;
 }
-
-
-/* 
-export const getPetsConsultsByUserId = async (userId: number, data: PetConsults[])=>{
-
-    const [petsConsultsFiltered, setPetsConsultsFiltered] = useState<PetConsults[]>([])
-    data.map((pet : PetConsults)=>{
-        if (pet?.pet.clientId === userId){
-            setPetsConsultsFiltered([...petsConsultsFiltered])
-        }
-    })
-    return petsConsultsFiltered;
-} */

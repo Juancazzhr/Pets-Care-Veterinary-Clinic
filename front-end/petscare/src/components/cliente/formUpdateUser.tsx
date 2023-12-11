@@ -10,14 +10,12 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { updateUser } from "../../services/userService";
 import { useRouter } from "next/router";
 import ReusableModal from "../reusableModal/modal";
-import AuthContext from "../../context/AuthContext";
-
 
 
 const FormUpdateUser: FC = () => {
 
   const { user} = useAuth0()
-  const { control, formState: { errors }, handleSubmit, reset } = useForm({
+  const { control, formState: { errors }, handleSubmit } = useForm({
     resolver: yupResolver(schemaFormRegister),
     defaultValues: async () => {
       const response: any = await fetch(`http://ec2-34-229-209-114.compute-1.amazonaws.com/dev/v1/users/mail/${user?.email}`)
@@ -45,7 +43,7 @@ const FormUpdateUser: FC = () => {
 
   const redirectToPetRegistration = useCallback(() => {
     setIsModalOpen(false);
-    /*   router.push("/registroMascotas"); */
+    /*   router.push("/"); */
   }, [router]);
 
 

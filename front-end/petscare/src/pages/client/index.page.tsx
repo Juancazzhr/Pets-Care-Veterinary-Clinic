@@ -1,6 +1,6 @@
 import TitleSection from "../../components/utils/TitleSection"
 import { PetConsults } from "@/interfaces"
-import { Box, Container, Paper} from "@mui/material"
+import { Box, Container, Paper } from "@mui/material"
 import { GetServerSideProps, NextPage } from "next"
 import Head from "next/head"
 import Typography from '@mui/material/Typography';
@@ -17,26 +17,31 @@ interface Props {
 }
 
 
-const ClientPage: NextPage<Props> = ({  petsConsults }) => {
+const ClientPage: NextPage<Props> = ({ petsConsults }) => {
 
   const [dataFiltered, setDataFiltered] = useState<PetConsults[]>()
   const { user } = useAuth0()
- 
-  const { userLog} = useContext(AuthContext)
 
-  const getData = async()=>{
-    const data = await getPetsConsultsByUserId(userLog?.id, petsConsults)
-     return setDataFiltered(data)
+  const { userLog } = useContext(AuthContext)
+
+  const getData = async () => {
+
+    if (userLog?.id === undefined) {
+      // manejar error
+    } else {
+      const data = await getPetsConsultsByUserId(userLog.id, petsConsults)
+      return setDataFiltered(data)
+    }
   }
-  
 
-  useEffect(()=>{
+
+  useEffect(() => {
     getData()
   }, [userLog])
 
-  console.log({userLog});
-  console.log({dataFiltered});
-  
+  console.log({ userLog });
+  console.log({ dataFiltered });
+
 
   return (
     <>
@@ -58,8 +63,8 @@ const ClientPage: NextPage<Props> = ({  petsConsults }) => {
             <Box className={styles.personalData}>
               <Typography className={styles.subtitle}>Mis mascotas</Typography>
 
-              {dataFiltered?.map((pet) =>
-                <AccordionPet key={pet.pet.id} data={pet} />
+              {dataFiltered?.map((pet, index) =>
+                <AccordionPet key={index} data={pet} />
               )
               }
             </Box>
