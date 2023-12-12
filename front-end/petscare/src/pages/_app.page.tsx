@@ -26,7 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
       domain = {domain}
       clientId={clientId}
       authorizationParams={{
-        redirect_uri: "http://localhost:3000"
+        redirect_uri: "http://localhost:3000/registro"
         /* redirect_uri: `${process.env.BASE_URL}` */
       }}
     > 

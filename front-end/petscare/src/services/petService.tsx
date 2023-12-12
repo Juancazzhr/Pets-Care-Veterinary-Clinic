@@ -4,8 +4,7 @@ import { Dispatch, SetStateAction } from "react";
 
 export const postPet = async (data: Pet) => {    
     const dataPet = JSON.stringify(data);    
-    console.log(data);
-    
+       
     const response = await fetch(`http://ec2-34-229-209-114.compute-1.amazonaws.com/dev/v1/pets`, {
       headers: {
         Accept: "application/json",

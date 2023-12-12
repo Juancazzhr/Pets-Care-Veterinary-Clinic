@@ -15,16 +15,19 @@ import ReusableModal from "../reusableModal/modal";
 const FormUpdateUser: FC = () => {
 
   const { user} = useAuth0()
+  const [userID, setUserID] = useState()
   const { control, formState: { errors }, handleSubmit } = useForm({
     resolver: yupResolver(schemaFormRegister),
     defaultValues: async () => {
       const response: any = await fetch(`http://ec2-34-229-209-114.compute-1.amazonaws.com/dev/v1/users/mail/${user?.email}`)
       const dataUser = await response.json()
+      setUserID(dataUser.id)
       return dataUser
     }
   });
 
-  
+  console.log({userID});
+    
   const router = useRouter()
   const [dataForm, setDataForm] = useState<User>()
   const [isDisabled, setIsDisabled] = useState(true)
@@ -47,12 +50,12 @@ const FormUpdateUser: FC = () => {
   }, [router]);
 
 
-
   // UPDATE USER
   const onSubmit: SubmitHandler<any> = (data: any) => {
 
         setDataForm({
           ...dataForm,
+          id: userID,
           firstName: data.firstName,
           lastName: data.lastName,
           address: data.address,
@@ -68,6 +71,7 @@ const FormUpdateUser: FC = () => {
     
         const dataUserUpdated = {
           ...dataForm,
+          id: userID,
           firstName: data.firstName,
           lastName: data.lastName,
           address: data.address,
@@ -81,9 +85,7 @@ const FormUpdateUser: FC = () => {
           }
         }
         console.log({dataUserUpdated});
-        
-    
-            
+                      
         const response = updateUser(dataUserUpdated)
         response.then((res) => {
           console.log({res});
@@ -106,6 +108,7 @@ const FormUpdateUser: FC = () => {
 
 // TOGGLE DISABLED / ENABLE FIELDS
  const onToggle = ()=>{
+ /*  event.stopPropagation(); */
   setIsDisabled(!isDisabled)
  }
 

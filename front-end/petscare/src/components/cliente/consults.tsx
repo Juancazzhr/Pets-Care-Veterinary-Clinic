@@ -81,7 +81,7 @@ const DataGridConsults: FC<Props> = ({ data }) => {
     };
 
     return (
-        <div style={{ height: 400, width: '100%' }}>
+        <div style={{ minHeight: 300, width: '100%' }}>
 
             {data?.consults.length !== 0 ?
 
