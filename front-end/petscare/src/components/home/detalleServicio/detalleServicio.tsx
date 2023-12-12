@@ -2,8 +2,7 @@ import { Professional, Service } from "@/interfaces";
 import styles from "./Detalle.module.css";
 import { CardMedia, Container, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
 import { FC, useState } from "react";
-import Image from 'next/image'
-import { profData } from '../../professionals/profData'
+
 
 
 
