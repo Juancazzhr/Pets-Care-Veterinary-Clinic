@@ -25,14 +25,11 @@ const AuthProvider = ({ children }: ChildrenProps) => {
 
   const getUser = (email:any, isAuth: boolean) => {
 
-   /*  const urlAPI = `${process.env.BASE_URL_BACK}users/mail/${email}}`; */
-
-    const urlAPI = `http://ec2-34-229-209-114.compute-1.amazonaws.com/dev/v1/users/mail/${email}`;
+    const urlAPI = `${process.env.BASE_URL_BACK}users/mail/${email}`;
 
     if(isAuth && router.asPath !== '/registro' ){
       fetch(urlAPI)
       .then((response) => {
-        console.log(response);
         if (response.ok !== true) {
           alert("No se pudo consultar Usuario");
         }

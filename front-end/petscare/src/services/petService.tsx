@@ -5,7 +5,7 @@ import { Dispatch, SetStateAction } from "react";
 export const postPet = async (data: Pet) => {    
     const dataPet = JSON.stringify(data);    
        
-    const response = await fetch(`http://ec2-34-229-209-114.compute-1.amazonaws.com/dev/v1/pets`, {
+    const response = await fetch(`${process.env.BASE_URL_BACK}pets`, {
       headers: {
         Accept: "application/json",
         'Content-Type': "application/json",
@@ -18,14 +18,14 @@ export const postPet = async (data: Pet) => {
 
 
 export const getPetsByUserId = async (id: number | undefined) => {
-    const response = await fetch(`http://ec2-34-229-209-114.compute-1.amazonaws.com/dev/v1/pets/users/${id}`)
+    const response = await fetch(`${process.env.BASE_URL_BACK}pets/users/${id}`)
     const pets = await response.json()
     return pets;
 }
 
 export const getPetById = async (id: number, setter: Dispatch<SetStateAction<Pet | undefined>>) => {
     const response = await fetch(
-        `http://ec2-34-229-209-114.compute-1.amazonaws.com/dev/v1/pets/${id}`);
+        `${process.env.BASE_URL_BACK}pets/${id}`);
     const pet = await response.json()
     setter(pet)
     return pet;

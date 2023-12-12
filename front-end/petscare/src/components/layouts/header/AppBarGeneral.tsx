@@ -82,7 +82,7 @@ const AppBarComponent: FC<Props> = ({ handleDrawerToggle, navItems }) => {
                                             onClick={() => {
                                                 loginWithRedirect({
                                                     appState: {
-                                                        redirectUri: "http://localhost:3000"
+                                                        redirectUri: `${process.env.BASE_URL}`
                                                     }
                                                 })
                                             }}
@@ -96,7 +96,7 @@ const AppBarComponent: FC<Props> = ({ handleDrawerToggle, navItems }) => {
                                             onClick={() => {
                                                 loginWithRedirect({
                                                     appState: {
-                                                        redirectUri: "http://localhost:3000/registro"
+                                                        redirectUri: `${process.env.BASE_URL}registro`
                                                       }, 
                                                     authorizationParams: {
                                                         screen_hint: "signup",

@@ -16,7 +16,7 @@ export const Auth0ProviderWithNavigate = ({children} : Props)=>{
     const domain = process.env.AUTH_DOMAIN
     const clientId = process.env.AUTH_CLIENT_ID
     const audience = process.env.AUTH_AUDIENCE
-    const redirectUri = 'http://localhost:3000/'
+    const redirectUri = `${process.env.BASE_URL}`
 
     const onRedirectCallback = (appState : AppState | undefined)=>{
         navigate.push(appState?.returnTo || window.location.pathname)

@@ -19,7 +19,7 @@ const FormUpdateUser: FC = () => {
   const { control, formState: { errors }, handleSubmit } = useForm({
     resolver: yupResolver(schemaFormRegister),
     defaultValues: async () => {
-      const response: any = await fetch(`http://ec2-34-229-209-114.compute-1.amazonaws.com/dev/v1/users/mail/${user?.email}`)
+      const response: any = await fetch(`${process.env.BASE_URL_BACK}users/mail/${user?.email}`)
       const dataUser = await response.json()
       setUserID(dataUser.id)
       return dataUser
