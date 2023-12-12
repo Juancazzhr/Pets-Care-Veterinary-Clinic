@@ -37,9 +37,6 @@ const ClientPage: NextPage<Props> = ({ petsConsults }) => {
     getData()
   }, [userLog])
 
-  console.log({ userLog });
-  console.log({ dataFiltered });
-
 
   return (
     <>
@@ -47,7 +44,6 @@ const ClientPage: NextPage<Props> = ({ petsConsults }) => {
         <title>Pets Care: clientes</title>
         <meta name="description" content="clientes" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
