@@ -28,7 +28,7 @@ export const postUser = async (data: User) => {
   
   
   export const getUserByEmail = async (email: string) => {
-    const response = await fetch(`http://ec2-34-229-209-114.compute-1.amazonaws.com/dev/v1/users/mail/${email}}`)
+    const response = await fetch(`https://ec2-34-229-209-114.compute-1.amazonaws.com/dev/v1/users/mail/${email}}`)
     const user = await response.json()
     return user;
 }
