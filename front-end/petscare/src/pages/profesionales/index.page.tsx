@@ -2,18 +2,11 @@ import Head from 'next/head'
 import TitleSection from '../../components/utils/TitleSection'
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
-import { GetServerSideProps, GetStaticProps, NextPage } from 'next'
-import { getPetsByUserId } from '../../services/petService'
+import { GetStaticProps, NextPage } from 'next'
 import { getProfessionals } from '../../services/userService'
-import { getServices } from '../../services/servicesService'
 import { Professional, Service, PetUser } from '../../interfaces'
-import AuthContext from '../../context/AuthContext'
-import { useContext, useEffect, useState } from 'react'
-import { useAuth0 } from "@auth0/auth0-react"
-import Alert from '@mui/material/Alert'
-import Button from '@mui/material/Button'
 import { Grid, Paper} from '@mui/material'
-import styles from '../../components/appointments/StepperAppointment.module.css'
+import styles from '../../components/professionals/profesionales.module.css'
 import CardProfessional from '../../components/professionals/cardProfessional'
 
 
@@ -39,7 +32,7 @@ const ProfesionalesPage: NextPage<Props> = ({ professionals }) => {
                     <Paper className={styles.paper}>
                         <Grid container spacing={2}>
                             {professionals?.map((professional, index) => (
-                                <Grid item xs={12} sm={6} md={4} key={index}>
+                                <Grid item xs={12} sm={6} md={3} key={index}>
                                     <CardProfessional data={professional} />
                                 </Grid>
                             ))}
