@@ -5,6 +5,9 @@ import com.petscare.mspet.model.Pet;
 import com.petscare.mspet.model.PetClinicalHistory;
 import com.petscare.mspet.model.PetType;
 import com.petscare.mspet.service.PetService;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -53,9 +57,7 @@ public class PetController {
         if(petService.getPetById(pet.getId()).isPresent()){
             PetClinicalHistory petClinicalHistory = new PetClinicalHistory(pet.getPetClinicalHistory().getId(),pet.getPetClinicalHistory().getCratedAt(),pet.getPetClinicalHistory().getLastUpdate(), pet.getPetClinicalHistory().getWeigth(), pet);
             PetClinicalHistory petClinicalHistoryUpdatedPet = petService.updatePetClinicalHistory(petClinicalHistory);
-            System.out.println(petClinicalHistoryUpdatedPet);
             Pet updatedPet = new Pet(pet.getId(),pet.getName(),pet.getSize(),pet.getRace(),pet.getClientId(),pet.getPetType(),petClinicalHistoryUpdatedPet);
-            System.out.println(updatedPet);
             return ResponseEntity.ok(petService.updatePet(updatedPet));
         }else{
             ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pet with id "+ pet.getId()+ " doesn't exist.");
@@ -169,11 +171,14 @@ public class PetController {
                     consultDTOS.add(consultDTO);
                 }
             }
-            if(!consultDTOS.isEmpty()){
-                PetHistoryConsults petHistoryConsults = new PetHistoryConsults(pet,consultDTOS);
+            PetHistoryConsults petHistoryConsults;
+            if(!consultDTOS.isEmpty()) {
+                petHistoryConsults = new PetHistoryConsults(pet, consultDTOS);
+            }else{
+                petHistoryConsults = new PetHistoryConsults(pet, Collections.emptyList());
+            }
                 petHistoryConsultsList.add(petHistoryConsults);
             }
-        }
         return petHistoryConsultsList;
     }
 
@@ -195,11 +200,14 @@ public class PetController {
                     }
                 }
             }
-            if(!appointmentsServices.isEmpty()){
-                PetsAppointments petsAppointments = new PetsAppointments(pet,appointmentsServices);
+            PetsAppointments petsAppointments;
+            if(!appointmentsServices.isEmpty()) {
+                petsAppointments = new PetsAppointments(pet, appointmentsServices);
+            }else{
+                petsAppointments = new PetsAppointments(pet,Collections.emptyList());
+            }
                 petsAppointmentsList.add(petsAppointments);
             }
-        }
         return petsAppointmentsList;
     }
 

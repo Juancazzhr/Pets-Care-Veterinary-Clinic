@@ -1,20 +1,25 @@
 package pets_Care.msusers.service;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import pets_Care.msusers.client.IClientServiceClient;
+import pets_Care.msusers.client.IProfessionalServiceClient;
 import pets_Care.msusers.model.User;
 import pets_Care.msusers.repository.IUserRepository;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UserService implements IUserService {
-
     IUserRepository repository;
+    IClientServiceClient clientRepository;
+    IProfessionalServiceClient professionalRepository;
 
-    public UserService(IUserRepository repository) {
+    public UserService(IUserRepository repository, IClientServiceClient clientRepository, IProfessionalServiceClient professionalRepository) {
         this.repository = repository;
+        this.clientRepository = clientRepository;
+        this.professionalRepository = professionalRepository;
     }
 
     @Override

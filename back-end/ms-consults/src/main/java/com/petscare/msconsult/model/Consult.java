@@ -26,5 +26,7 @@ public class Consult {
     @Column(name = "exams")
     private String exams;
 
+    @Column(name = "pet_clinical_history_id")
+    private Long petClinicalHistoryId;
 
 }

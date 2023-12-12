@@ -124,10 +124,15 @@ public class PetService implements IPetService{
         }
     }
 
+    @Override
+    public List<IAppointmentServiceClient.AppointmentDTO> listAllAppointments() {
+        return appointmentRepository.listAllApointments();
+    }
 
-
-
-
+    @Override
+    public List<IServicesProfessionalServiceClient.ServiceDTO> listAllServices() {
+        return serviceRepository.listAllServices();
+    }
     @Override
     public List<IConsultServiceClient.ConsultDTO> listAllConsults() {
         return consultRepository.listAllConsults();
