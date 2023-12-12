@@ -25,7 +25,7 @@ const Home: NextPage<Props> = ({ services, img1, img2, img3, profesionales }) =>
         <title>Pets Care</title>
         <meta name="Página de inicio" content="Página web de clínica veterinaria que ofrece servicios de laboratorio, cirugía, vacunación, consulta médica, peluquería y radiografía." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
+        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
