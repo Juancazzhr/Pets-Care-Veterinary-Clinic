@@ -1,6 +1,6 @@
 import TitleSection from "../../components/utils/TitleSection"
 import { PetConsults } from "@/interfaces"
-import { Box, Container, Paper } from "@mui/material"
+import { Box, Container, Link, Paper } from "@mui/material"
 import { GetServerSideProps, NextPage } from "next"
 import Head from "next/head"
 import Typography from '@mui/material/Typography';
@@ -10,6 +10,7 @@ import AccordionPet from "../../components/cliente/AccordionPet";
 import { getPetsConsults, getPetsConsultsByUserId } from "../../services/clientService";
 import { useContext, useEffect, useState } from "react"
 import AuthContext from "../../context/AuthContext"
+import AddCircleIcon from '@mui/icons-material/AddCircle'
 
 interface Props {
   petsConsults: PetConsults[]
@@ -57,15 +58,21 @@ const ClientPage: NextPage<Props> = ({ petsConsults }) => {
             </Box>
             <Box className={styles.personalData}>
               <Typography className={styles.subtitle}>Mis mascotas</Typography>
+              <Link href={'/registroMascotas'}>
+                <Box className={styles.addPets}>
+                  <AddCircleIcon />
+                  <Typography ml='10px' variant='body2'>AGREGAR MASCOTA</Typography>
+                </Box>
+              </Link>
 
-              {dataFiltered?.map((pet, index) =>
-                <AccordionPet key={index} data={pet} />
-              )
-              }
-            </Box>
-          </Paper>
+            {dataFiltered?.map((pet, index) =>
+              <AccordionPet key={index} data={pet} />
+            )
+            }
         </Box>
-      </Container>
+      </Paper>
+    </Box >
+      </Container >
     </>
   )
 

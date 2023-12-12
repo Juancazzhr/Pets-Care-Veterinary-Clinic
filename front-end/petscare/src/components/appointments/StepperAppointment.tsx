@@ -15,7 +15,7 @@ import { useRouter } from 'next/router';
 import PetSelect from './formItems/PetSelect';
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 import { Stack } from '@mui/material';
-import { Service, Professional, AppointmentInput, PetUser } from '@/interfaces/'
+import { Service, Professional, AppointmentInput } from '@/interfaces/'
 import Link from 'next/link';
 import { postAppointment } from '../../services/appointmentService';
 import ReusableModal from '../reusableModal/modal';

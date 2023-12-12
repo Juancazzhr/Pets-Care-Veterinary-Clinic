@@ -42,6 +42,18 @@
     font-size: 14px;
   }
 
+  .addPets {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    color: #573469;
+    font-size: 12px;
+  }
+
+  .addPets:hover {
+    color: #64C9A7;
+    cursor: pointer;
+  }
 
   @media screen and (min-width: 600px) {
     .input{

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FC } from 'react';
 import { PetConsults } from '@/interfaces';
 import Stack from '@mui/material/Stack';
-import { Divider, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import {
     GridCellParams, GridColDef, GridToolbarContainer, GridToolbarExport, GridToolbarFilterButton, DataGrid, GridToolbar, GridPrintGetRowsToExportParams, gridFilteredSortedRowIdsSelector,
     selectedGridRowsSelector,
@@ -109,7 +109,6 @@ const DataGridConsults: FC<Props> = ({ data }) => {
                 />
                 :
                 <Typography> Por el momento su mascota no registra consultas </Typography>
-
             }
 
         </div>

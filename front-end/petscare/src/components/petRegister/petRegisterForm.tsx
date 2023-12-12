@@ -1,10 +1,8 @@
 import { Pet } from '../../interfaces';
-import { FC, useCallback, useContext, useEffect, useState } from 'react';
+import { FC, useCallback, useContext, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup'
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useAuth0 } from '@auth0/auth0-react';
-import { Box, Button, FormControl,  InputLabel, MenuItem, Select, Stack, Typography } from '@mui/material';
-import { getUserByEmail } from "../../services/userService";
+import { Button, FormControl,  InputLabel, MenuItem, Select, Stack, Typography } from '@mui/material';
 import { postPet } from "../../services/petService";
 import InputController from "../userRegister/inputController";
 import React from 'react';
@@ -32,7 +30,6 @@ const PetRegisterForm: FC = () => {
     resolver: yupResolver(validationSchema)
   });
 
-  /* const { user } = useAuth0() */
   const { userLog } = useContext(AuthContext);
   const router = useRouter()
   const [dataForm, setDataForm] = useState<Pet>(initialValues)
@@ -53,25 +50,10 @@ const PetRegisterForm: FC = () => {
 
   const redirectToPetRegistration = useCallback(() => {
     setIsModalOpen(false);
-    router.push("/client");
+    router.push("/");
   }, []);
 
   const onSubmit: SubmitHandler<any> = (data: any) => {
-    console.log({data});
-    console.log({userLog});
-    
-
-   /*  const dataUser = () => {
-      if (user?.email === undefined) {
-        // Manejar el caso en que no hay email
-      } else {
-        const dataUser = getUserByEmail(user.email);
-        console.log(dataUser);
-      }
-    }
-
-    console.log(dataUser); */
-
 
     let tipo = 0;
     switch (petType) {
