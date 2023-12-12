@@ -34,7 +34,7 @@ const Faqs: NextPage<Props> = ({ data }) => {
 };
 
 export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:3000/faqs");
+  const res = await fetch("https://petscare-clinica-vet.vercel.app/faqs");
   const data: FaqsType[] = await res.json();
   return {
     props: {
