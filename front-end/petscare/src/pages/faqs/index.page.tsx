@@ -12,7 +12,6 @@ interface Props {
 const Faqs: NextPage<Props> = ({ data }) => {
   return (
     <>
-    <p>Faqs</p>
       <Head>
         <title>Faqs</title>
         <meta name="description" content="preguntas frecuentes" />

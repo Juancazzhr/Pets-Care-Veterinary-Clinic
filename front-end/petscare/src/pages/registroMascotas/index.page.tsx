@@ -4,11 +4,21 @@ import LayoutAuth from "../../components/layouts/LayoutAuth";
 import styles from "../../components/userRegister/registro.module.css";
 import { Box, Grid, Typography, Paper } from "@mui/material";
 import PetRegisterForm from "../../components/petRegister/petRegisterForm";
+import Head from "next/head";
 
 
 const RegisterPets: NextPage = () => {
 
+
   return (
+    <>
+    <Head>
+        <title>Pets Care: turnos</title>
+        <meta name="description" content="Turnos" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
     <Box className={styles.root}>
       <Typography
         color="primary"
@@ -23,6 +33,7 @@ const RegisterPets: NextPage = () => {
         <PetRegisterForm />
       </Paper>
     </Box>
+    </>
   );
 };
 

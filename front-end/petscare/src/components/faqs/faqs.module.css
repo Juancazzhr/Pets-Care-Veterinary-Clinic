@@ -1,3 +1,6 @@
+.body{
+    min-width: 95vh;
+}
 .stack{
     width: 90%;
     max-width: 800px;

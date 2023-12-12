@@ -33,6 +33,7 @@ const TurnosPage: NextPage<Props> = ({ services, professionals }) => {
         <title>Pets Care: turnos</title>
         <meta name="description" content="Turnos" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
