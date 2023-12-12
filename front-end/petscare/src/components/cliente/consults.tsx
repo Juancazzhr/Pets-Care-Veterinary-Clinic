@@ -51,7 +51,7 @@ interface Props {
 const DataGridConsults: FC<Props> = ({ data }) => {
 
     const pageSize = 5;
-    const pageSizeOptions = [5, 10, 20];
+    const pageSizeOptions = [data?.consults.length === 0 ? 0 : pageSize];
 
     const rows = data?.consults
 
