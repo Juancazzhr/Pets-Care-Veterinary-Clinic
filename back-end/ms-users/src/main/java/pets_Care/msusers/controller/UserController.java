@@ -139,16 +139,13 @@ public class UserController {
     }
 
     @PutMapping("/client")
-    public ResponseEntity<UsersClients> update(@RequestBody UsersClients userClient)throws Exception{
+    public ResponseEntity<User> update(@RequestBody User user)throws Exception{
         try{
-            User userRequested = new User (userClient.user.getId(),userClient.user.getFirstName(), userClient.user.getLastName(), userClient.user.getAddress(),
-                    userClient.user.getPhone(), userClient.user.getEmail(), userClient.user.getPassword(),
-                    userClient.user.getRol());
+            User userRequested = new User (user.getId(),user.getFirstName(), user.getLastName(), user.getAddress(),
+                    user.getPhone(), user.getEmail(), user.getPassword(),
+                    user.getRol());
             User userUpdated = service.updateUser(userRequested);
-            IClientServiceClient.ClientDTO clientDTOUpdated = new IClientServiceClient.ClientDTO(userClient.clientDTO.getId(),userClient.clientDTO.getUserId());
-            service.updateCLient(clientDTOUpdated);
-            UsersClients userClientUpdated = new UsersClients(userUpdated,clientDTOUpdated);
-            return ResponseEntity.ok(userClientUpdated);
+            return ResponseEntity.ok(userUpdated);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
