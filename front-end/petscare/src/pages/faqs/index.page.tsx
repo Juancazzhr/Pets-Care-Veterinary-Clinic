@@ -6,13 +6,14 @@ import Head from "next/head";
 import BodySingle from "../../components/faqs/body-single";
 
 interface Props {
-  data: FaqsType[];
+/*   data: FaqsType[]; */
 }
 
-const Faqs: NextPage<Props> = ({ data }) => {
+const Faqs: NextPage<Props> = (/* { data } */) => {
   return (
     <>
-      <Head>
+    <p>Faqs</p>
+     {/*  <Head>
         <title>Faqs</title>
         <meta name="description" content="preguntas frecuentes" />
       </Head>
@@ -27,12 +28,12 @@ const Faqs: NextPage<Props> = ({ data }) => {
             />
           );
         })}
-      </BodySingle>
+      </BodySingle> */}
     </>
   );
 };
 
-export const getStaticProps = async () => {
+/* export const getStaticProps = async () => {
   const res = await fetch("http://localhost:3000/api/faqs"); //cambiar url
   const data: FaqsType[] = await res.json();
   return {
@@ -41,6 +42,6 @@ export const getStaticProps = async () => {
     },
   };
 };
-
+ */
 
 export default Faqs;
