@@ -1,4 +1,4 @@
-import React from "react";
+/* import React from "react";
 import { FaqsType } from "../faqs/faqsData";
 import {
   Accordion,
@@ -40,3 +40,4 @@ export default function accordionFaqs({ id, question, answer }: FaqsType) {
     </div>
   );
 }
+ */

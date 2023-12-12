@@ -1,4 +1,4 @@
-import * as React from 'react';
+/* import * as React from 'react';
 import {FC, PropsWithChildren} from "react";
 import Container, {ContainerProps} from "@mui/material/Container";
 import {Stack, Typography} from "@mui/material";
@@ -24,3 +24,4 @@ const BodySingle: FC<BodySingleProps> = ({title, containerProps, children}: Body
     );
 };
 export default BodySingle;
+ */

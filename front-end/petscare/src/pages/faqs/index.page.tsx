@@ -1,9 +1,9 @@
 import React from "react";
-import AccordionFaqs from "../../components/faqs/AccordionFaqs";
+/* import AccordionFaqs from "../../components/faqs/AccordionFaqs"; */
 import { FaqsType } from "../../components/faqs/faqsData";
 import { NextPage } from "next";
 import Head from "next/head";
-import BodySingle from "../../components/faqs/body-single";
+/* import BodySingle from "../../components/faqs/body-single"; */
 
 interface Props {
 /*   data: FaqsType[]; */
