@@ -38,8 +38,8 @@ const ProfesionalesPage: NextPage<Props> = ({ professionals }) => {
                     <TitleSection title='profesionales' colorLine='64C9A7' colorText='573469' />
                     <Paper className={styles.paper}>
                         <Grid container spacing={2}>
-                            {professionals?.map((professional) => (
-                                <Grid item xs={12} sm={6} md={4}>
+                            {professionals?.map((professional, index) => (
+                                <Grid item xs={12} sm={6} md={4} key={index}>
                                     <CardProfessional data={professional} />
                                 </Grid>
                             ))}
