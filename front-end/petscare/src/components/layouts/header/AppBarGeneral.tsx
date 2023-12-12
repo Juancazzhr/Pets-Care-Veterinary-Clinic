@@ -96,7 +96,7 @@ const AppBarComponent: FC<Props> = ({ handleDrawerToggle, navItems }) => {
                                             onClick={() => {
                                                 loginWithRedirect({
                                                     appState: {
-                                                        redirectUri: `${process.env.BASE_URL}registro`
+                                                        redirectUri: `${process.env.BASE_URL}/registro`
                                                       }, 
                                                     authorizationParams: {
                                                         screen_hint: "signup",

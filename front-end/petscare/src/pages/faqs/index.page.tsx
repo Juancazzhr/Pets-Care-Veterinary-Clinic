@@ -33,7 +33,7 @@ const Faqs: NextPage<Props> = ({ data }) => {
 };
 
 export const getStaticProps = async () => {
-  const res = await fetch(`${process.env.BASE_URL}api/faqs`); 
+  const res = await fetch(`${process.env.BASE_URL}/api/faqs`); 
   const data: FaqsType[] = await res.json();
   return {
     props: {
