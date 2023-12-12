@@ -80,11 +80,17 @@ const FormUpdateUser: FC = () => {
             description: null
           }
         }
+        console.log({dataUserUpdated});
+        
     
             
         const response = updateUser(dataUserUpdated)
         response.then((res) => {
+          console.log({res});
+          
           if (res.ok) {
+            console.log('se actualizo');
+            
             setModalInfo({
               title: "¡Excelente!",
               message: "Tus datos se actualizaron exitosamente.",

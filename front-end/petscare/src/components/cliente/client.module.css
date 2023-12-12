@@ -28,9 +28,32 @@
     font-weight: 700;
   }
 
+  .dataPet{
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .textPet{
+    margin-left: 20px;
+    margin-top: 5px;
+    font-size: 14px;
+  }
+
+
   @media screen and (min-width: 600px) {
     .input{
       width: 47%;
       margin-right: 3%;
+  }
+
+  .dataPet{
+    flex-direction: row;
+  }
+
+  .textPet{
+    margin-top: 20px;
   }
 }

@@ -2,13 +2,13 @@ import * as React from 'react';
 import { FC } from 'react';
 import { PetConsults } from '@/interfaces';
 import Stack from '@mui/material/Stack';
-import { Typography } from '@mui/material';
+import { Divider, Typography } from '@mui/material';
 import {
     GridCellParams, GridColDef, GridToolbarContainer, GridToolbarExport, GridToolbarFilterButton, DataGrid, GridToolbar, GridPrintGetRowsToExportParams, gridFilteredSortedRowIdsSelector,
     selectedGridRowsSelector,
     esES, GridRowId
 } from '@mui/x-data-grid';
-
+import styles from './client.module.css'
 
 
 const columns: GridColDef[] = [
@@ -51,18 +51,18 @@ interface Props {
 const DataGridConsults: FC<Props> = ({ data }) => {
 
     const pageSize = 5;
-    const pageSizeOptions = [5, 10, 20];
+    const pageSizeOptions = [data?.consults.length === 0 ? 0 : pageSize];
 
     const rows = data?.consults
 
     function CustomToolbar() {
         return (
             <GridToolbarContainer >
-                <Stack >
-                    <Typography>Nombre: </Typography>
-                    <Typography>Tipo: </Typography>
-                    <Typography>Raza: </Typography>
-                    <Typography>Tamaño: </Typography>
+                <Stack className={styles.dataPet} >
+                    <Typography className={styles.textPet}><strong>NOMBRE:</strong> {data.pet.name} </Typography>
+                    <Typography className={styles.textPet}><strong>TIPO: </strong> {data.pet.petType.typeName} </Typography>
+                    <Typography className={styles.textPet}><strong>RAZA: </strong>{data.pet.race}</Typography>
+                    <Typography className={styles.textPet}><strong>TAMAÑO:</strong> {data.pet.size} </Typography>
                 </Stack>
                 <GridToolbarFilterButton />
                 <GridToolbarExport />
@@ -99,9 +99,9 @@ const DataGridConsults: FC<Props> = ({ data }) => {
                         }
                     }}
                     pageSizeOptions={pageSizeOptions}
-                    slots={{ toolbar: GridToolbar }} /*  CustomToolbar */
+                    slots={{ toolbar: CustomToolbar }} 
                     slotProps={{
-                        toolbar: { GridToolbar: { printOptions: { getRowsToExport: getSelectedRowsToExport }, showQuickFilter: true } },
+                        toolbar: { CustomToolbar: { printOptions: { getRowsToExport: getSelectedRowsToExport }, showQuickFilter: true } },
                     }}
                     localeText={esES.components.MuiDataGrid.defaultProps.localeText}
                     disableColumnSelector
@@ -120,60 +120,3 @@ const DataGridConsults: FC<Props> = ({ data }) => {
 export default DataGridConsults
 
 
-
-/*  const [rows, setRows] = useState(
-   { createdAt: '',
-         diagnostic: '',
-         exams:'',
-         drugs: ''}
-     
- ); */
-
-/*    const getData = async () => {
-       
-       data.consults.forEach((d) => {
-         setRows((row) => [
-           ...row,
-           {
-             {  createdAt: d.cratedAt,
-               diagnostic: d.diagnostic,
-               exams: d.exams,
-               drugs: d.drugs}
-           },
-         ]);
-       });
-     };
-*/
-
-/* import { makeStyles } from "@mui/styles";
-const useStyles = makeStyles({
-    root: {
-        "& .styledrows": {
-            backgroundColor: "green"
-        }
-    }
-});
- 
-
-const VISIBLE_FIELDS = ['Fecha', 'Mascota', 'Diagnóstico', 'Exámenes', 'Medicación'];
-
-export default function BasicExampleDataGrid() {
-    const { data } = useDemoData({
-        dataSet: 'Employee',
-        visibleFields: VISIBLE_FIELDS,
-        rowLength: 100,
-    });
-
-    return (
-        <div style={{ height: 400, width: '100%' }}>
-            <DataGrid {...data} slots={{ toolbar: GridToolbar }}
-                initialState={{
-                    filter: {
-                        filterModel: {
-                            items: [{ field: 'rating', operator: '>', value: '2.5' }],
-                        },
-                    },
-                }} />
-        </div>
-    );
-}*/
