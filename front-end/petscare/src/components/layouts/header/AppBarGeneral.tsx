@@ -82,7 +82,7 @@ const AppBarComponent: FC<Props> = ({ handleDrawerToggle, navItems }) => {
                                             onClick={() => {
                                                 loginWithRedirect({
                                                     appState: {
-                                                        redirectUri: "http://localhost:3000/client"
+                                                        redirectUri: "http://localhost:3000"
                                                     }
                                                 })
                                             }}

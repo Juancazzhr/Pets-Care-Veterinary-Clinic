@@ -108,13 +108,12 @@ const FormUpdateUser: FC = () => {
 
 // TOGGLE DISABLED / ENABLE FIELDS
  const onToggle = ()=>{
- /*  event.stopPropagation(); */
   setIsDisabled(!isDisabled)
  }
 
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form >
 
       <InputController
         name='firstName'
@@ -171,7 +170,7 @@ const FormUpdateUser: FC = () => {
         {isDisabled ? 
         <Button onClick={onToggle} variant="contained" className={styles.buttonSubmit}>Editar datos</Button>
         :
-        <Button type='submit' variant="contained" className={styles.buttonSubmit}>Guardar cambios</Button>
+        <Button onClick={handleSubmit(onSubmit)} variant="contained" className={styles.buttonSubmit}>Guardar cambios</Button>
       }
         
       </Box>
