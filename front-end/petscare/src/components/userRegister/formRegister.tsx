@@ -92,20 +92,13 @@ const FormRegister: FC = () => {
 
   useEffect(() => {
     if (user) {
-
-
       if (user?.email === undefined) {
         // Manejar el caso en que no hay email
       } else {
         setDataForm({ ...dataForm, email: user.email })
       }
-
-
     }
   }, [user])
-
-  console.log({ user });
-  console.log({ dataForm });
 
 
   return (

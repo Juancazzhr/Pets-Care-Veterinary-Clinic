@@ -26,8 +26,7 @@ const FormUpdateUser: FC = () => {
     }
   });
 
-  console.log({userID});
-    
+     
   const router = useRouter()
   const [dataForm, setDataForm] = useState<User>()
   const [isDisabled, setIsDisabled] = useState(true)
@@ -84,12 +83,10 @@ const FormUpdateUser: FC = () => {
             description: null
           }
         }
-        console.log({dataUserUpdated});
-                      
+                             
         const response = updateUser(dataUserUpdated)
         response.then((res) => {
-          console.log({res});
-          
+                 
           if (res.ok) {
             console.log('se actualizo');
             

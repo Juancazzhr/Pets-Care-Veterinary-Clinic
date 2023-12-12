@@ -1,9 +1,9 @@
-import { Pet, User } from '../../interfaces';
-import { FC, useCallback, useEffect, useState } from 'react';
+import { Pet } from '../../interfaces';
+import { FC, useCallback, useContext, useEffect, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup'
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Box, Button, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, Typography } from '@mui/material';
+import { Box, Button, FormControl,  InputLabel, MenuItem, Select, Stack, Typography } from '@mui/material';
 import { getUserByEmail } from "../../services/userService";
 import { postPet } from "../../services/petService";
 import InputController from "../userRegister/inputController";
@@ -12,6 +12,7 @@ import { validationSchema } from "../../rules";
 import ReusableModal from "../reusableModal/modal";
 import styles from '../userRegister/registro.module.css'
 import { useRouter } from 'next/router';
+import AuthContext from '../../context/AuthContext';
 
 
 const initialValues = {
@@ -31,7 +32,8 @@ const PetRegisterForm: FC = () => {
     resolver: yupResolver(validationSchema)
   });
 
-  const { user } = useAuth0()
+  /* const { user } = useAuth0() */
+  const { userLog } = useContext(AuthContext);
   const router = useRouter()
   const [dataForm, setDataForm] = useState<Pet>(initialValues)
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -55,9 +57,11 @@ const PetRegisterForm: FC = () => {
   }, []);
 
   const onSubmit: SubmitHandler<any> = (data: any) => {
-    console.log(data);
+    console.log({data});
+    console.log({userLog});
+    
 
-    const dataUser = () => {
+   /*  const dataUser = () => {
       if (user?.email === undefined) {
         // Manejar el caso en que no hay email
       } else {
@@ -65,8 +69,9 @@ const PetRegisterForm: FC = () => {
         console.log(dataUser);
       }
     }
-    /*  getUserByEmail(user?.email)*/
-    console.log(dataUser);
+
+    console.log(dataUser); */
+
 
     let tipo = 0;
     switch (petType) {
@@ -86,11 +91,12 @@ const PetRegisterForm: FC = () => {
         break;
     }
 
+    
     setDataForm({
       ...dataForm,
       name: data.name,
       size: size,
-      clientId: 0,
+      clientId: userLog?.id as number,
       petType: {
         id: tipo,
         typeName: petType
@@ -102,7 +108,7 @@ const PetRegisterForm: FC = () => {
       ...dataForm,
       name: data.name,
       size: size,
-      clientId: 0,
+      clientId: userLog?.id as number,
       petType: {
         id: tipo,
         typeName: petType
@@ -126,7 +132,6 @@ const PetRegisterForm: FC = () => {
   }
 
 
-  console.log({ user });
   console.log({ dataForm });
 
   return (
