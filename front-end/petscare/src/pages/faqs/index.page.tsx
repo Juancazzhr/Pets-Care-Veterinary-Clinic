@@ -1,19 +1,19 @@
 import React from "react";
-/* import AccordionFaqs from "../../components/faqs/AccordionFaqs"; */
+import AccordionFaqs from "../../components/faqs/AccordionFaqs";
 import { FaqsType } from "../../components/faqs/faqsData";
 import { NextPage } from "next";
 import Head from "next/head";
-/* import BodySingle from "../../components/faqs/body-single"; */
+import BodySingle from "../../components/faqs/body-single";
 
 interface Props {
-/*   data: FaqsType[]; */
+  data: FaqsType[];
 }
 
-const Faqs: NextPage<Props> = (/* { data } */) => {
+const Faqs: NextPage<Props> = ({ data }) => {
   return (
     <>
     <p>Faqs</p>
-     {/*  <Head>
+      <Head>
         <title>Faqs</title>
         <meta name="description" content="preguntas frecuentes" />
       </Head>
@@ -28,12 +28,12 @@ const Faqs: NextPage<Props> = (/* { data } */) => {
             />
           );
         })}
-      </BodySingle> */}
+      </BodySingle>
     </>
   );
 };
 
-/* export const getStaticProps = async () => {
+export const getStaticProps = async () => {
   const res = await fetch("http://localhost:3000/api/faqs"); //cambiar url
   const data: FaqsType[] = await res.json();
   return {
@@ -42,6 +42,6 @@ const Faqs: NextPage<Props> = (/* { data } */) => {
     },
   };
 };
- */
+
 
 export default Faqs;
