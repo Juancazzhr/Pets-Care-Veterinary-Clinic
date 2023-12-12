@@ -4,21 +4,18 @@ import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import NextLink from 'next/link'
 import Image from 'next/image'
 import logo from '../../../assets/img/logo-petscare_secondary.svg'
 import styles from './generalHeader.module.css';
-import { useRouter } from 'next/router';
+
 
 interface Props {
     handleDrawerToggle: () => void
 }
 
 const AppBarAuth: FC<Props> = ({ handleDrawerToggle }) => {
-
-    const { asPath } = useRouter()
 
     return (
         <Stack className={styles.appBarAuth} >
@@ -43,8 +40,7 @@ const AppBarAuth: FC<Props> = ({ handleDrawerToggle }) => {
                             sx={{ display: { md: 'none' } }}
                         >
                             <MenuIcon sx={{ fontSize: '32px' }} />
-                        </IconButton>
-                        
+                        </IconButton>                        
                     </Box>
                 </Toolbar>
             </Container>
