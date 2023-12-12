@@ -1,5 +1,4 @@
 import React from "react";
-import LayoutAuth from "../../components/layouts/LayoutAuth";
 import AccordionFaqs from "../../components/faqs/AccordionFaqs";
 import { FaqsType } from "../../components/faqs/faqsData";
 import { NextPage } from "next";
@@ -43,6 +42,5 @@ export const getStaticProps = async () => {
   };
 };
 
-(Faqs as any).Layout = LayoutAuth;
 
 export default Faqs;

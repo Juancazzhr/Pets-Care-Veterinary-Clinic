@@ -30,7 +30,11 @@ export default function accordionFaqs({ id, question, answer }: FaqsType) {
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>{answer}</Typography>
+          <Typography
+            sx={{
+              fontWeight: "400",
+              color: "#808080",
+            }}>{answer}</Typography>
         </AccordionDetails>
       </Accordion>
     </div>
